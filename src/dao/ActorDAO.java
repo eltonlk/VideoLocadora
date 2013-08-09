@@ -1,5 +1,7 @@
 package dao;
 
-public class ActorDAO {
+import dao.DataBaseDAO;
+
+public class ActorDAO extends DataBaseDAO {
     
 }
