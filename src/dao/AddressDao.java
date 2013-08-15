@@ -42,7 +42,7 @@ public class AddressDao {
         } catch (Exception e) {
            throw new DaoException("Não foi possivel realizar a tranzação.", e);
         } finally {
-           daoHelper.releaseAll(conn, pstmt);
+//           daoHelper.releaseAll(conn, pstmt);
         }
         
         return address;

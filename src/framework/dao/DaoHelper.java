@@ -2,6 +2,7 @@ package framework.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -39,11 +40,26 @@ public class DaoHelper {
         release(conn);
         context.remove();
     }
-    
+ 
+    public void rollbackTransaction() {
+        try {
+            Connection conn = getConnectionFromContext();
+            rollback(conn);
+            release(conn);
+            context.remove();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }    
+   
     public void commit(Connection conn) throws SQLException {
         conn.commit();
     }
     
+    public void rollback(Connection conn) throws SQLException {
+        if (conn != null) conn.rollback();
+    }
+
     public Connection getConnectionFromContext() throws SQLException {
         Connection conn = context.get();
         
@@ -56,13 +72,38 @@ public class DaoHelper {
         return conn;
     }
 
+    public long executePreparedUpdateAndReturnGenerateKeys(Connection conn, String query, Object... params) throws SQLException {
+        PreparedStatement pstmt = null;
+        ResultSet rset = null;
+        long id = 01;
+        
+        try {
+            pstmt = conn.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
+        
+            int i = 0;
+            for (Object param : params) {
+                pstmt.setObject(++i, param);
+            }
+
+            pstmt.executeUpdate();
+
+            rset = pstmt.getGeneratedKeys();
+
+            if (rset.next()) id = rset.getLong(1);
+        } finally {
+            release(rset);
+            release(pstmt);
+        }
+        
+        return id;       
+    }
+    
     public void release(Connection conn) {
         if (conn == null) return;
         
         try {
             conn.close();
-        } catch (SQLException e) { 
-        }        
+        } catch (SQLException e) { }        
     }        
     
     public void release(Statement stmt) {
@@ -70,8 +111,7 @@ public class DaoHelper {
         
         try {
             stmt.close();
-        } catch (SQLException e) { 
-        }        
+        } catch (SQLException e) { }        
     }
    
     public void release(ResultSet rs) {
@@ -79,8 +119,7 @@ public class DaoHelper {
         
         try {
             rs.close();
-        } catch (SQLException e) { 
-        }        
+        } catch (SQLException e) { }        
     }    
     
     public void releaseAll(Connection conn, Statement stmt) {

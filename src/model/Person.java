@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Date;
+
 public class Person {
     
     private long id;
@@ -13,13 +15,18 @@ public class Person {
     private String cel;
     private String status;
     
+    private Date created_at;
+    private Date updated_at;
+    
     private Address address;
     
     public Person() {
+        this.created_at = new Date();
+        this.updated_at = new Date();
     }
 
     public Person(String name, String legal_name, String kind, String document_1, String document_2, String email, String phone, String cel, String status, Address address) {
-       this.name = name;
+        this.name = name;
         this.legal_name = legal_name;
         this.kind = kind;
         this.document_1 = document_1;
@@ -121,6 +128,22 @@ public class Person {
     
     public void setAddress(Address address) {
         this.address = address;
+    }
+
+    public Date getCreatedAt() {
+        return created_at;
+    }
+
+    public void setCreatedAt(Date created_at) {
+        this.created_at = created_at;
+    }
+
+    public Date getUpdatedAt() {
+        return updated_at;
+    }
+
+    public void setUpdatedAt(Date updated_at) {
+        this.updated_at = updated_at;
     }
     
 }
