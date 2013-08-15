@@ -1,6 +1,6 @@
 package dao;
 
-import framework.dao.DaoException;
+import framework.dao.CreateDaoException;
 import framework.dao.DaoHelper;
 
 import java.sql.Connection;
@@ -20,7 +20,7 @@ public class StateDao {
         daoHelper = new DaoHelper();
     }
     
-    public State insert(State state) throws DaoException {
+    public State insert(State state) throws CreateDaoException {
         try {
             conn = daoHelper.getConnection();
             
@@ -38,7 +38,7 @@ public class StateDao {
                 state.setId(rset.getLong("id"));
             }
         } catch (Exception e) {
-           throw new DaoException("Não foi possivel realizar a tranzação.", e);
+           throw new CreateDaoException("Não foi possivel realizar a tranzação.", e);
         } finally {
            daoHelper.releaseAll(conn, pstmt);
         }

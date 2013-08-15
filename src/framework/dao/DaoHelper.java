@@ -98,6 +98,31 @@ public class DaoHelper {
         return id;       
     }
     
+    public long executePreparedUpdateAndReturnGenerateKeys(String query, Object... params) throws SQLException {
+        return executePreparedUpdateAndReturnGenerateKeys(getConnectionFromContext(), query, params);
+    }
+    
+    public void executePreparedUpdate(Connection conn, String query, Object... params) throws SQLException {
+        PreparedStatement pstmt = null;
+        
+        try {
+            pstmt = conn.prepareStatement(query);
+        
+            int i = 0;
+            for (Object param : params) {
+                pstmt.setObject(++i, param);
+            }
+
+            pstmt.executeUpdate();
+        } finally {
+            release(pstmt);
+        }
+    }
+    
+    public void executePreparedUpdate(String query, Object... params) throws SQLException {
+        executePreparedUpdate(getConnectionFromContext(), query, params);
+    }    
+    
     public void release(Connection conn) {
         if (conn == null) return;
         

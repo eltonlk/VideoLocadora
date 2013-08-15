@@ -1,7 +1,9 @@
 package dao;
 
-import framework.dao.DaoException;
+import framework.dao.CreateDaoException;
 import framework.dao.DaoHelper;
+import framework.dao.DeleteDaoException;
+import framework.dao.UpdateDaoException;
 
 import model.Person;
 import model.Address;
@@ -14,14 +16,13 @@ public class PersonDao {
         daoHelper = new DaoHelper();
     }
     
-    public Person insert(Person person) throws DaoException {
+    public void insert(Person person) throws CreateDaoException {
         try {
             daoHelper.begingTransaction();
                         
             String query = "INSERT INTO people (name, legal_name, kind, document_1, document_2, email, phone, cel, status) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ? )";           
            
             long id = daoHelper.executePreparedUpdateAndReturnGenerateKeys(
-                daoHelper.getConnectionFromContext(), 
                 query, 
                 person.getName(), 
                 person.getLegalName(),    
@@ -41,16 +42,74 @@ public class PersonDao {
         } catch (Exception e) {
            daoHelper.rollbackTransaction();
             
-           throw new DaoException("Não foi possivel realizar a tranzação.", e);
+           throw new CreateDaoException("Não foi possivel realizar a tranzação.", e);
         }
-        
-        return person;
     }
     
     public void insertAddress(Person person) {
         Address address = person.getAddress();
             
-        person.setAddress( new AddressDao().insert(address) );
+        new AddressDao().insert(address);
     }
+
+    public void update(Person person) throws UpdateDaoException {
+        try {
+            daoHelper.begingTransaction();
+                        
+            String query = "UPDATE people SET name = ?, legal_name = ?, kind = ?, document_1 = ?, document_2 = ?, email = ?, phone = ?, cel = ?, status = ? WHERE id = ?";           
+           
+            daoHelper.executePreparedUpdate(
+                query, 
+                person.getName(), 
+                person.getLegalName(),    
+                person.getKind(),
+                person.getDocument1(),
+                person.getDocument2(),
+                person.getEmail(),
+                person.getPhone(),
+                person.getCel(),
+                person.getStatus(),
+                person.getId());                    
+            
+            updateAddress(person);
+            
+            daoHelper.endTransaction();          
+        } catch (Exception e) {
+           daoHelper.rollbackTransaction();
+            
+           throw new UpdateDaoException("Não foi possivel realizar a tranzação.", e);
+        }        
+    }    
     
+    public void updateAddress(Person person) {
+        Address address = person.getAddress();
+            
+        new AddressDao().update(address);
+    }    
+    
+    public void delete(Person person) throws DeleteDaoException {
+        try {
+            daoHelper.begingTransaction();
+                        
+            String query = "DELETE FROM people WHERE id = ?";           
+           
+            daoHelper.executePreparedUpdate(
+                query, 
+                person.getId());                    
+            
+            deleteAddress(person);
+            
+            daoHelper.endTransaction();          
+        } catch (Exception e) {
+           daoHelper.rollbackTransaction();
+            
+           throw new DeleteDaoException("Não foi possivel realizar a tranzação.", e);
+        }        
+    }    
+    
+    public void deleteAddress(Person person) {
+        Address address = person.getAddress();
+            
+        new AddressDao().delete(address);
+    }     
 }

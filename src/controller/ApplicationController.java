@@ -1,7 +1,7 @@
 package controller;
 
 //import javax.swing.JFrame;
-//
+
 //import view.LoginJFrame;
 
 import model.Person;
@@ -15,7 +15,7 @@ public class ApplicationController {
     public static void main(String[] args) {
         
 //        JFrame frame = new LoginJFrame();
-//        
+
 //        frame.setLocationRelativeTo(null);
 //        frame.setVisible(true);
         
@@ -25,9 +25,23 @@ public class ApplicationController {
                      
         person.setCreatedAt(new Date());
         
-        System.out.println(person.getCreatedAt());
-        
         new PersonDao().insert(person);
+        
+        System.out.println(person.getId());
+        System.out.println(person.getAddress().getId());
+        System.out.println(address.getId());
+        
+        System.out.println(person.getName());
+        System.out.println(address.getAddress());
+        
+        person.setName("Elton Luis Kolling");
+        
+        address.setAddress("Rua 7 de setembro, 1245");
+        
+        new PersonDao().update(person);
+
+        System.out.println(person.getName());
+        System.out.println(address.getAddress());
         
     }
     

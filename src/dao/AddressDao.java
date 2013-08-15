@@ -1,51 +1,65 @@
 package dao;
 
-import framework.dao.DaoException;
+import framework.dao.CreateDaoException;
 import framework.dao.DaoHelper;
+import framework.dao.DeleteDaoException;
+import framework.dao.UpdateDaoException;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import model.Address;
 
 public class AddressDao {
 
     private DaoHelper daoHelper;
-    private Connection conn = null;
-    private PreparedStatement pstmt = null;
-    private ResultSet rset = null;
-    
+        
     public AddressDao() {
         daoHelper = new DaoHelper();
     }
     
-    public Address insert(Address address) throws DaoException {
+    public void insert(Address address) throws CreateDaoException {
         try {
-            conn = daoHelper.getConnectionFromContext();
+            String query = "INSERT INTO addresses (district_id, person_id, address, location) VALUES ( ?, ?, ?, ? )";           
+           
+            long id = daoHelper.executePreparedUpdateAndReturnGenerateKeys(
+                query, 
+                address.getDistrictId(), 
+                address.getPersonId(),    
+                address.getAddress(),
+                address.getLocation());                    
             
-            pstmt = conn.prepareStatement("INSERT INTO addresses (district_id, person_id, address, location) VALUES ( ?, ?, ?, ? )", 
-                    PreparedStatement.RETURN_GENERATED_KEYS);
-
-            pstmt.setLong(1, address.getDistrictId());
-            pstmt.setLong(2, address.getPersonId());
-            pstmt.setString(3, address.getAddress());
-            pstmt.setString(4, address.getLocation());
-
-            pstmt.executeUpdate();
-
-            rset = pstmt.getGeneratedKeys();
-            
-            if (rset.next()) {
-                address.setId(rset.getLong(1));
-            }
+            address.setId(id);            
         } catch (Exception e) {
-           throw new DaoException("Não foi possivel realizar a tranzação.", e);
-        } finally {
-//           daoHelper.releaseAll(conn, pstmt);
+           daoHelper.rollbackTransaction();
+            
+           throw new CreateDaoException("Não foi possivel realizar a tranzação.", e);
+        } 
+    }    
+    
+    public void update(Address address) throws UpdateDaoException {
+        try {
+            String query = "UPDATE addresses SET district_id = ?, person_id = ?, address = ?, location = ? WHERE id = ?";  
+            
+            daoHelper.executePreparedUpdate(
+                query, 
+                address.getDistrictId(), 
+                address.getPersonId(),    
+                address.getAddress(),
+                address.getLocation(),  
+                address.getId());
+        } catch (SQLException e) {
+            daoHelper.rollbackTransaction();
         }
-        
-        return address;
+    }
+    
+    public void delete(Address address) throws DeleteDaoException {
+        try {
+            String query = "DELETE FROM addresses WHERE id = ?";  
+            
+            daoHelper.executePreparedUpdate(query, address.getId());
+        } catch (SQLException e) {
+            daoHelper.rollbackTransaction();
+        }
     }    
     
 }
