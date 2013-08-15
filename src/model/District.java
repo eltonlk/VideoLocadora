@@ -2,27 +2,31 @@ package model;
 
 public class District {
     
-    private int id;
-    private int city_id;
+    private long id;
+    private long city_id;
     private String name;
     
     public District() {
-        
+    }
+    
+    public District(String name, long city_id) {
+        this.name = name;
+        this.city_id = city_id;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public int getCity_id() {
+    public long getCity_id() {
         return city_id;
     }
 
-    public void setCity_id(int city_id) {
+    public void setCity_id(long city_id) {
         this.city_id = city_id;
     }
 

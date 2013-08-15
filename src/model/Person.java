@@ -2,7 +2,7 @@ package model;
 
 public class Person {
     
-    private int id;
+    private long id;
     private String name;
     private String legal_name;
     private String kind;
@@ -13,16 +13,34 @@ public class Person {
     private String cel;
     private String status;
     
+    private Address address;
+    
     public Person() {
-        
     }
 
-    public int getId() {
+    public Person(String name, String legal_name, String kind, String document_1, String document_2, String email, String phone, String cel, String status, Address address) {
+       this.name = name;
+        this.legal_name = legal_name;
+        this.kind = kind;
+        this.document_1 = document_1;
+        this.document_2 = document_2;
+        this.email = email;
+        this.phone = phone;
+        this.cel = cel;
+        this.status = status;
+        this.address = address;
+    }
+
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
+        
+        if (address != null) {
+            address.setPersonId(id);
+        }       
     }
 
     public String getName() {
@@ -33,11 +51,11 @@ public class Person {
         this.name = name;
     }
 
-    public String getLegal_name() {
+    public String getLegalName() {
         return legal_name;
     }
 
-    public void setLegal_name(String legal_name) {
+    public void setLegalName(String legal_name) {
         this.legal_name = legal_name;
     }
 
@@ -49,19 +67,19 @@ public class Person {
         this.kind = kind;
     }
 
-    public String getDocument_1() {
+    public String getDocument1() {
         return document_1;
     }
 
-    public void setDocument_1(String document_1) {
+    public void setDocument1(String document_1) {
         this.document_1 = document_1;
     }
 
-    public String getDocument_2() {
+    public String getDocument2() {
         return document_2;
     }
 
-    public void setDocument_2(String document_2) {
+    public void setDocument2(String document_2) {
         this.document_2 = document_2;
     }
 
@@ -95,6 +113,14 @@ public class Person {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+    
+    public Address getAddress() {
+        return address;
+    }
+    
+    public void setAddress(Address address) {
+        this.address = address;
     }
     
 }

@@ -2,21 +2,27 @@ package model;
 
 public class Movie {
     
-    private int id;
+    private long id;
     private String title;
     private int year;
     private String synopsis;
-    private int gender_id;
+    private long gender_id;
     
     public Movie() {
-        
+    }
+    
+    public Movie(String title, int year, String synopsis, long gender_id) {
+        this.title = title;
+        this.year = year;
+        this.synopsis = synopsis;
+        this.gender_id = gender_id;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -44,11 +50,11 @@ public class Movie {
         this.synopsis = synopsis;
     }
 
-    public int getGender_id() {
+    public long getGender_id() {
         return gender_id;
     }
 
-    public void setGender_id(int gender_id) {
+    public void setGender_id(long gender_id) {
         this.gender_id = gender_id;
     }
     

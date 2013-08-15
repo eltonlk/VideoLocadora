@@ -1,40 +1,50 @@
 package model;
 
+import java.util.Date;
+
 public class Media {
     
-    private int id;
-    private int movie_id;
-    private int supplier_id;
+    private long id;
+    private long movie_id;
+    private long supplier_id;
     private String kind;
     private double amount;
     private String status;
-    private String purchased_at;
+    private Date purchased_at;
        
     public Media() {
-        
+    }
+    
+    public Media(long movie_id, long supplier_id, String kind, double amount, String status, Date purchased_at) {
+        this.movie_id = movie_id;
+        this.supplier_id = supplier_id;
+        this.kind = kind;
+        this.amount = amount;
+        this.status = status;
+        this.purchased_at = purchased_at;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public int getMovie_id() {
+    public long getMovie_id() {
         return movie_id;
     }
 
-    public void setMovie_id(int movie_id) {
+    public void setMovie_id(long movie_id) {
         this.movie_id = movie_id;
     }
 
-    public int getSupplier_id() {
+    public long getSupplier_id() {
         return supplier_id;
     }
 
-    public void setSupplier_id(int supplier_id) {
+    public void setSupplier_id(long supplier_id) {
         this.supplier_id = supplier_id;
     }
 
@@ -62,11 +72,11 @@ public class Media {
         this.status = status;
     }
 
-    public String getPurchased_at() {
+    public Date getPurchased_at() {
         return purchased_at;
     }
 
-    public void setPurchased_at(String purchased_at) {
+    public void setPurchased_at(Date purchased_at) {
         this.purchased_at = purchased_at;
     }
     

@@ -2,28 +2,33 @@ package model;
 
 public class City {
     
-    private int id;
-    private int state_id;
+    private long id;
+    private long state_id;
     private String name;
     private String zip;
     
     public City() {
-        
     }
 
-    public int getId() {
+    public City(String name, String zip, long state_id) {
+        this.name = name;
+        this.zip = zip;
+        this.state_id = state_id;
+    }
+
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public int getState_id() {
+    public long getState_id() {
         return state_id;
     }
 
-    public void setState_id(int state_id) {
+    public void setState_id(long state_id) {
         this.state_id = state_id;
     }
 

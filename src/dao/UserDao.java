@@ -5,6 +5,7 @@ import framework.dao.DaoHelper;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import model.User;
 
@@ -13,6 +14,7 @@ public class UserDao {
     private DaoHelper daoHelper;
     private Connection conn = null;
     private PreparedStatement pstmt = null;
+    private ResultSet rset = null;
     
     public UserDao() {
         daoHelper = new DaoHelper();
@@ -22,7 +24,8 @@ public class UserDao {
         try {
             conn = daoHelper.getConnection();
             
-            pstmt = conn.prepareStatement("INSERT INTO users (person_id, login, password, email) VALUES ( ?, ?, ?, ? )");
+            pstmt = conn.prepareStatement("INSERT INTO users (person_id, login, password, email) VALUES ( ?, ?, ?, ? )", 
+                    PreparedStatement.RETURN_GENERATED_KEYS);
 
             pstmt.setLong(1, user.getPerson_id());
             pstmt.setString(2, user.getLogin());
@@ -31,8 +34,11 @@ public class UserDao {
 
             pstmt.executeUpdate();
             
-//            TODO: Setar o id do novo usuario na instancia de user.
-//            user.setId(1);
+            rset = pstmt.getGeneratedKeys();
+            
+            if (rset.next()) {
+                user.setId(rset.getLong("id"));
+            }
         } catch (Exception e) {
            throw new DaoException("Não foi possivel realizar a tranzação.", e);
         } finally {

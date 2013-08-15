@@ -2,27 +2,31 @@ package model;
 
 public class State {
     
-    private int id;
-    private int country_id;
+    private long id;
+    private long country_id;
     private String name;
     
     public State() {
-        
     }
 
-    public int getId() {
+    public State(String name, long country_id) {
+        this.name = name;
+        this.country_id = country_id;
+    }
+
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public int getCountry_id() {
+    public long getCountryId() {
         return country_id;
     }
 
-    public void setCountry_id(int country_id) {
+    public void setCountryId(long country_id) {
         this.country_id = country_id;
     }
 
