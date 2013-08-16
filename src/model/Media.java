@@ -4,9 +4,9 @@ import java.util.Date;
 
 public class Media {
     
-    private long id;
-    private long movie_id;
-    private long supplier_id;
+    private int id;
+    private int movie_id;
+    private int supplier_id;
     private String kind;
     private double amount;
     private String status;
@@ -15,7 +15,7 @@ public class Media {
     public Media() {
     }
     
-    public Media(long movie_id, long supplier_id, String kind, double amount, String status, Date purchased_at) {
+    public Media(int movie_id, int supplier_id, String kind, double amount, String status, Date purchased_at) {
         this.movie_id = movie_id;
         this.supplier_id = supplier_id;
         this.kind = kind;
@@ -24,27 +24,27 @@ public class Media {
         this.purchased_at = purchased_at;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public long getMovie_id() {
+    public int getMovieId() {
         return movie_id;
     }
 
-    public void setMovie_id(long movie_id) {
+    public void setMovieId(int movie_id) {
         this.movie_id = movie_id;
     }
 
-    public long getSupplier_id() {
+    public int getSupplierId() {
         return supplier_id;
     }
 
-    public void setSupplier_id(long supplier_id) {
+    public void setSupplierId(int supplier_id) {
         this.supplier_id = supplier_id;
     }
 
@@ -72,11 +72,11 @@ public class Media {
         this.status = status;
     }
 
-    public Date getPurchased_at() {
+    public Date getPurchasedAt() {
         return purchased_at;
     }
 
-    public void setPurchased_at(Date purchased_at) {
+    public void setPurchasedAt(Date purchased_at) {
         this.purchased_at = purchased_at;
     }
     

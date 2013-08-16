@@ -2,8 +2,8 @@ package model;
 
 public class User {
     
-    private long id;
-    private long person_id;
+    private int id;
+    private int person_id;
     private String login;
     private String password;
     private String email;
@@ -12,19 +12,19 @@ public class User {
         
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public long getPerson_id() {
+    public int getPersonId() {
         return person_id;
     }
 
-    public void setPerson_id(long person_id) {
+    public void setPersonId(int person_id) {
         this.person_id = person_id;
     }
 

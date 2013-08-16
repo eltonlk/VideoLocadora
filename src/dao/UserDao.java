@@ -1,7 +1,7 @@
 package dao;
 
-import framework.dao.CreateDaoException;
-import framework.dao.DaoHelper;
+import framework.CreateDaoException;
+import framework.DaoHelper;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -27,7 +27,7 @@ public class UserDao {
             pstmt = conn.prepareStatement("INSERT INTO users (person_id, login, password, email) VALUES ( ?, ?, ?, ? )", 
                     PreparedStatement.RETURN_GENERATED_KEYS);
 
-            pstmt.setLong(1, user.getPerson_id());
+            pstmt.setInt(1, user.getPersonId());
             pstmt.setString(2, user.getLogin());
             pstmt.setString(3, user.getPassword());
             pstmt.setString(4, user.getEmail());
@@ -37,7 +37,7 @@ public class UserDao {
             rset = pstmt.getGeneratedKeys();
             
             if (rset.next()) {
-                user.setId(rset.getLong("id"));
+                user.setId(rset.getInt("id"));
             }
         } catch (Exception e) {
            throw new CreateDaoException("Não foi possivel realizar a tranzação.", e);

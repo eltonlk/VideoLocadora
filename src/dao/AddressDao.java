@@ -1,9 +1,9 @@
 package dao;
 
-import framework.dao.CreateDaoException;
-import framework.dao.DaoHelper;
-import framework.dao.DeleteDaoException;
-import framework.dao.UpdateDaoException;
+import framework.CreateDaoException;
+import framework.DaoHelper;
+import framework.DeleteDaoException;
+import framework.UpdateDaoException;
 
 import java.sql.SQLException;
 
@@ -21,9 +21,9 @@ public class AddressDao {
         try {
             String query = "INSERT INTO addresses (district_id, person_id, address, location) VALUES ( ?, ?, ?, ? )";           
            
-            long id = daoHelper.executePreparedUpdateAndReturnGenerateKeys(
+            int id = daoHelper.executePreparedUpdateAndReturnGenerateKeys(
                 query, 
-                address.getDistrictId(), 
+                address.getDistrict().getId(), 
                 address.getPersonId(),    
                 address.getAddress(),
                 address.getLocation());                    
@@ -42,7 +42,7 @@ public class AddressDao {
             
             daoHelper.executePreparedUpdate(
                 query, 
-                address.getDistrictId(), 
+                address.getDistrict().getId(), 
                 address.getPersonId(),    
                 address.getAddress(),
                 address.getLocation(),  

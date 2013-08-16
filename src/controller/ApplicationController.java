@@ -1,29 +1,36 @@
 package controller;
 
-//import javax.swing.JFrame;
-
-//import view.LoginJFrame;
-
-import model.Person;
-import model.Address;
-
 import dao.PersonDao;
-import java.util.Date;
+import javax.swing.JFrame;
+
+import model.Address;
+import model.City;
+import model.Country;
+import model.District;
+import model.Person;
+import model.State;
+import view.DashboardJFrame;
 
 public class ApplicationController {
     
     public static void main(String[] args) {
+        JFrame frame = new DashboardJFrame();
+                
+        frame.setVisible(true);
+    }
+    
+    public void testeGravacao() {
+        Country country = new Country("Brasil").save();
         
-//        JFrame frame = new LoginJFrame();
-
-//        frame.setLocationRelativeTo(null);
-//        frame.setVisible(true);
+        State state = new State("Rio Grande do Sul", country).save();
         
-        Address address = new Address("Rua Décio Pelegrini, 799", "home", 0, 0);
+        City city = new City("Teutônia", "95890000", state).save();
+        
+        District district = new District("Canabarro", city).save();
+        
+        Address address = new Address("Rua Décio Pelegrini, 799", "home", district);
         
         Person person = new Person("Elton", "Elton Kolling", "employee", "123456789", "987654321", "eltonlk@gmail.com", "98327358", "98327358", "active", address);
-                     
-        person.setCreatedAt(new Date());
         
         new PersonDao().insert(person);
         
@@ -42,7 +49,6 @@ public class ApplicationController {
 
         System.out.println(person.getName());
         System.out.println(address.getAddress());
-        
     }
     
 }

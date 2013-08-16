@@ -4,9 +4,9 @@ import java.util.Date;
 
 public class Operation {
     
-    private long id;
+    private int id;
     private boolean flow_in;
-    private long person_id;
+    private int person_id;
     private String description;
     private Date due_at;
     private double amount;
@@ -16,7 +16,7 @@ public class Operation {
     public Operation() {
     }
     
-    public Operation(boolean flow_in, long person_id, String description, Date due_at, double amount, boolean paid, Date paid_at) {
+    public Operation(boolean flow_in, int person_id, String description, Date due_at, double amount, boolean paid, Date paid_at) {
         this.flow_in = flow_in;
         this.person_id = person_id;
         this.description = description;
@@ -26,27 +26,27 @@ public class Operation {
         this.paid_at = paid_at;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public boolean isFlow_in() {
+    public boolean isFlowIn() {
         return flow_in;
     }
 
-    public void setFlow_in(boolean flow_in) {
+    public void setFlowIn(boolean flow_in) {
         this.flow_in = flow_in;
     }
 
-    public long getPerson_id() {
+    public int getPersonId() {
         return person_id;
     }
 
-    public void setPerson_id(long person_id) {
+    public void setPersonId(int person_id) {
         this.person_id = person_id;
     }
 
@@ -58,11 +58,11 @@ public class Operation {
         this.description = description;
     }
 
-    public Date getDue_at() {
+    public Date getDueAt() {
         return due_at;
     }
 
-    public void setDue_at(Date due_at) {
+    public void setDueAt(Date due_at) {
         this.due_at = due_at;
     }
 
@@ -82,11 +82,11 @@ public class Operation {
         this.paid = paid;
     }
 
-    public Date getPaid_at() {
+    public Date getPaidAt() {
         return paid_at;
     }
 
-    public void setPaid_at(Date paid_at) {
+    public void setPaidAt(Date paid_at) {
         this.paid_at = paid_at;
     }
     

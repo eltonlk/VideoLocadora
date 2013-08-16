@@ -1,33 +1,36 @@
 package model;
 
+import dao.StateDao;
+
 public class State {
     
-    private long id;
-    private long country_id;
+    private int id;
     private String name;
+    
+    private Country country;
     
     public State() {
     }
 
-    public State(String name, long country_id) {
+    public State(String name, Country country) {
         this.name = name;
-        this.country_id = country_id;
+        this.country = country;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public long getCountryId() {
-        return country_id;
+    public Country getCountry() {
+        return country;
     }
 
-    public void setCountryId(long country_id) {
-        this.country_id = country_id;
+    public void setCountry(Country country) {
+        this.country = country;
     }
 
     public String getName() {
@@ -36,6 +39,12 @@ public class State {
 
     public void setName(String name) {
         this.name = name;
+    }
+    
+    public State save() {
+        new StateDao().insert(this);
+        
+        return this;
     }
     
 }

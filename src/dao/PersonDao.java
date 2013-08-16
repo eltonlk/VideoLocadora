@@ -1,9 +1,9 @@
 package dao;
 
-import framework.dao.CreateDaoException;
-import framework.dao.DaoHelper;
-import framework.dao.DeleteDaoException;
-import framework.dao.UpdateDaoException;
+import framework.CreateDaoException;
+import framework.DaoHelper;
+import framework.DeleteDaoException;
+import framework.UpdateDaoException;
 
 import model.Person;
 import model.Address;
@@ -22,7 +22,7 @@ public class PersonDao {
                         
             String query = "INSERT INTO people (name, legal_name, kind, document_1, document_2, email, phone, cel, status) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ? )";           
            
-            long id = daoHelper.executePreparedUpdateAndReturnGenerateKeys(
+            int id = daoHelper.executePreparedUpdateAndReturnGenerateKeys(
                 query, 
                 person.getName(), 
                 person.getLegalName(),    

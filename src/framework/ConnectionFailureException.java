@@ -1,4 +1,4 @@
-package framework.dao;
+package framework;
 
 public class ConnectionFailureException extends RuntimeException {
 

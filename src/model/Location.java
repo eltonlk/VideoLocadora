@@ -4,9 +4,9 @@ import java.util.Date;
 
 public class Location {
     
-    private long id;
-    private long customer_id;
-    private long employee_id;
+    private int id;
+    private int customer_id;
+    private int employee_id;
     private String status;
     private Date booked_at;
     private Date removed_at;
@@ -16,7 +16,7 @@ public class Location {
     public Location() {
     }
     
-    public Location(long customer_id, long employee_id, String status, Date booked_at, Date removed_at, Date returned_at, double amount) {
+    public Location(int customer_id, int employee_id, String status, Date booked_at, Date removed_at, Date returned_at, double amount) {
         this.customer_id = customer_id;
         this.employee_id = employee_id;
         this.status = status;
@@ -26,27 +26,27 @@ public class Location {
         this.amount = amount;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public long getCustomer_id() {
+    public int getCustomerId() {
         return customer_id;
     }
 
-    public void setCustomer_id(long customer_id) {
+    public void setCustomerId(int customer_id) {
         this.customer_id = customer_id;
     }
 
-    public long getEmployee_id() {
+    public int getEmployeeId() {
         return employee_id;
     }
 
-    public void setEmployee_id(long employee_id) {
+    public void setEmployeeId(int employee_id) {
         this.employee_id = employee_id;
     }
 
@@ -58,27 +58,27 @@ public class Location {
         this.status = status;
     }
 
-    public Date getBooked_at() {
+    public Date getBookedAt() {
         return booked_at;
     }
 
-    public void setBooked_at(Date booked_at) {
+    public void setBookedAt(Date booked_at) {
         this.booked_at = booked_at;
     }
 
-    public Date getRemoved_at() {
+    public Date getRemovedAt() {
         return removed_at;
     }
 
-    public void setRemoved_at(Date removed_at) {
+    public void setRemovedAt(Date removed_at) {
         this.removed_at = removed_at;
     }
 
-    public Date getReturned_at() {
+    public Date getReturnedAt() {
         return returned_at;
     }
 
-    public void setReturned_at(Date returned_at) {
+    public void setReturnedAt(Date returned_at) {
         this.returned_at = returned_at;
     }
 

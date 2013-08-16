@@ -1,4 +1,4 @@
-package framework.dao;
+package framework;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -72,10 +72,10 @@ public class DaoHelper {
         return conn;
     }
 
-    public long executePreparedUpdateAndReturnGenerateKeys(Connection conn, String query, Object... params) throws SQLException {
+    public int executePreparedUpdateAndReturnGenerateKeys(Connection conn, String query, Object... params) throws SQLException {
         PreparedStatement pstmt = null;
         ResultSet rset = null;
-        long id = 01;
+        int id = 01;
         
         try {
             pstmt = conn.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
@@ -89,7 +89,7 @@ public class DaoHelper {
 
             rset = pstmt.getGeneratedKeys();
 
-            if (rset.next()) id = rset.getLong(1);
+            if (rset.next()) id = rset.getInt(1);
         } finally {
             release(rset);
             release(pstmt);
@@ -98,7 +98,7 @@ public class DaoHelper {
         return id;       
     }
     
-    public long executePreparedUpdateAndReturnGenerateKeys(String query, Object... params) throws SQLException {
+    public int executePreparedUpdateAndReturnGenerateKeys(String query, Object... params) throws SQLException {
         return executePreparedUpdateAndReturnGenerateKeys(getConnectionFromContext(), query, params);
     }
     

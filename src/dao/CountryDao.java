@@ -1,48 +1,36 @@
 package dao;
 
-import framework.dao.CreateDaoException;
-import framework.dao.DaoHelper;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import framework.CreateDaoException;
+import framework.DaoHelper;
 
 import model.Country;
 
 public class CountryDao {
     
     private DaoHelper daoHelper;
-    private Connection conn = null;
-    private PreparedStatement pstmt = null;
-    private ResultSet rset = null;    
     
     public CountryDao() {
         daoHelper = new DaoHelper();
     }
     
-    public Country insert(Country country) throws CreateDaoException {
+    public void insert(Country country) throws CreateDaoException {
         try {
-            conn = daoHelper.getConnection();
+            daoHelper.begingTransaction();
+                        
+            String query = "INSERT INTO countries (name) VALUES ( ? )";           
+           
+            int id = daoHelper.executePreparedUpdateAndReturnGenerateKeys(
+                query, 
+                country.getName());                    
             
-            pstmt = conn.prepareStatement("INSERT INTO countries (name) VALUES ( ? )", 
-                    PreparedStatement.RETURN_GENERATED_KEYS);
-
-            pstmt.setString(1, country.getName());
+            country.setId(id);
             
-            pstmt.executeUpdate();
-            
-            rset = pstmt.getGeneratedKeys();
-            
-            if (rset.next()) {
-                country.setId(rset.getLong("id"));
-            }
+            daoHelper.endTransaction();          
         } catch (Exception e) {
+           daoHelper.rollbackTransaction();
+            
            throw new CreateDaoException("Não foi possivel realizar a tranzação.", e);
-        } finally {
-           daoHelper.releaseAll(conn, pstmt);
         }
-        
-        return country;
     }    
     
 }

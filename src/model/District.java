@@ -1,33 +1,36 @@
 package model;
 
+import dao.DistrictDao;
+
 public class District {
     
-    private long id;
-    private long city_id;
+    private int id;
     private String name;
+
+    private City city;
     
     public District() {
     }
     
-    public District(String name, long city_id) {
+    public District(String name, City city) {
         this.name = name;
-        this.city_id = city_id;
+        this.city = city;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public long getCity_id() {
-        return city_id;
+    public City getCity() {
+        return city;
     }
 
-    public void setCity_id(long city_id) {
-        this.city_id = city_id;
+    public void setCity(City city) {
+        this.city = city;
     }
 
     public String getName() {
@@ -36,6 +39,12 @@ public class District {
 
     public void setName(String name) {
         this.name = name;
+    }
+    
+    public District save() {
+        new DistrictDao().insert(this);
+        
+        return this;
     }
     
 }

@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Person {
     
-    private long id;
+    private int id;
     private String name;
     private String legal_name;
     private String kind;
@@ -38,16 +38,16 @@ public class Person {
         this.address = address;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setId(int id) {
+        this.id = id;  
         
         if (address != null) {
-            address.setPersonId(id);
-        }       
+            this.address.setPersonId(id);
+        }
     }
 
     public String getName() {

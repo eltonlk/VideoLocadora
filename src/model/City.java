@@ -1,35 +1,38 @@
 package model;
 
+import dao.CityDao;
+
 public class City {
     
-    private long id;
-    private long state_id;
+    private int id;
     private String name;
     private String zip;
+    
+    private State state;
     
     public City() {
     }
 
-    public City(String name, String zip, long state_id) {
+    public City(String name, String zip, State state) {
         this.name = name;
         this.zip = zip;
-        this.state_id = state_id;
+        this.state = state;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public long getState_id() {
-        return state_id;
+    public State getState() {
+        return state;
     }
 
-    public void setState_id(long state_id) {
-        this.state_id = state_id;
+    public void setState(State state) {
+        this.state = state;
     }
 
     public String getName() {
@@ -48,4 +51,9 @@ public class City {
         this.zip = zip;
     }
     
+    public City save() {
+        new CityDao().insert(this);
+        
+        return this;
+    }
 }
