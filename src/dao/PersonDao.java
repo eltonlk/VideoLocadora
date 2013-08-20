@@ -3,7 +3,12 @@ package dao;
 import framework.CreateDaoException;
 import framework.DaoHelper;
 import framework.DeleteDaoException;
+import framework.QueryMapping;
 import framework.UpdateDaoException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import model.Person;
 import model.Address;
@@ -111,5 +116,32 @@ public class PersonDao {
         Address address = person.getAddress();
             
         new AddressDao().delete(address);
-    }     
+    }   
+    
+    public List<Person> getAll() {
+        final List<Person> people = new ArrayList<Person>();
+        
+        try {
+            daoHelper.executeQuery("SELECT * FROM people", new QueryMapping<Person>() {
+                public void mapping(ResultSet rset) throws SQLException {
+                    while (rset.next()) {
+                        Person person = new Person();
+                        person.setId( rset.getInt("id") );
+                        person.setName( rset.getString("name") );
+                        person.setLegalName( rset.getString("legal_name") );
+                        person.setKind( rset.getString("kind") );
+                        person.setDocument1( rset.getString("document_1") );
+                        person.setDocument2( rset.getString("document_2") );
+                        person.setEmail( rset.getString("email") );
+                        person.setPhone( rset.getString("phone") );
+                        person.setCel( rset.getString("cel") );
+                        
+                        people.add(person);
+                    }
+                }
+            });
+        } catch (SQLException e) { }
+        
+        return people; 
+    }
 }

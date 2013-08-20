@@ -79,11 +79,8 @@ public class DaoHelper {
         
         try {
             pstmt = conn.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
-        
-            int i = 0;
-            for (Object param : params) {
-                pstmt.setObject(++i, param);
-            }
+            
+            populatePreparedStatement(pstmt, params);
 
             pstmt.executeUpdate();
 
@@ -107,11 +104,8 @@ public class DaoHelper {
         
         try {
             pstmt = conn.prepareStatement(query);
-        
-            int i = 0;
-            for (Object param : params) {
-                pstmt.setObject(++i, param);
-            }
+            
+            populatePreparedStatement(pstmt, params);
 
             pstmt.executeUpdate();
         } finally {
@@ -156,5 +150,56 @@ public class DaoHelper {
         release(rs);
         releaseAll(conn, stmt);
     }    
+    
+    public <T> void executeQuery(Connection conn, String query, QueryMapping<T> queryMapping) throws SQLException {
+        PreparedStatement pstmt = null;
+        ResultSet rset = null;
+        
+        try {
+            pstmt = conn.prepareStatement(query);
+
+            rset = pstmt.executeQuery();
+
+            queryMapping.mapping(rset);
+        } finally {
+            release(rset);
+            release(pstmt);
+            release(conn);
+        }        
+    }
+    
+    public <T> void executeQuery(String query, QueryMapping<T> queryMapping) throws SQLException {
+        executeQuery(getConnection(), query, queryMapping);
+    }
+    
+    public <T> void executePreparedQuery(Connection conn, String query, QueryMapping<T> queryMapping, Object... params) throws SQLException {
+        PreparedStatement pstmt = null;
+        ResultSet rset = null;
+        
+        try {
+            pstmt = conn.prepareStatement(query);
+            
+            populatePreparedStatement(pstmt, params);
+            
+            rset = pstmt.executeQuery();
+
+            queryMapping.mapping(rset);
+        } finally {
+            release(rset);
+            release(pstmt);
+            release(conn);
+        } 
+    }
+    
+    public <T> void executePreparedQuery(String query, QueryMapping<T> queryMapping, Object... params) throws SQLException {
+        executePreparedQuery(getConnection(), query, queryMapping, params);
+    }
+
+    private void populatePreparedStatement(PreparedStatement pstmt, Object[] params) throws SQLException {
+        int i = 0;
+        for (Object param : params) {
+            pstmt.setObject(++i, param);
+        }
+    }
     
 }
