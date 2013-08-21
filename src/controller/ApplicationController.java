@@ -2,7 +2,6 @@ package controller;
 
 import dao.PersonDao;
 import java.util.List;
-//import javax.swing.JFrame;
 
 import model.Address;
 import model.City;
@@ -10,15 +9,11 @@ import model.Country;
 import model.District;
 import model.Person;
 import model.State;
-//import view.DashboardJFrame;
 
 public class ApplicationController {
     
     public static void main(String[] args) {
-//        JFrame frame = new DashboardJFrame();
-//                
-//        frame.setVisible(true);
-        
+
 //        testeGravacao();
         
         testeBusca();
