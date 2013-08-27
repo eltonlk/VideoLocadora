@@ -9,7 +9,7 @@ import java.sql.Statement;
 
 public class DaoHelper {
 
-    private static final ThreadLocal<Connection> context = new ThreadLocal<Connection>();
+    private static final ThreadLocal<Connection> context = new ThreadLocal<>();
     
     public Connection getConnection() throws SQLException {
         Connection conn = null;
@@ -19,7 +19,6 @@ public class DaoHelper {
 
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/video_locadora", "root", "");
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
         }
         return conn;
     }
@@ -48,7 +47,6 @@ public class DaoHelper {
             release(conn);
             context.remove();
         } catch (SQLException e) {
-            e.printStackTrace();
         }
     }    
    

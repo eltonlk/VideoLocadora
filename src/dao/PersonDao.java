@@ -54,7 +54,9 @@ public class PersonDao {
     public void insertAddress(Person person) {
         Address address = person.getAddress();
             
-        new AddressDao().insert(address);
+        if ( address != null ) {   
+            new AddressDao().insert(address);
+        }
     }
 
     public void update(Person person) throws UpdateDaoException {
@@ -88,8 +90,10 @@ public class PersonDao {
     
     public void updateAddress(Person person) {
         Address address = person.getAddress();
-            
-        new AddressDao().update(address);
+        
+        if ( address != null ) {   
+            new AddressDao().update(address);
+        }
     }    
     
     public void delete(Person person) throws DeleteDaoException {
@@ -114,15 +118,18 @@ public class PersonDao {
     
     public void deleteAddress(Person person) {
         Address address = person.getAddress();
-            
-        new AddressDao().delete(address);
+        
+        if ( address != null ) {   
+            new AddressDao().delete(address);
+        }
     }   
     
     public List<Person> getAll() {
-        final List<Person> people = new ArrayList<Person>();
+        final List<Person> people = new ArrayList<>();
         
         try {
             daoHelper.executeQuery("SELECT * FROM people", new QueryMapping<Person>() {
+                @Override
                 public void mapping(ResultSet rset) throws SQLException {
                     while (rset.next()) {
                         Person person = new Person();

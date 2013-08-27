@@ -27,7 +27,7 @@ public class PersonFrm extends javax.swing.JFrame {
         jPHeader = new javax.swing.JPanel();
         jLTitle = new javax.swing.JLabel();
         jTBActions = new javax.swing.JToolBar();
-        jBNew = new javax.swing.JButton();
+        jBAdd = new javax.swing.JButton();
         jBEdit = new javax.swing.JButton();
         jBDestroy = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JToolBar.Separator();
@@ -52,6 +52,7 @@ public class PersonFrm extends javax.swing.JFrame {
         jLCel = new javax.swing.JLabel();
         jTFCel = new javax.swing.JTextField();
         jPAddress = new javax.swing.JPanel();
+        jLAddressId = new javax.swing.JLabel();
         jLZip = new javax.swing.JLabel();
         jTFZip = new javax.swing.JTextField();
         jLAddress = new javax.swing.JLabel();
@@ -98,19 +99,22 @@ public class PersonFrm extends javax.swing.JFrame {
         jTBActions.setBorder(null);
         jTBActions.setRollover(true);
 
-        jBNew.setText("Adicionar");
-        jBNew.setFocusable(false);
-        jBNew.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jBNew.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jTBActions.add(jBNew);
+        jBAdd.setText("Adicionar");
+        jBAdd.setActionCommand("add");
+        jBAdd.setFocusable(false);
+        jBAdd.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jBAdd.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jTBActions.add(jBAdd);
 
         jBEdit.setText("Alterar");
+        jBEdit.setActionCommand("edit");
         jBEdit.setFocusable(false);
         jBEdit.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jBEdit.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jTBActions.add(jBEdit);
 
         jBDestroy.setText("Excluir");
+        jBDestroy.setActionCommand("destroy");
         jBDestroy.setFocusable(false);
         jBDestroy.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jBDestroy.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -118,6 +122,7 @@ public class PersonFrm extends javax.swing.JFrame {
         jTBActions.add(jSeparator1);
 
         jBSave.setText("Salvar");
+        jBSave.setActionCommand("save");
         jBSave.setEnabled(false);
         jBSave.setFocusable(false);
         jBSave.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -125,6 +130,7 @@ public class PersonFrm extends javax.swing.JFrame {
         jTBActions.add(jBSave);
 
         jBCancel.setText("Cancelar");
+        jBCancel.setActionCommand("cancel");
         jBCancel.setEnabled(false);
         jBCancel.setFocusable(false);
         jBCancel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -134,7 +140,7 @@ public class PersonFrm extends javax.swing.JFrame {
         jPForm.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         jLId.setFont(new java.awt.Font("Droid Sans", 1, 12)); // NOI18N
-        jLId.setText("ID");
+        jLId.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
 
         jLLegalName.setText("Nome");
 
@@ -168,7 +174,7 @@ public class PersonFrm extends javax.swing.JFrame {
                             .addGroup(jPContactLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jLCel)
                                 .addComponent(jTFCel, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(9, Short.MAX_VALUE))
         );
         jPContactLayout.setVerticalGroup(
             jPContactLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -185,10 +191,13 @@ public class PersonFrm extends javax.swing.JFrame {
                 .addGroup(jPContactLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTFPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTFCel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(125, Short.MAX_VALUE))
+                .addContainerGap(116, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Contato", jPContact);
+
+        jLAddressId.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        jLAddressId.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
 
         jLZip.setText("CEP");
 
@@ -218,35 +227,39 @@ public class PersonFrm extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPAddressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jTFAddress)
-                    .addGroup(jPAddressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPAddressLayout.createSequentialGroup()
                         .addComponent(jLZip)
-                        .addComponent(jTFZip, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLAddress)
-                        .addGroup(jPAddressLayout.createSequentialGroup()
-                            .addComponent(jCBCountry, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jCBState, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPAddressLayout.createSequentialGroup()
-                            .addGroup(jPAddressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLCity)
-                                .addComponent(jCBCity, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLCountry))
-                            .addGroup(jPAddressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPAddressLayout.createSequentialGroup()
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addGroup(jPAddressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLDistrict)
-                                        .addComponent(jCBDistrict, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGroup(jPAddressLayout.createSequentialGroup()
-                                    .addGap(12, 12, 12)
-                                    .addComponent(jLState))))))
-                .addContainerGap(14, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLAddressId, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTFZip, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLAddress, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPAddressLayout.createSequentialGroup()
+                        .addComponent(jCBCountry, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jCBState, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPAddressLayout.createSequentialGroup()
+                        .addGroup(jPAddressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLCity)
+                            .addComponent(jCBCity, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLCountry))
+                        .addGroup(jPAddressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPAddressLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPAddressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLDistrict)
+                                    .addComponent(jCBDistrict, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPAddressLayout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addComponent(jLState)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPAddressLayout.setVerticalGroup(
             jPAddressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPAddressLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLZip)
+                .addGroup(jPAddressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLZip, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLAddressId, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTFZip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -269,7 +282,7 @@ public class PersonFrm extends javax.swing.JFrame {
                 .addGroup(jPAddressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jCBCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jCBDistrict, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Endereço", jPAddress);
@@ -284,31 +297,28 @@ public class PersonFrm extends javax.swing.JFrame {
             jPFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPFormLayout.createSequentialGroup()
                 .addGap(8, 8, 8)
-                .addGroup(jPFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPFormLayout.createSequentialGroup()
                         .addComponent(jLLegalName)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLId))
-                    .addGroup(jPFormLayout.createSequentialGroup()
-                        .addGroup(jPFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jCBStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLStatus)
-                            .addComponent(jLName)
-                            .addGroup(jPFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jTFLegalName, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(jPFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jTFName, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPFormLayout.createSequentialGroup()
-                                        .addGroup(jPFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jTFDocument1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLDocument1))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(jPFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLDocument2)
-                                            .addComponent(jTFDocument2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addComponent(jLId, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jCBStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLStatus)
+                    .addComponent(jLName)
+                    .addGroup(jPFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jTFLegalName, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jTFName, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPFormLayout.createSequentialGroup()
+                                .addGroup(jPFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTFDocument1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLDocument1))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLDocument2)
+                                    .addComponent(jTFDocument2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPFormLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jTFDocument1, jTFDocument2});
@@ -317,9 +327,9 @@ public class PersonFrm extends javax.swing.JFrame {
             jPFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPFormLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLLegalName)
-                    .addComponent(jLId))
+                .addGroup(jPFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLLegalName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLId, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTFLegalName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -335,12 +345,12 @@ public class PersonFrm extends javax.swing.JFrame {
                     .addComponent(jTFDocument1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTFDocument2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLStatus)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jCBStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         jPContent.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -376,13 +386,11 @@ public class PersonFrm extends javax.swing.JFrame {
             .addComponent(jPHeader, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTBActions, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPForm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPContent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(jPForm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPContent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addComponent(jTBActions, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -397,6 +405,9 @@ public class PersonFrm extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jTBActions.getAccessibleContext().setAccessibleName("");
+        jTBActions.getAccessibleContext().setAccessibleDescription("");
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -408,8 +419,7 @@ public class PersonFrm extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                System.out.println(info.getName());
-                if ("GTK+".equals(info.getName())) {
+                if ("Metal".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -437,6 +447,14 @@ public class PersonFrm extends javax.swing.JFrame {
         return jBCancel;
     }
 
+    public JButton getjBAdd() {
+        return jBAdd;
+    }
+
+    public void setjBAdd(JButton jBAdd) {
+        this.jBAdd = jBAdd;
+    }
+        
     public void setjBCancel(JButton jBCancel) {
         this.jBCancel = jBCancel;
     }
@@ -455,14 +473,6 @@ public class PersonFrm extends javax.swing.JFrame {
 
     public void setjBEdit(JButton jBEdit) {
         this.jBEdit = jBEdit;
-    }
-
-    public JButton getjBNew() {
-        return jBNew;
-    }
-
-    public void setjBNew(JButton jBNew) {
-        this.jBNew = jBNew;
     }
 
     public JButton getjBSave() {
@@ -511,6 +521,14 @@ public class PersonFrm extends javax.swing.JFrame {
 
     public void setjCBStatus(JComboBox jCBStatus) {
         this.jCBStatus = jCBStatus;
+    }
+
+    public JLabel getjLAddressId() {
+        return jLAddressId;
+    }
+
+    public void setjLAddressId(JLabel jLAddressId) {
+        this.jLAddressId = jLAddressId;
     }
 
     public JLabel getjLId() {
@@ -594,10 +612,10 @@ public class PersonFrm extends javax.swing.JFrame {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBAdd;
     private javax.swing.JButton jBCancel;
     private javax.swing.JButton jBDestroy;
     private javax.swing.JButton jBEdit;
-    private javax.swing.JButton jBNew;
     private javax.swing.JButton jBSave;
     private javax.swing.JComboBox jCBCity;
     private javax.swing.JComboBox jCBCountry;
@@ -605,6 +623,7 @@ public class PersonFrm extends javax.swing.JFrame {
     private javax.swing.JComboBox jCBState;
     private javax.swing.JComboBox jCBStatus;
     private javax.swing.JLabel jLAddress;
+    private javax.swing.JLabel jLAddressId;
     private javax.swing.JLabel jLCel;
     private javax.swing.JLabel jLCity;
     private javax.swing.JLabel jLCountry;
