@@ -3,20 +3,24 @@ package view.person;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import model.Address;
 import model.Person;
 
 import service.PersonService;
 
-public class PersonActionListener implements ActionListener {
+public class PersonActionListener implements ActionListener, ListSelectionListener {
 
     private PersonFrm frm;
     private PersonService service;
+    private PersonTableModel tableModel;
 
     public PersonActionListener(PersonFrm frm) {
         this.frm = frm;
         service = new PersonService();
         attachListener();
+        loadTBPeople();
     }
     
     @Override
@@ -73,7 +77,6 @@ public class PersonActionListener implements ActionListener {
     }
     
     private void destroy() {
-        
     }
     
     private void save() {
@@ -81,7 +84,7 @@ public class PersonActionListener implements ActionListener {
         
         JOptionPane.showMessageDialog(frm, "Pessoa salva.", "save", JOptionPane.INFORMATION_MESSAGE);
         
-        disableButtonsToSave();        
+        disableButtonsToSave();      
     }
     
     private void cancel() {
@@ -123,4 +126,35 @@ public class PersonActionListener implements ActionListener {
         
         return address;        
     }
+    
+    private void loadTBPeople() {
+        tableModel = new PersonTableModel(service.getPeople());
+        
+        frm.getjTPeople().setModel(tableModel);
+        
+        frm.getjTPeople()
+            .getSelectionModel()
+            .addListSelectionListener( this );
+    }
+
+    @Override
+    public void valueChanged(ListSelectionEvent event) {
+        Person person = tableModel.getPeople().get( frm.getjTPeople().getSelectedRow() );
+        
+        mappingPersonToForm(person);
+    }
+    
+    private Person mappingPersonToForm(Person person) {
+        frm.getjLId().setText( Integer.toString(person.getId()) );
+        frm.getjTFName().setText( person.getName() );
+        frm.getjTFLegalName().setText( person.getLegalName() );
+        frm.getjTFDocument1().setText( person.getDocument1() );
+        frm.getjTFDocument2().setText( person.getDocument2() );
+        frm.getjTFEmail().setText( person.getEmail() );
+        frm.getjTFCel().setText( person.getCel() );
+        frm.getjTFPhone().setText( person.getPhone() );
+        
+        return person;
+    }
+    
 }

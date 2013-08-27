@@ -124,7 +124,7 @@ public class PersonDao {
         }
     }   
     
-    public List<Person> getAll() {
+    public List<Person> getPeople() {
         final List<Person> people = new ArrayList<>();
         
         try {

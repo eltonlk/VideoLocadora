@@ -22,7 +22,7 @@ public class ApplicationController {
     public static void testeBusca() {
         
         PersonDao personDao = new PersonDao();
-        List<Person> people = personDao.getAll();
+        List<Person> people = personDao.getPeople();
         
         for (Person person : people ) {
             System.out.println(person.getId() + " - " + person.getName());

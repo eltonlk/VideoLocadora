@@ -3,6 +3,7 @@ package view.person;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 
 public class PersonFrm extends javax.swing.JFrame {
@@ -437,6 +438,7 @@ public class PersonFrm extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new PersonFrm().setVisible(true);
             }
@@ -610,7 +612,15 @@ public class PersonFrm extends javax.swing.JFrame {
     public void setjTFZip(JTextField jTFZip) {
         this.jTFZip = jTFZip;
     }
-    
+
+    public JTable getjTPeople() {
+        return jTPeople;
+    }
+
+    public void setjTPeople(JTable jTPeople) {
+        this.jTPeople = jTPeople;
+    }
+   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBAdd;
     private javax.swing.JButton jBCancel;

@@ -20,8 +20,8 @@ public class PersonService {
         }        
     }
     
-    public List<Person> getAll() {
-        return dao.getAll();
+    public List<Person> getPeople() {
+        return dao.getPeople();
     }
     
 }
