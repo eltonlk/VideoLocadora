@@ -45,11 +45,6 @@ public class PersonActionListener implements ActionListener, ListSelectionListen
     }
 
     private void attachListener() {
-        frm.getjBAdd().addActionListener(this);
-        frm.getjBEdit().addActionListener(this);
-        frm.getjBDestroy().addActionListener(this);
-        frm.getjBSave().addActionListener(this);
-        frm.getjBCancel().addActionListener(this);
     }
     
     private void enableButtonsToSave() {
@@ -61,11 +56,11 @@ public class PersonActionListener implements ActionListener, ListSelectionListen
     }
     
     private void enableOrDisableButtonsToSave(boolean enabled) {
-        frm.getjBAdd().setEnabled(!enabled);
-        frm.getjBEdit().setEnabled(!enabled);
-        frm.getjBDestroy().setEnabled(!enabled);
-        frm.getjBSave().setEnabled(enabled);
-        frm.getjBCancel().setEnabled(enabled);
+//        frm.getjBAdd().setEnabled(!enabled);
+//        frm.getjBEdit().setEnabled(!enabled);
+//        frm.getjBDestroy().setEnabled(!enabled);
+//        frm.getjBSave().setEnabled(enabled);
+//        frm.getjBCancel().setEnabled(enabled);
     }    
     
     private void add() {

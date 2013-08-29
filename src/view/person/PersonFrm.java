@@ -27,13 +27,6 @@ public class PersonFrm extends javax.swing.JInternalFrame {
 
         jPHeader = new javax.swing.JPanel();
         jLTitle = new javax.swing.JLabel();
-        jTBActions = new javax.swing.JToolBar();
-        jBAdd = new javax.swing.JButton();
-        jBEdit = new javax.swing.JButton();
-        jBDestroy = new javax.swing.JButton();
-        jSeparator1 = new javax.swing.JToolBar.Separator();
-        jBSave = new javax.swing.JButton();
-        jBCancel = new javax.swing.JButton();
         jPForm = new javax.swing.JPanel();
         jLId = new javax.swing.JLabel();
         jLLegalName = new javax.swing.JLabel();
@@ -71,6 +64,7 @@ public class PersonFrm extends javax.swing.JInternalFrame {
         jPContent = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTPeople = new javax.swing.JTable();
+        baseToolBar1 = new view.components.toolbar.BaseToolBar(listener);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -87,7 +81,7 @@ public class PersonFrm extends javax.swing.JInternalFrame {
             .addGroup(jPHeaderLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLTitle)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(825, Short.MAX_VALUE))
         );
         jPHeaderLayout.setVerticalGroup(
             jPHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -96,47 +90,6 @@ public class PersonFrm extends javax.swing.JInternalFrame {
                 .addComponent(jLTitle)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        jTBActions.setBorder(null);
-        jTBActions.setRollover(true);
-
-        jBAdd.setText("Adicionar");
-        jBAdd.setActionCommand("add");
-        jBAdd.setFocusable(false);
-        jBAdd.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jBAdd.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jTBActions.add(jBAdd);
-
-        jBEdit.setText("Alterar");
-        jBEdit.setActionCommand("edit");
-        jBEdit.setFocusable(false);
-        jBEdit.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jBEdit.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jTBActions.add(jBEdit);
-
-        jBDestroy.setText("Excluir");
-        jBDestroy.setActionCommand("destroy");
-        jBDestroy.setFocusable(false);
-        jBDestroy.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jBDestroy.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jTBActions.add(jBDestroy);
-        jTBActions.add(jSeparator1);
-
-        jBSave.setText("Salvar");
-        jBSave.setActionCommand("save");
-        jBSave.setEnabled(false);
-        jBSave.setFocusable(false);
-        jBSave.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jBSave.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jTBActions.add(jBSave);
-
-        jBCancel.setText("Cancelar");
-        jBCancel.setActionCommand("cancel");
-        jBCancel.setEnabled(false);
-        jBCancel.setFocusable(false);
-        jBCancel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jBCancel.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jTBActions.add(jBCancel);
 
         jPForm.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
@@ -225,16 +178,6 @@ public class PersonFrm extends javax.swing.JInternalFrame {
         jPAddressLayout.setHorizontalGroup(
             jPAddressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPAddressLayout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addComponent(jLZip)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLAddressId, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(142, Short.MAX_VALUE))
-            .addGroup(jPAddressLayout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addComponent(jTFAddress)
-                .addGap(14, 14, 14))
-            .addGroup(jPAddressLayout.createSequentialGroup()
                 .addGroup(jPAddressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPAddressLayout.createSequentialGroup()
                         .addContainerGap()
@@ -260,6 +203,17 @@ public class PersonFrm extends javax.swing.JInternalFrame {
                         .addGap(12, 12, 12)
                         .addComponent(jTFZip, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(14, Short.MAX_VALUE))
+            .addGroup(jPAddressLayout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addGroup(jPAddressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPAddressLayout.createSequentialGroup()
+                        .addComponent(jLZip)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLAddressId, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(142, Short.MAX_VALUE))
+                    .addGroup(jPAddressLayout.createSequentialGroup()
+                        .addComponent(jTFAddress)
+                        .addGap(14, 14, 14))))
         );
         jPAddressLayout.setVerticalGroup(
             jPAddressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -358,7 +312,7 @@ public class PersonFrm extends javax.swing.JInternalFrame {
                 .addComponent(jLStatus)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jCBStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPContent.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -387,6 +341,11 @@ public class PersonFrm extends javax.swing.JInternalFrame {
             .addComponent(jScrollPane1)
         );
 
+        baseToolBar1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        baseToolBar1.setRollover(true);
+        baseToolBar1.setAlignmentX(0.0F);
+        baseToolBar1.setAlignmentY(0.0F);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -398,67 +357,24 @@ public class PersonFrm extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPContent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
-            .addComponent(jTBActions, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(baseToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jPHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTBActions, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(baseToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(65, 65, 65)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPContent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPForm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
-        jTBActions.getAccessibleContext().setAccessibleName("");
-        jTBActions.getAccessibleContext().setAccessibleDescription("");
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    public JButton getjBCancel() {
-        return jBCancel;
-    }
-
-    public JButton getjBAdd() {
-        return jBAdd;
-    }
-
-    public void setjBAdd(JButton jBAdd) {
-        this.jBAdd = jBAdd;
-    }
-        
-    public void setjBCancel(JButton jBCancel) {
-        this.jBCancel = jBCancel;
-    }
-
-    public JButton getjBDestroy() {
-        return jBDestroy;
-    }
-
-    public void setjBDestroy(JButton jBDestroy) {
-        this.jBDestroy = jBDestroy;
-    }
-
-    public JButton getjBEdit() {
-        return jBEdit;
-    }
-
-    public void setjBEdit(JButton jBEdit) {
-        this.jBEdit = jBEdit;
-    }
-
-    public JButton getjBSave() {
-        return jBSave;
-    }
-
-    public void setjBSave(JButton jBSave) {
-        this.jBSave = jBSave;
-    }
-    
+  
     public JComboBox getjCBCity() {
         return jCBCity;
     }
@@ -596,11 +512,7 @@ public class PersonFrm extends javax.swing.JInternalFrame {
     }
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jBAdd;
-    private javax.swing.JButton jBCancel;
-    private javax.swing.JButton jBDestroy;
-    private javax.swing.JButton jBEdit;
-    private javax.swing.JButton jBSave;
+    private view.components.toolbar.BaseToolBar baseToolBar1;
     private javax.swing.JComboBox jCBCity;
     private javax.swing.JComboBox jCBCountry;
     private javax.swing.JComboBox jCBDistrict;
@@ -629,8 +541,6 @@ public class PersonFrm extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPForm;
     private javax.swing.JPanel jPHeader;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JToolBar.Separator jSeparator1;
-    private javax.swing.JToolBar jTBActions;
     private javax.swing.JTextField jTFAddress;
     private javax.swing.JTextField jTFCel;
     private javax.swing.JTextField jTFDocument1;

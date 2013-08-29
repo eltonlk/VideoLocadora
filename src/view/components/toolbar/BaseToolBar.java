@@ -52,11 +52,23 @@ public final class BaseToolBar extends JToolBar {
     }
     
     protected void loadDefaultButtons() {
-        this.addButton("Adicionar", "/assets/images/icons/16x16/add.png")
-            .addButton("Alterar"  , "/assets/images/icons/16x16/pen.png")
-            .addButton("Excluir"  , "/assets/images/icons/16x16/delete.png")
-            .addButton("Salvar"   , "/assets/images/icons/16x16/add.png")
-            .addButton("Cancelar" , "/assets/images/icons/16x16/nope.png"); // remove
+//        this.addButton("Adicionar", "/assets/images/icons/16x16/add.png")
+//            .addButton("Alterar"  , "/assets/images/icons/16x16/pen.png")
+//            .addButton("Excluir"  , "/assets/images/icons/16x16/delete.png")
+//            .addButton("Salvar"   , "/assets/images/icons/16x16/add.png")
+//            .addButton("Cancelar" , "/assets/images/icons/16x16/nope.png"); // remove
+////        
+//        this.addButton("Adicionar", "/assets/images/icons/super-mono/sticker/icons/button-add.png")
+//            .addButton("Alterar"  , "/assets/images/icons/super-mono/sticker/icons/pencil.png")
+//            .addButton("Excluir"  , "/assets/images/icons/super-mono/sticker/icons/bin.png")
+//            .addButton("Salvar"   , "/assets/images/icons/super-mono/sticker/icons/button-check.png")
+//            .addButton("Cancelar" , "/assets/images/icons/super-mono/sticker/icons/button-cross.png");
+//        
+        this.addButton("Adicionar", "/assets/images/icons/super-mono/basic/blue/button-add2.png")
+            .addButton("Alterar"  , "/assets/images/icons/super-mono/basic/blue/document-edit2.png")
+            .addButton("Excluir"  , "/assets/images/icons/super-mono/basic/red/bin2.png")
+            .addButton("Salvar"   , "/assets/images/icons/super-mono/basic/green/button-check2.png")
+            .addButton("Cancelar" , "/assets/images/icons/super-mono/basic/red/button-cross2.png");
     }
 
 }

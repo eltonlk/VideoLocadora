@@ -29,7 +29,7 @@ public class CustomerFrm extends javax.swing.JInternalFrame {
         setTitle("Clientes");
         setToolTipText("");
 
-        baseToolBar1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        baseToolBar1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(203, 203, 203)));
         baseToolBar1.setRollover(true);
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
@@ -42,8 +42,8 @@ public class CustomerFrm extends javax.swing.JInternalFrame {
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(layout.createSequentialGroup()
                 .add(51, 51, 51)
-                .add(baseToolBar1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 48, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(499, Short.MAX_VALUE))
+                .add(baseToolBar1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 64, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(486, Short.MAX_VALUE))
         );
 
         pack();
