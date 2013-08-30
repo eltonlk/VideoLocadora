@@ -1,9 +1,11 @@
 package view.main;
 
 import com.jgoodies.looks.plastic.PlasticXPLookAndFeel;
-import com.jgoodies.looks.plastic.theme.Silver;
+import com.jgoodies.looks.plastic.theme.SkyBlue;
 import view.customer.CustomerFrm;
 import view.person.PersonFrm;
+import view.person.PersonInternalFrame;
+import view.supplier.SupplierFrm;
 
 public class Main extends javax.swing.JFrame {
 
@@ -62,8 +64,12 @@ public class Main extends javax.swing.JFrame {
         fileMenu.add(customersMenuItem);
 
         saveAsMenuItem.setMnemonic('a');
-        saveAsMenuItem.setText("Save As ...");
-        saveAsMenuItem.setDisplayedMnemonicIndex(5);
+        saveAsMenuItem.setText("Fornecedores");
+        saveAsMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveAsMenuItemActionPerformed(evt);
+            }
+        });
         fileMenu.add(saveAsMenuItem);
 
         exitMenuItem.setMnemonic('x');
@@ -121,7 +127,7 @@ public class Main extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(desktopPane, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 8, Short.MAX_VALUE)
+            .add(desktopPane, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 12, Short.MAX_VALUE)
         );
 
         pack();
@@ -132,16 +138,33 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_exitMenuItemActionPerformed
 
     private void peopleMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_peopleMenuItemActionPerformed
-        PersonFrm frm = new PersonFrm();
-        frm.setVisible(true);
-        desktopPane.add(frm);
+        PersonInternalFrame personIF = new PersonInternalFrame();
+        
+        personIF.setLocation((getWidth() - personIF.getWidth()) / 2, 40);
+        
+        personIF.setVisible(true);
+        
+        desktopPane.add(personIF);
+        
+//        PersonFrm frm = new PersonFrm();
+//        frm.setLocation((getWidth() - frm.getWidth()) / 2, 40);        
+//        frm.setVisible(true);
+//        desktopPane.add(frm);
     }//GEN-LAST:event_peopleMenuItemActionPerformed
 
     private void customersMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customersMenuItemActionPerformed
         CustomerFrm frm = new CustomerFrm();
+        frm.setLocation((getWidth() - frm.getWidth()) / 2, 40);
         frm.setVisible(true);
         desktopPane.add(frm);
     }//GEN-LAST:event_customersMenuItemActionPerformed
+
+    private void saveAsMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveAsMenuItemActionPerformed
+        SupplierFrm frm = new SupplierFrm();
+        frm.setLocation((getWidth() - frm.getWidth()) / 2, 40);        
+        frm.setVisible(true);
+        desktopPane.add(frm);
+    }//GEN-LAST:event_saveAsMenuItemActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -150,7 +173,7 @@ public class Main extends javax.swing.JFrame {
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
 
-        PlasticXPLookAndFeel.setPlasticTheme(new Silver());
+        PlasticXPLookAndFeel.setPlasticTheme(new SkyBlue());
         
         try {
 //            javax.swing.UIManager.setLookAndFeel("com.jgoodies.looks.plastic.PlasticXPLookAndFeel");

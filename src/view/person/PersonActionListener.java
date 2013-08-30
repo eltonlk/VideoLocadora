@@ -5,21 +5,24 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import model.Address;
+//import model.Address;
 import model.Person;
 
 import service.PersonService;
 
 public class PersonActionListener implements ActionListener, ListSelectionListener {
 
-    private PersonFrm frm;
+    private PersonInternalFrame frame;
     private PersonService service;
     private PersonTableModel tableModel;
 
-    public PersonActionListener(PersonFrm frm) {
-        this.frm = frm;
+    PersonActionListener(PersonInternalFrame frame) {
+        this.frame = frame;
+        
         service = new PersonService();
+        
         attachListener();
+        
         loadTBPeople();
     }
     
@@ -77,7 +80,7 @@ public class PersonActionListener implements ActionListener, ListSelectionListen
     private void save() {
         service.save( mappingFormToPerson() );
         
-        JOptionPane.showMessageDialog(frm, "Pessoa salva.", "save", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(frame, "Pessoa salva.", "save", JOptionPane.INFORMATION_MESSAGE);
         
         disableButtonsToSave();      
     }
@@ -89,67 +92,68 @@ public class PersonActionListener implements ActionListener, ListSelectionListen
     private Person mappingFormToPerson() {
         Person person = new Person();
         
-        if ( !"".equals( frm.getjLId().getText() ) ) {
-            person.setId( Integer.parseInt(frm.getjLId().getText()) );
+        if ( !"".equals( frame.getFormPanel().getLabelId().getText() ) ) {
+            person.setId( Integer.parseInt(frame.getFormPanel().getLabelId().getText()) );
         }
         
-        person.setName( frm.getjTFName().getText() );
-        person.setLegalName( frm.getjTFLegalName().getText() );
-        person.setDocument1( frm.getjTFDocument1().getText() );
-        person.setDocument2( frm.getjTFDocument2().getText() );
-        person.setEmail( frm.getjTFEmail().getText() );
+        person.setName( frame.getFormPanel().getInputName().getText() );
+        person.setLegalName( frame.getFormPanel().getInputLegalName().getText() );
+        person.setDocument1( frame.getFormPanel().getInputDocument1().getText() );
+        person.setDocument2( frame.getFormPanel().getInputDocument2().getText() );
+        person.setEmail( frame.getFormPanel().getInputEmail().getText() );
         person.setKind( "customer" );
-        person.setCel( frm.getjTFCel().getText() );
-        person.setPhone( frm.getjTFPhone().getText() );
-//        person.setStatus(frm.getjCBStatus());
+        person.setCel( frame.getFormPanel().getInputCel().getText() );
+        person.setPhone( frame.getFormPanel().getInputPhone().getText() );
+//        person.setStatus(frame.getjCBStatus());
         
 //        person.setAddress( mappingFormToAddress() );
         
         return person;
     }
     
-    private Address mappingFormToAddress() {
-        Address address = new Address();
-        
-        if ( !"".equals( frm.getjLAddressId().getText() ) ) {
-            address.setId( Integer.parseInt(frm.getjLAddressId().getText()) );
-        }        
-        
-        address.setAddress( frm.getjTFAddress().getText() );
-//        address.setDistrictId( );
-        address.setLocation( "work" );
-        
-        return address;        
-    }
+//    private Address mappingFormToAddress() {
+//        Address address = new Address();
+//        
+//        if ( !"".equals( frame.getjLAddressId().getText() ) ) {
+//            address.setId( Integer.parseInt(frame.getjLAddressId().getText()) );
+//        }        
+//        
+//        address.setAddress( frame.getjTFAddress().getText() );
+////        address.setDistrictId( );
+//        address.setLocation( "work" );
+//        
+//        return address;        
+//    }
     
     private void loadTBPeople() {
         tableModel = new PersonTableModel(service.getPeople());
         
-        frm.getjTPeople().setModel(tableModel);
+        frame.getListPanel()
+                .getTablePeople()
+                .setModel(tableModel);
         
-        frm.getjTPeople()
-            .getSelectionModel()
-            .addListSelectionListener( this );
+        frame.getListPanel()
+                .getTablePeople()
+                .getSelectionModel()
+                .addListSelectionListener( this );
     }
 
     @Override
     public void valueChanged(ListSelectionEvent event) {
-        Person person = tableModel.getPeople().get( frm.getjTPeople().getSelectedRow() );
+        Person person = tableModel.getPeople().get( frame.getListPanel().getTablePeople().getSelectedRow() );
         
         mappingPersonToForm(person);
     }
     
-    private Person mappingPersonToForm(Person person) {
-        frm.getjLId().setText( Integer.toString(person.getId()) );
-        frm.getjTFName().setText( person.getName() );
-        frm.getjTFLegalName().setText( person.getLegalName() );
-        frm.getjTFDocument1().setText( person.getDocument1() );
-        frm.getjTFDocument2().setText( person.getDocument2() );
-        frm.getjTFEmail().setText( person.getEmail() );
-        frm.getjTFCel().setText( person.getCel() );
-        frm.getjTFPhone().setText( person.getPhone() );
-        
-        return person;
+    private void mappingPersonToForm(Person person) {
+        frame.getFormPanel().getLabelId().setText( Integer.toString(person.getId()) );
+        frame.getFormPanel().getInputLegalName().setText( person.getLegalName() );
+        frame.getFormPanel().getInputName().setText( person.getName() );
+        frame.getFormPanel().getInputDocument1().setText( person.getDocument1() );
+        frame.getFormPanel().getInputDocument2().setText( person.getDocument2() );
+        frame.getFormPanel().getInputEmail().setText( person.getEmail() );
+        frame.getFormPanel().getInputPhone().setText( person.getPhone() );
+        frame.getFormPanel().getInputCel().setText( person.getCel() );
     }
     
 }

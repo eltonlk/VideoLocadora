@@ -15,6 +15,8 @@ public final class BaseToolBar extends JToolBar {
     
     public BaseToolBar() {
         this.buttons = new HashMap<>();
+        
+        this.setBorder(javax.swing.BorderFactory.createEtchedBorder());
     }
     
     public BaseToolBar(ActionListener listener) {

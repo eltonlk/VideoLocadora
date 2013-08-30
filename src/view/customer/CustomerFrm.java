@@ -3,11 +3,13 @@ package view.customer;
 import java.awt.event.ActionListener;
 
 public class CustomerFrm extends javax.swing.JInternalFrame {
-
+    
     private ActionListener listener;
     
     public CustomerFrm() {
         listener = new CustomerActionListener();
+        
+        this.setTitle("Clientes");
         
         initComponents();
     }
@@ -21,34 +23,52 @@ public class CustomerFrm extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        baseToolBar1 = new view.components.toolbar.BaseToolBar(listener);
+        jPanel2 = new javax.swing.JPanel();
+        baseToolBar = new view.components.toolbar.BaseToolBar(listener);
+        baseHeader = new view.components.header.BaseHeader(getTitle());
 
+        setBackground(new java.awt.Color(248, 241, 241));
         setClosable(true);
         setIconifiable(true);
-        setMaximizable(true);
-        setTitle("Clientes");
         setToolTipText("");
 
-        baseToolBar1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(203, 203, 203)));
-        baseToolBar1.setRollover(true);
+        jPanel2.setLayout(null);
+
+        baseToolBar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        baseToolBar.setRollover(true);
+        jPanel2.add(baseToolBar);
+        baseToolBar.setBounds(0, 60, 960, 60);
+
+        org.jdesktop.layout.GroupLayout baseHeaderLayout = new org.jdesktop.layout.GroupLayout(baseHeader);
+        baseHeader.setLayout(baseHeaderLayout);
+        baseHeaderLayout.setHorizontalGroup(
+            baseHeaderLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 956, Short.MAX_VALUE)
+        );
+        baseHeaderLayout.setVerticalGroup(
+            baseHeaderLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 56, Short.MAX_VALUE)
+        );
+
+        jPanel2.add(baseHeader);
+        baseHeader.setBounds(0, 0, 960, 60);
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, baseToolBar1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 969, Short.MAX_VALUE)
+            .add(jPanel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 960, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(layout.createSequentialGroup()
-                .add(51, 51, 51)
-                .add(baseToolBar1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 64, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(486, Short.MAX_VALUE))
+            .add(jPanel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 446, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private view.components.toolbar.BaseToolBar baseToolBar1;
+    private view.components.header.BaseHeader baseHeader;
+    private view.components.toolbar.BaseToolBar baseToolBar;
+    private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
 }

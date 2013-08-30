@@ -13,6 +13,8 @@ public class PersonFrm extends javax.swing.JInternalFrame {
     public PersonFrm() {
         initComponents();
         
+        setTitle("Pessoas");
+        
         listener = new PersonActionListener(this);
     }
 
@@ -25,8 +27,6 @@ public class PersonFrm extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPHeader = new javax.swing.JPanel();
-        jLTitle = new javax.swing.JLabel();
         jPForm = new javax.swing.JPanel();
         jLId = new javax.swing.JLabel();
         jLLegalName = new javax.swing.JLabel();
@@ -64,32 +64,11 @@ public class PersonFrm extends javax.swing.JInternalFrame {
         jPContent = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTPeople = new javax.swing.JTable();
-        baseToolBar1 = new view.components.toolbar.BaseToolBar(listener);
+        baseHeader = new view.components.header.BaseHeader(getTitle());
+        baseToolBar = new view.components.toolbar.BaseToolBar(listener);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
-        jPHeader.setBackground(new java.awt.Color(254, 254, 254));
-
-        jLTitle.setFont(new java.awt.Font("Droid Sans", 0, 24)); // NOI18N
-        jLTitle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/32x32/user-4.png"))); // NOI18N
-        jLTitle.setText("Pessoa");
-
-        javax.swing.GroupLayout jPHeaderLayout = new javax.swing.GroupLayout(jPHeader);
-        jPHeader.setLayout(jPHeaderLayout);
-        jPHeaderLayout.setHorizontalGroup(
-            jPHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPHeaderLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLTitle)
-                .addContainerGap(825, Short.MAX_VALUE))
-        );
-        jPHeaderLayout.setVerticalGroup(
-            jPHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPHeaderLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLTitle)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        setClosable(true);
+        setIconifiable(true);
 
         jPForm.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
@@ -312,7 +291,7 @@ public class PersonFrm extends javax.swing.JInternalFrame {
                 .addComponent(jLStatus)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jCBStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(76, Short.MAX_VALUE))
         );
 
         jPContent.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -334,42 +313,50 @@ public class PersonFrm extends javax.swing.JInternalFrame {
         jPContent.setLayout(jPContentLayout);
         jPContentLayout.setHorizontalGroup(
             jPContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 473, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         jPContentLayout.setVerticalGroup(
             jPContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1)
         );
 
-        baseToolBar1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        baseToolBar1.setRollover(true);
-        baseToolBar1.setAlignmentX(0.0F);
-        baseToolBar1.setAlignmentY(0.0F);
+        javax.swing.GroupLayout baseHeaderLayout = new javax.swing.GroupLayout(baseHeader);
+        baseHeader.setLayout(baseHeaderLayout);
+        baseHeaderLayout.setHorizontalGroup(
+            baseHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 960, Short.MAX_VALUE)
+        );
+        baseHeaderLayout.setVerticalGroup(
+            baseHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 60, Short.MAX_VALUE)
+        );
+
+        baseToolBar.setRollover(true);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPHeader, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(baseHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(baseToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, 960, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(10, 10, 10)
                 .addComponent(jPForm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPContent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addComponent(baseToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(14, 14, 14)
+                .addComponent(jPContent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(baseToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(65, 65, 65)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(baseHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(baseToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPContent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPForm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addComponent(jPForm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(46, 46, 46)
+                        .addComponent(jPContent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         pack();
@@ -512,7 +499,8 @@ public class PersonFrm extends javax.swing.JInternalFrame {
     }
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private view.components.toolbar.BaseToolBar baseToolBar1;
+    private view.components.header.BaseHeader baseHeader;
+    private view.components.toolbar.BaseToolBar baseToolBar;
     private javax.swing.JComboBox jCBCity;
     private javax.swing.JComboBox jCBCountry;
     private javax.swing.JComboBox jCBDistrict;
@@ -533,13 +521,11 @@ public class PersonFrm extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLPhone;
     private javax.swing.JLabel jLState;
     private javax.swing.JLabel jLStatus;
-    private javax.swing.JLabel jLTitle;
     private javax.swing.JLabel jLZip;
     private javax.swing.JPanel jPAddress;
     private javax.swing.JPanel jPContact;
     private javax.swing.JPanel jPContent;
     private javax.swing.JPanel jPForm;
-    private javax.swing.JPanel jPHeader;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTFAddress;
     private javax.swing.JTextField jTFCel;
