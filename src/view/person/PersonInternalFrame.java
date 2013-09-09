@@ -1,13 +1,29 @@
 package view.person;
 
 import java.awt.event.ActionListener;
+import view.components.header.BaseHeader;
 
 public class PersonInternalFrame extends javax.swing.JInternalFrame {
 
     private ActionListener listener;
+    private String person_kind;
     
-    public PersonInternalFrame() {
-        initComponents();
+    public PersonInternalFrame(String kind) {
+        this.person_kind = kind;
+        
+        switch (kind) {
+            case "customer":
+                setTitle("Clientes");
+                break;
+            case "supplier":
+                setTitle("Fornecedores");
+                break;
+            case "employee":
+                setTitle("Colaboradores");
+                break;
+        }
+        
+        initComponents();   
         
         listener = new PersonActionListener(this);
     }
@@ -20,8 +36,13 @@ public class PersonInternalFrame extends javax.swing.JInternalFrame {
         return listPanel;
     }
     
-    
-    
+    public String getPersonKind() {
+        return person_kind;
+    }
+
+    public BaseHeader getBaseHeader() {
+        return baseHeader;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -34,34 +55,41 @@ public class PersonInternalFrame extends javax.swing.JInternalFrame {
         panelContent = new javax.swing.JPanel();
         formPanel = new view.person.FormPanel();
         listPanel = new view.person.ListPanel();
-        baseToolBar = new view.components.toolbar.BaseToolBar(listener);
+        baseHeader = new view.components.header.BaseHeader(getTitle(), listener);
 
         setClosable(true);
 
-        baseToolBar.setRollover(true);
+        javax.swing.GroupLayout baseHeaderLayout = new javax.swing.GroupLayout(baseHeader);
+        baseHeader.setLayout(baseHeaderLayout);
+        baseHeaderLayout.setHorizontalGroup(
+            baseHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 981, Short.MAX_VALUE)
+        );
+        baseHeaderLayout.setVerticalGroup(
+            baseHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 60, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout panelContentLayout = new javax.swing.GroupLayout(panelContent);
         panelContent.setLayout(panelContentLayout);
         panelContentLayout.setHorizontalGroup(
             panelContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(baseHeader, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(panelContentLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(10, 10, 10)
                 .addComponent(formPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(listPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(baseToolBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(12, 12, 12)
+                .addComponent(listPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         panelContentLayout.setVerticalGroup(
             panelContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelContentLayout.createSequentialGroup()
-                .addContainerGap(39, Short.MAX_VALUE)
-                .addComponent(baseToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(panelContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(listPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(formPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+            .addGroup(panelContentLayout.createSequentialGroup()
+                .addComponent(baseHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(formPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(listPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -78,7 +106,7 @@ public class PersonInternalFrame extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private view.components.toolbar.BaseToolBar baseToolBar;
+    private view.components.header.BaseHeader baseHeader;
     private view.person.FormPanel formPanel;
     private view.person.ListPanel listPanel;
     private javax.swing.JPanel panelContent;

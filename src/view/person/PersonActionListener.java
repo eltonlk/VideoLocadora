@@ -3,6 +3,7 @@ package view.person;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
+import javax.swing.JToolBar;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 //import model.Address;
@@ -28,6 +29,8 @@ public class PersonActionListener implements ActionListener, ListSelectionListen
     
     @Override
     public void actionPerformed(ActionEvent event) {
+        System.out.println(event.getActionCommand());
+        
         switch (event.getActionCommand()) {
             case "add":
                 add();
@@ -59,6 +62,10 @@ public class PersonActionListener implements ActionListener, ListSelectionListen
     }
     
     private void enableOrDisableButtonsToSave(boolean enabled) {
+        JToolBar toolbar = frame.getBaseHeader().getToolbar();
+        
+        
+        
 //        frm.getjBAdd().setEnabled(!enabled);
 //        frm.getjBEdit().setEnabled(!enabled);
 //        frm.getjBDestroy().setEnabled(!enabled);
@@ -101,9 +108,10 @@ public class PersonActionListener implements ActionListener, ListSelectionListen
         person.setDocument1( frame.getFormPanel().getInputDocument1().getText() );
         person.setDocument2( frame.getFormPanel().getInputDocument2().getText() );
         person.setEmail( frame.getFormPanel().getInputEmail().getText() );
-        person.setKind( "customer" );
+        person.setKind( frame.getPersonKind() );
         person.setCel( frame.getFormPanel().getInputCel().getText() );
         person.setPhone( frame.getFormPanel().getInputPhone().getText() );
+        
 //        person.setStatus(frame.getjCBStatus());
         
 //        person.setAddress( mappingFormToAddress() );

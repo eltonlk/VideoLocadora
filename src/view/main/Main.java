@@ -2,10 +2,7 @@ package view.main;
 
 import com.jgoodies.looks.plastic.PlasticXPLookAndFeel;
 import com.jgoodies.looks.plastic.theme.SkyBlue;
-import view.customer.CustomerFrm;
-import view.person.PersonFrm;
 import view.person.PersonInternalFrame;
-import view.supplier.SupplierFrm;
 
 public class Main extends javax.swing.JFrame {
 
@@ -26,7 +23,7 @@ public class Main extends javax.swing.JFrame {
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         peopleMenuItem = new javax.swing.JMenuItem();
-        customersMenuItem = new javax.swing.JMenuItem();
+        suppliersMenuItem = new javax.swing.JMenuItem();
         saveAsMenuItem = new javax.swing.JMenuItem();
         exitMenuItem = new javax.swing.JMenuItem();
         editMenu = new javax.swing.JMenu();
@@ -46,7 +43,7 @@ public class Main extends javax.swing.JFrame {
         fileMenu.setText("Cadastros");
 
         peopleMenuItem.setMnemonic('o');
-        peopleMenuItem.setText("Pessoas");
+        peopleMenuItem.setText("Clientes");
         peopleMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 peopleMenuItemActionPerformed(evt);
@@ -54,17 +51,17 @@ public class Main extends javax.swing.JFrame {
         });
         fileMenu.add(peopleMenuItem);
 
-        customersMenuItem.setMnemonic('s');
-        customersMenuItem.setText("Clientes");
-        customersMenuItem.addActionListener(new java.awt.event.ActionListener() {
+        suppliersMenuItem.setMnemonic('s');
+        suppliersMenuItem.setText("Fornecedores");
+        suppliersMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                customersMenuItemActionPerformed(evt);
+                suppliersMenuItemActionPerformed(evt);
             }
         });
-        fileMenu.add(customersMenuItem);
+        fileMenu.add(suppliersMenuItem);
 
         saveAsMenuItem.setMnemonic('a');
-        saveAsMenuItem.setText("Fornecedores");
+        saveAsMenuItem.setText("Colaboradores");
         saveAsMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 saveAsMenuItemActionPerformed(evt);
@@ -123,11 +120,11 @@ public class Main extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(desktopPane, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
+            .add(desktopPane, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 634, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(desktopPane, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 12, Short.MAX_VALUE)
+            .add(desktopPane, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE)
         );
 
         pack();
@@ -138,32 +135,33 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_exitMenuItemActionPerformed
 
     private void peopleMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_peopleMenuItemActionPerformed
-        PersonInternalFrame personIF = new PersonInternalFrame();
+        PersonInternalFrame personIF = new PersonInternalFrame("customer");
         
         personIF.setLocation((getWidth() - personIF.getWidth()) / 2, 40);
         
         personIF.setVisible(true);
         
         desktopPane.add(personIF);
-        
-//        PersonFrm frm = new PersonFrm();
-//        frm.setLocation((getWidth() - frm.getWidth()) / 2, 40);        
-//        frm.setVisible(true);
-//        desktopPane.add(frm);
     }//GEN-LAST:event_peopleMenuItemActionPerformed
 
-    private void customersMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customersMenuItemActionPerformed
-        CustomerFrm frm = new CustomerFrm();
-        frm.setLocation((getWidth() - frm.getWidth()) / 2, 40);
-        frm.setVisible(true);
-        desktopPane.add(frm);
-    }//GEN-LAST:event_customersMenuItemActionPerformed
-
+    private void suppliersMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_suppliersMenuItemActionPerformed
+        PersonInternalFrame personIF = new PersonInternalFrame("supplier");
+        
+        personIF.setLocation((getWidth() - personIF.getWidth()) / 2, 40);
+        
+        personIF.setVisible(true);
+        
+        desktopPane.add(personIF);
+    }//GEN-LAST:event_suppliersMenuItemActionPerformed
+    
     private void saveAsMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveAsMenuItemActionPerformed
-        SupplierFrm frm = new SupplierFrm();
-        frm.setLocation((getWidth() - frm.getWidth()) / 2, 40);        
-        frm.setVisible(true);
-        desktopPane.add(frm);
+        PersonInternalFrame personIF = new PersonInternalFrame("employee");
+        
+        personIF.setLocation((getWidth() - personIF.getWidth()) / 2, 40);
+        
+        personIF.setVisible(true);
+        
+        desktopPane.add(personIF);
     }//GEN-LAST:event_saveAsMenuItemActionPerformed
 
     public static void main(String args[]) {
@@ -203,7 +201,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenuItem aboutMenuItem;
     private javax.swing.JMenuItem contentMenuItem;
     private javax.swing.JMenuItem copyMenuItem;
-    private javax.swing.JMenuItem customersMenuItem;
     private javax.swing.JMenuItem cutMenuItem;
     private javax.swing.JMenuItem deleteMenuItem;
     private javax.swing.JDesktopPane desktopPane;
@@ -215,5 +212,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenuItem pasteMenuItem;
     private javax.swing.JMenuItem peopleMenuItem;
     private javax.swing.JMenuItem saveAsMenuItem;
+    private javax.swing.JMenuItem suppliersMenuItem;
     // End of variables declaration//GEN-END:variables
 }
