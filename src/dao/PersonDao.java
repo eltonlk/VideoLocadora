@@ -101,7 +101,7 @@ public class PersonDao {
             daoHelper.begingTransaction();
                         
             String query = "DELETE FROM people WHERE id = ?";           
-           
+            
             daoHelper.executePreparedUpdate(
                 query, 
                 person.getId());                    
@@ -124,29 +124,33 @@ public class PersonDao {
         }
     }   
     
-    public List<Person> getPeople() {
+    public List<Person> getByKind(String kind) {
         final List<Person> people = new ArrayList<>();
         
         try {
-            daoHelper.executeQuery("SELECT * FROM people", new QueryMapping<Person>() {
-                @Override
-                public void mapping(ResultSet rset) throws SQLException {
-                    while (rset.next()) {
-                        Person person = new Person();
-                        person.setId( rset.getInt("id") );
-                        person.setName( rset.getString("name") );
-                        person.setLegalName( rset.getString("legal_name") );
-                        person.setKind( rset.getString("kind") );
-                        person.setDocument1( rset.getString("document_1") );
-                        person.setDocument2( rset.getString("document_2") );
-                        person.setEmail( rset.getString("email") );
-                        person.setPhone( rset.getString("phone") );
-                        person.setCel( rset.getString("cel") );
-                        
-                        people.add(person);
-                    }
-                }
-            });
+            String query = "SELECT * FROM people WHERE kind = ?"; 
+            
+            daoHelper.executePreparedQuery(query, 
+                    new QueryMapping<Person>() {
+                        @Override
+                        public void mapping(ResultSet rset) throws SQLException {
+                            while (rset.next()) {
+                                Person person = new Person();
+                                person.setId( rset.getInt("id") );
+                                person.setName( rset.getString("name") );
+                                person.setLegalName( rset.getString("legal_name") );
+                                person.setKind( rset.getString("kind") );
+                                person.setDocument1( rset.getString("document_1") );
+                                person.setDocument2( rset.getString("document_2") );
+                                person.setEmail( rset.getString("email") );
+                                person.setPhone( rset.getString("phone") );
+                                person.setCel( rset.getString("cel") );
+
+                                people.add(person);
+                            }
+                        }
+                    },
+                    kind);
         } catch (SQLException e) { }
         
         return people; 

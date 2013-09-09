@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JSeparator;
 import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
 
@@ -25,8 +24,18 @@ public final class BaseToolBar extends JToolBar {
         this.listener = listener;
         
         loadDefaultButtons();
+        
+        disableButtonsToSave();
     }
 
+    public void enableButtonsToSave() {
+        enableOrDisableButtonsToSave(true);
+    }
+    
+    public void disableButtonsToSave() {
+        enableOrDisableButtonsToSave(false);
+    }
+    
     public Map<String, JButton> getButtons() {
         return buttons;
     }
@@ -34,7 +43,7 @@ public final class BaseToolBar extends JToolBar {
     public BaseToolBar addButton(String text, String actionCommand, String iconPath) {
         JButton button = buildButton(text, actionCommand, iconPath);
         
-        buttons.put(text.toLowerCase(), button);
+        buttons.put(actionCommand, button);
         
         add(button);
         
@@ -57,12 +66,20 @@ public final class BaseToolBar extends JToolBar {
     protected void loadDefaultButtons() {
         this.addButton("Salvar"   , "save"  , "/assets/images/icons/super-mono/basic/green/button-check2.png")
             .addButton("Cancelar" , "cancel", "/assets/images/icons/super-mono/basic/red/button-cross2.png");
-        
+
         this.addSeparator(new Dimension(50, 0));        
-                
+
         this.addButton("Adicionar", "add"    , "/assets/images/icons/super-mono/basic/blue/button-add2.png")
             .addButton("Alterar"  , "edit"   , "/assets/images/icons/super-mono/basic/blue/document-edit2.png")
             .addButton("Excluir"  , "destroy", "/assets/images/icons/super-mono/basic/red/bin2.png");
     }
 
+    private void enableOrDisableButtonsToSave(boolean enabled) {
+        buttons.get( "add" ).setEnabled(!enabled);
+        buttons.get( "edit" ).setEnabled(!enabled);
+        buttons.get( "destroy" ).setEnabled(!enabled);
+        buttons.get( "save" ).setEnabled(enabled);
+        buttons.get( "cancel" ).setEnabled(enabled);
+    }     
+    
 }

@@ -62,6 +62,9 @@
       </Layout>
       <SubComponents>
         <Component class="view.person.FormPanel" name="formPanel">
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new view.person.FormPanel( getPersonKind() )"/>
+          </AuxValues>
         </Component>
         <Component class="view.person.ListPanel" name="listPanel">
         </Component>

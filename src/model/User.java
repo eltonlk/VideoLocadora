@@ -9,7 +9,6 @@ public class User {
     private String email;
     
     public User() {
-        
     }
 
     public int getId() {

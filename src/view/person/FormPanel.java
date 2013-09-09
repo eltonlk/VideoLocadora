@@ -6,7 +6,11 @@ import javax.swing.JTextField;
 
 public class FormPanel extends javax.swing.JPanel {
 
-    public FormPanel() {
+    private String personKind;
+    
+    public FormPanel(String personKind) {
+        this.personKind = personKind;
+        
         initComponents();
     }
 
@@ -255,6 +259,9 @@ public class FormPanel extends javax.swing.JPanel {
         this.labelId = labelId;
     }
     
+    public String getPersonKind() {
+        return personKind;
+    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField inputCel;

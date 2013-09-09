@@ -1,15 +1,16 @@
 package view.person;
 
-import java.awt.event.ActionListener;
 import view.components.header.BaseHeader;
 
 public class PersonInternalFrame extends javax.swing.JInternalFrame {
 
-    private ActionListener listener;
+    private PersonActionListener listener;
     private String person_kind;
     
     public PersonInternalFrame(String kind) {
         this.person_kind = kind;
+        
+        listener = new PersonActionListener(this, kind);
         
         switch (kind) {
             case "customer":
@@ -19,13 +20,13 @@ public class PersonInternalFrame extends javax.swing.JInternalFrame {
                 setTitle("Fornecedores");
                 break;
             case "employee":
-                setTitle("Colaboradores");
+                setTitle("Funcionários");
                 break;
         }
         
         initComponents();   
         
-        listener = new PersonActionListener(this);
+        listener.initComponents();
     }
 
     public FormPanel getFormPanel() {
@@ -53,7 +54,7 @@ public class PersonInternalFrame extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         panelContent = new javax.swing.JPanel();
-        formPanel = new view.person.FormPanel();
+        formPanel = new view.person.FormPanel( getPersonKind() );
         listPanel = new view.person.ListPanel();
         baseHeader = new view.components.header.BaseHeader(getTitle(), listener);
 
@@ -89,7 +90,7 @@ public class PersonInternalFrame extends javax.swing.JInternalFrame {
                 .addGroup(panelContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(formPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(listPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

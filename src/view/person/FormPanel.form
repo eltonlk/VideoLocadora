@@ -171,7 +171,7 @@
                                   <Component id="labelPhone" min="-2" max="-2" attributes="0"/>
                                   <Component id="inputPhone" min="-2" pref="177" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace type="separate" max="32767" attributes="0"/>
+                              <EmptySpace type="separate" pref="30" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="labelCel" min="-2" max="-2" attributes="0"/>
                                   <Component id="inputCel" min="-2" pref="177" max="-2" attributes="0"/>
@@ -202,7 +202,7 @@
                               <Component id="inputPhone" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="87" max="32767" attributes="0"/>
+                      <EmptySpace pref="89" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>

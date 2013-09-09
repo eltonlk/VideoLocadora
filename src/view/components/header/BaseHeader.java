@@ -4,14 +4,13 @@ import java.awt.Color;
 import java.awt.event.ActionListener;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JToolBar;
 import view.components.toolbar.BaseToolBar;
 
 public class BaseHeader extends JPanel {
 
     private String title;
     private ActionListener listener;
-    private JToolBar toolbar;
+    private BaseToolBar toolbar;
     
     public BaseHeader() {
         this.setBackground(Color.white);
@@ -27,7 +26,7 @@ public class BaseHeader extends JPanel {
         loadDefaultElements();
     }
 
-    public JToolBar getToolbar() {
+    public BaseToolBar getToolbar() {
         return toolbar;
     }
     
@@ -36,7 +35,7 @@ public class BaseHeader extends JPanel {
         this.add(toolBar());
     }
     
-    private JToolBar toolBar() {
+    private BaseToolBar toolBar() {
         toolbar = new BaseToolBar(listener);
         toolbar.setRollover(true);
         toolbar.setBounds(getWidth() - 310, 5, 330, 50);

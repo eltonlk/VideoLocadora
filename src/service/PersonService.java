@@ -20,8 +20,12 @@ public class PersonService {
         }        
     }
     
-    public List<Person> getPeople() {
-        return dao.getPeople();
+    public List<Person> getByKind(String kind) {
+        return dao.getByKind(kind);
+    }
+
+    public void destroy(Person person) {
+        dao.delete(person);
     }
     
 }

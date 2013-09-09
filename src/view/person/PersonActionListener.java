@@ -1,36 +1,54 @@
 package view.person;
 
+import model.PersonTableModel;
+import view.components.toolbar.BaseToolBar;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
-import javax.swing.JToolBar;
+import javax.swing.JTable;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-//import model.Address;
+import mapping.PersonMapping;
 import model.Person;
 
 import service.PersonService;
 
 public class PersonActionListener implements ActionListener, ListSelectionListener {
 
+    private BaseToolBar toolbar;
     private PersonInternalFrame frame;
+    private PersonMapping mapping;
     private PersonService service;
     private PersonTableModel tableModel;
+    private String kind;
+    private JTable tablePeople;
 
-    PersonActionListener(PersonInternalFrame frame) {
+    PersonActionListener(PersonInternalFrame frame, String kind) {
         this.frame = frame;
+        this.kind = kind;
+    }
+   
+    public void initComponents() {
+        this.mapping = new PersonMapping( frame.getFormPanel() );
         
-        service = new PersonService();
+        this.service = new PersonService();
         
-        attachListener();
+        this.toolbar = frame.getBaseHeader().getToolbar();
         
-        loadTBPeople();
+        this.tablePeople = frame.getListPanel().getTablePeople();
+        
+        loadTBPeople();        
     }
     
     @Override
-    public void actionPerformed(ActionEvent event) {
-        System.out.println(event.getActionCommand());
+    public void valueChanged(ListSelectionEvent event) {
+        Person person = tableModel.getPerson( frame.getListPanel().getTablePeople().getSelectedRow() );
         
+        mapping.toForm(person);
+    }    
+    
+    @Override
+    public void actionPerformed(ActionEvent event) {
         switch (event.getActionCommand()) {
             case "add":
                 add();
@@ -49,119 +67,48 @@ public class PersonActionListener implements ActionListener, ListSelectionListen
                 break;
         }
     }
-
-    private void attachListener() {
-    }
     
-    private void enableButtonsToSave() {
-        enableOrDisableButtonsToSave(true);
-    }
-    
-    private void disableButtonsToSave() {
-        enableOrDisableButtonsToSave(false);
-    }
-    
-    private void enableOrDisableButtonsToSave(boolean enabled) {
-        JToolBar toolbar = frame.getBaseHeader().getToolbar();
+    private void loadTBPeople() {
+        tableModel = new PersonTableModel(service.getByKind(kind));
         
+        tablePeople.setModel(tableModel);
         
-        
-//        frm.getjBAdd().setEnabled(!enabled);
-//        frm.getjBEdit().setEnabled(!enabled);
-//        frm.getjBDestroy().setEnabled(!enabled);
-//        frm.getjBSave().setEnabled(enabled);
-//        frm.getjBCancel().setEnabled(enabled);
+        tablePeople.getSelectionModel()
+                .addListSelectionListener( this );
     }    
     
     private void add() {
-        enableButtonsToSave();
+        toolbar.enableButtonsToSave();
     }
     
     private void edit() {
-        enableButtonsToSave();
+        toolbar.enableButtonsToSave();
     }
     
     private void destroy() {
+        Person person = mapping.toPerson();
+                
+        service.destroy(person);
+        
+        JOptionPane.showMessageDialog(frame, "Registro excluído.", "save", JOptionPane.INFORMATION_MESSAGE);
+        
+        tableModel.removePerson(person);        
     }
     
     private void save() {
-        service.save( mappingFormToPerson() );
+        Person person = mapping.toPerson();
         
-        JOptionPane.showMessageDialog(frame, "Pessoa salva.", "save", JOptionPane.INFORMATION_MESSAGE);
+        service.save(person);
         
-        disableButtonsToSave();      
+        JOptionPane.showMessageDialog(frame, "Registro salvo.", "save", JOptionPane.INFORMATION_MESSAGE);
+        
+        tableModel.addPerson(person);
+        
+        toolbar.disableButtonsToSave();      
     }
     
     private void cancel() {
-        
-    }
-    
-    private Person mappingFormToPerson() {
-        Person person = new Person();
-        
-        if ( !"".equals( frame.getFormPanel().getLabelId().getText() ) ) {
-            person.setId( Integer.parseInt(frame.getFormPanel().getLabelId().getText()) );
-        }
-        
-        person.setName( frame.getFormPanel().getInputName().getText() );
-        person.setLegalName( frame.getFormPanel().getInputLegalName().getText() );
-        person.setDocument1( frame.getFormPanel().getInputDocument1().getText() );
-        person.setDocument2( frame.getFormPanel().getInputDocument2().getText() );
-        person.setEmail( frame.getFormPanel().getInputEmail().getText() );
-        person.setKind( frame.getPersonKind() );
-        person.setCel( frame.getFormPanel().getInputCel().getText() );
-        person.setPhone( frame.getFormPanel().getInputPhone().getText() );
-        
-//        person.setStatus(frame.getjCBStatus());
-        
-//        person.setAddress( mappingFormToAddress() );
-        
-        return person;
-    }
-    
-//    private Address mappingFormToAddress() {
-//        Address address = new Address();
-//        
-//        if ( !"".equals( frame.getjLAddressId().getText() ) ) {
-//            address.setId( Integer.parseInt(frame.getjLAddressId().getText()) );
-//        }        
-//        
-//        address.setAddress( frame.getjTFAddress().getText() );
-////        address.setDistrictId( );
-//        address.setLocation( "work" );
-//        
-//        return address;        
-//    }
-    
-    private void loadTBPeople() {
-        tableModel = new PersonTableModel(service.getPeople());
-        
-        frame.getListPanel()
-                .getTablePeople()
-                .setModel(tableModel);
-        
-        frame.getListPanel()
-                .getTablePeople()
-                .getSelectionModel()
-                .addListSelectionListener( this );
-    }
-
-    @Override
-    public void valueChanged(ListSelectionEvent event) {
-        Person person = tableModel.getPeople().get( frame.getListPanel().getTablePeople().getSelectedRow() );
-        
-        mappingPersonToForm(person);
-    }
-    
-    private void mappingPersonToForm(Person person) {
-        frame.getFormPanel().getLabelId().setText( Integer.toString(person.getId()) );
-        frame.getFormPanel().getInputLegalName().setText( person.getLegalName() );
-        frame.getFormPanel().getInputName().setText( person.getName() );
-        frame.getFormPanel().getInputDocument1().setText( person.getDocument1() );
-        frame.getFormPanel().getInputDocument2().setText( person.getDocument2() );
-        frame.getFormPanel().getInputEmail().setText( person.getEmail() );
-        frame.getFormPanel().getInputPhone().setText( person.getPhone() );
-        frame.getFormPanel().getInputCel().setText( person.getCel() );
+        toolbar.disableButtonsToSave();
     }
     
 }
