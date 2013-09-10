@@ -1,5 +1,6 @@
 package view.person;
 
+import view.components.table.TablePanel;
 import view.components.toolbar.BaseToolBar;
 
 public class PersonInternalFrame extends javax.swing.JInternalFrame {
@@ -36,8 +37,8 @@ public class PersonInternalFrame extends javax.swing.JInternalFrame {
         return formPanel;
     }
 
-    public ListPanel getListPanel() {
-        return listPanel;
+    public TablePanel getListPanel() {
+        return tablePanel;
     }
     
     public String getPersonKind() {
@@ -63,11 +64,10 @@ public class PersonInternalFrame extends javax.swing.JInternalFrame {
         panelContent = new javax.swing.JPanel();
         baseToolBar = new view.components.toolbar.BaseToolBar(listener);
         formPanel = new view.person.FormPanel();
-        listPanel = new view.person.ListPanel();
+        tablePanel = new view.components.table.TablePanel();
 
         setClosable(true);
         setPreferredSize(new java.awt.Dimension(1000, 585));
-        setSize(new java.awt.Dimension(0, 0));
 
         panelContent.setLayout(new java.awt.GridBagLayout());
 
@@ -84,12 +84,12 @@ public class PersonInternalFrame extends javax.swing.JInternalFrame {
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 5);
         panelContent.add(formPanel, gridBagConstraints);
 
-        listPanel.setMinimumSize(new java.awt.Dimension(520, 500));
+        tablePanel.setMinimumSize(new java.awt.Dimension(520, 500));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(10, 5, 10, 10);
-        panelContent.add(listPanel, gridBagConstraints);
+        panelContent.add(tablePanel, gridBagConstraints);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -107,7 +107,7 @@ public class PersonInternalFrame extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private view.components.toolbar.BaseToolBar baseToolBar;
     private view.person.FormPanel formPanel;
-    private view.person.ListPanel listPanel;
     private javax.swing.JPanel panelContent;
+    private view.components.table.TablePanel tablePanel;
     // End of variables declaration//GEN-END:variables
 }

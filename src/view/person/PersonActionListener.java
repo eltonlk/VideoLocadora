@@ -21,7 +21,7 @@ public class PersonActionListener implements ActionListener, ListSelectionListen
     private PersonService service;
     private PersonTableModel tableModel;
     private String kind;
-    private JTable tablePeople;
+    private JTable table;
 
     PersonActionListener(PersonInternalFrame frame, String kind) {
         this.frame = frame;
@@ -35,14 +35,14 @@ public class PersonActionListener implements ActionListener, ListSelectionListen
         
         this.toolbar = frame.getBaseToolBar();
         
-        this.tablePeople = frame.getListPanel().getTablePeople();
+        this.table = frame.getListPanel().getTable();
         
         loadTBPeople();        
     }
     
     @Override
     public void valueChanged(ListSelectionEvent event) {
-        Person person = tableModel.getPerson( frame.getListPanel().getTablePeople().getSelectedRow() );
+        Person person = tableModel.getPerson( table.getSelectedRow() );
         
         mapping.toForm(person);
     }    
@@ -71,9 +71,9 @@ public class PersonActionListener implements ActionListener, ListSelectionListen
     private void loadTBPeople() {
         tableModel = new PersonTableModel(service.getByKind(kind));
         
-        tablePeople.setModel(tableModel);
+        table.setModel(tableModel);
         
-        tablePeople.getSelectionModel()
+        table.getSelectionModel()
                 .addListSelectionListener( this );
     }    
     

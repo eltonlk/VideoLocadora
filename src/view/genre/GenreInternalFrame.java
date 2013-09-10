@@ -1,5 +1,6 @@
 package view.genre;
 
+import view.components.table.TablePanel;
 import view.components.toolbar.BaseToolBar;
 
 public class GenreInternalFrame extends javax.swing.JInternalFrame {
@@ -22,8 +23,8 @@ public class GenreInternalFrame extends javax.swing.JInternalFrame {
         return formPanel;
     }
 
-    public ListPanel getListPanel() {
-        return listPanel;
+    public TablePanel getTablePanel() {
+        return tablePanel;
     }
 
     /**
@@ -39,7 +40,7 @@ public class GenreInternalFrame extends javax.swing.JInternalFrame {
         panelContent = new javax.swing.JPanel();
         baseToolBar = new view.components.toolbar.BaseToolBar(listener);
         formPanel = new view.genre.FormPanel();
-        listPanel = new view.genre.ListPanel();
+        tablePanel = new view.components.table.TablePanel();
 
         setClosable(true);
         setIconifiable(true);
@@ -61,12 +62,10 @@ public class GenreInternalFrame extends javax.swing.JInternalFrame {
         gridBagConstraints.gridy = 1;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 5);
         panelContent.add(formPanel, gridBagConstraints);
-
-        listPanel.setMinimumSize(new java.awt.Dimension(520, 500));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridy = 1;
         gridBagConstraints.insets = new java.awt.Insets(10, 5, 10, 10);
-        panelContent.add(listPanel, gridBagConstraints);
+        panelContent.add(tablePanel, gridBagConstraints);
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -84,7 +83,7 @@ public class GenreInternalFrame extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private view.components.toolbar.BaseToolBar baseToolBar;
     private view.genre.FormPanel formPanel;
-    private view.genre.ListPanel listPanel;
     private javax.swing.JPanel panelContent;
+    private view.components.table.TablePanel tablePanel;
     // End of variables declaration//GEN-END:variables
 }

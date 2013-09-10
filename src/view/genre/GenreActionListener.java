@@ -19,7 +19,7 @@ public class GenreActionListener implements ActionListener, ListSelectionListene
     private GenreMapping mapping;
     private GenreService service;
     private GenreTableModel tableModel;
-    private JTable tableGenres;
+    private JTable table;
 
     GenreActionListener(GenreInternalFrame frame) {
         this.frame = frame;
@@ -32,14 +32,14 @@ public class GenreActionListener implements ActionListener, ListSelectionListene
         
         this.toolbar = frame.getBaseToolBar();
         
-        this.tableGenres = frame.getListPanel().getTableGenres();
+        this.table = frame.getTablePanel().getTable();
         
         loadTBPeople();        
     }
     
     @Override
     public void valueChanged(ListSelectionEvent event) {
-        Genre genre = tableModel.getGenre( frame.getListPanel().getTableGenres().getSelectedRow() );
+        Genre genre = tableModel.getGenre( table.getSelectedRow() );
         
         mapping.toForm(genre);
     }    
@@ -68,9 +68,9 @@ public class GenreActionListener implements ActionListener, ListSelectionListene
     private void loadTBPeople() {
         tableModel = new GenreTableModel(service.getAll());
         
-        tableGenres.setModel(tableModel);
+        table.setModel(tableModel);
         
-        tableGenres.getSelectionModel()
+        table.getSelectionModel()
                 .addListSelectionListener( this );
     }    
     

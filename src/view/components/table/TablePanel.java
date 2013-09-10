@@ -1,15 +1,15 @@
-package view.person;
+package view.components.table;
 
 import javax.swing.JTable;
 
-public class ListPanel extends javax.swing.JPanel {
+public class TablePanel extends javax.swing.JPanel {
 
-    public ListPanel() {
+    public TablePanel() {
         initComponents();
     }
 
-    public JTable getTablePeople() {
-        return tablePeople;
+    public JTable getTable() {
+        return table;
     }
     
     /**
@@ -22,9 +22,9 @@ public class ListPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         scrollPane = new javax.swing.JScrollPane();
-        tablePeople = new javax.swing.JTable();
+        table = new javax.swing.JTable();
 
-        tablePeople.setModel(new javax.swing.table.DefaultTableModel(
+        table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -35,7 +35,7 @@ public class ListPanel extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        scrollPane.setViewportView(tablePeople);
+        scrollPane.setViewportView(table);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -50,6 +50,6 @@ public class ListPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane scrollPane;
-    private javax.swing.JTable tablePeople;
+    private javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables
 }
