@@ -34,6 +34,7 @@ public class UserInternalFrame extends javax.swing.JInternalFrame {
         jToolBar1.setBackground(new java.awt.Color(254, 254, 254));
         jToolBar1.setBorder(null);
         jToolBar1.setRollover(true);
+        jToolBar1.setMargin(new java.awt.Insets(0, 100, 0, 0));
 
         jButton1.setText("jButton1");
         jButton1.setFocusable(false);
@@ -45,9 +46,12 @@ public class UserInternalFrame extends javax.swing.JInternalFrame {
         jSeparator1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jToolBar1.add(jSeparator1);
 
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/check_16.png"))); // NOI18N
         jButton2.setText("jButton2");
+        jButton2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jButton2.setFocusable(false);
-        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton2.setMargin(new java.awt.Insets(10, 20, 50, 0));
+        jButton2.setPreferredSize(new java.awt.Dimension(70, 30));
         jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar1.add(jButton2);
 
@@ -64,8 +68,8 @@ public class UserInternalFrame extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(63, 63, 63)
-                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(328, Short.MAX_VALUE))
+                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(288, Short.MAX_VALUE))
         );
 
         pack();

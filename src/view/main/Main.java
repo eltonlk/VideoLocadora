@@ -3,6 +3,7 @@ package view.main;
 import com.jgoodies.looks.plastic.PlasticXPLookAndFeel;
 import com.jgoodies.looks.plastic.theme.SkyBlue;
 import view.person.PersonInternalFrame;
+import view.user.UserInternalFrame;
 
 public class Main extends javax.swing.JFrame {
 
@@ -22,17 +23,17 @@ public class Main extends javax.swing.JFrame {
         desktopPane = new javax.swing.JDesktopPane();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
-        peopleMenuItem = new javax.swing.JMenuItem();
+        customersMenuItem = new javax.swing.JMenuItem();
         suppliersMenuItem = new javax.swing.JMenuItem();
-        saveAsMenuItem = new javax.swing.JMenuItem();
+        employeesMenuItem = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        usersMenuItem = new javax.swing.JMenuItem();
+        optionsMenuItem = new javax.swing.JMenuItem();
+        jSeparator2 = new javax.swing.JPopupMenu.Separator();
         exitMenuItem = new javax.swing.JMenuItem();
         editMenu = new javax.swing.JMenu();
         cutMenuItem = new javax.swing.JMenuItem();
-        copyMenuItem = new javax.swing.JMenuItem();
-        pasteMenuItem = new javax.swing.JMenuItem();
-        deleteMenuItem = new javax.swing.JMenuItem();
         helpMenu = new javax.swing.JMenu();
-        contentMenuItem = new javax.swing.JMenuItem();
         aboutMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -42,15 +43,17 @@ public class Main extends javax.swing.JFrame {
         fileMenu.setMnemonic('f');
         fileMenu.setText("Cadastros");
 
-        peopleMenuItem.setMnemonic('o');
-        peopleMenuItem.setText("Clientes");
-        peopleMenuItem.addActionListener(new java.awt.event.ActionListener() {
+        customersMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/customers_16.png"))); // NOI18N
+        customersMenuItem.setMnemonic('o');
+        customersMenuItem.setText("Clientes");
+        customersMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                peopleMenuItemActionPerformed(evt);
+                customersMenuItemActionPerformed(evt);
             }
         });
-        fileMenu.add(peopleMenuItem);
+        fileMenu.add(customersMenuItem);
 
+        suppliersMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/suppliers_16.png"))); // NOI18N
         suppliersMenuItem.setMnemonic('s');
         suppliersMenuItem.setText("Fornecedores");
         suppliersMenuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -60,15 +63,32 @@ public class Main extends javax.swing.JFrame {
         });
         fileMenu.add(suppliersMenuItem);
 
-        saveAsMenuItem.setMnemonic('a');
-        saveAsMenuItem.setText("Colaboradores");
-        saveAsMenuItem.addActionListener(new java.awt.event.ActionListener() {
+        employeesMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/employees_16.png"))); // NOI18N
+        employeesMenuItem.setMnemonic('a');
+        employeesMenuItem.setText("Colaboradores");
+        employeesMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveAsMenuItemActionPerformed(evt);
+                employeesMenuItemActionPerformed(evt);
             }
         });
-        fileMenu.add(saveAsMenuItem);
+        fileMenu.add(employeesMenuItem);
+        fileMenu.add(jSeparator1);
 
+        usersMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/user_16.png"))); // NOI18N
+        usersMenuItem.setText("Usuários");
+        usersMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                usersMenuItemActionPerformed(evt);
+            }
+        });
+        fileMenu.add(usersMenuItem);
+
+        optionsMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/config_16.png"))); // NOI18N
+        optionsMenuItem.setText("Opções do Sistema");
+        fileMenu.add(optionsMenuItem);
+        fileMenu.add(jSeparator2);
+
+        exitMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/sign_out_16.png"))); // NOI18N
         exitMenuItem.setMnemonic('x');
         exitMenuItem.setText("Sair");
         exitMenuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -81,35 +101,20 @@ public class Main extends javax.swing.JFrame {
         menuBar.add(fileMenu);
 
         editMenu.setMnemonic('e');
-        editMenu.setText("Edit");
+        editMenu.setText("Filmes");
 
         cutMenuItem.setMnemonic('t');
-        cutMenuItem.setText("Cut");
+        cutMenuItem.setText("Generos");
         editMenu.add(cutMenuItem);
-
-        copyMenuItem.setMnemonic('y');
-        copyMenuItem.setText("Copy");
-        editMenu.add(copyMenuItem);
-
-        pasteMenuItem.setMnemonic('p');
-        pasteMenuItem.setText("Paste");
-        editMenu.add(pasteMenuItem);
-
-        deleteMenuItem.setMnemonic('d');
-        deleteMenuItem.setText("Delete");
-        editMenu.add(deleteMenuItem);
 
         menuBar.add(editMenu);
 
         helpMenu.setMnemonic('h');
-        helpMenu.setText("Help");
+        helpMenu.setText("Ajuda");
 
-        contentMenuItem.setMnemonic('c');
-        contentMenuItem.setText("Contents");
-        helpMenu.add(contentMenuItem);
-
+        aboutMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/about_16.png"))); // NOI18N
         aboutMenuItem.setMnemonic('a');
-        aboutMenuItem.setText("About");
+        aboutMenuItem.setText("Sobre");
         helpMenu.add(aboutMenuItem);
 
         menuBar.add(helpMenu);
@@ -124,7 +129,7 @@ public class Main extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(desktopPane, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE)
+            .add(desktopPane, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
         );
 
         pack();
@@ -134,7 +139,7 @@ public class Main extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_exitMenuItemActionPerformed
 
-    private void peopleMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_peopleMenuItemActionPerformed
+    private void customersMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customersMenuItemActionPerformed
         PersonInternalFrame personIF = new PersonInternalFrame("customer");
         
         personIF.setLocation((getWidth() - personIF.getWidth()) / 2, 40);
@@ -142,7 +147,7 @@ public class Main extends javax.swing.JFrame {
         personIF.setVisible(true);
         
         desktopPane.add(personIF);
-    }//GEN-LAST:event_peopleMenuItemActionPerformed
+    }//GEN-LAST:event_customersMenuItemActionPerformed
 
     private void suppliersMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_suppliersMenuItemActionPerformed
         PersonInternalFrame personIF = new PersonInternalFrame("supplier");
@@ -154,7 +159,7 @@ public class Main extends javax.swing.JFrame {
         desktopPane.add(personIF);
     }//GEN-LAST:event_suppliersMenuItemActionPerformed
     
-    private void saveAsMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveAsMenuItemActionPerformed
+    private void employeesMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_employeesMenuItemActionPerformed
         PersonInternalFrame personIF = new PersonInternalFrame("employee");
         
         personIF.setLocation((getWidth() - personIF.getWidth()) / 2, 40);
@@ -162,7 +167,17 @@ public class Main extends javax.swing.JFrame {
         personIF.setVisible(true);
         
         desktopPane.add(personIF);
-    }//GEN-LAST:event_saveAsMenuItemActionPerformed
+    }//GEN-LAST:event_employeesMenuItemActionPerformed
+
+    private void usersMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usersMenuItemActionPerformed
+        UserInternalFrame userIF = new UserInternalFrame();
+        
+        userIF.setLocation((getWidth() - userIF.getWidth()) / 2, 40);
+        
+        userIF.setVisible(true);
+        
+        desktopPane.add(userIF);
+    }//GEN-LAST:event_usersMenuItemActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -199,19 +214,19 @@ public class Main extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem aboutMenuItem;
-    private javax.swing.JMenuItem contentMenuItem;
-    private javax.swing.JMenuItem copyMenuItem;
+    private javax.swing.JMenuItem customersMenuItem;
     private javax.swing.JMenuItem cutMenuItem;
-    private javax.swing.JMenuItem deleteMenuItem;
     private javax.swing.JDesktopPane desktopPane;
     private javax.swing.JMenu editMenu;
+    private javax.swing.JMenuItem employeesMenuItem;
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JMenu helpMenu;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JMenuBar menuBar;
-    private javax.swing.JMenuItem pasteMenuItem;
-    private javax.swing.JMenuItem peopleMenuItem;
-    private javax.swing.JMenuItem saveAsMenuItem;
+    private javax.swing.JMenuItem optionsMenuItem;
     private javax.swing.JMenuItem suppliersMenuItem;
+    private javax.swing.JMenuItem usersMenuItem;
     // End of variables declaration//GEN-END:variables
 }

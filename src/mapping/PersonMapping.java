@@ -35,7 +35,7 @@ public class PersonMapping {
         person.setDocument1( formPanel.getInputDocument1().getText() );
         person.setDocument2( formPanel.getInputDocument2().getText() );
         person.setEmail( formPanel.getInputEmail().getText() );
-        person.setKind( formPanel.getPersonKind() );
+        person.setKind( formPanel.getKind() );
         person.setCel( formPanel.getInputCel().getText() );
         person.setPhone( formPanel.getInputPhone().getText() );
         

@@ -33,7 +33,7 @@ public class PersonActionListener implements ActionListener, ListSelectionListen
         
         this.service = new PersonService();
         
-        this.toolbar = frame.getBaseHeader().getToolbar();
+        this.toolbar = frame.getBaseToolBar();
         
         this.tablePeople = frame.getListPanel().getTablePeople();
         

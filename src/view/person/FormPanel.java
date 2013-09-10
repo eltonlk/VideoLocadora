@@ -6,12 +6,14 @@ import javax.swing.JTextField;
 
 public class FormPanel extends javax.swing.JPanel {
 
-    private String personKind;
+    private String kind;
     
-    public FormPanel(String personKind) {
-        this.personKind = personKind;
-        
+    public FormPanel() {
         initComponents();
+    }
+    
+    public FormPanel(String kind) {
+        this.kind = kind;
     }
 
     /**
@@ -259,8 +261,8 @@ public class FormPanel extends javax.swing.JPanel {
         this.labelId = labelId;
     }
     
-    public String getPersonKind() {
-        return personKind;
+    public String getKind() {
+        return kind;
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -285,6 +287,4 @@ public class FormPanel extends javax.swing.JPanel {
     private javax.swing.JPanel panelContact;
     private javax.swing.JComboBox selectStatus;
     // End of variables declaration//GEN-END:variables
-
-    
 }

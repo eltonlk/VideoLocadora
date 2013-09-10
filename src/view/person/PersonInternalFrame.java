@@ -1,26 +1,29 @@
 package view.person;
 
-import view.components.header.BaseHeader;
+import view.components.toolbar.BaseToolBar;
 
 public class PersonInternalFrame extends javax.swing.JInternalFrame {
 
     private PersonActionListener listener;
-    private String person_kind;
+    private String kind;
     
     public PersonInternalFrame(String kind) {
-        this.person_kind = kind;
+        this.kind = kind;
         
         listener = new PersonActionListener(this, kind);
         
         switch (kind) {
             case "customer":
                 setTitle("Clientes");
+                setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/customers_16.png")));
                 break;
             case "supplier":
                 setTitle("Fornecedores");
+                setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/suppliers_16.png")));
                 break;
             case "employee":
                 setTitle("Funcionários");
+                setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/employees_16.png")));
                 break;
         }
         
@@ -38,12 +41,15 @@ public class PersonInternalFrame extends javax.swing.JInternalFrame {
     }
     
     public String getPersonKind() {
-        return person_kind;
+        return kind;
     }
 
-    public BaseHeader getBaseHeader() {
-        return baseHeader;
+    public BaseToolBar getBaseToolBar() {
+        return baseToolBar;
     }
+    
+    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -54,43 +60,31 @@ public class PersonInternalFrame extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         panelContent = new javax.swing.JPanel();
-        formPanel = new view.person.FormPanel( getPersonKind() );
+        formPanel = new view.person.FormPanel();
         listPanel = new view.person.ListPanel();
-        baseHeader = new view.components.header.BaseHeader(getTitle(), listener);
+        baseToolBar = new view.components.toolbar.BaseToolBar(listener);
 
         setClosable(true);
-
-        javax.swing.GroupLayout baseHeaderLayout = new javax.swing.GroupLayout(baseHeader);
-        baseHeader.setLayout(baseHeaderLayout);
-        baseHeaderLayout.setHorizontalGroup(
-            baseHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 981, Short.MAX_VALUE)
-        );
-        baseHeaderLayout.setVerticalGroup(
-            baseHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 60, Short.MAX_VALUE)
-        );
 
         javax.swing.GroupLayout panelContentLayout = new javax.swing.GroupLayout(panelContent);
         panelContent.setLayout(panelContentLayout);
         panelContentLayout.setHorizontalGroup(
             panelContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(baseHeader, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(panelContentLayout.createSequentialGroup()
-                .addGap(10, 10, 10)
+                .addContainerGap()
                 .addComponent(formPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
-                .addComponent(listPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(11, 11, 11)
+                .addComponent(listPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         panelContentLayout.setVerticalGroup(
             panelContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelContentLayout.createSequentialGroup()
-                .addComponent(baseHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(5, 5, 5)
                 .addGroup(panelContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(formPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(listPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -98,16 +92,20 @@ public class PersonInternalFrame extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(panelContent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(baseToolBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelContent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(baseToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panelContent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private view.components.header.BaseHeader baseHeader;
+    private view.components.toolbar.BaseToolBar baseToolBar;
     private view.person.FormPanel formPanel;
     private view.person.ListPanel listPanel;
     private javax.swing.JPanel panelContent;
