@@ -1,15 +1,15 @@
 package model;
 
-public class Gender {
+public class Genre {
  
     private int id;
     private String name;
-    private boolean active;
+    private String status;
     
-    public Gender() {
+    public Genre() {
     }
 
-    public Gender(String name) {
+    public Genre(String name) {
         this.name = name;
     }
     
@@ -29,12 +29,12 @@ public class Gender {
         this.name = name;
     }
 
-    public boolean isActive() {
-        return active;
+    public String getStatus() {
+        return status;
     }
 
-    public void setActive(boolean active) {
-        this.active = active;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     @Override
@@ -52,7 +52,7 @@ public class Gender {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Gender other = (Gender) obj;
+        final Genre other = (Genre) obj;
         if (this.id != other.id) {
             return false;
         }

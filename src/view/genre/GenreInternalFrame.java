@@ -1,35 +1,21 @@
-package view.person;
+package view.genre;
 
 import view.components.toolbar.BaseToolBar;
 
-public class PersonInternalFrame extends javax.swing.JInternalFrame {
+public class GenreInternalFrame extends javax.swing.JInternalFrame {
 
-    private PersonActionListener listener;
-    private String kind;
+    private GenreActionListener listener;
     
-    public PersonInternalFrame(String kind) {
-        this.kind = kind;
+    public GenreInternalFrame() {
+        listener = new GenreActionListener(this);
         
-        listener = new PersonActionListener(this, kind);
-        
-        switch (kind) {
-            case "customer":
-                setTitle("Clientes");
-                setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/customers_16.png")));
-                break;
-            case "supplier":
-                setTitle("Fornecedores");
-                setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/suppliers_16.png")));
-                break;
-            case "employee":
-                setTitle("Funcionários");
-                setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/employees_16.png")));
-                break;
-        }
-        
-        initComponents();   
+        initComponents();
         
         listener.initComponents();
+    }
+
+    public BaseToolBar getBaseToolBar() {
+        return baseToolBar;
     }
 
     public FormPanel getFormPanel() {
@@ -39,16 +25,6 @@ public class PersonInternalFrame extends javax.swing.JInternalFrame {
     public ListPanel getListPanel() {
         return listPanel;
     }
-    
-    public String getPersonKind() {
-        return kind;
-    }
-
-    public BaseToolBar getBaseToolBar() {
-        return baseToolBar;
-    }
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -62,12 +38,14 @@ public class PersonInternalFrame extends javax.swing.JInternalFrame {
 
         panelContent = new javax.swing.JPanel();
         baseToolBar = new view.components.toolbar.BaseToolBar(listener);
-        formPanel = new view.person.FormPanel();
-        listPanel = new view.person.ListPanel();
+        formPanel = new view.genre.FormPanel();
+        listPanel = new view.genre.ListPanel();
 
         setClosable(true);
+        setIconifiable(true);
+        setTitle("Generos");
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/category_16.png"))); // NOI18N
         setPreferredSize(new java.awt.Dimension(1000, 585));
-        setSize(new java.awt.Dimension(0, 0));
 
         panelContent.setLayout(new java.awt.GridBagLayout());
 
@@ -78,36 +56,35 @@ public class PersonInternalFrame extends javax.swing.JInternalFrame {
         panelContent.add(baseToolBar, gridBagConstraints);
 
         formPanel.setMinimumSize(new java.awt.Dimension(450, 500));
+        formPanel.setPreferredSize(new java.awt.Dimension(450, 500));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 5);
         panelContent.add(formPanel, gridBagConstraints);
 
         listPanel.setMinimumSize(new java.awt.Dimension(520, 500));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(10, 5, 10, 10);
         panelContent.add(listPanel, gridBagConstraints);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelContent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(panelContent, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelContent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(panelContent, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private view.components.toolbar.BaseToolBar baseToolBar;
-    private view.person.FormPanel formPanel;
-    private view.person.ListPanel listPanel;
+    private view.genre.FormPanel formPanel;
+    private view.genre.ListPanel listPanel;
     private javax.swing.JPanel panelContent;
     // End of variables declaration//GEN-END:variables
 }

@@ -2,6 +2,7 @@ package view.main;
 
 import com.jgoodies.looks.plastic.PlasticXPLookAndFeel;
 import com.jgoodies.looks.plastic.theme.SkyBlue;
+import view.genre.GenreInternalFrame;
 import view.person.PersonInternalFrame;
 import view.user.UserInternalFrame;
 
@@ -31,8 +32,8 @@ public class Main extends javax.swing.JFrame {
         optionsMenuItem = new javax.swing.JMenuItem();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
         exitMenuItem = new javax.swing.JMenuItem();
-        editMenu = new javax.swing.JMenu();
-        cutMenuItem = new javax.swing.JMenuItem();
+        movieMenu = new javax.swing.JMenu();
+        genresMenuItem = new javax.swing.JMenuItem();
         helpMenu = new javax.swing.JMenu();
         aboutMenuItem = new javax.swing.JMenuItem();
 
@@ -100,14 +101,20 @@ public class Main extends javax.swing.JFrame {
 
         menuBar.add(fileMenu);
 
-        editMenu.setMnemonic('e');
-        editMenu.setText("Filmes");
+        movieMenu.setMnemonic('e');
+        movieMenu.setText("Filmes");
 
-        cutMenuItem.setMnemonic('t');
-        cutMenuItem.setText("Generos");
-        editMenu.add(cutMenuItem);
+        genresMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/category_16.png"))); // NOI18N
+        genresMenuItem.setMnemonic('t');
+        genresMenuItem.setText("Generos");
+        genresMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                genresMenuItemActionPerformed(evt);
+            }
+        });
+        movieMenu.add(genresMenuItem);
 
-        menuBar.add(editMenu);
+        menuBar.add(movieMenu);
 
         helpMenu.setMnemonic('h');
         helpMenu.setText("Ajuda");
@@ -125,11 +132,11 @@ public class Main extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(desktopPane, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 634, Short.MAX_VALUE)
+            .add(desktopPane)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(desktopPane, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
+            .add(desktopPane)
         );
 
         pack();
@@ -179,6 +186,16 @@ public class Main extends javax.swing.JFrame {
         desktopPane.add(userIF);
     }//GEN-LAST:event_usersMenuItemActionPerformed
 
+    private void genresMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genresMenuItemActionPerformed
+        GenreInternalFrame genreIF = new GenreInternalFrame();
+        
+        genreIF.setLocation((getWidth() - genreIF.getWidth()) / 2, 40);
+        
+        genreIF.setVisible(true);
+        
+        desktopPane.add(genreIF);
+    }//GEN-LAST:event_genresMenuItemActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -215,16 +232,16 @@ public class Main extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem aboutMenuItem;
     private javax.swing.JMenuItem customersMenuItem;
-    private javax.swing.JMenuItem cutMenuItem;
     private javax.swing.JDesktopPane desktopPane;
-    private javax.swing.JMenu editMenu;
     private javax.swing.JMenuItem employeesMenuItem;
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenu fileMenu;
+    private javax.swing.JMenuItem genresMenuItem;
     private javax.swing.JMenu helpMenu;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JMenuBar menuBar;
+    private javax.swing.JMenu movieMenu;
     private javax.swing.JMenuItem optionsMenuItem;
     private javax.swing.JMenuItem suppliersMenuItem;
     private javax.swing.JMenuItem usersMenuItem;

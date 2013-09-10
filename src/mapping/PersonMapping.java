@@ -13,7 +13,6 @@ public class PersonMapping {
     
     public void toForm(Person person) {
         formPanel.getLabelId().setText( Integer.toString(person.getId()) );
-        formPanel.getLabelId().setText( Integer.toString(person.getId()) );
         formPanel.getInputLegalName().setText( person.getLegalName() );
         formPanel.getInputName().setText( person.getName() );
         formPanel.getInputDocument1().setText( person.getDocument1() );

@@ -1,4 +1,4 @@
-package view.person;
+package view.genre;
 
 import javax.swing.JTable;
 
@@ -8,8 +8,8 @@ public class ListPanel extends javax.swing.JPanel {
         initComponents();
     }
 
-    public JTable getTablePeople() {
-        return tablePeople;
+    public JTable getTableGenres() {
+        return tableGenres;
     }
     
     /**
@@ -21,10 +21,10 @@ public class ListPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        scrollPane = new javax.swing.JScrollPane();
-        tablePeople = new javax.swing.JTable();
+        jScrollPane = new javax.swing.JScrollPane();
+        tableGenres = new javax.swing.JTable();
 
-        tablePeople.setModel(new javax.swing.table.DefaultTableModel(
+        tableGenres.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -35,21 +35,21 @@ public class ListPanel extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        scrollPane.setViewportView(tablePeople);
+        jScrollPane.setViewportView(tableGenres);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(scrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 520, Short.MAX_VALUE)
+            layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jScrollPane, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 520, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(scrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
+            layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jScrollPane, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JScrollPane scrollPane;
-    private javax.swing.JTable tablePeople;
+    private javax.swing.JScrollPane jScrollPane;
+    private javax.swing.JTable tableGenres;
     // End of variables declaration//GEN-END:variables
 }

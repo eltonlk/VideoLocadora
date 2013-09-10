@@ -1,3 +1,10 @@
+CREATE  TABLE `video_locadora`.`genres` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(255) NULL,
+  `status` VARCHAR(45) NULL,
+  PRIMARY KEY (`id`)
+);
+
 CREATE  TABLE `video_locadora`.`people` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(255) NULL,
@@ -58,16 +65,4 @@ CREATE  TABLE `video_locadora`.`addresses` (
   CONSTRAINT `fk_addresses_district_id` FOREIGN KEY (`district_id`) REFERENCES `video_locadora`.`districts` (`id`),
   CONSTRAINT `fk_addresses_person_id` FOREIGN KEY (`person_id`) REFERENCES `video_locadora`.`people` (`id`)
 );
-
-CREATE  TABLE `video_locadora`.`users` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `login` VARCHAR(45) NULL,
-  `password` VARCHAR(255) NULL,
-  `email` VARCHAR(255) NULL,
-  `person_id` INT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_users_person_id` (`person_id` ASC) ,
-  CONSTRAINT `fk_users_person_id` FOREIGN KEY (`person_id`) REFERENCES `video_locadora`.`people` (`id`)
-);
-
 
