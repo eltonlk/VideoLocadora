@@ -12,12 +12,17 @@ public class GenreService {
         dao = new GenreDao();
     }
     
-    public void save(Genre genre) {
-        if (genre.getId() == 0) {
-            dao.insert(genre);
+    public boolean save(Genre genre) {
+        if (genre.isValid()) {
+            if (genre.getId() == 0) {
+                dao.insert(genre);
+            } else {
+                dao.update(genre);
+            }           
+            return false;
         } else {
-            dao.update(genre);
-        }        
+            return false;
+        }
     }
     
     public List<Genre> getAll() {

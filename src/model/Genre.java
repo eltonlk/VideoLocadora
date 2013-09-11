@@ -1,8 +1,9 @@
 package model;
 
-public class Genre {
- 
-    private int id;
+import framework.BaseModel;
+
+public class Genre extends BaseModel {
+    
     private String name;
     private String status;
     
@@ -13,14 +14,6 @@ public class Genre {
         this.name = name;
     }
     
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getName() {
         return name;
     }
@@ -59,4 +52,11 @@ public class Genre {
         return true;
     }
 
+    @Override
+    protected void validateRules() {
+        if (name.isEmpty()) {
+            addError("name", "Nome não pode ficar em branco.");
+        }
+    }
+    
 }

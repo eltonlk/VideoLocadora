@@ -10,6 +10,7 @@ import mapping.GenreMapping;
 import model.Genre;
 import model.GenreTableModel;
 import service.GenreService;
+import view.components.message.FormMessages;
 import view.components.toolbar.BaseToolBar;
 
 public class GenreActionListener implements ActionListener, ListSelectionListener {
@@ -95,13 +96,13 @@ public class GenreActionListener implements ActionListener, ListSelectionListene
     private void save() {
         Genre genre = mapping.toGenre();
         
-        service.save(genre);
+        if (service.save(genre)) {
+            tableModel.addGenre(genre);
+
+            toolbar.disableButtonsToSave();      
+        }
         
-        JOptionPane.showMessageDialog(frame, "Registro salvo.", "save", JOptionPane.INFORMATION_MESSAGE);
-        
-        tableModel.addGenre(genre);
-        
-        toolbar.disableButtonsToSave();      
+        FormMessages.show(frame, genre);
     }
     
     private void cancel() {
