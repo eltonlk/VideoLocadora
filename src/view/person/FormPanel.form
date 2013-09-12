@@ -34,7 +34,7 @@
                           <Component id="labelName" min="-2" max="-2" attributes="0"/>
                           <Component id="labelStatus" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="201" max="32767" attributes="0"/>
+                      <EmptySpace min="201" pref="350" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
@@ -100,7 +100,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="selectStatus" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="jTabbedPane" max="32767" attributes="0"/>
+              <Component id="jTabbedPane" pref="250" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -127,11 +127,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="inputDocument1">
-      <Properties>
-        <Property name="size" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[210, 0]"/>
-        </Property>
-      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="inputDocument2">
     </Component>
@@ -183,7 +178,7 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
                                       <Component id="labelCel" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="0" pref="150" max="32767" attributes="0"/>
+                                      <EmptySpace min="0" pref="149" max="32767" attributes="0"/>
                                   </Group>
                                   <Component id="inputCel" max="32767" attributes="0"/>
                               </Group>
@@ -215,7 +210,7 @@
                           <Component id="inputPhone" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="inputCel" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="97" max="32767" attributes="0"/>
+                      <EmptySpace pref="107" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -261,7 +256,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <Component id="labelAddress" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="344" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="343" max="32767" attributes="0"/>
                           </Group>
                           <Component id="inputAddress" max="32767" attributes="0"/>
                       </Group>
@@ -276,7 +271,7 @@
                       <Component id="labelAddress" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="inputAddress" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="153" max="32767" attributes="0"/>
+                      <EmptySpace pref="161" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>

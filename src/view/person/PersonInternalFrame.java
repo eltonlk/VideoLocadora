@@ -41,7 +41,7 @@ public class PersonInternalFrame extends javax.swing.JInternalFrame {
         return tablePanel;
     }
     
-    public String getPersonKind() {
+    public String getKind() {
         return kind;
     }
 
@@ -63,7 +63,7 @@ public class PersonInternalFrame extends javax.swing.JInternalFrame {
 
         panelContent = new javax.swing.JPanel();
         baseToolBar = new view.components.toolbar.BaseToolBar(listener);
-        formPanel = new view.person.FormPanel();
+        formPanel = new view.person.FormPanel(getKind());
         tablePanel = new view.components.table.TablePanel();
 
         setClosable(true);

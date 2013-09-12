@@ -2,6 +2,8 @@ CREATE  TABLE `video_locadora`.`genres` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(255) NULL,
   `status` VARCHAR(45) NULL,
+  `created_at` DATETIME NULL,
+  `updated_at` DATETIME NULL,
   PRIMARY KEY (`id`)
 );
 
@@ -16,6 +18,8 @@ CREATE  TABLE `video_locadora`.`people` (
   `cel` VARCHAR(10) NULL,
   `status` VARCHAR(45) NULL,
   `kind` VARCHAR(10) NULL,
+  `created_at` DATETIME NULL,
+  `updated_at` DATETIME NULL,
   PRIMARY KEY (`id`)
 );
 

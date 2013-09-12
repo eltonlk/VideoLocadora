@@ -15,6 +15,8 @@ public final class FormPanel extends javax.swing.JPanel {
     }
     
     public FormPanel(String kind) {
+        this();
+        
         this.kind = kind;
     }
 

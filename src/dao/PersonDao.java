@@ -8,6 +8,7 @@ import framework.UpdateDaoException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import model.Person;
@@ -25,7 +26,7 @@ public class PersonDao {
         try {
             daoHelper.begingTransaction();
                         
-            String query = "INSERT INTO people (name, legal_name, kind, document_1, document_2, email, phone, cel, status) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ? )";           
+            String query = "INSERT INTO people (name, legal_name, kind, document_1, document_2, email, phone, cel, status, created_at, updated_at) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )";           
            
             int id = daoHelper.executePreparedUpdateAndReturnGenerateKeys(
                 query, 
@@ -37,7 +38,9 @@ public class PersonDao {
                 person.getEmail(),
                 person.getPhone(),
                 person.getCel(),
-                person.getStatus());                    
+                person.getStatus(),
+                new java.sql.Timestamp(new Date().getTime()),
+                new java.sql.Timestamp(new Date().getTime()));    
             
             person.setId(id);
             
@@ -63,7 +66,7 @@ public class PersonDao {
         try {
             daoHelper.begingTransaction();
                         
-            String query = "UPDATE people SET name = ?, legal_name = ?, kind = ?, document_1 = ?, document_2 = ?, email = ?, phone = ?, cel = ?, status = ? WHERE id = ?";           
+            String query = "UPDATE people SET name = ?, legal_name = ?, kind = ?, document_1 = ?, document_2 = ?, email = ?, phone = ?, cel = ?, status = ?, updated_at = ? WHERE id = ?";           
            
             daoHelper.executePreparedUpdate(
                 query, 
@@ -76,7 +79,8 @@ public class PersonDao {
                 person.getPhone(),
                 person.getCel(),
                 person.getStatus(),
-                person.getId());                    
+                person.getId(),
+                new java.sql.Timestamp(new Date().getTime())); 
             
             updateAddress(person);
             
@@ -126,7 +130,7 @@ public class PersonDao {
     
     public List<Person> getByKind(String kind) {
         final List<Person> people = new ArrayList<>();
-        
+
         try {
             String query = "SELECT * FROM people WHERE kind = ?"; 
             
@@ -145,6 +149,8 @@ public class PersonDao {
                                 person.setEmail( rset.getString("email") );
                                 person.setPhone( rset.getString("phone") );
                                 person.setCel( rset.getString("cel") );
+                                person.setCreatedAt( rset.getTimestamp("created_at"));
+                                person.setUpdatedAt( rset.getTimestamp("updated_at"));
 
                                 people.add(person);
                             }
