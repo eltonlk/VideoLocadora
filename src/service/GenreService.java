@@ -19,7 +19,7 @@ public class GenreService {
             } else {
                 dao.update(genre);
             }           
-            return false;
+            return true;
         } else {
             return false;
         }

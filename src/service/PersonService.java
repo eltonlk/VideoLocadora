@@ -12,12 +12,17 @@ public class PersonService {
         dao = new PersonDao();
     }
     
-    public void save(Person person) {
-        if (person.getId() == 0) {
-            dao.insert(person);
+    public boolean save(Person person) {
+        if (person.isValid()) {
+            if (person.getId() == 0) {
+                dao.insert(person);
+            } else {
+                dao.update(person);
+            }           
+            return true;
         } else {
-            dao.update(person);
-        }        
+            return false;
+        }
     }
     
     public List<Person> getByKind(String kind) {

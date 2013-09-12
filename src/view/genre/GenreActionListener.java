@@ -2,7 +2,6 @@ package view.genre;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -10,7 +9,7 @@ import mapping.GenreMapping;
 import model.Genre;
 import model.GenreTableModel;
 import service.GenreService;
-import view.components.message.FormMessages;
+import view.components.message.BaseMessage;
 import view.components.toolbar.BaseToolBar;
 
 public class GenreActionListener implements ActionListener, ListSelectionListener {
@@ -43,6 +42,8 @@ public class GenreActionListener implements ActionListener, ListSelectionListene
         Genre genre = tableModel.getGenre( table.getSelectedRow() );
         
         mapping.toForm(genre);
+        
+        toolbar.disableButtonsToSave();
     }    
     
     @Override
@@ -76,21 +77,29 @@ public class GenreActionListener implements ActionListener, ListSelectionListene
     }    
     
     private void add() {
+        mapping.toForm(new Genre());
+        
+        frame.getFormPanel().enableOrDisableFields(true);
+        
         toolbar.enableButtonsToSave();
     }
     
     private void edit() {
+        frame.getFormPanel().enableOrDisableFields(true);
+        
         toolbar.enableButtonsToSave();
     }
     
     private void destroy() {
-        Genre genre = mapping.toGenre();
-                
-        service.destroy(genre);
+        if (BaseMessage.confirmDestroy()) {
+            Genre genre = mapping.toGenre();
+
+            service.destroy(genre);
+
+            tableModel.removeGenre(genre);                    
         
-        JOptionPane.showMessageDialog(frame, "Registro excluído.", "save", JOptionPane.INFORMATION_MESSAGE);
-        
-        tableModel.removeGenre(genre);        
+            BaseMessage.destroyInfo();
+        }
     }
     
     private void save() {
@@ -99,13 +108,17 @@ public class GenreActionListener implements ActionListener, ListSelectionListene
         if (service.save(genre)) {
             tableModel.addGenre(genre);
 
+            frame.getFormPanel().enableOrDisableFields(false);
+            
             toolbar.disableButtonsToSave();      
         }
         
-        FormMessages.show(frame, genre);
+        BaseMessage.form(frame, genre);
     }
     
     private void cancel() {
+        frame.getFormPanel().enableOrDisableFields(false);
+        
         toolbar.disableButtonsToSave();
     }
     

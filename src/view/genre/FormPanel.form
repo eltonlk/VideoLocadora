@@ -29,8 +29,8 @@
                   <Component id="inputName" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="labelActive" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="selectActive" alignment="0" min="-2" pref="210" max="-2" attributes="0"/>
+                          <Component id="labelStatus" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="selectStatus" alignment="0" min="-2" pref="210" max="-2" attributes="0"/>
                           <Component id="labelName" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="111" max="32767" attributes="0"/>
@@ -52,9 +52,9 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="inputName" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="labelActive" min="-2" max="-2" attributes="0"/>
+              <Component id="labelStatus" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="selectActive" min="-2" max="-2" attributes="0"/>
+              <Component id="selectStatus" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="385" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -68,12 +68,12 @@
     </Component>
     <Component class="javax.swing.JTextField" name="inputName">
     </Component>
-    <Component class="javax.swing.JLabel" name="labelActive">
+    <Component class="javax.swing.JLabel" name="labelStatus">
       <Properties>
         <Property name="text" type="java.lang.String" value="Situa&#xe7;&#xe3;o"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="selectActive">
+    <Component class="javax.swing.JComboBox" name="selectStatus">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="2">

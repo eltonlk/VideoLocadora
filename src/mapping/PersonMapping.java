@@ -12,7 +12,12 @@ public class PersonMapping {
     }
     
     public void toForm(Person person) {
-        formPanel.getLabelId().setText( Integer.toString(person.getId()) );
+        if (person.getId() != 0) {
+            formPanel.getLabelId().setText( Integer.toString(person.getId()) );
+        } else {
+            formPanel.getLabelId().setText("");
+        }        
+        
         formPanel.getInputLegalName().setText( person.getLegalName() );
         formPanel.getInputName().setText( person.getName() );
         formPanel.getInputDocument1().setText( person.getDocument1() );
@@ -20,6 +25,7 @@ public class PersonMapping {
         formPanel.getInputEmail().setText( person.getEmail() );
         formPanel.getInputPhone().setText( person.getPhone() );
         formPanel.getInputCel().setText( person.getCel() );
+        formPanel.getSelectStatus().setSelectedItem( person.getStatus() );
     }    
     
     public Person toPerson() {
@@ -37,8 +43,7 @@ public class PersonMapping {
         person.setKind( formPanel.getKind() );
         person.setCel( formPanel.getInputCel().getText() );
         person.setPhone( formPanel.getInputPhone().getText() );
-        
-//        person.setStatus(frame.getjCBStatus());
+        person.setStatus( (String) formPanel.getSelectStatus().getSelectedItem());
         
 //        person.setAddress( mappingFormToAddress() );
         

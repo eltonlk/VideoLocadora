@@ -8,6 +8,7 @@ public class Genre extends BaseModel {
     private String status;
     
     public Genre() {
+        this.status = "Ativo";
     }
 
     public Genre(String name) {
@@ -54,7 +55,7 @@ public class Genre extends BaseModel {
 
     @Override
     protected void validateRules() {
-        if (name.isEmpty()) {
+        if (ValidationUtils.isEmpty(name)) {
             addError("name", "Nome não pode ficar em branco.");
         }
     }

@@ -4,10 +4,12 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-public class FormPanel extends javax.swing.JPanel {
+public final class FormPanel extends javax.swing.JPanel {
 
     public FormPanel() {
         initComponents();
+        
+        enableOrDisableFields(false);
     }
 
     public JTextField getInputName() {
@@ -18,12 +20,12 @@ public class FormPanel extends javax.swing.JPanel {
         this.inputName = inputName;
     }
 
-    public JComboBox getjComboBox1() {
-        return selectActive;
+    public JComboBox getSelectStatus() {
+        return selectStatus;
     }
 
-    public void setjComboBox1(JComboBox jComboBox1) {
-        this.selectActive = jComboBox1;
+    public void setSelectStatus(JComboBox selectStatus) {
+        this.selectStatus = selectStatus;
     }
 
     public JLabel getLabelId() {
@@ -33,7 +35,12 @@ public class FormPanel extends javax.swing.JPanel {
     public void setLabelId(JLabel labelId) {
         this.labelId = labelId;
     }
-
+    
+    public void enableOrDisableFields(boolean enable) {
+        inputName.enable(enable);
+        selectStatus.enable(enable);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -45,17 +52,17 @@ public class FormPanel extends javax.swing.JPanel {
 
         labelName = new javax.swing.JLabel();
         inputName = new javax.swing.JTextField();
-        labelActive = new javax.swing.JLabel();
-        selectActive = new javax.swing.JComboBox();
+        labelStatus = new javax.swing.JLabel();
+        selectStatus = new javax.swing.JComboBox();
         labelId = new javax.swing.JLabel();
 
         setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         labelName.setText("Nome");
 
-        labelActive.setText("Situação");
+        labelStatus.setText("Situação");
 
-        selectActive.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ativo", "Inativo" }));
+        selectStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ativo", "Inativo" }));
 
         labelId.setFont(new java.awt.Font("Lucida Grande", 1, 12)); // NOI18N
         labelId.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -70,8 +77,8 @@ public class FormPanel extends javax.swing.JPanel {
                     .add(inputName)
                     .add(layout.createSequentialGroup()
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(labelActive)
-                            .add(selectActive, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 210, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(labelStatus)
+                            .add(selectStatus, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 210, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                             .add(labelName))
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 111, Short.MAX_VALUE)
                         .add(labelId, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 113, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
@@ -87,17 +94,17 @@ public class FormPanel extends javax.swing.JPanel {
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(inputName, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(labelActive)
+                .add(labelStatus)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(selectActive, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(selectStatus, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(385, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField inputName;
-    private javax.swing.JLabel labelActive;
     private javax.swing.JLabel labelId;
     private javax.swing.JLabel labelName;
-    private javax.swing.JComboBox selectActive;
+    private javax.swing.JLabel labelStatus;
+    private javax.swing.JComboBox selectStatus;
     // End of variables declaration//GEN-END:variables
 }

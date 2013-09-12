@@ -57,15 +57,15 @@ public class GenreTableModel extends AbstractTableModel {
     
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Genre gender = genres.get(rowIndex);
+        Genre genre = genres.get(rowIndex);
 
         switch (columnIndex) {
         case ID:
-            return gender.getId();
+            return genre.getId();
         case NAME:
-            return gender.getName();
+            return genre.getName();
         case STATUS:
-            return gender.getStatus();
+            return genre.getStatus();
         default:
             throw new IndexOutOfBoundsException("columnIndex out of bounds");
         }
@@ -96,11 +96,19 @@ public class GenreTableModel extends AbstractTableModel {
     }
 
     public void addGenre(Genre genre) {
-        genres.add(genre);
+        int index = genres.indexOf(genre);
 
-        int lastIndex = getRowCount() - 1;
+        if (index == -1) {
+            genres.add(genre);
+            
+            index = getRowCount();
+            
+            fireTableRowsInserted(index, index);
+        } else {
+            genres.set(index, genre);
 
-        fireTableRowsInserted(lastIndex, lastIndex);
+            fireTableRowsUpdated(index, index);
+        }        
     }
 
 //    public void removeGenre(int index) {

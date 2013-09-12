@@ -12,9 +12,14 @@ public class GenreMapping {
     }
     
     public void toForm(Genre genre) {
-        formPanel.getLabelId().setText( Integer.toString(genre.getId()) );
+        if (genre.getId() != 0 ) {
+            formPanel.getLabelId().setText( Integer.toString(genre.getId()) );
+        } else {
+            formPanel.getLabelId().setText("");
+        }
+                
         formPanel.getInputName().setText( genre.getName() );
-//        formPanel.getInputCel().setText( genre.getCel() );
+        formPanel.getSelectStatus().setSelectedItem( genre.getStatus() );
     }    
     
     public Genre toGenre() {
@@ -25,7 +30,7 @@ public class GenreMapping {
         }
         
         genre.setName( formPanel.getInputName().getText() );
-//        genre.setActive( formPanel.getInputPhone().getText() );
+        genre.setStatus( (String) formPanel.getSelectStatus().getSelectedItem() );
         
         return genre;
     }  

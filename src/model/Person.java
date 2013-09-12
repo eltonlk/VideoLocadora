@@ -1,10 +1,10 @@
 package model;
 
+import framework.BaseModel;
 import java.util.Date;
 
-public class Person {
+public class Person extends BaseModel {
     
-    private int id;
     private String name;
     private String legal_name;
     private String kind;
@@ -21,6 +21,7 @@ public class Person {
     private Address address;
     
     public Person() {
+        this.status = "Ativo";
         this.created_at = new Date();
         this.updated_at = new Date();
     }
@@ -38,10 +39,7 @@ public class Person {
         this.address = address;
     }
 
-    public int getId() {
-        return id;
-    }
-
+    @Override
     public void setId(int id) {
         this.id = id;  
         
@@ -166,6 +164,19 @@ public class Person {
             return false;
         }
         return true;
+    }
+
+    @Override
+    protected void validateRules() {
+        if (ValidationUtils.isEmpty(name)) {
+            addError("name", "Nome Fantasia não pode ficar em branco.");
+        }
+        if (ValidationUtils.isEmpty(legal_name)) {
+            addError("legal_name", "Razão Social não pode ficar em branco.");
+        }
+        if (ValidationUtils.emailInvalid(email)) {
+            addError("email", "Email não é válido.");
+        }
     }
     
 }

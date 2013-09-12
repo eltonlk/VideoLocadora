@@ -4,7 +4,6 @@ import model.PersonTableModel;
 import view.components.toolbar.BaseToolBar;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -12,6 +11,7 @@ import mapping.PersonMapping;
 import model.Person;
 
 import service.PersonService;
+import view.components.message.BaseMessage;
 
 public class PersonActionListener implements ActionListener, ListSelectionListener {
 
@@ -45,6 +45,8 @@ public class PersonActionListener implements ActionListener, ListSelectionListen
         Person person = tableModel.getPerson( table.getSelectedRow() );
         
         mapping.toForm(person);
+        
+        toolbar.disableButtonsToSave();
     }    
     
     @Override
@@ -78,36 +80,48 @@ public class PersonActionListener implements ActionListener, ListSelectionListen
     }    
     
     private void add() {
+        mapping.toForm(new Person());
+        
+        frame.getFormPanel().enableOrDisableFields(true);
+        
         toolbar.enableButtonsToSave();
     }
     
     private void edit() {
+        frame.getFormPanel().enableOrDisableFields(true);
+        
         toolbar.enableButtonsToSave();
     }
     
     private void destroy() {
-        Person person = mapping.toPerson();
-                
-        service.destroy(person);
-        
-        JOptionPane.showMessageDialog(frame, "Registro excluído.", "save", JOptionPane.INFORMATION_MESSAGE);
-        
-        tableModel.removePerson(person);        
+        if (BaseMessage.confirmDestroy()) {
+            Person person = mapping.toPerson();
+
+            service.destroy(person);
+
+            tableModel.removePerson(person);        
+            
+            BaseMessage.destroyInfo();
+        }
     }
     
     private void save() {
         Person person = mapping.toPerson();
         
-        service.save(person);
+        if (service.save(person)) {
+            tableModel.addPerson(person);
+            
+            frame.getFormPanel().enableOrDisableFields(false);
+            
+            toolbar.disableButtonsToSave();      
+        }
         
-        JOptionPane.showMessageDialog(frame, "Registro salvo.", "save", JOptionPane.INFORMATION_MESSAGE);
-        
-        tableModel.addPerson(person);
-        
-        toolbar.disableButtonsToSave();      
+        BaseMessage.form(frame, person);
     }
     
     private void cancel() {
+        frame.getFormPanel().enableOrDisableFields(false);
+        
         toolbar.disableButtonsToSave();
     }
     

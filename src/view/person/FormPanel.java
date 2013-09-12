@@ -4,12 +4,14 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-public class FormPanel extends javax.swing.JPanel {
+public final class FormPanel extends javax.swing.JPanel {
 
     private String kind;
     
     public FormPanel() {
         initComponents();
+        
+        enableOrDisableFields(false);
     }
     
     public FormPanel(String kind) {
@@ -44,6 +46,8 @@ public class FormPanel extends javax.swing.JPanel {
         inputCel = new javax.swing.JTextField();
         labelCel = new javax.swing.JLabel();
         panelAddress = new javax.swing.JPanel();
+        labelAddress = new javax.swing.JLabel();
+        inputAddress = new javax.swing.JTextField();
         labelId = new javax.swing.JLabel();
 
         setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -112,15 +116,29 @@ public class FormPanel extends javax.swing.JPanel {
 
         jTabbedPane.addTab("Contato", panelContact);
 
+        labelAddress.setText("Endereço");
+
         javax.swing.GroupLayout panelAddressLayout = new javax.swing.GroupLayout(panelAddress);
         panelAddress.setLayout(panelAddressLayout);
         panelAddressLayout.setHorizontalGroup(
             panelAddressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 413, Short.MAX_VALUE)
+            .addGroup(panelAddressLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelAddressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelAddressLayout.createSequentialGroup()
+                        .addComponent(labelAddress)
+                        .addGap(0, 344, Short.MAX_VALUE))
+                    .addComponent(inputAddress))
+                .addContainerGap())
         );
         panelAddressLayout.setVerticalGroup(
             panelAddressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 209, Short.MAX_VALUE)
+            .addGroup(panelAddressLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(labelAddress)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(inputAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(153, Short.MAX_VALUE))
         );
 
         jTabbedPane.addTab("Endereço", panelAddress);
@@ -155,7 +173,7 @@ public class FormPanel extends javax.swing.JPanel {
                                 .addContainerGap())))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTabbedPane)
+                            .addComponent(jTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addComponent(inputLegalName)
                             .addComponent(inputName)
                             .addGroup(layout.createSequentialGroup()
@@ -270,8 +288,29 @@ public class FormPanel extends javax.swing.JPanel {
     public String getKind() {
         return kind;
     }
+
+    public JTextField getInputAddress() {
+        return inputAddress;
+    }
+
+    public void setInputAddress(JTextField inputAddress) {
+        this.inputAddress = inputAddress;
+    }
+    
+    public void enableOrDisableFields(boolean enable) {
+        inputCel.enable(enable);
+        inputDocument1.enable(enable);
+        inputDocument2.enable(enable);
+        inputEmail.enable(enable);
+        inputLegalName.enable(enable);
+        inputName.enable(enable);
+        inputPhone.enable(enable);
+        selectStatus.enable(enable);
+        inputAddress.enable(enable);
+    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField inputAddress;
     private javax.swing.JTextField inputCel;
     private javax.swing.JTextField inputDocument1;
     private javax.swing.JTextField inputDocument2;
@@ -280,6 +319,7 @@ public class FormPanel extends javax.swing.JPanel {
     private javax.swing.JTextField inputName;
     private javax.swing.JTextField inputPhone;
     private javax.swing.JTabbedPane jTabbedPane;
+    private javax.swing.JLabel labelAddress;
     private javax.swing.JLabel labelCel;
     private javax.swing.JLabel labelDocument1;
     private javax.swing.JLabel labelDocument2;
