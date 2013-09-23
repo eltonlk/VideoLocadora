@@ -1,16 +1,20 @@
 package model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity(name="actors")
 public class Actor {
     
+    @Id
+    @Column(name="id")
+    @GeneratedValue
     private int id;
+    
+    @Column(name="nome", nullable = false, unique = true, columnDefinition = "VARCHAR(60)", length = 60)
     private String name;
-    
-    public Actor() {
-    }
-    
-    public Actor(String name) {
-        this.name = name;
-    }
 
     public int getId() {
         return id;
