@@ -13,7 +13,7 @@ public class Actor {
     @GeneratedValue
     private int id;
     
-    @Column(name="nome", nullable = false, unique = true, columnDefinition = "VARCHAR(60)", length = 60)
+    @Column(name="name", nullable = false, unique = true, columnDefinition = "VARCHAR(60)", length = 60)
     private String name;
 
     public int getId() {

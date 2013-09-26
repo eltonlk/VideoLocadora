@@ -98,8 +98,18 @@ public class ActorFrame extends javax.swing.JFrame {
         jTextField2.setFocusable(false);
 
         jButton1.setText("Salvar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Excluir");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Cancelar");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -162,6 +172,16 @@ public class ActorFrame extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         this.setVisible(false);
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.actor.setName(jTextField1.getText());
+        
+        this.save();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        this.destroy();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
