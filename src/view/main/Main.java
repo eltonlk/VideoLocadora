@@ -4,6 +4,7 @@ import com.jgoodies.looks.plastic.PlasticXPLookAndFeel;
 import com.jgoodies.looks.plastic.theme.SkyBlue;
 import view.genre.GenreInternalFrame;
 import view.person.PersonInternalFrame;
+import view.user.UserForm;
 import view.user.UserInternalFrame;
 
 public class Main extends javax.swing.JFrame {
@@ -177,7 +178,9 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_employeesMenuItemActionPerformed
 
     private void usersMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usersMenuItemActionPerformed
-        UserInternalFrame userIF = new UserInternalFrame();
+//        UserInternalFrame userIF = new UserInternalFrame();
+        
+        UserForm userIF = new UserForm();
         
         userIF.setLocation((getWidth() - userIF.getWidth()) / 2, 40);
         
