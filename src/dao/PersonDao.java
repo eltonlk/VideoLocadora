@@ -5,6 +5,8 @@ import framework.DaoHelper;
 import framework.DeleteDaoException;
 import framework.QueryMapping;
 import framework.UpdateDaoException;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -47,7 +49,7 @@ public class PersonDao {
             insertAddress(person);
             
             daoHelper.endTransaction();          
-        } catch (Exception e) {
+        } catch (SQLException | IOException e) {
            daoHelper.rollbackTransaction();
             
            throw new CreateDaoException("Não foi possivel realizar a tranzação.", e);
@@ -85,7 +87,7 @@ public class PersonDao {
             updateAddress(person);
             
             daoHelper.endTransaction();          
-        } catch (Exception e) {
+        } catch (SQLException | IOException e) {
            daoHelper.rollbackTransaction();
             
            throw new UpdateDaoException("Não foi possivel realizar a tranzação.", e);
@@ -113,7 +115,7 @@ public class PersonDao {
             deleteAddress(person);
             
             daoHelper.endTransaction();          
-        } catch (Exception e) {
+        } catch (SQLException | IOException e) {
            daoHelper.rollbackTransaction();
             
            throw new DeleteDaoException("Não foi possivel realizar a tranzação.", e);
@@ -128,7 +130,7 @@ public class PersonDao {
         }
     }   
     
-    public List<Person> getByKind(String kind) {
+    public List<Person> getByKind(String kind) throws FileNotFoundException, IOException {
         final List<Person> people = new ArrayList<>();
 
         try {

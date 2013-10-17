@@ -5,6 +5,8 @@ import framework.DaoHelper;
 import framework.DeleteDaoException;
 import framework.QueryMapping;
 import framework.UpdateDaoException;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -33,7 +35,7 @@ public class GenreDao {
             genre.setId(id);
             
             daoHelper.endTransaction();          
-        } catch (Exception e) {
+        } catch (SQLException | IOException e) {
            daoHelper.rollbackTransaction();
             
            throw new CreateDaoException("Não foi possivel realizar a tranzação.", e);
@@ -53,7 +55,7 @@ public class GenreDao {
                 genre.getId());                    
             
             daoHelper.endTransaction();          
-        } catch (Exception e) {
+        } catch (SQLException | IOException e) {
            daoHelper.rollbackTransaction();
             
            throw new UpdateDaoException("Não foi possivel realizar a tranzação.", e);
@@ -71,14 +73,14 @@ public class GenreDao {
                 genre.getId());                    
             
             daoHelper.endTransaction();          
-        } catch (Exception e) {
+        } catch (SQLException | IOException e) {
            daoHelper.rollbackTransaction();
             
            throw new DeleteDaoException("Não foi possivel realizar a tranzação.", e);
         }        
     }    
     
-    public List<Genre> getAll() {
+    public List<Genre> getAll() throws FileNotFoundException, IOException {
         final List<Genre> genres = new ArrayList<>();
         
         try {

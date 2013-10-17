@@ -1,65 +1,51 @@
 package framework;
 
-import java.io.FileInputStream;
+import framework.database.DataBaseConnection;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Properties;
 
 public class DaoHelper {
 
     private static final ThreadLocal<Connection> context = new ThreadLocal<>();
     
-    public Connection getConnection() throws SQLException, FileNotFoundException, IOException {
-        Connection conn = null;
+    public Connection getConnection() throws IOException, SQLException {
+        DataBaseConnection dataBaseConnection = new DataBaseConnection();
         
-        Properties prop = new Properties();
-        
-        try {
-            prop.load(new FileInputStream("database.properties"));
-            
-            Class.forName(prop.getProperty("driver"));
-
-            conn = DriverManager.
-                    getConnection(prop.getProperty("db.url"), 
-                        prop.getProperty("user"), 
-                        prop.getProperty("password"));
-        } catch (ClassNotFoundException e) {
-        }
-        return conn;
+        return dataBaseConnection.getConnection();
     }
     
-    public void begingTransaction() throws SQLException, FileNotFoundException, IOException {
-        Connection conn = getConnection();
-        conn.setAutoCommit(false);
-        context.set(conn);
-    }
-    
-    public void endTransaction() throws SQLException {
-        commit( getConnectionFromContext() );
-        releaseTransaction();
-    }
-    
-    public void releaseTransaction() throws SQLException {
-        Connection conn = getConnectionFromContext();
-        release(conn);
-        context.remove();
-    }
- 
-    public void rollbackTransaction() {
-        try {
-            Connection conn = getConnectionFromContext();
-            rollback(conn);
-            release(conn);
-            context.remove();
-        } catch (SQLException e) {
-        }
-    }    
+//    public void begingTransaction() throws SQLException, FileNotFoundException, IOException {
+//        Connection conn = getConnection();
+//        conn.setAutoCommit(false);
+//        context.set(conn);
+//    }
+//    
+//    public void endTransaction() throws SQLException {
+//        commit( getConnectionFromContext() );
+//        releaseTransaction();
+//    }
+//    
+//    public void releaseTransaction() throws SQLException {
+//        Connection conn = getConnectionFromContext();
+//        release(conn);
+//        context.remove();
+//    }
+// 
+//    public void rollbackTransaction() {
+//        try {
+//            Connection conn = getConnectionFromContext();
+//            rollback(conn);
+//            release(conn);
+//            context.remove();
+//        } catch (SQLException e) {
+//        }
+//    }    
    
     public void commit(Connection conn) throws SQLException {
         conn.commit();
