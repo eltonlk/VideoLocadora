@@ -1,29 +1,40 @@
 package framework;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Properties;
 
 public class DaoHelper {
 
     private static final ThreadLocal<Connection> context = new ThreadLocal<>();
     
-    public Connection getConnection() throws SQLException {
+    public Connection getConnection() throws SQLException, FileNotFoundException, IOException {
         Connection conn = null;
         
+        Properties prop = new Properties();
+        
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            prop.load(new FileInputStream("database.properties"));
+            
+            Class.forName(prop.getProperty("driver"));
 
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/video_locadora", "root", "");
+            conn = DriverManager.
+                    getConnection(prop.getProperty("db.url"), 
+                        prop.getProperty("user"), 
+                        prop.getProperty("password"));
         } catch (ClassNotFoundException e) {
         }
         return conn;
     }
     
-    public void begingTransaction() throws SQLException {
+    public void begingTransaction() throws SQLException, FileNotFoundException, IOException {
         Connection conn = getConnection();
         conn.setAutoCommit(false);
         context.set(conn);
@@ -166,7 +177,7 @@ public class DaoHelper {
         }        
     }
     
-    public <T> void executeQuery(String query, QueryMapping<T> queryMapping) throws SQLException {
+    public <T> void executeQuery(String query, QueryMapping<T> queryMapping) throws SQLException, FileNotFoundException, IOException {
         executeQuery(getConnection(), query, queryMapping);
     }
     
@@ -189,7 +200,7 @@ public class DaoHelper {
         } 
     }
     
-    public <T> void executePreparedQuery(String query, QueryMapping<T> queryMapping, Object... params) throws SQLException {
+    public <T> void executePreparedQuery(String query, QueryMapping<T> queryMapping, Object... params) throws SQLException, FileNotFoundException, IOException {
         executePreparedQuery(getConnection(), query, queryMapping, params);
     }
 
