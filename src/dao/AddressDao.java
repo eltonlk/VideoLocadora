@@ -29,7 +29,7 @@ public class AddressDao {
                 address.getLocation());                    
             
             address.setId(id);            
-        } catch (Exception e) {
+        } catch (SQLException e) {
            daoHelper.rollbackTransaction();
             
            throw new CreateDaoException("Não foi possivel realizar a tranzação.", e);
