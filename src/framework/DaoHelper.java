@@ -20,32 +20,32 @@ public class DaoHelper {
         return dataBaseConnection.getConnection();
     }
     
-//    public void begingTransaction() throws SQLException, FileNotFoundException, IOException {
-//        Connection conn = getConnection();
-//        conn.setAutoCommit(false);
-//        context.set(conn);
-//    }
-//    
-//    public void endTransaction() throws SQLException {
-//        commit( getConnectionFromContext() );
-//        releaseTransaction();
-//    }
-//    
-//    public void releaseTransaction() throws SQLException {
-//        Connection conn = getConnectionFromContext();
-//        release(conn);
-//        context.remove();
-//    }
-// 
-//    public void rollbackTransaction() {
-//        try {
-//            Connection conn = getConnectionFromContext();
-//            rollback(conn);
-//            release(conn);
-//            context.remove();
-//        } catch (SQLException e) {
-//        }
-//    }    
+    public void begingTransaction() throws SQLException, FileNotFoundException, IOException {
+        Connection conn = getConnection();
+        conn.setAutoCommit(false);
+        context.set(conn);
+    }
+    
+    public void endTransaction() throws SQLException {
+        commit( getConnectionFromContext() );
+        releaseTransaction();
+    }
+    
+    public void releaseTransaction() throws SQLException {
+        Connection conn = getConnectionFromContext();
+        release(conn);
+        context.remove();
+    }
+ 
+    public void rollbackTransaction() {
+        try {
+            Connection conn = getConnectionFromContext();
+            rollback(conn);
+            release(conn);
+            context.remove();
+        } catch (SQLException e) {
+        }
+    }    
    
     public void commit(Connection conn) throws SQLException {
         conn.commit();

@@ -14,14 +14,15 @@ public class DataBaseConnection {
     
     public DataBaseConnection() throws IOException, SQLException {
         databaseProperties.load(new FileInputStream("database.properties"));
-
+        
         try {
             Class.forName(databaseProperties.getProperty("driver"));
-
+            
             connection = DriverManager.getConnection(databaseProperties.getProperty("url"), 
                 databaseProperties.getProperty("user"), 
                 databaseProperties.getProperty("password"));
         } catch (ClassNotFoundException e) {
+            System.out.println("Não foi possivel conectar ao Banco de Dados.\n" + e.getMessage());
         }
     }
     
