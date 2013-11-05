@@ -2,6 +2,7 @@ package view.main;
 
 import com.jgoodies.looks.plastic.PlasticXPLookAndFeel;
 import com.jgoodies.looks.plastic.theme.SkyBlue;
+import view.actor.ActorInternalFrame;
 import view.genre.GenreInternalFrame;
 import view.person.PersonInternalFrame;
 import view.user.UserInternalFrame;
@@ -34,6 +35,7 @@ public class Main extends javax.swing.JFrame {
         exitMenuItem = new javax.swing.JMenuItem();
         movieMenu = new javax.swing.JMenu();
         genresMenuItem = new javax.swing.JMenuItem();
+        actorsMenuItem = new javax.swing.JMenuItem();
         helpMenu = new javax.swing.JMenu();
         aboutMenuItem = new javax.swing.JMenuItem();
 
@@ -114,6 +116,14 @@ public class Main extends javax.swing.JFrame {
         });
         movieMenu.add(genresMenuItem);
 
+        actorsMenuItem.setText("Atores");
+        actorsMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                actorsMenuItemActionPerformed(evt);
+            }
+        });
+        movieMenu.add(actorsMenuItem);
+
         menuBar.add(movieMenu);
 
         helpMenu.setMnemonic('h');
@@ -132,11 +142,11 @@ public class Main extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(desktopPane)
+            .add(desktopPane, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(desktopPane)
+            .add(desktopPane, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 4, Short.MAX_VALUE)
         );
 
         pack();
@@ -196,6 +206,16 @@ public class Main extends javax.swing.JFrame {
         desktopPane.add(genreIF);
     }//GEN-LAST:event_genresMenuItemActionPerformed
 
+    private void actorsMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actorsMenuItemActionPerformed
+        ActorInternalFrame actorIF = new ActorInternalFrame();
+        
+        actorIF.setLocation((getWidth() - actorIF.getWidth()) / 2, 40);
+        
+        actorIF.setVisible(true);
+        
+        desktopPane.add(actorIF);
+    }//GEN-LAST:event_actorsMenuItemActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -231,6 +251,7 @@ public class Main extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem aboutMenuItem;
+    private javax.swing.JMenuItem actorsMenuItem;
     private javax.swing.JMenuItem customersMenuItem;
     private javax.swing.JDesktopPane desktopPane;
     private javax.swing.JMenuItem employeesMenuItem;

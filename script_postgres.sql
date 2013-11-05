@@ -39,9 +39,9 @@ CREATE TABLE people (
   kind VARCHAR(15) NOT NULL
 );
 
-insert into people (id, name, legal_name, document_1, document_2, email, phone, cel, status, kind) values(1, 'Elton', 'Elton Luis Kolling', '1234567890', '0987654321', 'eltonlk@gmail.com', '(051) 3762-9369', '(051) 98327358', 'employee', 'active');
-insert into people (id, name, legal_name, document_1, document_2, email, phone, cel, status, kind) values(2, '29Sul', 'Traichel & Dissel', '1234567890', '0987654321', 'contato@29sul.com.br', '(051) 3762-9369', '(051) 98327358', 'customer', 'active');
-insert into people (id, name, legal_name, document_1, document_2, email, phone, cel, status, kind) values(3, 'Vidraçaria Konrad', 'Vidraçaria Konrad LTDA.', '1234567890', '0987654321', 'contato@konrad.com', '(051) 3762-9369', '(051) 98327358', 'supplier', 'active');
+insert into people (id, name, legal_name, document_1, document_2, email, phone, cel, status, kind) values(1, 'Elton', 'Elton Luis Kolling', '1234567890', '0987654321', 'eltonlk@gmail.com', '(051) 3762-9369', '(051) 98327358', 'employee', 'Ativo');
+insert into people (id, name, legal_name, document_1, document_2, email, phone, cel, status, kind) values(2, '29Sul', 'Traichel & Dissel', '1234567890', '0987654321', 'contato@29sul.com.br', '(051) 3762-9369', '(051) 98327358', 'customer', 'Ativo');
+insert into people (id, name, legal_name, document_1, document_2, email, phone, cel, status, kind) values(3, 'Vidraçaria Konrad', 'Vidraçaria Konrad LTDA.', '1234567890', '0987654321', 'contato@konrad.com', '(051) 3762-9369', '(051) 98327358', 'supplier', 'Ativo');
 
 CREATE TABLE person_addresses (
   id SERIAL PRIMARY KEY,
@@ -64,12 +64,25 @@ CREATE TABLE genres (
   status VARCHAR(45) NOT NULL
 );
 
-insert into genres (id, name, status) values(1, 'Aventura', 'active');
-insert into genres (id, name, status) values(2, 'Ação', 'active');
-insert into genres (id, name, status) values(3, 'Terror', 'active');
-insert into genres (id, name, status) values(4, 'Suspense', 'active');
-insert into genres (id, name, status) values(5, 'Comédia', 'active');
-insert into genres (id, name, status) values(6, 'Desenho', 'active');
-insert into genres (id, name, status) values(7, 'Anime', 'active');
-insert into genres (id, name, status) values(8, 'Velho Oeste', 'active');
+insert into genres (id, name, status) values(1, 'Aventura', 'Ativo');
+insert into genres (id, name, status) values(2, 'Ação', 'Ativo');
+insert into genres (id, name, status) values(3, 'Terror', 'Ativo');
+insert into genres (id, name, status) values(4, 'Suspense', 'Ativo');
+insert into genres (id, name, status) values(5, 'Comédia', 'Ativo');
+insert into genres (id, name, status) values(6, 'Desenho', 'Ativo');
+insert into genres (id, name, status) values(7, 'Anime', 'Ativo');
+insert into genres (id, name, status) values(8, 'Velho Oeste', 'Ativo');
 
+CREATE TABLE actors (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(255) NOT NULL
+);
+
+insert into actors (id, name) values(1, 'Brad Pit');
+insert into actors (id, name) values(2, 'Júlia Roberts');
+insert into actors (id, name) values(3, 'Robert de Niro');
+insert into actors (id, name) values(4, 'Leonardo D`Caprio');
+insert into actors (id, name) values(5, 'Silvester Stalone');
+insert into actors (id, name) values(6, 'Tom Cruise');
+insert into actors (id, name) values(7, 'Will Smith');
+insert into actors (id, name) values(8, 'Jessica Biel');

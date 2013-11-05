@@ -39,6 +39,8 @@ public final class FormPanel extends javax.swing.JPanel {
     public void enableOrDisableFields(boolean enable) {
         inputName.enable(enable);
         selectStatus.enable(enable);
+        
+        this.repaint();
     }
     
     /**
