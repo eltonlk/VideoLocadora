@@ -7,26 +7,25 @@ import framework.UpdateDaoException;
 
 import java.sql.SQLException;
 
-import model.Address;
+import model.PersonAddress;
 
-public class AddressDao {
+public class PersonAddressDao {
 
-    private DaoHelper daoHelper;
+    private final DaoHelper daoHelper;
         
-    public AddressDao() {
+    public PersonAddressDao() {
         daoHelper = new DaoHelper();
     }
     
-    public void insert(Address address) throws CreateDaoException {
+    public void insert(PersonAddress address) throws CreateDaoException {
         try {
-            String query = "INSERT INTO addresses (district_id, person_id, address, location) VALUES ( ?, ?, ?, ? )";           
+            String query = "INSERT INTO addresses (district, person_id, address) VALUES ( ?, ?, ? )";           
            
             int id = daoHelper.executePreparedUpdateAndReturnGenerateKeys(
                 query, 
-                address.getDistrict().getId(), 
-                address.getPersonId(),    
-                address.getAddress(),
-                address.getLocation());                    
+                address.getDistrict(), 
+                address.getPerson(),    
+                address.getAddress());                    
             
             address.setId(id);            
         } catch (SQLException e) {
@@ -36,23 +35,22 @@ public class AddressDao {
         } 
     }    
     
-    public void update(Address address) throws UpdateDaoException {
+    public void update(PersonAddress address) throws UpdateDaoException {
         try {
-            String query = "UPDATE addresses SET district_id = ?, person_id = ?, address = ?, location = ? WHERE id = ?";  
+            String query = "UPDATE addresses SET district = ?, person_id = ?, address = ? WHERE id = ?";  
             
             daoHelper.executePreparedUpdate(
                 query, 
-                address.getDistrict().getId(), 
-                address.getPersonId(),    
+                address.getDistrict(), 
+                address.getPerson(),    
                 address.getAddress(),
-                address.getLocation(),  
                 address.getId());
         } catch (SQLException e) {
             daoHelper.rollbackTransaction();
         }
     }
     
-    public void delete(Address address) throws DeleteDaoException {
+    public void delete(PersonAddress address) throws DeleteDaoException {
         try {
             String query = "DELETE FROM addresses WHERE id = ?";  
             

@@ -1,7 +1,6 @@
 package model;
 
 import framework.BaseModel;
-import java.util.Date;
 
 public class Person extends BaseModel {
     
@@ -15,18 +14,13 @@ public class Person extends BaseModel {
     private String cel;
     private String status;
     
-    private Date created_at;
-    private Date updated_at;
-    
-    private Address address;
+    private PersonAddress address;
     
     public Person() {
         this.status = "Ativo";
-        this.created_at = new Date();
-        this.updated_at = new Date();
     }
 
-    public Person(String name, String legal_name, String kind, String document_1, String document_2, String email, String phone, String cel, String status, Address address) {
+    public Person(String name, String legal_name, String kind, String document_1, String document_2, String email, String phone, String cel, String status, PersonAddress address) {
         this.name = name;
         this.legal_name = legal_name;
         this.kind = kind;
@@ -44,7 +38,7 @@ public class Person extends BaseModel {
         this.id = id;  
         
         if (address != null) {
-            this.address.setPersonId(id);
+            this.address.setPerson(this);
         }
     }
 
@@ -120,28 +114,12 @@ public class Person extends BaseModel {
         this.status = status;
     }
     
-    public Address getAddress() {
+    public PersonAddress getAddress() {
         return address;
     }
     
-    public void setAddress(Address address) {
+    public void setAddress(PersonAddress address) {
         this.address = address;
-    }
-
-    public Date getCreatedAt() {
-        return created_at;
-    }
-
-    public void setCreatedAt(Date created_at) {
-        this.created_at = created_at;
-    }
-
-    public Date getUpdatedAt() {
-        return updated_at;
-    }
-
-    public void setUpdatedAt(Date updated_at) {
-        this.updated_at = updated_at;
     }
 
     @Override
@@ -160,10 +138,8 @@ public class Person extends BaseModel {
             return false;
         }
         final Person other = (Person) obj;
-        if (this.id != other.id) {
-            return false;
-        }
-        return true;
+        
+        return this.id == other.id;
     }
 
     @Override

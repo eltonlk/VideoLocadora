@@ -1,9 +1,10 @@
 package model;
 
-public class User {
+import framework.BaseModel;
+
+public class User extends BaseModel {
     
-    private int id;
-    private int person_id;
+    private Person person;
     private String login;
     private String password;
     private String email;
@@ -11,20 +12,12 @@ public class User {
     public User() {
     }
 
-    public int getId() {
-        return id;
+    public Person getPerson() {
+        return person;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getPersonId() {
-        return person_id;
-    }
-
-    public void setPersonId(int person_id) {
-        this.person_id = person_id;
+    public void setPerson(Person person) {
+        this.person = person;
     }
 
     public String getLogin() {
@@ -49,6 +42,38 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 11 * hash + this.id;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final User other = (User) obj;
+        return this.id == other.id;
+    }      
+    
+    @Override
+    protected void validateRules() {
+        if (ValidationUtils.isEmpty(login)) {
+            addError("login", "Login do usúario não pode ficar em branco.");
+        } 
+        if (ValidationUtils.isEmpty(password)) {
+            addError("password", "Senha do usúario não pode ficar em branco.");
+        }
+        if (ValidationUtils.isEmpty(email)) {
+            addError("email", "Email do usúario não pode ficar em branco.");
+        } 
     }
     
 }

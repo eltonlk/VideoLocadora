@@ -6,9 +6,8 @@ import javax.swing.table.AbstractTableModel;
 
 public class PersonTableModel extends AbstractTableModel {
 
-    private List<Person> people;
-   
-    private String[] columns = new String[] { "Id", "Legal Name", "Name", "Situação" };
+    private final List<Person> people;
+    private final String[] columns = new String[] { "Cod", "Razão Social", "Nome Fantasia", "Situação" };
     
     private static final int ID = 0;
     private static final int LEGALNAME = 1;   

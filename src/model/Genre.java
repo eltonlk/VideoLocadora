@@ -47,16 +47,13 @@ public class Genre extends BaseModel {
             return false;
         }
         final Genre other = (Genre) obj;
-        if (this.id != other.id) {
-            return false;
-        }
-        return true;
+        return this.id == other.id;
     }
 
     @Override
     protected void validateRules() {
         if (ValidationUtils.isEmpty(name)) {
-            addError("name", "Nome não pode ficar em branco.");
+            addError("name", "Nome do genero não pode ficar em branco.");
         }
     }
     

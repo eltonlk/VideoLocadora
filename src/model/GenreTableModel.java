@@ -6,8 +6,8 @@ import javax.swing.table.AbstractTableModel;
 
 public class GenreTableModel extends AbstractTableModel {
 
-    private List<Genre> genres;
-    private String[] columns = new String[] { "ID", "Name", "Situação" };
+    private final List<Genre> genres;
+    private final String[] columns = new String[] { "Código", "Nome", "Situação" };
     
     private static final int ID = 0;
     private static final int NAME = 1;   

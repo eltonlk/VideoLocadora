@@ -37,7 +37,7 @@ public class GenreDao {
             daoHelper.endTransaction();          
         } catch (SQLException | IOException e) {
            daoHelper.rollbackTransaction();
-            
+            System.out.println(e.getMessage());
            throw new CreateDaoException("Não foi possivel realizar a tranzação.", e);
         }
     }

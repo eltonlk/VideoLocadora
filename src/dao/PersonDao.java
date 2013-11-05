@@ -14,11 +14,11 @@ import java.util.Date;
 import java.util.List;
 
 import model.Person;
-import model.Address;
+import model.PersonAddress;
 
 public class PersonDao {
     
-    private DaoHelper daoHelper;
+    private final DaoHelper daoHelper;
     
     public PersonDao() {
         daoHelper = new DaoHelper();
@@ -28,7 +28,7 @@ public class PersonDao {
         try {
             daoHelper.begingTransaction();
                         
-            String query = "INSERT INTO people (name, legal_name, kind, document_1, document_2, email, phone, cel, status, created_at, updated_at) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )";           
+            String query = "INSERT INTO people (name, legal_name, kind, document_1, document_2, email, phone, cel, status) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )";           
            
             int id = daoHelper.executePreparedUpdateAndReturnGenerateKeys(
                 query, 
@@ -40,9 +40,7 @@ public class PersonDao {
                 person.getEmail(),
                 person.getPhone(),
                 person.getCel(),
-                person.getStatus(),
-                new java.sql.Timestamp(new Date().getTime()),
-                new java.sql.Timestamp(new Date().getTime()));    
+                person.getStatus());    
             
             person.setId(id);
             
@@ -57,10 +55,10 @@ public class PersonDao {
     }
     
     public void insertAddress(Person person) {
-        Address address = person.getAddress();
+        PersonAddress address = person.getAddress();
             
         if ( address != null ) {   
-            new AddressDao().insert(address);
+            new PersonAddressDao().insert(address);
         }
     }
 
@@ -68,7 +66,7 @@ public class PersonDao {
         try {
             daoHelper.begingTransaction();
                         
-            String query = "UPDATE people SET name = ?, legal_name = ?, kind = ?, document_1 = ?, document_2 = ?, email = ?, phone = ?, cel = ?, status = ?, updated_at = ? WHERE id = ?";           
+            String query = "UPDATE people SET name = ?, legal_name = ?, kind = ?, document_1 = ?, document_2 = ?, email = ?, phone = ?, cel = ?, status = ? WHERE id = ?";           
            
             daoHelper.executePreparedUpdate(
                 query, 
@@ -81,8 +79,7 @@ public class PersonDao {
                 person.getPhone(),
                 person.getCel(),
                 person.getStatus(),
-                person.getId(),
-                new java.sql.Timestamp(new Date().getTime())); 
+                person.getId()); 
             
             updateAddress(person);
             
@@ -95,10 +92,10 @@ public class PersonDao {
     }    
     
     public void updateAddress(Person person) {
-        Address address = person.getAddress();
+        PersonAddress address = person.getAddress();
         
         if ( address != null ) {   
-            new AddressDao().update(address);
+            new PersonAddressDao().update(address);
         }
     }    
     
@@ -123,10 +120,10 @@ public class PersonDao {
     }    
     
     public void deleteAddress(Person person) {
-        Address address = person.getAddress();
+        PersonAddress address = person.getAddress();
         
         if ( address != null ) {   
-            new AddressDao().delete(address);
+            new PersonAddressDao().delete(address);
         }
     }   
     
@@ -135,12 +132,13 @@ public class PersonDao {
 
         try {
             String query = "SELECT * FROM people WHERE kind = ?"; 
-            
+           
             daoHelper.executePreparedQuery(query, 
                     new QueryMapping<Person>() {
                         @Override
                         public void mapping(ResultSet rset) throws SQLException {
                             while (rset.next()) {
+                                
                                 Person person = new Person();
                                 person.setId( rset.getInt("id") );
                                 person.setName( rset.getString("name") );
@@ -151,8 +149,7 @@ public class PersonDao {
                                 person.setEmail( rset.getString("email") );
                                 person.setPhone( rset.getString("phone") );
                                 person.setCel( rset.getString("cel") );
-                                person.setCreatedAt( rset.getTimestamp("created_at"));
-                                person.setUpdatedAt( rset.getTimestamp("updated_at"));
+                                person.setStatus( rset.getString("status") );
 
                                 people.add(person);
                             }

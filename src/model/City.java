@@ -1,30 +1,18 @@
 package model;
 
-import dao.CityDao;
+import framework.BaseModel;
 
-public class City {
+public class City extends BaseModel {
     
-    private int id;
     private String name;
-    private String zip;
-    
     private State state;
     
     public City() {
     }
 
-    public City(String name, String zip, State state) {
+    public City(String name, State state) {
         this.name = name;
-        this.zip = zip;
         this.state = state;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public State getState() {
@@ -43,17 +31,29 @@ public class City {
         this.name = name;
     }
 
-    public String getZip() {
-        return zip;
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 11 * hash + this.id;
+        return hash;
     }
 
-    public void setZip(String zip) {
-        this.zip = zip;
-    }
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final City other = (City) obj;
+        return this.id == other.id;
+    }    
     
-    public City save() {
-        new CityDao().insert(this);
-        
-        return this;
+    @Override
+    protected void validateRules() {
+        if (ValidationUtils.isEmpty(name)) {
+            addError("name", "Nome da cidade não pode ficar em branco.");
+        }
     }
 }

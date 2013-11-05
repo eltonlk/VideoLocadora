@@ -39,9 +39,9 @@ CREATE TABLE people (
   kind VARCHAR(15) NOT NULL
 );
 
-insert into people (id, name, legal_name, document_1, document_2, email, phone, cel, status, kind) values(1, 'Elton', 'Elton Luis Kolling', '1234567890', '0987654321', 'eltonlk@gmail.com', '(051) 3762-9369', '(051) 98327358', 'employee', 'Ativo');
-insert into people (id, name, legal_name, document_1, document_2, email, phone, cel, status, kind) values(2, '29Sul', 'Traichel & Dissel', '1234567890', '0987654321', 'contato@29sul.com.br', '(051) 3762-9369', '(051) 98327358', 'customer', 'Ativo');
-insert into people (id, name, legal_name, document_1, document_2, email, phone, cel, status, kind) values(3, 'Vidraçaria Konrad', 'Vidraçaria Konrad LTDA.', '1234567890', '0987654321', 'contato@konrad.com', '(051) 3762-9369', '(051) 98327358', 'supplier', 'Ativo');
+insert into people (id, name, legal_name, document_1, document_2, email, phone, cel, status, kind) values(1, 'Elton', 'Elton Luis Kolling', '1234567890', '0987654321', 'eltonlk@gmail.com', '(051) 3762-9369', '(051) 98327358', 'Ativo', 'employee');
+insert into people (id, name, legal_name, document_1, document_2, email, phone, cel, status, kind) values(2, '29Sul', 'Traichel & Dissel', '1234567890', '0987654321', 'contato@29sul.com.br', '(051) 3762-9369', '(051) 98327358', 'Ativo', 'customer');
+insert into people (id, name, legal_name, document_1, document_2, email, phone, cel, status, kind) values(3, 'Vidraçaria Konrad', 'Vidraçaria Konrad LTDA.', '1234567890', '0987654321', 'contato@konrad.com', '(051) 3762-9369', '(051) 98327358', 'Ativo', 'supplier');
 
 CREATE TABLE person_addresses (
   id SERIAL PRIMARY KEY,
@@ -86,3 +86,81 @@ insert into actors (id, name) values(5, 'Silvester Stalone');
 insert into actors (id, name) values(6, 'Tom Cruise');
 insert into actors (id, name) values(7, 'Will Smith');
 insert into actors (id, name) values(8, 'Jessica Biel');
+
+CREATE TABLE movies (
+  id SERIAL PRIMARY KEY,
+  title VARCHAR(255) NOT NULL,
+  release_in DATE NULL,
+  genre_id INT references genres(id),  
+  synopsis TEXT NULL  
+);
+CREATE INDEX fk_movies_genre_id ON movies (genre_id);
+
+insert into movies (id, title, release_in, genre_id, synopsis) values(1, 'Troya', '2010-10-17', 1, 'Destruição de Troya.');
+insert into movies (id, title, release_in, genre_id, synopsis) values(2, 'Vanilla Sky', '2009-03-25', 4, 'labmda labmda lambda.');
+insert into movies (id, title, release_in, genre_id, synopsis) values(3, 'Titanic', '2005-12-01', 4, 'Como um dos maiores navios naufragou.');
+insert into movies (id, title, release_in, genre_id, synopsis) values(4, 'Rambo', '2001-07-30', 2, 'Rambo destroi tudo.');
+
+CREATE TABLE actors_movies (
+  actor_id INT references actors(id),
+  movie_id INT references movies(id)
+);
+CREATE INDEX fk_actors_movies_actor_id ON actors_movies (actor_id);
+CREATE INDEX fk_actors_movies_movie_id ON actors_movies (movie_id);
+
+insert into actors_movies (actor_id, movie_id) values(1, 1);
+insert into actors_movies (actor_id, movie_id) values(6, 2);
+insert into actors_movies (actor_id, movie_id) values(4, 3);
+insert into actors_movies (actor_id, movie_id) values(5, 4);
+
+CREATE TABLE medias (
+  id SERIAL PRIMARY KEY,
+  movie_id INT references movies(id),
+  supplier_id INT references people(id),
+  kind VARCHAR(15) NOT NULL,
+  amount DECIMAL(13,2) DEFAULT 0,
+  purchased_at DATE NULL,
+  amount_paid DECIMAL(13,2) DEFAULT 0,
+  status VARCHAR(15) NOT NULL
+);
+CREATE INDEX fk_medias_movie_id ON medias (movie_id);
+CREATE INDEX fk_medias_supplier_id ON medias (supplier_id);
+
+insert into medias (id, movie_id, kind, amount, purchased_at, amount_paid, status) values(1, 1, 3, 'DVD', 3.45, '2010-10-25', 119.20, 'Ativo');
+insert into medias (id, movie_id, kind, amount, purchased_at, amount_paid, status) values(2, 1, 3, 'VHS', 2.00, '2010-10-20', 80.20, 'Inativo');
+insert into medias (id, movie_id, kind, amount, purchased_at, amount_paid, status) values(3, 1, 3, 'Blu-Ray', 4.95, '2010-10-30', 175.84, 'Ativo');
+insert into medias (id, movie_id, kind, amount, purchased_at, amount_paid, status) values(4, 2, 3, 'DVD', 3.45, '2009-04-25', 119.20, 'Ativo');
+insert into medias (id, movie_id, kind, amount, purchased_at, amount_paid, status) values(5, 2, 3, 'Blu-Ray', 3.45, '2010-01-10', 119.20, 'Ativo');
+insert into medias (id, movie_id, kind, amount, purchased_at, amount_paid, status) values(6, 3, 3, 'DVD', 3.45, '2006-01-07', 119.20, 'Ativo');
+insert into medias (id, movie_id, kind, amount, purchased_at, amount_paid, status) values(7, 4, 3, 'DVD', 3.45, '2001-08-12', 119.20, 'Ativo');
+
+CREATE TABLE locations (
+  id SERIAL PRIMARY KEY,
+  customer_id INT references people(id),
+  employee_id INT references people(id),
+  booked_to DATE NULL,
+  removed_at DATE NULL,
+  returned_in DATE NULL,
+  amount DECIMAL(13,2) DEFAULT 0
+);
+CREATE INDEX fk_locations_customer_id ON locations (customer_id);
+CREATE INDEX fk_locations_employee_id ON locations (employee_id);
+
+insert into locations (id, customer_id, employee_id, booked_to, removed_at, returned_in, amount) values(1, 2, 1, '2013-10-11', '2013-10-11', '2013-10-14', 10.35);
+insert into locations (id, customer_id, employee_id, booked_to, removed_at, amount) values(2, 2, 1, '2013-10-11', '2013-10-11', 6.90);
+insert into locations (id, customer_id, employee_id, booked_to, amount) values(3, 2, 1, '2013-11-05', 3.45);
+
+CREATE TABLE medias_locations (
+  media_id INT references medias(id),
+  location_id INT references locations(id)
+);
+CREATE INDEX fk_medias_locations_media_id ON medias_locations (media_id);
+CREATE INDEX fk_medias_locations_location_id ON medias_locations (location_id);
+
+insert into medias_locations (media_id, location_id) values(1, 1);
+insert into medias_locations (media_id, location_id) values(4, 1);
+insert into medias_locations (media_id, location_id) values(6, 1);
+insert into medias_locations (media_id, location_id) values(7, 2);
+insert into medias_locations (media_id, location_id) values(1, 2);
+insert into medias_locations (media_id, location_id) values(5, 3);
+

@@ -226,16 +226,7 @@ public class Main extends javax.swing.JFrame {
         PlasticXPLookAndFeel.setPlasticTheme(new SkyBlue());
         
         try {
-//            javax.swing.UIManager.setLookAndFeel("com.jgoodies.looks.plastic.PlasticXPLookAndFeel");
-        
             javax.swing.UIManager.setLookAndFeel( new PlasticXPLookAndFeel() );
-            
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
         } catch (javax.swing.UnsupportedLookAndFeelException ex) { // ClassNotFoundException | InstantiationException | IllegalAccessException | 
             java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }

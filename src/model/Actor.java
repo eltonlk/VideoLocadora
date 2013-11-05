@@ -1,8 +1,9 @@
 package model;
 
-public class Actor {
+import framework.BaseModel;
+
+public class Actor extends BaseModel {
     
-    private int id;
     private String name;
     
     public Actor() {
@@ -12,14 +13,6 @@ public class Actor {
         this.name = name;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getName() {
         return name;
     }
@@ -27,5 +20,30 @@ public class Actor {
     public void setName(String name) {
         this.name = name;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 11 * hash + this.id;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Actor other = (Actor) obj;
+        return this.id == other.id;
+    }    
     
+    @Override
+    protected void validateRules() {
+        if (ValidationUtils.isEmpty(name)) {
+            addError("name", "Nome do ator não pode ficar em branco.");
+        }
+    }
 }

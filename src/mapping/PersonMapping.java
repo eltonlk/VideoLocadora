@@ -5,7 +5,7 @@ import model.Person;
 
 public class PersonMapping {
     
-    private FormPanel formPanel;
+    private final FormPanel formPanel;
     
     public PersonMapping(FormPanel formPanel) {
         this.formPanel = formPanel;
