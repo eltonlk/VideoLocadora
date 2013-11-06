@@ -126,13 +126,13 @@ CREATE TABLE medias (
 CREATE INDEX fk_medias_movie_id ON medias (movie_id);
 CREATE INDEX fk_medias_supplier_id ON medias (supplier_id);
 
-insert into medias (id, movie_id, kind, amount, purchased_at, amount_paid, status) values(1, 1, 3, 'DVD', 3.45, '2010-10-25', 119.20, 'Ativo');
-insert into medias (id, movie_id, kind, amount, purchased_at, amount_paid, status) values(2, 1, 3, 'VHS', 2.00, '2010-10-20', 80.20, 'Inativo');
-insert into medias (id, movie_id, kind, amount, purchased_at, amount_paid, status) values(3, 1, 3, 'Blu-Ray', 4.95, '2010-10-30', 175.84, 'Ativo');
-insert into medias (id, movie_id, kind, amount, purchased_at, amount_paid, status) values(4, 2, 3, 'DVD', 3.45, '2009-04-25', 119.20, 'Ativo');
-insert into medias (id, movie_id, kind, amount, purchased_at, amount_paid, status) values(5, 2, 3, 'Blu-Ray', 3.45, '2010-01-10', 119.20, 'Ativo');
-insert into medias (id, movie_id, kind, amount, purchased_at, amount_paid, status) values(6, 3, 3, 'DVD', 3.45, '2006-01-07', 119.20, 'Ativo');
-insert into medias (id, movie_id, kind, amount, purchased_at, amount_paid, status) values(7, 4, 3, 'DVD', 3.45, '2001-08-12', 119.20, 'Ativo');
+insert into medias (id, movie_id, supplier_id, kind, amount, purchased_at, amount_paid, status) values(1, 1, 3, 'DVD', 3.45, '2010-10-25', 119.20, 'Ativo');
+insert into medias (id, movie_id, supplier_id, kind, amount, purchased_at, amount_paid, status) values(2, 1, 3, 'VHS', 2.00, '2010-10-20', 80.20, 'Inativo');
+insert into medias (id, movie_id, supplier_id, kind, amount, purchased_at, amount_paid, status) values(3, 1, 3, 'Blu-Ray', 4.95, '2010-10-30', 175.84, 'Ativo');
+insert into medias (id, movie_id, supplier_id, kind, amount, purchased_at, amount_paid, status) values(4, 2, 3, 'DVD', 3.45, '2009-04-25', 119.20, 'Ativo');
+insert into medias (id, movie_id, supplier_id, kind, amount, purchased_at, amount_paid, status) values(5, 2, 3, 'Blu-Ray', 3.45, '2010-01-10', 119.20, 'Ativo');
+insert into medias (id, movie_id, supplier_id, kind, amount, purchased_at, amount_paid, status) values(6, 3, 3, 'DVD', 3.45, '2006-01-07', 119.20, 'Ativo');
+insert into medias (id, movie_id, supplier_id, kind, amount, purchased_at, amount_paid, status) values(7, 4, 3, 'DVD', 3.45, '2001-08-12', 119.20, 'Ativo');
 
 CREATE TABLE locations (
   id SERIAL PRIMARY KEY,

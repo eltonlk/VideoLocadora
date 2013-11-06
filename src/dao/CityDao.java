@@ -2,6 +2,8 @@ package dao;
 
 import framework.CreateDaoException;
 import framework.DaoHelper;
+import java.io.IOException;
+import java.sql.SQLException;
 
 import model.City;
 
@@ -17,18 +19,17 @@ public class CityDao {
         try {
             daoHelper.begingTransaction();
                         
-            String query = "INSERT INTO cities (name, zip, state_id) VALUES ( ?, ?, ? )";           
+            String query = "INSERT INTO cities (name, state_id) VALUES ( ?, ?, ? )";           
            
             int id = daoHelper.executePreparedUpdateAndReturnGenerateKeys(
                 query, 
                 city.getName(),
-                city.getZip(),
                 city.getState().getId());                    
             
             city.setId(id);
             
             daoHelper.endTransaction();          
-        } catch (Exception e) {
+        } catch (SQLException | IOException e) {
            daoHelper.rollbackTransaction();
             
            throw new CreateDaoException("Não foi possivel realizar a tranzação.", e);

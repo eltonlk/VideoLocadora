@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="locations_by_period" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="877d8abf-b764-4626-860e-bf9ea9ccb5b4">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+     movies."id" AS movies_id,
+     movies."title" AS movies_title,
+     movies."release_in" AS movies_release_in,
+     movies."genre_id" AS movies_genre_id,
+     movies."synopsis" AS movies_synopsis,
+     medias."id" AS medias_id,
+     medias."movie_id" AS medias_movie_id,
+     medias."supplier_id" AS medias_supplier_id,
+     medias."kind" AS medias_kind,
+     medias."amount" AS medias_amount,
+     medias."purchased_at" AS medias_purchased_at,
+     medias."amount_paid" AS medias_amount_paid,
+     medias."status" AS medias_status,
+     medias_locations."media_id" AS medias_locations_media_id,
+     medias_locations."location_id" AS medias_locations_location_id,
+     locations."id" AS locations_id,
+     locations."customer_id" AS locations_customer_id,
+     locations."employee_id" AS locations_employee_id,
+     locations."booked_to" AS locations_booked_to,
+     locations."removed_at" AS locations_removed_at,
+     locations."returned_in" AS locations_returned_in,
+     locations."amount" AS locations_amount,
+     genres."id" AS genres_id,
+     genres."name" AS genres_name,
+     genres."status" AS genres_status
+FROM
+     "public"."movies" movies INNER JOIN "public"."medias" medias ON movies."id" = medias."movie_id"
+     INNER JOIN "public"."medias_locations" medias_locations ON medias."id" = medias_locations."media_id"
+     INNER JOIN "public"."locations" locations ON medias_locations."location_id" = locations."id"
+     INNER JOIN "public"."genres" genres ON movies."genre_id" = genres."id"]]>
+	</queryString>
+	<field name="movies_id" class="java.lang.Integer"/>
+	<field name="movies_title" class="java.lang.String"/>
+	<field name="movies_release_in" class="java.sql.Date"/>
+	<field name="movies_genre_id" class="java.lang.Integer"/>
+	<field name="movies_synopsis" class="java.lang.String"/>
+	<field name="medias_id" class="java.lang.Integer"/>
+	<field name="medias_movie_id" class="java.lang.Integer"/>
+	<field name="medias_supplier_id" class="java.lang.Integer"/>
+	<field name="medias_kind" class="java.lang.String"/>
+	<field name="medias_amount" class="java.math.BigDecimal"/>
+	<field name="medias_purchased_at" class="java.sql.Date"/>
+	<field name="medias_amount_paid" class="java.math.BigDecimal"/>
+	<field name="medias_status" class="java.lang.String"/>
+	<field name="medias_locations_media_id" class="java.lang.Integer"/>
+	<field name="medias_locations_location_id" class="java.lang.Integer"/>
+	<field name="locations_id" class="java.lang.Integer"/>
+	<field name="locations_customer_id" class="java.lang.Integer"/>
+	<field name="locations_employee_id" class="java.lang.Integer"/>
+	<field name="locations_booked_to" class="java.sql.Date"/>
+	<field name="locations_removed_at" class="java.sql.Date"/>
+	<field name="locations_returned_in" class="java.sql.Date"/>
+	<field name="locations_amount" class="java.math.BigDecimal"/>
+	<field name="genres_id" class="java.lang.Integer"/>
+	<field name="genres_name" class="java.lang.String"/>
+	<field name="genres_status" class="java.lang.String"/>
+	<group name="locations_id">
+		<groupExpression><![CDATA[$F{locations_id}]]></groupExpression>
+	</group>
+	<group name="location_date">
+		<groupExpression><![CDATA[$F{locations_removed_at}]]></groupExpression>
+		<groupHeader>
+			<band height="50">
+				<textField>
+					<reportElement uuid="2dc29eaf-042c-4e99-b993-04fee7123535" x="11" y="30" width="100" height="20"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{locations_removed_at}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="c101b35e-2297-4069-89e2-cc19a09f02f6" x="132" y="30" width="100" height="20"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{locations_id}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="85b9b826-eca1-46ae-b95e-f8b3c45f545a" x="354" y="30" width="100" height="20"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{locations_amount}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="50"/>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="43" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="065d8706-42c9-4d4e-9334-2d0815f54d99" x="0" y="0" width="572" height="19"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Relatório de Locações por Período]]></text>
+			</staticText>
+			<textField evaluationTime="Report">
+				<reportElement uuid="00173414-8a4f-497a-8962-7e7b6c654619" x="467" y="0" width="105" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}/$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="2a082db5-b1e6-4ef7-a1a5-fe974aa3b858" x="32" y="2" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[locations_removed_at]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="4a5ffe86-33db-46fd-904c-921ba371091f" x="169" y="2" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[movies_title]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="6a1f98d4-7c11-4ad0-9b8b-2c9869082b09" x="340" y="2" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[locations_id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2e11bfd1-cdd3-48c5-afce-16c5e4b0e6de" x="240" y="22" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[genres_name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e9570bef-b1a3-4196-90cf-3861989f828a" x="277" y="2" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[medias_kind]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7935e7d9-af40-4d3c-a99f-3a7337ea6065" x="370" y="2" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[medias_amount]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="23" splitType="Stretch">
+			<textField>
+				<reportElement uuid="84caf138-0e15-4609-8ca2-8df109664b71" x="11" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{movies_title}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3ca8563d-7ed0-4874-b5a7-bd081c48fe20" x="132" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{genres_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="c36daca6-87b6-400e-933f-984c94e60dbe" x="240" y="3" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{medias_kind}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="ebe4ad5c-a50e-4dc0-834c-833ec80abb09" x="354" y="3" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{medias_amount}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
