@@ -2,11 +2,11 @@ package view.main;
 
 import com.jgoodies.looks.plastic.PlasticXPLookAndFeel;
 import com.jgoodies.looks.plastic.theme.SkyBlue;
-import view.actor.ActorInternalFrame;
+import view.actors.ActorInternalFrame;
 import view.genre.GenreInternalFrame;
 import view.person.PersonInternalFrame;
-import view.report.LocationsByPeriodInternalFrame;
-import view.user.UserInternalFrame;
+import view.reports.LocationsByPeriodInternalFrame;
+import view.users.UserInternalFrame;
 
 public class Main extends javax.swing.JFrame {
 

@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package view.city;
+package view.cities;
 
 /**
  *

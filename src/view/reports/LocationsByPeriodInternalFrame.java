@@ -1,4 +1,4 @@
-package view.report;
+package view.reports;
 
 import framework.ReportHelper;
 import java.util.HashMap;

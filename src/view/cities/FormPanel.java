@@ -4,18 +4,18 @@
  * and open the template in the editor.
  */
 
-package view.state;
+package view.cities;
 
 /**
  *
  * @author elton
  */
-public class StateInternalFrame extends javax.swing.JInternalFrame {
+public class FormPanel extends javax.swing.JPanel {
 
     /**
-     * Creates new form StateInternalFrame
+     * Creates new form FormPanel
      */
-    public StateInternalFrame() {
+    public FormPanel() {
         initComponents();
     }
 
@@ -28,18 +28,16 @@ public class StateInternalFrame extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
+            .addGap(0, 400, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
+            .addGap(0, 300, Short.MAX_VALUE)
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
 
 

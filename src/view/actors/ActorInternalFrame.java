@@ -1,4 +1,4 @@
-package view.actor;
+package view.actors;
 
 public class ActorInternalFrame extends javax.swing.JInternalFrame {
 
@@ -16,7 +16,7 @@ public class ActorInternalFrame extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         baseToolBar1 = new view.components.toolbar.BaseToolBar();
-        formPanel1 = new view.actor.FormPanel();
+        formPanel1 = new view.actors.FormPanel();
 
         setClosable(true);
         setIconifiable(true);
@@ -46,6 +46,6 @@ public class ActorInternalFrame extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private view.components.toolbar.BaseToolBar baseToolBar1;
-    private view.actor.FormPanel formPanel1;
+    private view.actors.FormPanel formPanel1;
     // End of variables declaration//GEN-END:variables
 }

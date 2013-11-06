@@ -1,4 +1,4 @@
-package view.actor;
+package view.actors;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;

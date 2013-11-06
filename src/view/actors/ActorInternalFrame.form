@@ -51,7 +51,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout"/>
     </Container>
-    <Component class="view.actor.FormPanel" name="formPanel1">
+    <Component class="view.actors.FormPanel" name="formPanel1">
     </Component>
   </SubComponents>
 </Form>

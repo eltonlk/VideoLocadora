@@ -3,10 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/elton/Projetos/java/VideoLocadora/src/framework/BaseTableModel.java</file>
-            <file>file:/Users/elton/Projetos/java/VideoLocadora/src/model/GenreTableModel.java</file>
-            <file>file:/Users/elton/Projetos/java/VideoLocadora/src/framework/BaseModel.java</file>
-            <file>file:/Users/elton/Projetos/java/VideoLocadora/src/model/ActorTableModel.java</file>
+            <file>file:/Users/elton/Projetos/java/VideoLocadora/src/view/medias/FormDialog.java</file>
+            <file>file:/Users/elton/Projetos/java/VideoLocadora/src/view/movies/MovieInternalFrame.java</file>
+            <file>file:/Users/elton/Projetos/java/VideoLocadora/src/view/movies/FormPanel.java</file>
+            <file>file:/Users/elton/Projetos/java/VideoLocadora/src/view/medias/ListPanel.java</file>
         </group>
     </open-files>
 </project-private>

@@ -35,7 +35,7 @@ public class ReportHelper {
     
     public void show() {
         try {
-            this.report = JasperCompileManager.compileReport(getClass().getResourceAsStream("../view/report/" + report_name + ".jrxml"));
+            this.report = JasperCompileManager.compileReport(getClass().getResourceAsStream("../view/reports/" + report_name + ".jrxml"));
             
             this.print = JasperFillManager.fillReport(report, params, connection.getConnection());
             
