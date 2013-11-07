@@ -1,9 +1,33 @@
 package view.medias;
 
+import java.util.List;
+import model.Media;
+import model.MediaTableModel;
+
 public class ListPanel extends javax.swing.JPanel {
 
+    private MediaTableModel tableModel;
+    
     public ListPanel() {
         initComponents();
+
+        tableModel = new MediaTableModel();
+        
+        mediasTable.setModel(tableModel);        
+    }
+    
+    public void loadMedias(List<Media> medias) {
+        tableModel.clear();
+
+        tableModel.addListOfMedias(medias);
+    }
+
+    public MediaTableModel getTableModel() {
+        return tableModel;
+    }
+
+    public void setTableModel(MediaTableModel tableModel) {
+        this.tableModel = tableModel;
     }
 
     /**
@@ -15,13 +39,13 @@ public class ListPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        mediasScrollPane = new javax.swing.JScrollPane();
+        mediasTable = new javax.swing.JTable();
         buttonNew = new javax.swing.JButton();
         buttonEdit = new javax.swing.JButton();
         buttonRemove = new javax.swing.JButton();
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        mediasTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -32,7 +56,7 @@ public class ListPanel extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        mediasScrollPane.setViewportView(mediasTable);
 
         buttonNew.setText("Adicionar");
         buttonNew.addActionListener(new java.awt.event.ActionListener() {
@@ -52,7 +76,7 @@ public class ListPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(mediasScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 64, Short.MAX_VALUE)
                         .addComponent(buttonNew)
@@ -69,7 +93,7 @@ public class ListPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(mediasScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonEdit)
@@ -83,12 +107,11 @@ public class ListPanel extends javax.swing.JPanel {
         //dasdasdasda
     }//GEN-LAST:event_buttonNewActionPerformed
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonEdit;
     private javax.swing.JButton buttonNew;
     private javax.swing.JButton buttonRemove;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JScrollPane mediasScrollPane;
+    private javax.swing.JTable mediasTable;
     // End of variables declaration//GEN-END:variables
 }

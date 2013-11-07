@@ -4,7 +4,6 @@ import dao.GenreDao;
 import framework.ReportHelper;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
@@ -13,20 +12,12 @@ import model.Genre;
 
 public class ListMoviesInternalFrame extends javax.swing.JInternalFrame {
 
-    private GenreDao genreDao = new GenreDao();
+    private final GenreDao genreDao = new GenreDao();
     
     public ListMoviesInternalFrame() {
         initComponents();
         
-        List<Genre> genres = new ArrayList();
-        
-        try {
-            genres = genreDao.getAll();
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(ListMoviesInternalFrame.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(ListMoviesInternalFrame.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        List<Genre> genres = genreDao.getAll();
         
         for (Genre genre : genres) {  
              selectGenre.addItem(genre.getName());

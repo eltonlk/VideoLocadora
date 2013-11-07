@@ -1,24 +1,44 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package view.movies;
 
-/**
- *
- * @author elton
- */
+import view.components.table.TablePanel;
+import view.components.toolbar.BaseToolBar;
+
 public class MovieInternalFrame extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form MovieInternalFrame
-     */
+    private final MovieActionListener listener;
+    
     public MovieInternalFrame() {
+        listener = new MovieActionListener(this);
+        
         initComponents();
+        
+        listener.initComponents();
     }
 
+    public FormPanel getFormPanel() {
+        return formPanel;
+    }
+
+    public void setFormPanel(FormPanel formPanel) {
+        this.formPanel = formPanel;
+    }
+
+    public TablePanel getTablePanel() {
+        return tablePanel;
+    }
+
+    public void setTablePanel(TablePanel tablePanel) {
+        this.tablePanel = tablePanel;
+    }
+
+    public BaseToolBar getToolBar() {
+        return toolBar;
+    }
+
+    public void setToolBar(BaseToolBar toolBar) {
+        this.toolBar = toolBar;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,16 +47,52 @@ public class MovieInternalFrame extends javax.swing.JInternalFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
+
+        painelContent = new javax.swing.JPanel();
+        toolBar = new view.components.toolbar.BaseToolBar(listener);
+        formPanel = new view.movies.FormPanel();
+        tablePanel = new view.components.table.TablePanel();
+
+        setClosable(true);
+        setIconifiable(true);
+        setTitle("Filmes");
+
+        painelContent.setLayout(new java.awt.GridBagLayout());
+
+        toolBar.setMinimumSize(new java.awt.Dimension(1000, 40));
+        toolBar.setPreferredSize(new java.awt.Dimension(1000, 40));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        painelContent.add(toolBar, gridBagConstraints);
+
+        formPanel.setMinimumSize(new java.awt.Dimension(450, 500));
+        formPanel.setPreferredSize(new java.awt.Dimension(450, 500));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 5);
+        painelContent.add(formPanel, gridBagConstraints);
+
+        tablePanel.setMinimumSize(new java.awt.Dimension(520, 500));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.insets = new java.awt.Insets(10, 5, 10, 10);
+        painelContent.add(tablePanel, gridBagConstraints);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
+            .addComponent(painelContent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
+            .addComponent(painelContent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -44,5 +100,9 @@ public class MovieInternalFrame extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private view.movies.FormPanel formPanel;
+    private javax.swing.JPanel painelContent;
+    private view.components.table.TablePanel tablePanel;
+    private view.components.toolbar.BaseToolBar toolBar;
     // End of variables declaration//GEN-END:variables
 }

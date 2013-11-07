@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 public class MyDate {
     
     private SimpleDateFormat strToDate;
-    private Calendar date;
+    private final Calendar date;
     
     public MyDate() {
         date = new GregorianCalendar();

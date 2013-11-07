@@ -1,23 +1,25 @@
 package model;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class Media {
     
     private int id;
-    private int movie_id;
-    private int supplier_id;
+    private Movie movie;
+    private Person supplier;
     private String kind;
-    private double amount;
+    private BigDecimal amount;
     private String status;
     private Date purchased_at;
+    private BigDecimal amount_paid;
        
     public Media() {
     }
     
-    public Media(int movie_id, int supplier_id, String kind, double amount, String status, Date purchased_at) {
-        this.movie_id = movie_id;
-        this.supplier_id = supplier_id;
+    public Media(Movie movie, Person supplier, String kind, BigDecimal amount, String status, Date purchased_at) {
+        this.movie = movie;
+        this.supplier = supplier;
         this.kind = kind;
         this.amount = amount;
         this.status = status;
@@ -32,20 +34,20 @@ public class Media {
         this.id = id;
     }
 
-    public int getMovieId() {
-        return movie_id;
+    public Movie getMovie() {
+        return movie;
     }
 
-    public void setMovieId(int movie_id) {
-        this.movie_id = movie_id;
+    public void setMovie(Movie movie) {
+        this.movie = movie;
     }
 
-    public int getSupplierId() {
-        return supplier_id;
+    public Person getSupplier() {
+        return supplier;
     }
 
-    public void setSupplierId(int supplier_id) {
-        this.supplier_id = supplier_id;
+    public void setSupplier(Person supplier) {
+        this.supplier = supplier;
     }
 
     public String getKind() {
@@ -56,11 +58,11 @@ public class Media {
         this.kind = kind;
     }
 
-    public double getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(double amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 
@@ -78,6 +80,14 @@ public class Media {
 
     public void setPurchasedAt(Date purchased_at) {
         this.purchased_at = purchased_at;
+    }
+
+    public BigDecimal getAmountPaid() {
+        return amount_paid;
+    }
+
+    public void setAmountPaid(BigDecimal amount_paid) {
+        this.amount_paid = amount_paid;
     }
     
 }

@@ -1,50 +1,48 @@
-package view.person;
+package view.movies;
 
-import model.PersonTableModel;
+import model.MovieTableModel;
 import view.components.toolbar.BaseToolBar;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JTable;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import mapping.PersonMapping;
-import model.Person;
+import mapping.MovieMapping;
+import model.Movie;
 
-import service.PersonService;
+import service.MovieService;
 import view.components.message.BaseMessage;
 
-public class PersonActionListener implements ActionListener, ListSelectionListener {
+public class MovieActionListener implements ActionListener, ListSelectionListener {
 
     private BaseToolBar toolbar;
-    private final PersonInternalFrame frame;
-    private PersonMapping mapping;
-    private PersonService service;
-    private PersonTableModel tableModel;
-    private final String kind;
+    private final MovieInternalFrame frame;
+    private MovieMapping mapping;
+    private MovieService service;
+    private MovieTableModel tableModel;
     private JTable table;
 
-    PersonActionListener(PersonInternalFrame frame, String kind) {
+    MovieActionListener(MovieInternalFrame frame) {
         this.frame = frame;
-        this.kind = kind;
     }
    
     public void initComponents() {
-        this.mapping = new PersonMapping( frame.getFormPanel() );
+        this.mapping = new MovieMapping( frame.getFormPanel() );
         
-        this.service = new PersonService();
+        this.service = new MovieService();
         
-        this.toolbar = frame.getBaseToolBar();
+        this.toolbar = frame.getToolBar();
         
-        this.table = frame.getListPanel().getTable();
+        this.table = frame.getTablePanel().getTable();
         
         loadTBPeople();        
     }
     
     @Override
     public void valueChanged(ListSelectionEvent event) {
-        Person person = tableModel.getPerson( table.getSelectedRow() );
+        Movie movie = tableModel.getMovie( table.getSelectedRow() );
         
-        mapping.toForm(person);
+        mapping.toForm(movie);
         
         toolbar.disableButtonsToSave();
     }    
@@ -71,7 +69,7 @@ public class PersonActionListener implements ActionListener, ListSelectionListen
     }
     
     private void loadTBPeople() {
-        tableModel = new PersonTableModel(service.getByKind(kind));
+        tableModel = new MovieTableModel(service.getAll());
         
         table.setModel(tableModel);
         
@@ -80,7 +78,7 @@ public class PersonActionListener implements ActionListener, ListSelectionListen
     }    
     
     private void add() {
-        mapping.toForm(new Person());
+        mapping.toForm(new Movie());
         
         frame.getFormPanel().enableOrDisableFields(true);
         
@@ -95,28 +93,28 @@ public class PersonActionListener implements ActionListener, ListSelectionListen
     
     private void destroy() {
         if (BaseMessage.confirmDestroy()) {
-            Person person = mapping.toPerson();
+            Movie movie = mapping.toMovie();
 
-            service.destroy(person);
+            service.destroy(movie);
 
-            tableModel.removePerson(person);        
+            tableModel.removeMovie(movie);        
             
             BaseMessage.destroyInfo();
         }
     }
     
     private void save() {
-        Person person = mapping.toPerson();
+        Movie movie = mapping.toMovie();
         
-        if (service.save(person)) {
-            tableModel.addPerson(person);
+        if (service.save(movie)) {
+            tableModel.addMovie(movie);
             
             frame.getFormPanel().enableOrDisableFields(false);
             
             toolbar.disableButtonsToSave();      
         }
         
-        BaseMessage.form(frame, person);
+        BaseMessage.form(frame, movie);
     }
     
     private void cancel() {

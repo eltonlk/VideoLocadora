@@ -10,7 +10,7 @@ import model.Person;
 
 public class PersonService {
 
-    private PersonDao dao;
+    private final PersonDao dao;
     
     public PersonService() {
         dao = new PersonDao();

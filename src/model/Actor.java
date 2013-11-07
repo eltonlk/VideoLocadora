@@ -22,6 +22,11 @@ public class Actor extends BaseModel {
     }
 
     @Override
+    public String toString() {
+        return name;
+    }    
+    
+    @Override
     public int hashCode() {
         int hash = 3;
         hash = 11 * hash + this.id;

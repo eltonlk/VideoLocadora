@@ -1,22 +1,24 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package view.movies;
 
-/**
- *
- * @author elton
- */
-public class FormPanel extends javax.swing.JPanel {
+import java.awt.Frame;
+import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
+import javax.swing.JLabel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import model.GenreComboBoxModel;
+import view.actors.ListPanel;
 
-    /**
-     * Creates new form FormPanel
-     */
+public final class FormPanel extends javax.swing.JPanel {
+
+    private Frame parent;
+    
     public FormPanel() {
         initComponents();
+        
+        selectGenre.setModel(new GenreComboBoxModel());
+        
+        enableOrDisableFields(false);
     }
 
     /**
@@ -31,22 +33,26 @@ public class FormPanel extends javax.swing.JPanel {
         labelTitle = new javax.swing.JLabel();
         inputTitle = new javax.swing.JTextField();
         labelGenre = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
+        selectGenre = new javax.swing.JComboBox();
         labelReleaseIn = new javax.swing.JLabel();
-        inputReleaseIn = new javax.swing.JTextField();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        tabPanel = new javax.swing.JTabbedPane();
         panelMedias = new javax.swing.JPanel();
-        listPanel2 = new view.medias.ListPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        mediasListPanel = new view.medias.ListPanel();
+        panelActors = new javax.swing.JPanel();
+        actorsListPanel = new view.actors.ListPanel();
+        panelSynopsis = new javax.swing.JPanel();
+        synopsisScrollPane = new javax.swing.JScrollPane();
         textAreaSynopsis = new javax.swing.JTextArea();
+        inputReleaseIn = new javax.swing.JFormattedTextField();
+        labelId = new javax.swing.JLabel();
+
+        setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        setMinimumSize(new java.awt.Dimension(450, 500));
+        setPreferredSize(new java.awt.Dimension(450, 500));
 
         labelTitle.setText("Título");
 
         labelGenre.setText("Genero");
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         labelReleaseIn.setText("Lançado em");
 
@@ -54,54 +60,63 @@ public class FormPanel extends javax.swing.JPanel {
         panelMedias.setLayout(panelMediasLayout);
         panelMediasLayout.setHorizontalGroup(
             panelMediasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMediasLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(listPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(mediasListPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 413, Short.MAX_VALUE)
         );
         panelMediasLayout.setVerticalGroup(
             panelMediasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelMediasLayout.createSequentialGroup()
-                .addComponent(listPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(mediasListPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 91, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Mídias", panelMedias);
+        tabPanel.addTab("Mídias", panelMedias);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+        javax.swing.GroupLayout panelActorsLayout = new javax.swing.GroupLayout(panelActors);
+        panelActors.setLayout(panelActorsLayout);
+        panelActorsLayout.setHorizontalGroup(
+            panelActorsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(actorsListPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 413, Short.MAX_VALUE)
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 235, Short.MAX_VALUE)
+        panelActorsLayout.setVerticalGroup(
+            panelActorsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelActorsLayout.createSequentialGroup()
+                .addComponent(actorsListPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 91, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Atores", jPanel2);
+        tabPanel.addTab("Atores", panelActors);
 
         textAreaSynopsis.setColumns(20);
         textAreaSynopsis.setRows(5);
-        jScrollPane1.setViewportView(textAreaSynopsis);
+        synopsisScrollPane.setViewportView(textAreaSynopsis);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout panelSynopsisLayout = new javax.swing.GroupLayout(panelSynopsis);
+        panelSynopsis.setLayout(panelSynopsisLayout);
+        panelSynopsisLayout.setHorizontalGroup(
+            panelSynopsisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelSynopsisLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
+                .addComponent(synopsisScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 401, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        panelSynopsisLayout.setVerticalGroup(
+            panelSynopsisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelSynopsisLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
+                .addComponent(synopsisScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 314, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Sinopse", jPanel1);
+        tabPanel.addTab("Sinopse", panelSynopsis);
+
+        try {
+            inputReleaseIn.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        labelId.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        labelId.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -109,21 +124,24 @@ public class FormPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTabbedPane1)
-                    .addComponent(inputTitle, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labelTitle)
-                            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tabPanel, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(inputTitle)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(labelGenre)
                                 .addGap(174, 174, 174)
                                 .addComponent(labelReleaseIn))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(selectGenre, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(inputReleaseIn, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addComponent(inputReleaseIn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(labelTitle)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(labelId, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -132,36 +150,105 @@ public class FormPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(labelTitle)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(labelTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(labelId, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(inputTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(labelGenre)
                             .addComponent(labelReleaseIn))
-                        .addGap(34, 34, 34))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(inputReleaseIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(inputReleaseIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(selectGenre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tabPanel)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
+    
+    public void enableOrDisableFields(boolean enable) {
+         inputReleaseIn.enable(enable);
+         inputTitle.enable(enable);
+         selectGenre.enable(enable);
+         textAreaSynopsis.enable(enable);
+         
+         this.repaint();
+    }
 
+    public ListPanel getActorsListPanel() {
+        return actorsListPanel;
+    }
 
+    public void setActorsListPanel(ListPanel actorsListPanel) {
+        this.actorsListPanel = actorsListPanel;
+    }
+
+    public JFormattedTextField getInputReleaseIn() {
+        return inputReleaseIn;
+    }
+
+    public void setInputReleaseIn(JFormattedTextField inputReleaseIn) {
+        this.inputReleaseIn = inputReleaseIn;
+    }
+
+    public JTextField getInputTitle() {
+        return inputTitle;
+    }
+
+    public void setInputTitle(JTextField inputTitle) {
+        this.inputTitle = inputTitle;
+    }
+
+    public view.medias.ListPanel getMediasListPanel() {
+        return mediasListPanel;
+    }
+
+    public void setMediasListPanel(view.medias.ListPanel mediasListPanel) {
+        this.mediasListPanel = mediasListPanel;
+    }
+
+    public JComboBox getSelectGenre() {
+        return selectGenre;
+    }
+
+    public void setSelectGenre(JComboBox selectGenre) {
+        this.selectGenre = selectGenre;
+    }
+
+    public JTextArea getTextAreaSynopsis() {
+        return textAreaSynopsis;
+    }
+
+    public void setTextAreaSynopsis(JTextArea textAreaSynopsis) {
+        this.textAreaSynopsis = textAreaSynopsis;
+    }
+
+    public JLabel getLabelId() {
+        return labelId;
+    }
+
+    public void setLabelId(JLabel labelId) {
+        this.labelId = labelId;
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField inputReleaseIn;
+    private view.actors.ListPanel actorsListPanel;
+    private javax.swing.JFormattedTextField inputReleaseIn;
     private javax.swing.JTextField inputTitle;
-    private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel labelGenre;
+    private javax.swing.JLabel labelId;
     private javax.swing.JLabel labelReleaseIn;
     private javax.swing.JLabel labelTitle;
-    private view.medias.ListPanel listPanel2;
+    private view.medias.ListPanel mediasListPanel;
+    private javax.swing.JPanel panelActors;
     private javax.swing.JPanel panelMedias;
+    private javax.swing.JPanel panelSynopsis;
+    private javax.swing.JComboBox selectGenre;
+    private javax.swing.JScrollPane synopsisScrollPane;
+    private javax.swing.JTabbedPane tabPanel;
     private javax.swing.JTextArea textAreaSynopsis;
     // End of variables declaration//GEN-END:variables
+
 }

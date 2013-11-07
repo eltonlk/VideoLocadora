@@ -1,16 +1,12 @@
 package service;
 
 import dao.GenreDao;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import model.Genre;
 
 public class GenreService {
     
-    private GenreDao dao;
+    private final GenreDao dao;
     
     public GenreService() {
         dao = new GenreDao();
@@ -30,14 +26,7 @@ public class GenreService {
     }
     
     public List<Genre> getAll() {
-        try {
-            return dao.getAll();
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(GenreService.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(GenreService.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
+        return dao.getAll();
     }
 
     public void destroy(Genre genre) {

@@ -6,7 +6,7 @@ import javax.swing.table.AbstractTableModel;
 
 public abstract class BaseTableModel extends AbstractTableModel {
 
-    protected String[][] columns;
+    protected String[] columns;
     protected final List items;
     
     public BaseTableModel() {
@@ -15,10 +15,6 @@ public abstract class BaseTableModel extends AbstractTableModel {
 
     public BaseTableModel(List lines) {
         this.items = new ArrayList<>(lines); 
-    }
-    
-    public void setColumns(String[][] columns) {
-        this.columns = columns;
     }
     
     @Override
@@ -31,25 +27,21 @@ public abstract class BaseTableModel extends AbstractTableModel {
         return columns.length;
     }
     
-//    @Override
-//    public String getColumnName(int columnIndex) {
-//        return columns[columnIndex];
-//    }
+    @Override
+    public String getColumnName(int columnIndex) {
+        return columns[columnIndex];
+    }
     
-//    @Override
-//    public Class<?> getColumnClass(int columnIndex) {
-//        switch (columnIndex) {
-//        case ID:
-//            return int.class;
-//        case NAME:
-//            return String.class;
-//        case STATUS:
-//            return String.class;
-//        default:
-//            throw new IndexOutOfBoundsException("columnIndex out of bounds");
-//        }
-//    }    
-
+    @Override
+    public abstract Object getValueAt(int rowIndex, int columnIndex);
+    
+    @Override
+    public abstract Class<?> getColumnClass(int columnIndex);
+    
+    public List getItems() {
+        return items;
+    }
+    
     public Object getItem(int index) {
         return items.get(index);
     }
@@ -78,5 +70,19 @@ public abstract class BaseTableModel extends AbstractTableModel {
 
             fireTableRowsDeleted(index + 1, index + 1);            
         }
-    }     
+    }   
+    
+    public void addListOfItems(List items) {
+        int index = getRowCount();
+
+        this.items.addAll(items);
+
+        fireTableDataChanged();
+    }    
+    
+    public void clear() {
+        this.items.clear();
+
+        fireTableDataChanged();
+    }
 }

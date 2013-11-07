@@ -309,6 +309,8 @@ public final class FormPanel extends javax.swing.JPanel {
         inputPhone.enable(enable);
         selectStatus.enable(enable);
         inputAddress.enable(enable);
+        
+        this.repaint();
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -1,29 +1,28 @@
 package model;
 
-public class Movie {
+import framework.BaseModel;
+import java.util.Date;
+import java.util.List;
+
+public class Movie extends BaseModel {
     
-    private int id;
     private String title;
-    private int year;
+    private Date release_in;
     private String synopsis;
-    private int gender_id;
+    private Genre genre;
+    
+    private List<Media> medias;
+    
+    private List<Actor> actors;    
     
     public Movie() {
     }
     
-    public Movie(String title, int year, String synopsis, int gender_id) {
+    public Movie(String title, Date release_in, String synopsis, Genre genre) {
         this.title = title;
-        this.year = year;
+        this.release_in = release_in;
         this.synopsis = synopsis;
-        this.gender_id = gender_id;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+        this.genre = genre;
     }
 
     public String getTitle() {
@@ -34,12 +33,12 @@ public class Movie {
         this.title = title;
     }
 
-    public int getYear() {
-        return year;
+    public Date getReleaseIn() {
+        return release_in;
     }
 
-    public void setYear(int year) {
-        this.year = year;
+    public void setReleaseIn(Date release_in) {
+        this.release_in = release_in;
     }
 
     public String getSynopsis() {
@@ -50,12 +49,54 @@ public class Movie {
         this.synopsis = synopsis;
     }
 
-    public int getGenderId() {
-        return gender_id;
+    public Genre getGenre() {
+        return genre;
     }
 
-    public void setGenderId(int gender_id) {
-        this.gender_id = gender_id;
+    public void setGenre(Genre genre) {
+        this.genre = genre;
+    }
+
+    public List<Media> getMedias() {
+        return medias;
+    }
+
+    public void setMedias(List<Media> medias) {
+        this.medias = medias;
+    }
+
+    public List<Actor> getActors() {
+        return actors;
+    }
+
+    public void setActors(List<Actor> actors) {
+        this.actors = actors;
     }
     
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 37 * hash + this.id;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Movie other = (Movie) obj;
+        
+        return this.id == other.id;
+    }
+
+    @Override
+    protected void validateRules() {
+        if (ValidationUtils.isEmpty(title)) {
+            addError("title", "Título do filme não pode ficar em branco.");
+        }
+    }
 }

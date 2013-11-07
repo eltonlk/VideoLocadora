@@ -11,11 +11,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Genre;
 
 public class GenreDao {
     
-    private DaoHelper daoHelper;
+    private final DaoHelper daoHelper;
     
     public GenreDao() {
         daoHelper = new DaoHelper();
@@ -80,6 +82,30 @@ public class GenreDao {
         }        
     }    
     
+    public Genre getById(int id) {
+        final Genre genre = new Genre();
+        String query = "SELECT * FROM genres WHERE id = ?";
+        
+        try {
+            daoHelper.executePreparedQuery(query,
+                    new QueryMapping<Genre>() {
+                        @Override
+                        public void mapping(ResultSet rset) throws SQLException {
+                            if (rset.next()) {
+                                genre.setId( rset.getInt("id") );
+                                genre.setName( rset.getString("name") );
+                                genre.setStatus( rset.getString("status") );
+                            }
+                        }
+                    },
+                    id);
+        } catch (SQLException | IOException ex) {
+            Logger.getLogger(GenreDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return genre; 
+    }    
+    
     public Genre getByName(String name) throws FileNotFoundException, IOException {
         final Genre genre = new Genre();
         
@@ -103,8 +129,7 @@ public class GenreDao {
         return genre; 
     }
 
-    
-    public List<Genre> getAll() throws FileNotFoundException, IOException {
+    public List<Genre> getAll() {
         final List<Genre> genres = new ArrayList<>();
         
         try {
@@ -124,7 +149,9 @@ public class GenreDao {
                             }
                         }
                     });
-        } catch (SQLException e) { }
+        } catch (SQLException e) { } catch (IOException ex) {
+            Logger.getLogger(GenreDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         return genres; 
     }

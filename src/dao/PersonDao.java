@@ -126,6 +126,36 @@ public class PersonDao {
             new PersonAddressDao().delete(address);
         }
     }   
+
+    public Person getById(int id) {
+        final Person person = new Person();
+        String query = "SELECT * FROM people WHERE id = ?";
+        
+        try {
+            daoHelper.executePreparedQuery(query,
+                new QueryMapping<Person>() {
+                    @Override
+                    public void mapping(ResultSet rset) throws SQLException {
+                        if (rset.next()) {
+                            person.setId( rset.getInt("id") );
+                            person.setName( rset.getString("name") );
+                            person.setLegalName( rset.getString("legal_name") );
+                            person.setKind( rset.getString("kind") );
+                            person.setDocument1( rset.getString("document_1") );
+                            person.setDocument2( rset.getString("document_2") );
+                            person.setEmail( rset.getString("email") );
+                            person.setPhone( rset.getString("phone") );
+                            person.setCel( rset.getString("cel") );
+                            person.setStatus( rset.getString("status") );                                
+                        }
+                    }
+                },
+                id);
+        } catch (SQLException | IOException ex) { }
+        
+        return person; 
+    }       
+    
     
     public List<Person> getByKind(String kind) throws FileNotFoundException, IOException {
         final List<Person> people = new ArrayList<>();

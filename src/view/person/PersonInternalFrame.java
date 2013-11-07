@@ -67,6 +67,7 @@ public class PersonInternalFrame extends javax.swing.JInternalFrame {
         tablePanel = new view.components.table.TablePanel();
 
         setClosable(true);
+        setIconifiable(true);
         setPreferredSize(new java.awt.Dimension(1000, 585));
 
         panelContent.setLayout(new java.awt.GridBagLayout());

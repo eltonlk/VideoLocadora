@@ -2,7 +2,6 @@ package framework;
 
 import framework.database.DataBaseConnection;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -20,7 +19,7 @@ public class DaoHelper {
         return dataBaseConnection.getConnection();
     }
     
-    public void begingTransaction() throws SQLException, FileNotFoundException, IOException {
+    public void begingTransaction() throws SQLException, IOException {
         Connection conn = getConnection();
         conn.setAutoCommit(false);
         context.set(conn);
@@ -71,10 +70,10 @@ public class DaoHelper {
         PreparedStatement pstmt = null;
         ResultSet rset = null;
         int id = 01;
-        
+
         try {
             pstmt = conn.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
-            
+
             populatePreparedStatement(pstmt, params);
 
             pstmt.executeUpdate();
@@ -163,7 +162,7 @@ public class DaoHelper {
         }        
     }
     
-    public <T> void executeQuery(String query, QueryMapping<T> queryMapping) throws SQLException, FileNotFoundException, IOException {
+    public <T> void executeQuery(String query, QueryMapping<T> queryMapping) throws SQLException, IOException {
         executeQuery(getConnection(), query, queryMapping);
     }
     
@@ -186,7 +185,7 @@ public class DaoHelper {
         } 
     }
     
-    public <T> void executePreparedQuery(String query, QueryMapping<T> queryMapping, Object... params) throws SQLException, FileNotFoundException, IOException {
+    public <T> void executePreparedQuery(String query, QueryMapping<T> queryMapping, Object... params) throws SQLException, IOException {
         executePreparedQuery(getConnection(), query, queryMapping, params);
     }
 

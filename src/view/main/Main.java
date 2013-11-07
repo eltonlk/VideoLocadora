@@ -4,6 +4,7 @@ import com.jgoodies.looks.plastic.PlasticXPLookAndFeel;
 import com.jgoodies.looks.plastic.theme.SkyBlue;
 import view.actors.ActorInternalFrame;
 import view.genre.GenreInternalFrame;
+import view.movies.MovieInternalFrame;
 import view.person.PersonInternalFrame;
 import view.reports.ListMoviesInternalFrame;
 import view.reports.LocationsByPeriodInternalFrame;
@@ -240,13 +241,15 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_employeesMenuItemActionPerformed
 
     private void usersMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usersMenuItemActionPerformed
-        UserInternalFrame userIF = new UserInternalFrame();
+//        UserInternalFrame userIF = new UserInternalFrame();
         
-        userIF.setLocation((getWidth() - userIF.getWidth()) / 2, 40);
+        MovieInternalFrame frame = new MovieInternalFrame();
         
-        userIF.setVisible(true);
+        frame.setLocation((getWidth() - frame.getWidth()) / 2, 40);
         
-        desktopPane.add(userIF);
+        frame.setVisible(true);
+        
+        desktopPane.add(frame);
     }//GEN-LAST:event_usersMenuItemActionPerformed
 
     private void genresMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genresMenuItemActionPerformed
