@@ -74,9 +74,12 @@ public class MovieDao {
     }    
 
     public void saveActors(Movie movie) {
+        System.out.println("1");
+        
         try {
-            String query = "INSERT INTO actors_movies (actor_id, movie_id) VALUES ( ?, ? ) WHERE actor_id != ? AND movie_id != ?";           
+            String query = "INSERT INTO actors_movies (actor_id, movie_id) SELECT ?, ? WHERE NOT EXISTS (SELECT 1 FROM actors_movies WHERE actor_id = ? AND movie_id = ?)";           
 
+            
             for(Actor actor : movie.getActors()) {
                 daoHelper.executePreparedUpdate(
                     query, 
@@ -87,7 +90,7 @@ public class MovieDao {
             }
         } catch (SQLException e) {
            daoHelper.rollbackTransaction();
-            
+            System.out.println( e.getMessage() );
            throw new CreateDaoException("Não foi possivel realizar a tranzação.", e);
         }         
     }       
