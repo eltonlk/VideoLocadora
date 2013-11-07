@@ -80,11 +80,35 @@ public class GenreDao {
         }        
     }    
     
+    public Genre getByName(String name) throws FileNotFoundException, IOException {
+        final Genre genre = new Genre();
+        
+        try {
+            String query = "SELECT * FROM genres WHERE name = ?"; 
+            
+            daoHelper.executePreparedQuery(query, 
+                    new QueryMapping<Genre>() {
+                        @Override
+                        public void mapping(ResultSet rset) throws SQLException {
+                            if (rset.next()) {
+                                genre.setId( rset.getInt("id") );
+                                genre.setName( rset.getString("name") );
+                                genre.setStatus( rset.getString("status") );
+                            }
+                        }
+                    },
+                    name);
+        } catch (SQLException e) { }
+        
+        return genre; 
+    }
+
+    
     public List<Genre> getAll() throws FileNotFoundException, IOException {
         final List<Genre> genres = new ArrayList<>();
         
         try {
-            String query = "SELECT * FROM genres"; 
+            String query = "SELECT * FROM genres ORDER BY name"; 
             
             daoHelper.executePreparedQuery(query, 
                     new QueryMapping<Genre>() {

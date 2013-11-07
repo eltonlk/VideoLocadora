@@ -80,7 +80,7 @@ public class ListPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonNewActionPerformed
-        FormDialog form = new FormDialog(this, true);
+        //dasdasdasda
     }//GEN-LAST:event_buttonNewActionPerformed
 
 

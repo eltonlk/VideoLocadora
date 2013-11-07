@@ -31,10 +31,10 @@ public abstract class BaseTableModel extends AbstractTableModel {
         return columns.length;
     }
     
-    @Override
-    public String getColumnName(int columnIndex) {
-        return columns[columnIndex];
-    }
+//    @Override
+//    public String getColumnName(int columnIndex) {
+//        return columns[columnIndex];
+//    }
     
 //    @Override
 //    public Class<?> getColumnClass(int columnIndex) {
