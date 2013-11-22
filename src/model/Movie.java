@@ -1,15 +1,15 @@
 package model;
 
 import java.io.Serializable;
-
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
-
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -26,10 +26,11 @@ public class Movie implements Serializable {
 
     private String synopsis;
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
-    private Set<Actor> cast =	new HashSet<>(0);
+    @ManyToMany(cascade = CascadeType.ALL)
+    private Set<Actor> cast = new HashSet<>(0);
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "movie_id")   
     private Set<Media> medias = new HashSet<>(0);
 
     public Long getMovieId() {
@@ -70,6 +71,14 @@ public class Movie implements Serializable {
 
     public void setMedias(Set<Media> medias) {
         this.medias = medias;
+    }
+
+    public void addActor(Actor actor) {
+        this.cast.add(actor);
+    }
+
+    public void addMedia(Media media) {
+        this.medias.add(media);
     }
 
 }

@@ -1,18 +1,33 @@
 package view.main;
 
-import controller.ActorController;
-import model.Actor;
+import model.*;
+import controller.*;
+import java.util.List;
 
 public class Dashboard extends javax.swing.JFrame {
 
     public Dashboard() {
         initComponents();
+  
+        List<Actor> list = ActorController.list();
         
-        Actor actor = new Actor();
-        actor.setName("Elton");
+        ActorController.destroy(list.get(0));
         
-        ActorController.create(actor);
+//        System.out.println(list);
         
+//        Actor actor = new Actor();
+//        actor.setName("Silvester Stallone 222");
+//        
+//        Media media = new Media();
+//        media.setKind("VHS");
+//        
+//        Movie movie = new Movie();  
+//        movie.setTitle("Rambo II");
+//        movie.setSynopsis("Matador.");
+////        movie.addActor(actor);
+////        movie.addMedia(media);
+//        
+//        MovieController.create(movie);
     }
 
     /**

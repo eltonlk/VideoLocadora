@@ -3,7 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/EltonLuis/Projetos/java/sistemas/VideoLocadora/src/hibernate.cfg.xml</file>
+            <file>file:/Users/elton/Projetos/java/sistemas/VideoLocadora/src/model/Movie.java</file>
+            <file>file:/Users/elton/Projetos/java/sistemas/VideoLocadora/src/model/Actor.java</file>
+            <file>file:/Users/elton/Projetos/java/sistemas/VideoLocadora/src/view/main/Dashboard.java</file>
         </group>
     </open-files>
 </project-private>

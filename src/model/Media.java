@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -19,7 +20,8 @@ public class Media implements Serializable {
     private String kind;
 
     @ManyToOne
-    private Movie movie = new Movie();
+    @JoinColumn(name = "movie_id")    
+    private Movie movie;
 
     public Long getMediaId() {
         return mediaId;
