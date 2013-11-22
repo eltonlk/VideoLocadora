@@ -1,70 +1,36 @@
 package dao;
 
-import framework.DaoHelper;
-import framework.QueryMapping;
-import java.io.IOException;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import model.Actor;
-import model.Movie;
+//import model.Actor;
+//import org.hibernate.Session;
+//import org.hibernate.SessionFactory;
+//import org.hibernate.Transaction;
+//import util.HibernateUtil;
 
-public class ActorDao {
+public class ActorDao extends GenericDao {
     
-    private final DaoHelper daoHelper;
-    
-    public ActorDao() {
-        daoHelper = new DaoHelper();
-    }
+//    public static Boolean save(Actor actor) {
+//        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+//        Session session = sessionFactory.openSession();
+//        Transaction transaction = session.beginTransaction();
+//        
+//        try {
+//            if (actor.getActorId() == null) {
+//                session.save(actor);
+//            } else {
+//                session.merge(actor);
+//            }
+//            
+//            transaction.commit();
+//            
+//            return true;
+//        } catch (Exception e) {
+//            System.out.println(e.getMessage());
+//            transaction.rollback();
+//        } finally {
+//            session.clear();
+//        }         
+//        
+//        return false;
+//    }
 
-    public List<Actor> getAll() {
-        final List<Actor> actors = new ArrayList<>();
-        
-        try {
-            String query = "SELECT * FROM actors ORDER BY name"; 
-            
-            daoHelper.executePreparedQuery(query, 
-                    new QueryMapping<Actor>() {
-                        @Override
-                        public void mapping(ResultSet rset) throws SQLException {
-                            while (rset.next()) {
-                                Actor actor = new Actor();
-                                actor.setId( rset.getInt("id") );
-                                actor.setName( rset.getString("name") );
-
-                                actors.add(actor);
-                            }
-                        }
-                    });
-        } catch (SQLException | IOException e) { }
-            
-        return actors; 
-    }    
-    
-    public List<Actor> getByMovie(final Movie movie) {
-        final List<Actor> actors = new ArrayList<>();
-        
-        try {
-            String query = "SELECT * FROM actors INNER JOIN actors_movies ON actors_movies.actor_id = actors.id WHERE actors_movies.movie_id = ?"; 
-            
-            daoHelper.executePreparedQuery(query, 
-                new QueryMapping<Actor>() {
-                    @Override
-                    public void mapping(ResultSet rset) throws SQLException {
-                        while (rset.next()) {
-                            Actor actor = new Actor();
-
-                            actor.setId( rset.getInt("id") );
-                            actor.setName( rset.getString("name") );
-
-                            actors.add(actor);
-                        }
-                    }
-                },
-                movie.getId());
-        } catch (SQLException | IOException e) { }
-        
-        return actors; 
-    } 
 }

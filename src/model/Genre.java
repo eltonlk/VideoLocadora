@@ -1,20 +1,30 @@
 package model;
 
-import framework.BaseModel;
+import java.io.Serializable;
 
-public class Genre extends BaseModel {
-    
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="genres")
+public class Genre implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long genreId;
     private String name;
-    private String status;
-    
-    public Genre() {
-        this.status = "Ativo";
+
+    public Long getGenreId() {
+        return genreId;
     }
 
-    public Genre(String name) {
-        this.name = name;
+    public void setGenreId(Long genreId) {
+        this.genreId = genreId;
     }
-    
+
     public String getName() {
         return name;
     }
@@ -23,43 +33,4 @@ public class Genre extends BaseModel {
         this.name = name;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    @Override
-    public String toString() {
-        return name;
-    }
-    
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 11 * hash + this.id;
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Genre other = (Genre) obj;
-        return this.id == other.id;
-    }
-
-    @Override
-    protected void validateRules() {
-        if (ValidationUtils.isEmpty(name)) {
-            addError("name", "Nome do genero não pode ficar em branco.");
-        }
-    }
-    
 }

@@ -14,25 +14,25 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="locations")
-public class Location implements Serializable {
+@Table(name="reservations")
+public class Reservation implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long locationId;
+    private Long reservationId;
 
     @ManyToOne
     private Person person = new Person();
 
     @OneToMany
-    private Set<LocationItem> items = new HashSet<>(0);
+    private Set<ReservationItem> items = new HashSet<>(0);
 
-    public Long getLocationId() {
-        return locationId;
+    public Long getReservationId() {
+        return reservationId;
     }
 
-    public void setLocationId(Long locationId) {
-        this.locationId = locationId;
+    public void setReservationId(Long reservationId) {
+        this.reservationId = reservationId;
     }
 
     public Person getPerson() {
@@ -43,11 +43,11 @@ public class Location implements Serializable {
         this.person = person;
     }
 
-    public Set<LocationItem> getItems() {
+    public Set<ReservationItem> getItems() {
         return items;
     }
 
-    public void setItems(Set<LocationItem> items) {
+    public void setItems(Set<ReservationItem> items) {
         this.items = items;
     }
 

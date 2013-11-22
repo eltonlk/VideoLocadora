@@ -6,27 +6,23 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="cities")
-public class City implements Serializable {
+@Table(name="countries")
+public class Country implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long cityId;
+    private Long countryId;
     private String name;
 
-    @ManyToOne
-    private State state = new State();
-
-    public Long getCityId() {
-        return cityId;
+    public Long getCountryId() {
+        return countryId;
     }
 
-    public void setCityId(Long cityId) {
-        this.cityId = cityId;
+    public void setCountryId(Long countryId) {
+        this.countryId = countryId;
     }
 
     public String getName() {
@@ -35,14 +31,6 @@ public class City implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public State getState() {
-        return state;
-    }
-
-    public void setState(State state) {
-        this.state = state;
     }
 
 }

@@ -1,28 +1,32 @@
 package model;
 
-import framework.BaseModel;
+import java.io.Serializable;
 
-public class State extends BaseModel {
-    
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="states")
+public class State implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long stateId;
     private String name;
-    private String uf;
-    private String country;
-    
-    public State() {
+
+    @ManyToOne
+    private Country country = new Country();
+
+    public Long getStateId() {
+        return stateId;
     }
 
-    public State(String name, String uf, String country) {
-        this.name = name;
-        this.uf = uf;
-        this.country = country;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
+    public void setStateId(Long stateId) {
+        this.stateId = stateId;
     }
 
     public String getName() {
@@ -33,37 +37,12 @@ public class State extends BaseModel {
         this.name = name;
     }
 
-    public String getUf() {
-        return uf;
+    public Country getCountry() {
+        return country;
     }
 
-    public void setUf(String uf) {
-        this.uf = uf;
+    public void setCountry(Country country) {
+        this.country = country;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 11 * hash + this.id;
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final State other = (State) obj;
-        return this.id == other.id;
-    }     
-    
-    @Override
-    protected void validateRules() {
-        if (ValidationUtils.isEmpty(name)) {
-            addError("name", "Nome do estado não pode ficar em branco.");
-        } 
-    }
 }

@@ -1,16 +1,31 @@
 package model;
 
-import framework.BaseModel;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
-public class Actor extends BaseModel {
+@Entity(name="actors")
+public class Actor implements java.io.Serializable {
     
+    @Id
+    @Column(name="id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long actorId;
+    
+    @Column(name="name", nullable = false, unique = true, columnDefinition = "VARCHAR(100)", length = 100)
     private String name;
     
     public Actor() {
     }
-    
-    public Actor(String name) {
-        this.name = name;
+
+    public Long getActorId() {
+        return actorId;
+    }
+
+    public void setActorId(Long actorId) {
+        this.actorId = actorId;
     }
 
     public String getName() {
@@ -20,35 +35,5 @@ public class Actor extends BaseModel {
     public void setName(String name) {
         this.name = name;
     }
-
-    @Override
-    public String toString() {
-        return name;
-    }    
     
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 11 * hash + this.id;
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Actor other = (Actor) obj;
-        return this.id == other.id;
-    }    
-    
-    @Override
-    protected void validateRules() {
-        if (ValidationUtils.isEmpty(name)) {
-            addError("name", "Nome do ator não pode ficar em branco.");
-        }
-    }
 }
