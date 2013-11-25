@@ -10,17 +10,6 @@
     <property name="hibernate.show_sql">true</property>
     <property name="hibernate.query.factory_class">org.hibernate.hql.classic.ClassicQueryTranslatorFactory</property>
     <property name="hbm2ddl.auto">update</property>
-    <mapping class="model.Actor"/>
-    <mapping class="model.City"/>
-    <mapping class="model.Country"/>
-    <mapping class="model.Genre"/>
-    <mapping class="model.Location"/>
-    <mapping class="model.LocationItem"/>
-    <mapping class="model.Media"/>
-    <mapping class="model.Movie"/>
-    <mapping class="model.Person"/>
-    <mapping class="model.Reservation"/>
-    <mapping class="model.ReservationItem"/>
-    <mapping class="model.State"/>
+    <mapping resource="hibernate.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>
