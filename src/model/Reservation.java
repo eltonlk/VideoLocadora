@@ -1,31 +1,16 @@
 package model;
 
 import java.io.Serializable;
-
-import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
-@Entity
-@Table(name="reservations")
 public class Reservation implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long reservationId;
+    private Person person;
+    private Set items;
 
-    @ManyToOne
-    private Person person = new Person();
-
-    @OneToMany
-    private Set<ReservationItem> items = new HashSet<>(0);
+    public Reservation() {
+    }
 
     public Long getReservationId() {
         return reservationId;

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="model.LocationItem" table="location_items">
+        <id name="locationItemId" column="id" type="java.lang.Long">
+            <generator class="sequence">
+                <param name="sequence">location_items_id_seq</param>
+            </generator>
+        </id>
+
+        <many-to-one name="location" class="model.Location" column="location_id"/>
+        <many-to-one name="media" class="model.Media" column="media_id"/>
+    </class>
+</hibernate-mapping>

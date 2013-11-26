@@ -2,27 +2,15 @@ package model;
 
 import java.io.Serializable;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
-@Entity
-@Table(name="reservation_items")
 public class ReservationItem implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long reservationItemId;
+    private Reservation reservation;
+    private Media media;
 
-    @ManyToOne
-    private Reservation reservation = new Reservation();
-
-    @ManyToOne
-    private Media media = new Media();
-
+    public ReservationItem() {
+    }
+    
     public Long getReservationItemId() {
         return reservationItemId;
     }

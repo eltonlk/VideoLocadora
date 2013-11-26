@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="model.ReservationItem" table="reservation_items">
+        <id name="reservationItemId" column="id" type="java.lang.Long">
+            <generator class="sequence">
+                <param name="sequence">reservation_items_id_seq</param>
+            </generator>
+        </id>
+
+        <many-to-one name="reservation" class="model.Reservation" column="reservation_id"/>
+        <many-to-one name="media" class="model.Media" column="media_id"/>
+    </class>
+</hibernate-mapping>

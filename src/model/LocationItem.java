@@ -2,27 +2,15 @@ package model;
 
 import java.io.Serializable;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
-@Entity
-@Table(name="location_items")
 public class LocationItem implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long locationItemId;
+    private Location location;
+    private Media media;
 
-    @ManyToOne
-    private Location location = new Location();
-
-    @ManyToOne
-    private Media media = new Media();
-
+    public LocationItem() {
+    }
+    
     public Long getLocationItemId() {
         return locationItemId;
     }

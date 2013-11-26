@@ -1,37 +1,18 @@
 package model;
 
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.Set;
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
-@Entity
-@Table(name="movies")
 public class Movie implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long movieId;
-
     private String title;
-
     private String synopsis;
+    private Set actors;
+    private Set medias;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    private Set<Actor> cast = new HashSet<>(0);
-
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "movie_id")   
-    private Set<Media> medias = new HashSet<>(0);
+    public Movie() {
+    }
 
     public Long getMovieId() {
         return movieId;
@@ -57,12 +38,12 @@ public class Movie implements Serializable {
         this.synopsis = synopsis;
     }
 
-    public Set<Actor> getCast() {
-        return cast;
+    public Set<Actor> getActors() {
+        return actors;
     }
 
-    public void setCast(Set<Actor> cast) {
-        this.cast = cast;
+    public void setActors(Set<Actor> actors) {
+        this.actors = actors;
     }
 
     public Set<Media> getMedias() {
@@ -74,7 +55,7 @@ public class Movie implements Serializable {
     }
 
     public void addActor(Actor actor) {
-        this.cast.add(actor);
+        this.actors.add(actor);
     }
 
     public void addMedia(Media media) {

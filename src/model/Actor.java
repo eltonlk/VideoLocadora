@@ -1,13 +1,12 @@
 package model;
 
-import java.util.HashSet;
 import java.util.Set;
 
 public class Actor implements java.io.Serializable {
     
     private Long actorId;
     private String name;
-    private Set<Movie> movies =	new HashSet<>(0);    
+    private Set movies;    
     
     public Actor() {
     }

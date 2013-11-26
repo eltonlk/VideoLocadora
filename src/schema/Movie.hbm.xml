@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="model.Movie" table="movies">
+        <id name="movieId" column="id" type="java.lang.Long">
+            <generator class="sequence">
+                <param name="sequence">movies_id_seq</param>
+            </generator>
+        </id>
+
+        <property name="title" column="title" type="java.lang.String" unique="true" not-null="true"/>
+
+        <property name="synopsis" column="synopsis" type="java.lang.String"/>
+
+        <set name="actors" table="movies_actors" inverse="false" lazy="true" fetch="select" cascade="all">
+            <key>
+                <column name="movie_id" not-null="true"/>
+            </key>
+            <many-to-many entity-name="model.Actor">
+                <column name="actor_id" not-null="true"/>
+            </many-to-many>
+        </set>
+        
+        <set name="medias" table="medias" inverse="true" lazy="true" fetch="select" cascade="all">
+            <key>
+                <column name="movie_id" not-null="true"/>
+            </key>
+            <one-to-many class="model.Media"/>
+        </set>
+    </class>
+</hibernate-mapping>

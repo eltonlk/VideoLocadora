@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="model.City" table="cities">
+        <id name="cityId" column="id" type="java.lang.Long">
+            <generator class="sequence">
+                <param name="sequence">cities_id_seq</param>
+            </generator>
+        </id>
+
+        <property name="name" column="name" type="java.lang.String"/>
+
+        <many-to-one name="state" class="model.State" column="state_id"/>
+    </class>
+</hibernate-mapping>

@@ -2,31 +2,17 @@ package model;
 
 import java.io.Serializable;
 
-import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
-@Entity
-@Table(name="locations")
 public class Location implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long locationId;
+    private Person person;
+    private Set items;
 
-    @ManyToOne
-    private Person person = new Person();
-
-    @OneToMany
-    private Set<LocationItem> items = new HashSet<>(0);
-
+    public Location() {
+    }
+    
     public Long getLocationId() {
         return locationId;
     }

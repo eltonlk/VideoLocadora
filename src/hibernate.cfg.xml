@@ -4,12 +4,23 @@
   <session-factory>
     <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
     <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
-    <property name="hibernate.connection.url">jdbc:postgresql://localhost:5433/VideoLocadora</property>
+    <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/VideoLocadora</property>
     <property name="hibernate.connection.username">postgres</property>
     <property name="hibernate.connection.password">123456</property>
     <property name="hibernate.show_sql">true</property>
     <property name="hibernate.query.factory_class">org.hibernate.hql.classic.ClassicQueryTranslatorFactory</property>
     <property name="hbm2ddl.auto">update</property>
-    <mapping resource="hibernate.hbm.xml"/>
+    <mapping resource="schema/Actor.hbm.xml"/>
+    <mapping resource="schema/City.hbm.xml"/>
+    <mapping resource="schema/Country.hbm.xml"/>
+    <mapping resource="schema/Genre.hbm.xml"/>
+    <mapping resource="schema/Location.hbm.xml"/>
+    <mapping resource="schema/LocationItem.hbm.xml"/>
+    <mapping resource="schema/Media.hbm.xml"/>
+    <mapping resource="schema/Movie.hbm.xml"/>
+    <mapping resource="schema/Person.hbm.xml"/>
+    <mapping resource="schema/Reservation.hbm.xml"/>
+    <mapping resource="schema/ReservationItem.hbm.xml"/>
+    <mapping resource="schema/State.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

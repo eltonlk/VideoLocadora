@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="model.Media" table="medias">
+        <id name="mediaId" column="id" type="java.lang.Long">
+            <generator class="sequence">
+                <param name="sequence">medias_id_seq</param>
+            </generator>
+        </id>
+
+        <property name="kind" column="kind" type="java.lang.String"/>
+
+        <many-to-one name="movie" class="model.Movie" column="movie_id"/>
+    </class>
+</hibernate-mapping>
