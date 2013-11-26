@@ -14,7 +14,7 @@ public abstract class GenericTableModel<T> extends AbstractTableModel {
         this.columns = new String[] {};
     }
 
-    public GenericTableModel(List rows) {
+    public GenericTableModel(List<T> rows) {
 	this.rows = new ArrayList<>(rows);
     }
     

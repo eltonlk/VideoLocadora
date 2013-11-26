@@ -25,9 +25,7 @@ public class GenericDao<T, ID extends Serializable> {
             return (List<T>) list;
         } catch (Exception e) {
             System.out.println(e.getMessage());
-        } finally {
-            session.clear();
-        }     
+        }      
         return null;
    }
     

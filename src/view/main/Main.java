@@ -2,17 +2,24 @@ package view.main;
 
 import com.jgoodies.looks.plastic.PlasticXPLookAndFeel;
 import com.jgoodies.looks.plastic.theme.SkyBlue;
-import view.actors.ActorInternalFrame;
-import view.genre.GenreInternalFrame;
-import view.movies.MovieInternalFrame;
-import view.person.PersonInternalFrame;
-import view.reports.ListMoviesInternalFrame;
-import view.reports.LocationsByPeriodInternalFrame;
+import controller.*;
 
 public class Main extends javax.swing.JFrame {
-
+    
+    private ActorController actorController;
+    private CityController cityController;
+    private CountryController countryController;
+    private GenreController genreController;
+    private LocationController locationController;
+    private MovieController movieController;
+    private PersonController personController;
+    private ReservationController reservationController;
+    private StateController stateController;
+    
     public Main() {
         initComponents();
+
+        loadControllers();
     }
 
     /**
@@ -33,6 +40,7 @@ public class Main extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         citiesMenuItem = new javax.swing.JMenuItem();
         statesMenuItem = new javax.swing.JMenuItem();
+        countriesMenuItem = new javax.swing.JMenuItem();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
         usersMenuItem = new javax.swing.JMenuItem();
         optionsMenuItem = new javax.swing.JMenuItem();
@@ -42,8 +50,8 @@ public class Main extends javax.swing.JFrame {
         reservationMenuItem = new javax.swing.JMenuItem();
         locationMenuItem = new javax.swing.JMenuItem();
         devolutionMenuItem = new javax.swing.JMenuItem();
-        moviesMenuItem = new javax.swing.JMenuItem();
         jSeparator4 = new javax.swing.JPopupMenu.Separator();
+        moviesMenuItem = new javax.swing.JMenuItem();
         genresMenuItem = new javax.swing.JMenuItem();
         actorsMenuItem = new javax.swing.JMenuItem();
         reportMenu = new javax.swing.JMenu();
@@ -55,6 +63,8 @@ public class Main extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema de Gestão de Video Locadoras");
         setPreferredSize(getMaximumSize());
+
+        desktopPane.setLayout(null);
 
         entriesMenu.setMnemonic('f');
         entriesMenu.setText("Cadastros");
@@ -91,10 +101,28 @@ public class Main extends javax.swing.JFrame {
         entriesMenu.add(jSeparator1);
 
         citiesMenuItem.setText("Cidades");
+        citiesMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                citiesMenuItemActionPerformed(evt);
+            }
+        });
         entriesMenu.add(citiesMenuItem);
 
         statesMenuItem.setText("Estados");
+        statesMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                statesMenuItemActionPerformed(evt);
+            }
+        });
         entriesMenu.add(statesMenuItem);
+
+        countriesMenuItem.setText("Países");
+        countriesMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                countriesMenuItemActionPerformed(evt);
+            }
+        });
+        entriesMenu.add(countriesMenuItem);
         entriesMenu.add(jSeparator2);
 
         usersMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/user_16.png"))); // NOI18N
@@ -127,17 +155,37 @@ public class Main extends javax.swing.JFrame {
         movieMenu.setText("Filmes");
 
         reservationMenuItem.setText("Reserva");
+        reservationMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reservationMenuItemActionPerformed(evt);
+            }
+        });
         movieMenu.add(reservationMenuItem);
 
         locationMenuItem.setText("Locação");
+        locationMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                locationMenuItemActionPerformed(evt);
+            }
+        });
         movieMenu.add(locationMenuItem);
 
         devolutionMenuItem.setText("Devolução");
+        devolutionMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                devolutionMenuItemActionPerformed(evt);
+            }
+        });
         movieMenu.add(devolutionMenuItem);
+        movieMenu.add(jSeparator4);
 
         moviesMenuItem.setText("Filmes");
+        moviesMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                moviesMenuItemActionPerformed(evt);
+            }
+        });
         movieMenu.add(moviesMenuItem);
-        movieMenu.add(jSeparator4);
 
         genresMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/category_16.png"))); // NOI18N
         genresMenuItem.setMnemonic('t');
@@ -210,87 +258,77 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_exitMenuItemActionPerformed
 
     private void customersMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customersMenuItemActionPerformed
-        PersonInternalFrame personIF = new PersonInternalFrame("customer");
-        
-        personIF.setLocation((getWidth() - personIF.getWidth()) / 2, 40);
-        
-        personIF.setVisible(true);
-        
-        desktopPane.add(personIF);
+        personController.list();
     }//GEN-LAST:event_customersMenuItemActionPerformed
 
     private void suppliersMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_suppliersMenuItemActionPerformed
-        PersonInternalFrame personIF = new PersonInternalFrame("supplier");
-        
-        personIF.setLocation((getWidth() - personIF.getWidth()) / 2, 40);
-        
-        personIF.setVisible(true);
-        
-        desktopPane.add(personIF);
+        personController.list();
     }//GEN-LAST:event_suppliersMenuItemActionPerformed
     
     private void employeesMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_employeesMenuItemActionPerformed
-        PersonInternalFrame personIF = new PersonInternalFrame("employee");
-        
-        personIF.setLocation((getWidth() - personIF.getWidth()) / 2, 40);
-        
-        personIF.setVisible(true);
-        
-        desktopPane.add(personIF);
+        personController.list();
     }//GEN-LAST:event_employeesMenuItemActionPerformed
 
     private void usersMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usersMenuItemActionPerformed
-//        UserInternalFrame userIF = new UserInternalFrame();
-        
-        MovieInternalFrame frame = new MovieInternalFrame();
-        
-        frame.setLocation((getWidth() - frame.getWidth()) / 2, 40);
-        
-        frame.setVisible(true);
-        
-        desktopPane.add(frame);
+// TODO
     }//GEN-LAST:event_usersMenuItemActionPerformed
 
     private void genresMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genresMenuItemActionPerformed
-        ListPanel panel = new ListPanel();
-        
-        panel.setLocation((getWidth() - panel.getWidth()) / 2, 40);
-        
-        desktopPane.add(panel);
-        
-        panel.setVisible(true);
+        genreController.list();
     }//GEN-LAST:event_genresMenuItemActionPerformed
 
     private void actorsMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actorsMenuItemActionPerformed
-        ActorInternalFrame actorIF = new ActorInternalFrame();
-        
-        actorIF.setLocation((getWidth() - actorIF.getWidth()) / 2, 40);
-        
-        actorIF.setVisible(true);
-        
-        desktopPane.add(actorIF);
+        actorController.list();
     }//GEN-LAST:event_actorsMenuItemActionPerformed
 
     private void locationsByPeriodMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_locationsByPeriodMenuItemActionPerformed
-        LocationsByPeriodInternalFrame frame = new LocationsByPeriodInternalFrame();
-        
-        frame.setLocation((getWidth() - frame.getWidth()) / 2, 40);
-        
-        frame.setVisible(true);
-        
-        desktopPane.add(frame);
+// TODO
     }//GEN-LAST:event_locationsByPeriodMenuItemActionPerformed
 
     private void listMoviesMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listMoviesMenuItemActionPerformed
-        ListMoviesInternalFrame frame = new ListMoviesInternalFrame();
-        
-        frame.setLocation((getWidth() - frame.getWidth()) / 2, 40);
-        
-        frame.setVisible(true);
-        
-        desktopPane.add(frame);
+// TODO
     }//GEN-LAST:event_listMoviesMenuItemActionPerformed
 
+    private void citiesMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_citiesMenuItemActionPerformed
+        cityController.list();
+    }//GEN-LAST:event_citiesMenuItemActionPerformed
+
+    private void statesMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statesMenuItemActionPerformed
+        stateController.list();
+    }//GEN-LAST:event_statesMenuItemActionPerformed
+
+    private void reservationMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reservationMenuItemActionPerformed
+        reservationController.list();
+    }//GEN-LAST:event_reservationMenuItemActionPerformed
+
+    private void locationMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_locationMenuItemActionPerformed
+        locationController.list();
+    }//GEN-LAST:event_locationMenuItemActionPerformed
+
+    private void devolutionMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_devolutionMenuItemActionPerformed
+// TODO
+    }//GEN-LAST:event_devolutionMenuItemActionPerformed
+
+    private void moviesMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moviesMenuItemActionPerformed
+        movieController.list();
+    }//GEN-LAST:event_moviesMenuItemActionPerformed
+
+    private void countriesMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_countriesMenuItemActionPerformed
+        countryController.list();
+    }//GEN-LAST:event_countriesMenuItemActionPerformed
+
+   private void loadControllers() {
+        actorController = new ActorController(desktopPane);
+        cityController = new CityController(desktopPane);
+        countryController = new CountryController(desktopPane);
+        genreController = new GenreController(desktopPane);
+        locationController = new LocationController(desktopPane);
+        movieController = new MovieController(desktopPane);
+        personController = new PersonController(desktopPane);
+        reservationController = new ReservationController(desktopPane);
+        stateController = new StateController(desktopPane);        
+    }
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -319,6 +357,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenuItem aboutMenuItem;
     private javax.swing.JMenuItem actorsMenuItem;
     private javax.swing.JMenuItem citiesMenuItem;
+    private javax.swing.JMenuItem countriesMenuItem;
     private javax.swing.JMenuItem customersMenuItem;
     private javax.swing.JDesktopPane desktopPane;
     private javax.swing.JMenuItem devolutionMenuItem;
@@ -344,4 +383,5 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenuItem suppliersMenuItem;
     private javax.swing.JMenuItem usersMenuItem;
     // End of variables declaration//GEN-END:variables
+    
 }

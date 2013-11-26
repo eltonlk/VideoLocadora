@@ -1,11 +1,15 @@
 package model;
 
+import java.util.Date;
 import java.util.Set;
 
 public class Actor implements java.io.Serializable {
     
     private Long actorId;
     private String name;
+    private String gender;
+    private Date birth;
+    private Country country;
     private Set movies;    
     
     public Actor() {
@@ -26,12 +30,36 @@ public class Actor implements java.io.Serializable {
     public void setName(String name) {
         this.name = name;
     }
-    
-    public Set<Movie> getMovies() {
-        return this.movies;
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public Date getBirth() {
+        return birth;
+    }
+
+    public void setBirth(Date birth) {
+        this.birth = birth;
+    }
+
+    public Country getCountry() {
+        return country;
+    }
+
+    public void setCountry(Country country) {
+        this.country = country;
     }
     
-    public void setMovies(Set<Movie> movies) {
+    public Set getMovies() {
+        return movies;
+    }
+
+    public void setMovies(Set movies) {
         this.movies = movies;
     }
     

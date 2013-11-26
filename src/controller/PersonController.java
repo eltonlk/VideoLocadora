@@ -1,25 +1,14 @@
 package controller;
 
-import model.Person;
+import javax.swing.JDesktopPane;
+import tableModel.PersonTableModel;
 
-public class PersonController {
+public class PersonController extends util.GenericController<model.Person> {
 
-    public static void list() {
-    }
-
-    public static void add() {
-    }
-
-    public static void edit() {
-    }
-
-    public static void create(Person person) {
-    }
-
-    public static void update(Person person) {
-    }
-
-    public static void destroy(Person person) {
-    }
-
+    public PersonController(JDesktopPane pane) {
+        this.pane = pane;
+        this.dao = new dao.PersonDao();
+        this.tableModel = new PersonTableModel();
+    }    
+   
 }

@@ -1,25 +1,14 @@
 package controller;
 
-import model.Country;
+import javax.swing.JDesktopPane;
+import tableModel.CountryTableModel;
 
-public class CountryController {
+public class CountryController extends util.GenericController<model.Country> {
 
-    public static void list() {
-    }
-
-    public static void add() {
-    }
-
-    public static void edit() {
-    }
-
-    public static void create(Country country) {
-    }
-
-    public static void update(Country country) {
-    }
-
-    public static void destroy(Country country) {
-    }
-
+    public CountryController(JDesktopPane pane) {
+        this.pane = pane;
+        this.dao = new dao.CountryDao();
+        this.tableModel = new CountryTableModel();
+    }    
+   
 }

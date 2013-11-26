@@ -1,31 +1,14 @@
 package controller;
 
-import dao.MovieDao;
-import model.Movie;
+import javax.swing.JDesktopPane;
+import tableModel.MovieTableModel;
 
-public class MovieController {
+public class MovieController extends util.GenericController<model.Movie> {
 
-    private static final MovieDao dao = new MovieDao();
-    
-    public static void list() {
-    }
-
-    public static void add() {
-    }
-
-    public static void edit() {
-    }
-
-    public static void create(Movie movie) {
-        dao.save(movie);
-    }
-
-    public static void update(Movie movie) {
-        dao.save(movie);
-    }
-
-    public static void destroy(Movie movie) {
-        dao.destroy(movie);
-    }
-
+    public MovieController(JDesktopPane pane) {
+        this.pane = pane;
+        this.dao = new dao.MovieDao();
+        this.tableModel = new MovieTableModel();
+    }    
+   
 }

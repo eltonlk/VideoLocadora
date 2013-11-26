@@ -1,6 +1,7 @@
 package dao;
 
-public class CountryDao extends util.GenericDao {
+import model.Country;
+
+public class CountryDao extends util.GenericDao<Country, java.io.Serializable> {
 
 }
-

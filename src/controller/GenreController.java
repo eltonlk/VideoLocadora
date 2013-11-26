@@ -1,25 +1,14 @@
 package controller;
 
-import model.Genre;
+import javax.swing.JDesktopPane;
+import tableModel.GenreTableModel;
 
-public class GenreController {
+public class GenreController extends util.GenericController<model.Genre> {
 
-    public static void list() {
-    }
-
-    public static void add() {
-    }
-
-    public static void edit() {
-    }
-
-    public static void create(Genre genre) {
-    }
-
-    public static void update(Genre genre) {
-    }
-
-    public static void destroy(Genre genre) {
-    }
-
+    public GenreController(JDesktopPane pane) {
+        this.pane = pane;
+        this.dao = new dao.GenreDao();
+        this.tableModel = new GenreTableModel();
+    }    
+   
 }

@@ -1,25 +1,14 @@
 package controller;
 
-import model.City;
+import javax.swing.JDesktopPane;
+import tableModel.CityTableModel;
 
-public class CityController {
+public class CityController extends util.GenericController<model.City> {
 
-    public static void list() {
-    }
-
-    public static void add() {
-    }
-
-    public static void edit() {
-    }
-
-    public static void create(City city) {
-    }
-
-    public static void update(City city) {
-    }
-
-    public static void destroy(City city) {
-    }
-
+    public CityController(JDesktopPane pane) {
+        this.pane = pane;
+        this.dao = new dao.CityDao();
+        this.tableModel = new CityTableModel();
+    }    
+   
 }

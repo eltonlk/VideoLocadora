@@ -1,25 +1,14 @@
 package controller;
 
-import model.State;
+import javax.swing.JDesktopPane;
+import tableModel.StateTableModel;
 
-public class StateController {
+public class StateController  extends util.GenericController<model.State> {
 
-    public static void list() {
-    }
-
-    public static void add() {
-    }
-
-    public static void edit() {
-    }
-
-    public static void create(State state) {
-    }
-
-    public static void update(State state) {
-    }
-
-    public static void destroy(State state) {
-    }
-
+    public StateController(JDesktopPane pane) {
+        this.pane = pane;
+        this.dao = new dao.StateDao();
+        this.tableModel = new StateTableModel();
+    }    
+   
 }

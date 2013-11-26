@@ -1,25 +1,14 @@
 package controller;
 
-import model.Location;
+import javax.swing.JDesktopPane;
+import tableModel.LocationTableModel;
 
-public class LocationController {
+public class LocationController extends util.GenericController<model.Location> {
 
-    public static void list() {
-    }
-
-    public static void add() {
-    }
-
-    public static void edit() {
-    }
-
-    public static void create(Location location) {
-    }
-
-    public static void update(Location location) {
-    }
-
-    public static void destroy(Location location) {
-    }
-
+    public LocationController(JDesktopPane pane) {
+        this.pane = pane;
+        this.dao = new dao.LocationDao();
+        this.tableModel = new LocationTableModel();
+    }    
+   
 }

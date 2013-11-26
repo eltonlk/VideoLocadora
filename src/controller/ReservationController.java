@@ -1,25 +1,14 @@
 package controller;
 
-import model.Reservation;
+import javax.swing.JDesktopPane;
+import tableModel.ReservationTableModel;
 
-public class ReservationController {
+public class ReservationController extends util.GenericController<model.Reservation> {
 
-    public static void list() {
-    }
-
-    public static void add() {
-    }
-
-    public static void edit() {
-    }
-
-    public static void create(Reservation reservation) {
-    }
-
-    public static void update(Reservation reservation) {
-    }
-
-    public static void destroy(Reservation reservation) {
-    }
-
+    public ReservationController(JDesktopPane pane) {
+        this.pane = pane;
+        this.dao = new dao.ReservationDao();
+        this.tableModel = new ReservationTableModel();
+    }    
+   
 }

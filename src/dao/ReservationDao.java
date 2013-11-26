@@ -1,6 +1,8 @@
 package dao;
 
-public class ReservationDao extends util.GenericDao {
+import model.Reservation;
+
+public class ReservationDao extends util.GenericDao<Reservation, java.io.Serializable> {
 
 }
 

@@ -1,23 +1,14 @@
 package controller;
 
-import dao.ActorDao;
-import java.util.List;
-import model.Actor;
+import javax.swing.JDesktopPane;
+import tableModel.ActorTableModel;
 
-public class ActorController {
-    
-    private static final ActorDao dao = new ActorDao();
+public class ActorController extends util.GenericController<model.Actor> {
 
-    public static List<Actor> list() {
-        return dao.list();
-    }
-    
-    public static void create(Actor actor) {
-        dao.save(actor);
-    }
-    
-    public static void destroy(Actor actor) {
-        dao.destroy(actor);
-    }
+    public ActorController(JDesktopPane pane) {
+        this.pane = pane;
+        this.dao = new dao.ActorDao();
+        this.tableModel = new ActorTableModel();
+    }    
     
 }
