@@ -7,7 +7,7 @@ import model.Actor;
 public class ActorTableModel extends util.GenericTableModel<Actor> {
 
     public ActorTableModel() {
-        this.columns = new String[] { "Nome", "Sexo", "Nascimento", "País" };
+        this.columns = new String[] { "Nome", "Sexo", "País" };
     }
 
     public ActorTableModel(List<Actor> rows) {
@@ -22,8 +22,6 @@ public class ActorTableModel extends util.GenericTableModel<Actor> {
         case 1:
             return String.class;
         case 2:
-            return java.util.Date.class;
-        case 3:
             return String.class;            
         default:
             throw new IndexOutOfBoundsException("columnIndex out of bounds");
@@ -40,8 +38,6 @@ public class ActorTableModel extends util.GenericTableModel<Actor> {
         case 1: 
             return actor.getGender();
         case 2: 
-            return actor.getBirth();
-        case 3: 
             return actor.getCountry().getName();   
         default:
             throw new IndexOutOfBoundsException("columnIndex out of bounds");

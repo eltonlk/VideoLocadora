@@ -64,6 +64,8 @@ public class Main extends javax.swing.JFrame {
         setTitle("Sistema de Gestão de Video Locadoras");
         setPreferredSize(getMaximumSize());
 
+        desktopPane.setLayout(null);
+
         entriesMenu.setMnemonic('f');
         entriesMenu.setText("Cadastros");
 

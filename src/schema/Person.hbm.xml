@@ -7,7 +7,19 @@
                 <param name="sequence">people_id_seq</param>
             </generator>
         </id>
-
-        <property name="name" column="name" type="java.lang.String"/>
+        
+        <property name="avatar" column="avatar" type="binary"/>
+        
+        <property name="name" column="name" type="string" not-null="true"/>
+        
+        <property name="document1" column="document1" type="string"/>
+        
+        <property name="document2" column="document2" type="string"/>
+        
+        <property name="phone" column="phone" type="string"/>
+        
+        <property name="cell" column="cell" type="string"/>
+        
+        <property name="email" column="email" type="string"/>
     </class>
 </hibernate-mapping>

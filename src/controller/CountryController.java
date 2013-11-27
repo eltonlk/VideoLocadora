@@ -1,14 +1,19 @@
 package controller;
 
 import javax.swing.JDesktopPane;
-import tableModel.CountryTableModel;
+import view.countries.*;
 
 public class CountryController extends util.GenericController<model.Country> {
 
     public CountryController(JDesktopPane pane) {
         this.pane = pane;
-        this.dao = new dao.CountryDao();
-        this.tableModel = new CountryTableModel();
     }    
+
+    @Override
+    public void list() {
+        CountriesInternalFrame frame = new CountriesInternalFrame();
+        
+        showFrame(frame);
+    }
    
 }

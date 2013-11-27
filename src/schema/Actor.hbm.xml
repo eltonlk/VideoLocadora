@@ -8,11 +8,11 @@
             </generator>
         </id>
 
-        <property name="name" column="name" type="java.lang.String"/>
+        <property name="avatar" column="avatar" type="binary"/>
+
+        <property name="name" column="name" type="string" not-null="true"/>
         
-        <property name="gender" column="gender" type="java.lang.String"/>
-        
-        <property name="birth" column="birth" type="date"/>
+        <property name="gender" column="gender" type="string"/>
         
         <many-to-one name="country" class="model.Country" column="country_id"/>
         

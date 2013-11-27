@@ -8,6 +8,10 @@
             </generator>
         </id>
 
-        <property name="name" column="name" type="java.lang.String"/>
+        <property name="name" column="name" type="string"/>
+        
+        <property name="nationality" column="nationality" type="string"/>
+        
+        <property name="acronym" column="acronym" type="string"/>
     </class>
 </hibernate-mapping>
