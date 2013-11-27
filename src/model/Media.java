@@ -1,11 +1,13 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Currency;
 
 public class Media implements Serializable {
 
     private Long mediaId;
     private String kind;
+    private Currency amount;
     private Movie movie;
 
     public Media() {
@@ -27,6 +29,14 @@ public class Media implements Serializable {
         this.kind = kind;
     }
 
+    public Currency getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Currency amount) {
+        this.amount = amount;
+    }
+    
     public Movie getMovie() {
         return movie;
     }

@@ -1,12 +1,17 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Set;
 
 public class Movie implements Serializable {
 
     private Long movieId;
     private String title;
+    private String kind;
+    private Date releasedIn;
+    private Genre genre;
+    private int duration;
     private String synopsis;
     private Set actors;
     private Set medias;
@@ -30,6 +35,38 @@ public class Movie implements Serializable {
         this.title = title;
     }
 
+    public String getKind() {
+        return kind;
+    }
+
+    public void setKind(String kind) {
+        this.kind = kind;
+    }
+
+    public Date getReleasedIn() {
+        return releasedIn;
+    }
+
+    public void setReleasedIn(Date releasedIn) {
+        this.releasedIn = releasedIn;
+    }
+
+    public Genre getGenre() {
+        return genre;
+    }
+
+    public void setGenre(Genre genre) {
+        this.genre = genre;
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
+
     public String getSynopsis() {
         return synopsis;
     }
@@ -38,22 +75,22 @@ public class Movie implements Serializable {
         this.synopsis = synopsis;
     }
 
-    public Set<Actor> getActors() {
+    public Set getActors() {
         return actors;
     }
 
-    public void setActors(Set<Actor> actors) {
+    public void setActors(Set actors) {
         this.actors = actors;
     }
 
-    public Set<Media> getMedias() {
+    public Set getMedias() {
         return medias;
     }
 
-    public void setMedias(Set<Media> medias) {
+    public void setMedias(Set medias) {
         this.medias = medias;
     }
-
+    
     public void addActor(Actor actor) {
         this.actors.add(actor);
     }

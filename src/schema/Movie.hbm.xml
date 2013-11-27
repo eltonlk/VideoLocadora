@@ -8,10 +8,18 @@
             </generator>
         </id>
 
-        <property name="title" column="title" type="java.lang.String" unique="true" not-null="true"/>
+        <property name="title" column="title" type="string" unique="true" not-null="true"/>
 
-        <property name="synopsis" column="synopsis" type="java.lang.String"/>
+        <property name="synopsis" column="synopsis" type="text"/>
+        
+        <property name="kind" column="kind" type="string"/>
+        
+        <property name="releasedIn" column="released_in" type="date"/>
+        
+        <property name="duration" column="duration" type="int"/>
 
+        <many-to-one name="genre" class="model.Genre" column="genre_id"/>
+        
         <set name="actors" table="movies_actors" inverse="false" lazy="true" fetch="select" cascade="all">
             <key>
                 <column name="movie_id" not-null="true"/>

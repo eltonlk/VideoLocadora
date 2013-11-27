@@ -9,6 +9,8 @@ public class ActorController extends util.GenericController<model.Actor> {
         this.pane = pane;
         this.dao = new dao.ActorDao();
         this.tableModel = new ActorTableModel();
-    }    
+    }
+    
+    
     
 }

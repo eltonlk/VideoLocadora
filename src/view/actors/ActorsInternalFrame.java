@@ -4,18 +4,18 @@
  * and open the template in the editor.
  */
 
-package view.states;
+package view.actors;
 
 /**
  *
- * @author elton
+ * @author EltonLuis
  */
-public class StateInternalFrame extends javax.swing.JInternalFrame {
+public class ActorsInternalFrame extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form StateInternalFrame
+     * Creates new form ActorsInternalFrame
      */
-    public StateInternalFrame() {
+    public ActorsInternalFrame() {
         initComponents();
     }
 
@@ -32,11 +32,11 @@ public class StateInternalFrame extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
+            .addGap(0, 883, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
+            .addGap(0, 505, Short.MAX_VALUE)
         );
 
         pack();

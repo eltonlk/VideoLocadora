@@ -11,25 +11,27 @@ public abstract class GenericController<M> {
     protected GenericDao dao;
     protected GenericTableModel tableModel;
     protected JDesktopPane pane;
-
+    protected M currentObject;
+    
     public GenericController() {
     }
     
     public void list() {
-        ListPanel panel = new ListPanel(this);
+        JInternalFrame list = new ListPanel(this);
         
-        addFrame(panel);
+        addFrame(list);
     }
 
-    public void show() {
+    public void form() {
+        
     }
     
-    public void save(M actor) {
-        dao.save(actor);
+    public void save(M object, JInternalFrame frame) {
+        dao.save(object);
     }
     
-    public void destroy(M actor) {
-        dao.destroy(actor);
+    public void destroy(M object) {
+        dao.destroy(object);
     }    
 
     protected void addFrame(JInternalFrame frame) {
@@ -49,5 +51,8 @@ public abstract class GenericController<M> {
 
         table.setModel(tableModel);
     }
-    
+
+    public GenericTableModel getTableModel() {
+        return tableModel;
+    }
 }

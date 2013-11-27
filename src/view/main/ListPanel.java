@@ -1,5 +1,6 @@
 package view.main;
 
+import javax.swing.JOptionPane;
 import util.GenericController;
 
 public class ListPanel extends javax.swing.JInternalFrame {
@@ -43,7 +44,6 @@ public class ListPanel extends javax.swing.JInternalFrame {
         setResizable(true);
         setMinimumSize(new java.awt.Dimension(800, 500));
         setPreferredSize(new java.awt.Dimension(800, 500));
-        setSize(new java.awt.Dimension(800, 500));
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         toolBar.setBackground(new java.awt.Color(245, 245, 245));
@@ -60,6 +60,11 @@ public class ListPanel extends javax.swing.JInternalFrame {
         addButton.setMinimumSize(new java.awt.Dimension(65, 38));
         addButton.setPreferredSize(new java.awt.Dimension(65, 38));
         addButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        addButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addButtonActionPerformed(evt);
+            }
+        });
         toolBar.add(addButton);
 
         editButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/edit_16.png"))); // NOI18N
@@ -71,6 +76,11 @@ public class ListPanel extends javax.swing.JInternalFrame {
         editButton.setMinimumSize(new java.awt.Dimension(65, 38));
         editButton.setPreferredSize(new java.awt.Dimension(65, 38));
         editButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        editButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editButtonActionPerformed(evt);
+            }
+        });
         toolBar.add(editButton);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -109,6 +119,18 @@ public class ListPanel extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
+        controller.form(new model.Movie());
+    }//GEN-LAST:event_addButtonActionPerformed
+
+    private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
+        if (table.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(this, "Selecione o item a ser editado.", "Selecione o item a ser editado.", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            controller.form(controller.getTableModel().getItem(table.getSelectedRow()));
+        }
+    }//GEN-LAST:event_editButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

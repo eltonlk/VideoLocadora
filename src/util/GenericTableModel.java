@@ -70,6 +70,10 @@ public abstract class GenericTableModel<T> extends AbstractTableModel {
 
         fireTableRowsInserted(old_index, getRowCount() - 1);
     }
+    
+    public List<T> getItems() {
+        return rows;
+    }
 
     public void clear() {
         this.rows.clear();

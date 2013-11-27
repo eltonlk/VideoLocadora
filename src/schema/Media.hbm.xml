@@ -8,7 +8,9 @@
             </generator>
         </id>
 
-        <property name="kind" column="kind" type="java.lang.String"/>
+        <property name="kind" column="kind" type="string"/>
+        
+        <property name="amount" column="amount" type="currency"/>
 
         <many-to-one name="movie" class="model.Movie" column="movie_id"/>
     </class>
