@@ -18,7 +18,7 @@ public abstract class GenericController<M> {
 
         Dimension frameSize = frame.getSize();
 
-        frame.setLocation((desktopSize.width - frameSize.width)/2, (desktopSize.height- frameSize.height)/2);
+        frame.setLocation((desktopSize.width - frameSize.width)/2, (desktopSize.height- frameSize.height)/4);
         
         pane.add(frame);
         

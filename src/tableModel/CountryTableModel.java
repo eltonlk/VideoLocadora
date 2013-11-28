@@ -5,7 +5,7 @@ import model.Country;
 public class CountryTableModel extends util.GenericTableModel<Country> {
 
     public CountryTableModel() {
-        this.columns = new String[] { "Nome" };
+        this.columns = new String[] { "Nome", "Sigla", "Nacionalidade" };
     }
 
     @Override
@@ -13,6 +13,10 @@ public class CountryTableModel extends util.GenericTableModel<Country> {
         switch (columnIndex) {
         case 0:
             return String.class;
+        case 1:
+            return String.class;
+        case 2:
+            return String.class;            
         default:
             throw new IndexOutOfBoundsException("columnIndex out of bounds");
         }
@@ -25,6 +29,10 @@ public class CountryTableModel extends util.GenericTableModel<Country> {
         switch (columnIndex) {
         case 0: 
             return country.getName();
+        case 1: 
+            return country.getAcronym();
+        case 2: 
+            return country.getNationality();            
         default:
             throw new IndexOutOfBoundsException("columnIndex out of bounds");
         }

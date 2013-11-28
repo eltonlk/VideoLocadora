@@ -7,6 +7,7 @@ public class City implements Serializable {
     private Long cityId;
     private String name;
     private State state;
+    private String zip;
 
     public City() {
     }
@@ -35,4 +36,12 @@ public class City implements Serializable {
         this.state = state;
     }
 
+    public String getZip() {
+        return zip;
+    }
+
+    public void setZip(String zip) {
+        this.zip = zip;
+    }
+    
 }

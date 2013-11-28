@@ -8,7 +8,9 @@
             </generator>
         </id>
 
-        <property name="name" column="name" type="java.lang.String"/>
+        <property name="name" column="name" type="string"/>
+        
+        <property name="zip" column="zip" type="string"/>
 
         <many-to-one name="state" class="model.State" column="state_id"/>
     </class>

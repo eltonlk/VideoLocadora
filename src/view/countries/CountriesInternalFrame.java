@@ -1,20 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package view.countries;
 
-/**
- *
- * @author elton
- */
+import tableModel.CountryTableModel;
+
 public class CountriesInternalFrame extends javax.swing.JInternalFrame {
 
-    /** Creates new form CountriesInternalFrame */
+    private CountryTableModel tableModel;
+    
     public CountriesInternalFrame() {
         initComponents();
+        
+        this.tableModel = new CountryTableModel();
+
+        this.tableCountries.setModel(tableModel);
     }
 
     /** This method is called from within the constructor to
@@ -26,25 +23,25 @@ public class CountriesInternalFrame extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        formPanel = new javax.swing.JPanel();
+        form = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         formName = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         formNationality = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
         formAcronym = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
         formSubmit = new javax.swing.JButton();
-        scrollPane = new javax.swing.JScrollPane();
-        countriesTable = new javax.swing.JTable();
-        newButton = new javax.swing.JButton();
-        editButton = new javax.swing.JButton();
         destroyButton = new javax.swing.JButton();
+        editButton = new javax.swing.JButton();
+        addButton = new javax.swing.JButton();
+        scrollPane = new javax.swing.JScrollPane();
+        tableCountries = new javax.swing.JTable();
 
         setClosable(true);
-        setTitle("Países");
+        setTitle("Cadastro de Países");
 
-        formPanel.setBackground(new java.awt.Color(250, 250, 250));
-        formPanel.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(204, 204, 204)));
+        form.setBackground(new java.awt.Color(240, 240, 240));
+        form.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel1.setText("Nome");
 
@@ -52,40 +49,34 @@ public class CountriesInternalFrame extends javax.swing.JInternalFrame {
 
         jLabel3.setText("Sigla");
 
+        formSubmit.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
+        formSubmit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/Save.png"))); // NOI18N
         formSubmit.setText("Gravar");
 
-        javax.swing.GroupLayout formPanelLayout = new javax.swing.GroupLayout(formPanel);
-        formPanel.setLayout(formPanelLayout);
-        formPanelLayout.setHorizontalGroup(
-            formPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(formPanelLayout.createSequentialGroup()
-                .addGroup(formPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(formPanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1))
-                    .addGroup(formPanelLayout.createSequentialGroup()
-                        .addGap(107, 107, 107)
-                        .addComponent(formSubmit))
-                    .addGroup(formPanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel3))
-                    .addGroup(formPanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel2))
-                    .addGroup(formPanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(formName, javax.swing.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE))
-                    .addGroup(formPanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(formNationality))
-                    .addGroup(formPanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(formAcronym, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        javax.swing.GroupLayout formLayout = new javax.swing.GroupLayout(form);
+        form.setLayout(formLayout);
+        formLayout.setHorizontalGroup(
+            formLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(formLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(formLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(formName)
+                    .addComponent(formNationality)
+                    .addGroup(formLayout.createSequentialGroup()
+                        .addGroup(formLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(formAcronym, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 169, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, formLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(formSubmit)))
+                .addContainerGap())
         );
-        formPanelLayout.setVerticalGroup(
-            formPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(formPanelLayout.createSequentialGroup()
+        formLayout.setVerticalGroup(
+            formLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(formLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -98,12 +89,24 @@ public class CountriesInternalFrame extends javax.swing.JInternalFrame {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(formAcronym, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 186, Short.MAX_VALUE)
                 .addComponent(formSubmit)
                 .addContainerGap())
         );
 
-        countriesTable.setModel(new javax.swing.table.DefaultTableModel(
+        destroyButton.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
+        destroyButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/trash_16.png"))); // NOI18N
+        destroyButton.setText("Excluír");
+
+        editButton.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
+        editButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/edit_16.png"))); // NOI18N
+        editButton.setText("Alterar");
+
+        addButton.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
+        addButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/plus_16.png"))); // NOI18N
+        addButton.setText("Adicionar");
+
+        tableCountries.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -114,13 +117,7 @@ public class CountriesInternalFrame extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        scrollPane.setViewportView(countriesTable);
-
-        newButton.setText("Adicionar");
-
-        editButton.setText("Alterar");
-
-        destroyButton.setText("Excluir");
+        scrollPane.setViewportView(tableCountries);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -128,32 +125,32 @@ public class CountriesInternalFrame extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(formPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(form, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(newButton)
+                        .addComponent(addButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(editButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(destroyButton))
-                    .addComponent(scrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 471, Short.MAX_VALUE))
+                    .addComponent(scrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 478, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(formPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(form, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(scrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(scrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(destroyButton)
                             .addComponent(editButton)
-                            .addComponent(newButton))))
+                            .addComponent(addButton))))
                 .addContainerGap())
         );
 
@@ -162,18 +159,18 @@ public class CountriesInternalFrame extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable countriesTable;
+    private javax.swing.JButton addButton;
     private javax.swing.JButton destroyButton;
     private javax.swing.JButton editButton;
+    private javax.swing.JPanel form;
     private javax.swing.JTextField formAcronym;
     private javax.swing.JTextField formName;
     private javax.swing.JTextField formNationality;
-    private javax.swing.JPanel formPanel;
     private javax.swing.JButton formSubmit;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JButton newButton;
     private javax.swing.JScrollPane scrollPane;
+    private javax.swing.JTable tableCountries;
     // End of variables declaration//GEN-END:variables
 }

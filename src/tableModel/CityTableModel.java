@@ -5,7 +5,7 @@ import model.City;
 public class CityTableModel extends util.GenericTableModel<City> {
 
     public CityTableModel() {
-        this.columns = new String[] { "Nome", "Estado" };
+        this.columns = new String[] { "Nome", "CEP", "Estado" };
     }
 
     @Override
@@ -15,6 +15,8 @@ public class CityTableModel extends util.GenericTableModel<City> {
             return String.class;
         case 1:
             return String.class;
+        case 2:
+            return String.class;            
         default:
             throw new IndexOutOfBoundsException("columnIndex out of bounds");
         }
@@ -27,7 +29,9 @@ public class CityTableModel extends util.GenericTableModel<City> {
         switch (columnIndex) {
         case 0: 
             return city.getName();
-        case 1:
+        case 1: 
+            return city.getZip();            
+        case 2:
             return city.getState().getName();
         default:
             throw new IndexOutOfBoundsException("columnIndex out of bounds");
