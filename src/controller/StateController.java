@@ -1,8 +1,9 @@
 package controller;
 
 import javax.swing.JDesktopPane;
+import view.states.*;
 
-public class StateController  extends util.GenericController<model.State> {
+public class StateController extends util.GenericController<model.State> {
 
     public StateController(JDesktopPane pane) {
         this.pane = pane;
@@ -10,7 +11,9 @@ public class StateController  extends util.GenericController<model.State> {
 
     @Override
     public void list() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        StatesInternalFrame frame = new StatesInternalFrame();
+        
+        showFrame(frame);
     }
    
 }

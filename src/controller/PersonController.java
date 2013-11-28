@@ -1,6 +1,7 @@
 package controller;
 
 import javax.swing.JDesktopPane;
+import view.people.*;
 
 public class PersonController extends util.GenericController<model.Person> {
 
@@ -10,7 +11,9 @@ public class PersonController extends util.GenericController<model.Person> {
 
     @Override
     public void list() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        PeopleInternalFrame frame = new PeopleInternalFrame();
+        
+        showFrame(frame);
     }
    
 }

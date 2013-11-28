@@ -1,17 +1,17 @@
-package view.cities;
+package view.states;
 
-import tableModel.CityTableModel;
+import tableModel.StateTableModel;
 
-public class CitiesInternalFrame extends javax.swing.JInternalFrame {
+public class StatesInternalFrame extends javax.swing.JInternalFrame {
 
-    private CityTableModel tableModel;
+    private StateTableModel tableModel;
     
-    public CitiesInternalFrame() {
+    public StatesInternalFrame() {
         initComponents();
         
-        this.tableModel = new CityTableModel();
+        this.tableModel = new StateTableModel();
 
-        this.tableCities.setModel(tableModel);        
+        this.tableStates.setModel(tableModel);
     }
 
     /** This method is called from within the constructor to
@@ -27,26 +27,26 @@ public class CitiesInternalFrame extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         formName = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        formState = new javax.swing.JComboBox();
+        formAcronym = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        formZip = new javax.swing.JTextField();
         formSubmit = new javax.swing.JButton();
+        formCountry = new javax.swing.JComboBox();
         destroyButton = new javax.swing.JButton();
         editButton = new javax.swing.JButton();
         addButton = new javax.swing.JButton();
         scrollPane = new javax.swing.JScrollPane();
-        tableCities = new javax.swing.JTable();
+        tableStates = new javax.swing.JTable();
 
         setClosable(true);
-        setTitle("Cadastro de Cidades");
+        setTitle("Cadastro de Estados");
 
         form.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel1.setText("Nome");
 
-        jLabel2.setText("Estado");
+        jLabel2.setText("País");
 
-        jLabel3.setText("CEP");
+        jLabel3.setText("Sigla");
 
         formSubmit.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
         formSubmit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/Save.png"))); // NOI18N
@@ -63,15 +63,18 @@ public class CitiesInternalFrame extends javax.swing.JInternalFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, formLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(formSubmit))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, formLayout.createSequentialGroup()
+                    .addGroup(formLayout.createSequentialGroup()
                         .addGroup(formLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(formState, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1)
-                            .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(formLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(formZip, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(formLayout.createSequentialGroup()
+                                .addGroup(formLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(formCountry, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel2))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(formLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(formAcronym, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 86, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         formLayout.setVerticalGroup(
@@ -87,9 +90,9 @@ public class CitiesInternalFrame extends javax.swing.JInternalFrame {
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(formLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(formState, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(formZip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 237, Short.MAX_VALUE)
+                    .addComponent(formCountry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(formAcronym, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 236, Short.MAX_VALUE)
                 .addComponent(formSubmit)
                 .addContainerGap())
         );
@@ -106,7 +109,7 @@ public class CitiesInternalFrame extends javax.swing.JInternalFrame {
         addButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/plus_16.png"))); // NOI18N
         addButton.setText("Adicionar");
 
-        tableCities.setModel(new javax.swing.table.DefaultTableModel(
+        tableStates.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -117,7 +120,7 @@ public class CitiesInternalFrame extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        scrollPane.setViewportView(tableCities);
+        scrollPane.setViewportView(tableStates);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -134,7 +137,7 @@ public class CitiesInternalFrame extends javax.swing.JInternalFrame {
                         .addComponent(editButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(destroyButton))
-                    .addComponent(scrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(scrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 431, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -162,14 +165,14 @@ public class CitiesInternalFrame extends javax.swing.JInternalFrame {
     private javax.swing.JButton destroyButton;
     private javax.swing.JButton editButton;
     private javax.swing.JPanel form;
+    private javax.swing.JTextField formAcronym;
+    private javax.swing.JComboBox formCountry;
     private javax.swing.JTextField formName;
-    private javax.swing.JComboBox formState;
     private javax.swing.JButton formSubmit;
-    private javax.swing.JTextField formZip;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane scrollPane;
-    private javax.swing.JTable tableCities;
+    private javax.swing.JTable tableStates;
     // End of variables declaration//GEN-END:variables
 }

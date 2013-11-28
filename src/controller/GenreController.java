@@ -1,6 +1,7 @@
 package controller;
 
 import javax.swing.JDesktopPane;
+import view.genres.*;
 
 public class GenreController extends util.GenericController<model.Genre> {
 
@@ -10,7 +11,9 @@ public class GenreController extends util.GenericController<model.Genre> {
 
     @Override
     public void list() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        GenresInternalFrame frame = new GenresInternalFrame();
+        
+        showFrame(frame);
     }
    
 }
