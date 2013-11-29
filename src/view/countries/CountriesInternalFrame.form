@@ -161,6 +161,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Gravar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="formSubmitActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -185,6 +188,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Alterar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="editButtonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="addButton">
       <Properties>
@@ -196,6 +202,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Adicionar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addButtonActionPerformed"/>
+      </Events>
     </Component>
     <Container class="javax.swing.JScrollPane" name="scrollPane">
 

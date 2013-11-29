@@ -1,19 +1,27 @@
 package view.countries;
 
+import controller.CountryController;
+import model.Country;
 import tableModel.CountryTableModel;
 
 public class CountriesInternalFrame extends javax.swing.JInternalFrame {
 
+    private CountryController controller;
     private CountryTableModel tableModel;
+    private Country country;
     
-    public CountriesInternalFrame() {
+    public CountriesInternalFrame(CountryController controller) {
         initComponents();
+    
+        this.controller = controller;        
         
         this.tableModel = new CountryTableModel();
 
         this.tableCountries.setModel(tableModel);
+        
+        enableOrDisableFields(false);        
     }
-
+    
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -51,6 +59,11 @@ public class CountriesInternalFrame extends javax.swing.JInternalFrame {
         formSubmit.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
         formSubmit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/Save.png"))); // NOI18N
         formSubmit.setText("Gravar");
+        formSubmit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                formSubmitActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout formLayout = new javax.swing.GroupLayout(form);
         form.setLayout(formLayout);
@@ -104,10 +117,20 @@ public class CountriesInternalFrame extends javax.swing.JInternalFrame {
         editButton.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
         editButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/edit_16.png"))); // NOI18N
         editButton.setText("Alterar");
+        editButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editButtonActionPerformed(evt);
+            }
+        });
 
         addButton.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
         addButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/plus_16.png"))); // NOI18N
         addButton.setText("Adicionar");
+        addButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addButtonActionPerformed(evt);
+            }
+        });
 
         tableCountries.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -158,6 +181,47 @@ public class CountriesInternalFrame extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void enableOrDisableFields(boolean enable) {
+        this.formName.setEnabled(enable);
+        this.formNationality.setEnabled(enable);
+        this.formAcronym.setEnabled(enable);
+        
+        this.formSubmit.setEnabled(enable);
+        
+        this.form.repaint();
+    }
+    
+    private void mappingCountryToForm() {
+        this.formName.setText(country.getName());
+        this.formNationality.setText(country.getNationality());
+        this.formAcronym.setText(country.getAcronym());
+    }
+
+    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
+        this.country = new Country();
+        
+        mappingCountryToForm();
+        
+        enableOrDisableFields(true);
+    }//GEN-LAST:event_addButtonActionPerformed
+
+    private void formSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_formSubmitActionPerformed
+        this.country.setName(formName.getText());
+        this.country.setNationality(formNationality.getText());
+        this.country.setAcronym(formAcronym.getText());
+        
+        controller.save(country);
+        
+        enableOrDisableFields(false);
+    }//GEN-LAST:event_formSubmitActionPerformed
+
+    private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
+        
+        mappingCountryToForm();
+        
+        enableOrDisableFields(true);
+    }//GEN-LAST:event_editButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
