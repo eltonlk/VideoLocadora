@@ -8,7 +8,7 @@
             </generator>
         </id>
 
-        <property name="name" column="name" type="string" not-null="true"/>
+        <property name="name" column="name" type="string" not-null="true" unique="true"/>
         
         <property name="nationality" column="nationality" type="string"/>
         

@@ -36,7 +36,7 @@ public class GenericActionListener implements ListSelectionListener, ActionListe
         if (table.getSelectedRow() >= 0) {
             frame.enableOrDisableFields(false);
             
-            frame.setObject(tableModel.getItem(table.getSelectedRow()));
+            frame.setObject((GenericModel) tableModel.getItem(table.getSelectedRow()));
 
             frame.mappingObjectToForm();
         }
@@ -72,12 +72,12 @@ public class GenericActionListener implements ListSelectionListener, ActionListe
         if (table.getSelectedRow() >= 0) {
             frame.enableOrDisableFields(true);
         } else {
-            javax.swing.JOptionPane.showMessageDialog(null, "Selecione um registro para editar.");
+            Message.editNotSelected();
         }        
     }
     
     private void destroy() {
-        if (table.getSelectedRow() >= 0) {
+        if (table.getSelectedRow() >= 0 && Message.confirmDestroy()) {
             controller.destroy(frame.getObject());
             
             frame.setNewObject();
@@ -88,24 +88,24 @@ public class GenericActionListener implements ListSelectionListener, ActionListe
             
             frame.enableOrDisableFields(false);
             
-            javax.swing.JOptionPane.showMessageDialog(null, "Registro foi excluido.");
+            Message.destroyInfo();
         } else {
-            javax.swing.JOptionPane.showMessageDialog(null, "Selecione um registro para excluír.");
+            Message.destroyNotSelected();
         }
     }
     
     private void save() {
         frame.mappingFormToObject();
         
-        if (controller.save(frame.getObject())) {
-            javax.swing.JOptionPane.showMessageDialog(null, "Registro Salvo.");
-            
+        GenericModel object = (GenericModel) frame.getObject();
+        
+        if (controller.save(object)) {
             tableModel.reload();
             
             frame.enableOrDisableFields(false);
-        } else {
-            javax.swing.JOptionPane.showMessageDialog(null, "Não foi possivel salvar o registro.");
         }
+        
+        Message.form(frame, object);
     }    
     
 }

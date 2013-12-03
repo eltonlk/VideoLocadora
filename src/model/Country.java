@@ -1,8 +1,8 @@
 package model;
 
-import java.io.Serializable;
+import dao.CountryDao;
 
-public class Country implements Serializable {
+public class Country extends util.GenericModel {
 
     private Long countryId;
     private String name;
@@ -42,6 +42,19 @@ public class Country implements Serializable {
 
     public void setAcronym(String acronym) {
         this.acronym = acronym;
+    }
+
+    @Override
+    protected void validateRules() {
+        if (ValidationUtils.isEmpty(name)) {
+            addError("name", "Nome do país não pode ficar em branco.");
+        } else {
+            CountryDao dao = new CountryDao();
+
+            if (dao.findByName(name) == null) {
+                addError("name", "Nome do país já existe.");
+            }
+        }
     }
 
 }

@@ -1,10 +1,10 @@
-package framework;
+package util;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.regex.Pattern;
 
-public abstract class ModelValidation {
+public abstract class GenericModelValidation {
     
     private HashMap errors;
     
@@ -25,7 +25,7 @@ public abstract class ModelValidation {
     }
     
     private void validate() {
-        errors = new HashMap();
+        this.errors = new HashMap();
         
         validateRules();
     }

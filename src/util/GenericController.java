@@ -14,8 +14,12 @@ public abstract class GenericController<M> {
     
     public abstract void list();
 
-    public boolean save(M object) {
-        return dao.save(object);
+    public boolean save(GenericModel object) {
+        if (object.isValid()) {
+            return dao.save(object);
+        } else {
+            return false;
+        }
     }
     
     public boolean destroy(M object) {
