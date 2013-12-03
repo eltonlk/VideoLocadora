@@ -8,7 +8,7 @@ public class Location implements Serializable {
 
     private Long locationId;
     private Person person;
-    private Set items;
+    private Set<LocationItem> items;
 
     public Location() {
     }

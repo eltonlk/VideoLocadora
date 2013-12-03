@@ -5,6 +5,8 @@ import java.io.Serializable;
 public class Person implements Serializable {
 
     private Long personId;
+    private byte[] avatar;
+    private String legalName;
     private String name;
     private String document1;
     private String document2;
@@ -23,6 +25,22 @@ public class Person implements Serializable {
         this.personId = personId;
     }
 
+    public byte[] getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(byte[] avatar) {
+        this.avatar = avatar;
+    }
+
+    public String getLegalName() {
+        return legalName;
+    }
+
+    public void setLegalName(String legalName) {
+        this.legalName = legalName;
+    }
+    
     public String getName() {
         return name;
     }

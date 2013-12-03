@@ -5,7 +5,8 @@ import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
 public abstract class GenericTableModel<T> extends AbstractTableModel {
-
+    
+    protected T selected;
     protected List<T> rows;
     protected String[] columns;
     
@@ -45,6 +46,10 @@ public abstract class GenericTableModel<T> extends AbstractTableModel {
     @Override
     public abstract boolean isCellEditable(int rowIndex, int columnIndex);
     
+    public T getSelected() {
+        return this.selected;
+    }
+    
     public T getItem(int index) {
         return rows.get(index);
     }
@@ -64,6 +69,8 @@ public abstract class GenericTableModel<T> extends AbstractTableModel {
     }
 
     public void addItems(List<T> items) {
+        clear();
+        
         int old_index = getRowCount();
 
         this.rows.addAll(items);
@@ -84,5 +91,5 @@ public abstract class GenericTableModel<T> extends AbstractTableModel {
     public boolean isEmpty() {
         return rows.isEmpty();
     }
-    
+   
 }

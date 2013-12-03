@@ -2,22 +2,18 @@ package view.countries;
 
 import controller.CountryController;
 import model.Country;
-import tableModel.CountryTableModel;
 
 public class CountriesInternalFrame extends javax.swing.JInternalFrame {
 
     private CountryController controller;
-    private CountryTableModel tableModel;
     private Country country;
     
     public CountriesInternalFrame(CountryController controller) {
         initComponents();
     
         this.controller = controller;        
-        
-        this.tableModel = new CountryTableModel();
 
-        this.tableCountries.setModel(tableModel);
+        this.tableCountries.setModel(controller.getTableModel());
         
         enableOrDisableFields(false);        
     }
@@ -181,14 +177,14 @@ public class CountriesInternalFrame extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
     private void enableOrDisableFields(boolean enable) {
         this.formName.setEnabled(enable);
         this.formNationality.setEnabled(enable);
         this.formAcronym.setEnabled(enable);
         
         this.formSubmit.setEnabled(enable);
-        
+                
         this.form.repaint();
     }
     

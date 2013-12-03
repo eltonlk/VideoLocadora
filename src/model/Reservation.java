@@ -7,7 +7,7 @@ public class Reservation implements Serializable {
 
     private Long reservationId;
     private Person person;
-    private Set items;
+    private Set<ReservationItem> items;
 
     public Reservation() {
     }

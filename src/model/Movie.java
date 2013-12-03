@@ -7,14 +7,15 @@ import java.util.Set;
 public class Movie implements Serializable {
 
     private Long movieId;
+    private byte[] avatar;
     private String title;
     private String kind;
     private Date releasedIn;
     private Genre genre;
     private int duration;
     private String synopsis;
-    private Set actors;
-    private Set medias;
+    private Set<Actor> actors;
+    private Set<Media> medias;
 
     public Movie() {
     }
@@ -27,6 +28,14 @@ public class Movie implements Serializable {
         this.movieId = movieId;
     }
 
+    public byte[] getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(byte[] avatar) {
+        this.avatar = avatar;
+    }
+    
     public String getTitle() {
         return title;
     }
@@ -75,19 +84,19 @@ public class Movie implements Serializable {
         this.synopsis = synopsis;
     }
 
-    public Set getActors() {
+    public Set<Actor> getActors() {
         return actors;
     }
 
-    public void setActors(Set actors) {
+    public void setActors(Set<Actor> actors) {
         this.actors = actors;
     }
 
-    public Set getMedias() {
+    public Set<Media> getMedias() {
         return medias;
     }
 
-    public void setMedias(Set medias) {
+    public void setMedias(Set<Media> medias) {
         this.medias = medias;
     }
     
@@ -98,5 +107,5 @@ public class Movie implements Serializable {
     public void addMedia(Media media) {
         this.medias.add(media);
     }
-
+    
 }

@@ -9,7 +9,7 @@ public class Actor implements java.io.Serializable {
     private String name;
     private String gender;
     private Country country;
-    private Set movies;    
+    private Set<Movie> movies;    
     
     public Actor() {
     }
@@ -53,12 +53,12 @@ public class Actor implements java.io.Serializable {
     public void setCountry(Country country) {
         this.country = country;
     }
-    
-    public Set getMovies() {
+
+    public Set<Movie> getMovies() {
         return movies;
     }
 
-    public void setMovies(Set movies) {
+    public void setMovies(Set<Movie> movies) {
         this.movies = movies;
     }
     
