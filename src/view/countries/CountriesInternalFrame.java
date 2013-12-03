@@ -1,21 +1,25 @@
 package view.countries;
 
 import controller.CountryController;
+import javax.swing.JButton;
 import model.Country;
+import tableModel.CountryTableModel;
+import util.GenericActionListener;
 
-public class CountriesInternalFrame extends javax.swing.JInternalFrame {
+public class CountriesInternalFrame extends util.GenericInternalFrame<CountryController, Country, CountryTableModel> {
 
-    private CountryController controller;
-    private Country country;
-    
     public CountriesInternalFrame(CountryController controller) {
         initComponents();
     
         this.controller = controller;        
-
-        this.tableCountries.setModel(controller.getTableModel());
         
-        enableOrDisableFields(false);        
+        this.listTableModel = new CountryTableModel();
+        
+        this.tableCountries.setModel(listTableModel);
+        
+        this.listener = new GenericActionListener(this, tableCountries, listTableModel, controller);
+        
+        loadResources();
     }
     
     /** This method is called from within the constructor to
@@ -55,11 +59,7 @@ public class CountriesInternalFrame extends javax.swing.JInternalFrame {
         formSubmit.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
         formSubmit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/Save.png"))); // NOI18N
         formSubmit.setText("Gravar");
-        formSubmit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                formSubmitActionPerformed(evt);
-            }
-        });
+        formSubmit.setActionCommand("save");
 
         javax.swing.GroupLayout formLayout = new javax.swing.GroupLayout(form);
         form.setLayout(formLayout);
@@ -106,27 +106,22 @@ public class CountriesInternalFrame extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
+        formSubmit.getAccessibleContext().setAccessibleName("saveButton");
+
         destroyButton.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
         destroyButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/trash_16.png"))); // NOI18N
         destroyButton.setText("Excluír");
+        destroyButton.setActionCommand("destroy");
 
         editButton.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
         editButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/edit_16.png"))); // NOI18N
         editButton.setText("Alterar");
-        editButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editButtonActionPerformed(evt);
-            }
-        });
+        editButton.setActionCommand("edit");
 
         addButton.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
         addButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/plus_16.png"))); // NOI18N
         addButton.setText("Adicionar");
-        addButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addButtonActionPerformed(evt);
-            }
-        });
+        addButton.setActionCommand("add");
 
         tableCountries.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -175,10 +170,35 @@ public class CountriesInternalFrame extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
+        destroyButton.getAccessibleContext().setAccessibleName("destroyButton");
+        editButton.getAccessibleContext().setAccessibleName("editButton");
+        addButton.getAccessibleContext().setAccessibleName("addButton");
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    @Override
+    public JButton getAddButton() {
+        return addButton;
+    }
+
+    @Override
+    public JButton getDestroyButton() {
+        return destroyButton;
+    }
+
+    @Override
+    public JButton getEditButton() {
+        return editButton;
+    }
+
+    @Override
+    public JButton getFormSubmit() {
+        return formSubmit;
+    }
     
-    private void enableOrDisableFields(boolean enable) {
+    @Override
+    protected void enableOrDisableFields(boolean enable) {
         this.formName.setEnabled(enable);
         this.formNationality.setEnabled(enable);
         this.formAcronym.setEnabled(enable);
@@ -188,37 +208,28 @@ public class CountriesInternalFrame extends javax.swing.JInternalFrame {
         this.form.repaint();
     }
     
-    private void mappingCountryToForm() {
-        this.formName.setText(country.getName());
-        this.formNationality.setText(country.getNationality());
-        this.formAcronym.setText(country.getAcronym());
+    @Override
+    protected void setNewObject() {
+        this.object = new Country();
+    }    
+    
+    @Override
+    protected void mappingObjectToForm() {
+        
+        System.out.println(object.getName());
+        
+        this.formName.setText(object.getName());
+        this.formNationality.setText(object.getNationality());
+        this.formAcronym.setText(object.getAcronym());
     }
 
-    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
-        this.country = new Country();
-        
-        mappingCountryToForm();
-        
-        enableOrDisableFields(true);
-    }//GEN-LAST:event_addButtonActionPerformed
-
-    private void formSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_formSubmitActionPerformed
-        this.country.setName(formName.getText());
-        this.country.setNationality(formNationality.getText());
-        this.country.setAcronym(formAcronym.getText());
-        
-        controller.save(country);
-        
-        enableOrDisableFields(false);
-    }//GEN-LAST:event_formSubmitActionPerformed
-
-    private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
-        
-        mappingCountryToForm();
-        
-        enableOrDisableFields(true);
-    }//GEN-LAST:event_editButtonActionPerformed
-
+    @Override
+    protected void mappingFormToObject() {
+        this.object.setName(formName.getText());
+        this.object.setNationality(formNationality.getText());
+        this.object.setAcronym(formAcronym.getText());
+    }    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
@@ -235,4 +246,5 @@ public class CountriesInternalFrame extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane scrollPane;
     private javax.swing.JTable tableCountries;
     // End of variables declaration//GEN-END:variables
+
 }

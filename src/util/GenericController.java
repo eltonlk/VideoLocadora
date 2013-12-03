@@ -7,12 +7,21 @@ import javax.swing.JInternalFrame;
 public abstract class GenericController<M> {
     
     protected JDesktopPane pane;
+    protected GenericDao dao;
     
     public GenericController() {
     }
     
     public abstract void list();
 
+    public boolean save(M object) {
+        return dao.save(object);
+    }
+    
+    public boolean destroy(M object) {
+        return dao.destroy(object);
+    }
+    
     protected void showFrame(JInternalFrame frame) {
         Dimension desktopSize = pane.getSize();
 
@@ -24,5 +33,5 @@ public abstract class GenericController<M> {
         
         frame.setVisible(true);
     }    
-
+    
 }

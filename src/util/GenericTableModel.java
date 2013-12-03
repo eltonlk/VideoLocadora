@@ -5,8 +5,7 @@ import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
 public abstract class GenericTableModel<T> extends AbstractTableModel {
-    
-    protected T selected;
+
     protected List<T> rows;
     protected String[] columns;
     
@@ -46,9 +45,7 @@ public abstract class GenericTableModel<T> extends AbstractTableModel {
     @Override
     public abstract boolean isCellEditable(int rowIndex, int columnIndex);
     
-    public T getSelected() {
-        return this.selected;
-    }
+    public abstract void reload();
     
     public T getItem(int index) {
         return rows.get(index);

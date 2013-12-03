@@ -35,7 +35,7 @@ public class GenericDao<T, ID extends Serializable> {
         Transaction transaction = session.beginTransaction();
         
         try {
-            session.save(object);
+            session.saveOrUpdate(object);
             
             transaction.commit();
             
@@ -43,11 +43,27 @@ public class GenericDao<T, ID extends Serializable> {
         } catch (Exception e) {
             System.out.println(e.getMessage());
             transaction.rollback();
-        } finally {
-            session.clear();
         }         
         return false;
     }
+    
+    public Boolean merge(T object) {
+        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        
+        try {
+            session.merge(object);
+            
+            transaction.commit();
+            
+            return true;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            transaction.rollback();
+        }         
+        return false;
+    }    
     
     public Boolean destroy(T object) {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
@@ -60,9 +76,7 @@ public class GenericDao<T, ID extends Serializable> {
         } catch (Exception e) {
             System.out.println(e.getMessage());
             transaction.rollback();
-        } finally {
-            session.close();
-        }
+        } 
         return false;
     }
     

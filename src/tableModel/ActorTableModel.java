@@ -51,5 +51,10 @@ public class ActorTableModel extends util.GenericTableModel<Actor> {
     public boolean isCellEditable(int rowIndex, int columnIndex) {
         return false;
     }
+
+    @Override
+    public void reload() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

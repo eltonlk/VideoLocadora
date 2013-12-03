@@ -1,11 +1,16 @@
 package tableModel;
 
+import dao.CountryDao;
 import model.Country;
 
 public class CountryTableModel extends util.GenericTableModel<Country> {
 
+    private CountryDao dao = new CountryDao();
+    
     public CountryTableModel() {
         this.columns = new String[] { "Nome", "Sigla", "Nacionalidade" };
+        
+        reload();
     }
 
     @Override
@@ -44,6 +49,11 @@ public class CountryTableModel extends util.GenericTableModel<Country> {
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
         return false;
+    }
+    
+    @Override
+    public final void reload() {
+        addItems(dao.list());
     }
     
 }
