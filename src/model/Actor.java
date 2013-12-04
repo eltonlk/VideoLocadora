@@ -4,14 +4,14 @@ import dao.ActorDao;
 import java.util.Set;
 
 public class Actor extends util.GenericModel {
-    
+
     private Long actorId;
     private byte[] avatar;
     private String name;
     private String gender;
     private Country country;
-    private Set<Movie> movies;    
-    
+    private Set<Movie> movies;
+
     public Actor() {
     }
 
@@ -30,7 +30,7 @@ public class Actor extends util.GenericModel {
     public void setAvatar(byte[] avatar) {
         this.avatar = avatar;
     }
-    
+
     public String getName() {
         return name;
     }
@@ -71,9 +71,9 @@ public class Actor extends util.GenericModel {
             ActorDao dao = new ActorDao();
 
             if (dao.exists(this)) {
-                addError("name", "Nome do ator já existe.");
+                addError("name", "Ator já existe.");
             }
         }
     }
-    
+
 }

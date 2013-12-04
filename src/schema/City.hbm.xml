@@ -8,8 +8,8 @@
             </generator>
         </id>
 
-        <property name="name" column="name" type="string"/>
-        
+        <property name="name" column="name" type="string" not-null="true"/>
+
         <property name="zip" column="zip" type="string"/>
 
         <many-to-one name="state" class="model.State" column="state_id"/>

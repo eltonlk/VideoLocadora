@@ -11,7 +11,7 @@ public class City extends util.GenericModel {
 
     public City() {
     }
-    
+
     public Long getCityId() {
         return cityId;
     }
@@ -43,7 +43,7 @@ public class City extends util.GenericModel {
     public void setZip(String zip) {
         this.zip = zip;
     }
-    
+
     @Override
     protected void validateRules() {
         if (state == null) {
@@ -55,9 +55,9 @@ public class City extends util.GenericModel {
             CityDao dao = new CityDao();
 
             if (dao.exists(this)) {
-                addError("name", "Nome da cidade já existe para este estado.");
+                addError("name", "Cidade já existe para este estado.");
             }
         }
     }
-    
+
 }

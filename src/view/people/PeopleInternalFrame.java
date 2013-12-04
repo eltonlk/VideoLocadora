@@ -1,17 +1,25 @@
 package view.people;
 
+import controller.PersonController;
+import javax.swing.JButton;
+import model.Person;
 import tableModel.PersonTableModel;
+import util.GenericActionListener;
 
-public class PeopleInternalFrame extends javax.swing.JInternalFrame {
+public class PeopleInternalFrame extends util.GenericInternalFrame<PersonController, Person, PersonTableModel> {
 
-    private PersonTableModel personTableModel;
-        
-    public PeopleInternalFrame() {
+    public PeopleInternalFrame(PersonController controller) {
         initComponents();
-        
-        this.personTableModel = new PersonTableModel();
-        
-        this.tablePeople.setModel(personTableModel);
+
+        this.controller = controller;
+
+        this.listTableModel = new PersonTableModel();
+
+        this.tablePeople.setModel(listTableModel);
+
+        this.listener = new GenericActionListener(this, tablePeople, listTableModel, controller);
+
+        loadResources();
     }
 
     /** This method is called from within the constructor to
@@ -29,11 +37,11 @@ public class PeopleInternalFrame extends javax.swing.JInternalFrame {
         formLegalName = new javax.swing.JTextField();
         labelDocument1 = new javax.swing.JLabel();
         labelDocument2 = new javax.swing.JLabel();
-        formdocument1 = new javax.swing.JTextField();
+        formDocument1 = new javax.swing.JTextField();
         formSubmit = new javax.swing.JButton();
         formDocument2 = new javax.swing.JTextField();
         formName = new javax.swing.JTextField();
-        labelLegalName1 = new javax.swing.JLabel();
+        labelName = new javax.swing.JLabel();
         addButton = new javax.swing.JButton();
         editButton = new javax.swing.JButton();
         destroyButton = new javax.swing.JButton();
@@ -73,7 +81,7 @@ public class PeopleInternalFrame extends javax.swing.JInternalFrame {
         formSubmit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/Save.png"))); // NOI18N
         formSubmit.setText("Gravar");
 
-        labelLegalName1.setText("Nome Fantasia");
+        labelName.setText("Nome Fantasia");
 
         javax.swing.GroupLayout formLayout = new javax.swing.GroupLayout(form);
         form.setLayout(formLayout);
@@ -89,7 +97,7 @@ public class PeopleInternalFrame extends javax.swing.JInternalFrame {
                             .addComponent(formLegalName)
                             .addGroup(formLayout.createSequentialGroup()
                                 .addGroup(formLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(formdocument1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(formDocument1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(labelDocument1))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(formLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -103,7 +111,7 @@ public class PeopleInternalFrame extends javax.swing.JInternalFrame {
                             .addGroup(formLayout.createSequentialGroup()
                                 .addGroup(formLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(labelLegalName)
-                                    .addComponent(labelLegalName1))
+                                    .addComponent(labelName))
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, formLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -120,7 +128,7 @@ public class PeopleInternalFrame extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(formLegalName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(labelLegalName1)
+                        .addComponent(labelName)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(formName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -129,7 +137,7 @@ public class PeopleInternalFrame extends javax.swing.JInternalFrame {
                             .addComponent(labelDocument2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(formLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(formdocument1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(formDocument1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(formDocument2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(formAvatar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -239,6 +247,58 @@ public class PeopleInternalFrame extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    @Override
+    public JButton getAddButton() {
+        return addButton;
+    }
+
+    @Override
+    public JButton getDestroyButton() {
+        return destroyButton;
+    }
+
+    @Override
+    public JButton getEditButton() {
+        return editButton;
+    }
+
+    @Override
+    public JButton getFormSubmit() {
+        return formSubmit;
+    }
+
+    @Override
+    protected void enableOrDisableFields(boolean enable) {
+        this.formLegalName.setEnabled(enable);
+        this.formName.setEnabled(enable);
+        this.formDocument1.setEnabled(enable);
+        this.formDocument2.setEnabled(enable);
+
+        this.formSubmit.setEnabled(enable);
+
+        this.form.repaint();
+    }
+
+    @Override
+    protected void setNewObject() {
+        this.object = new Person();
+    }
+
+    @Override
+    protected void mappingObjectToForm() {
+        this.formLegalName.setText(object.getLegalName());
+        this.formName.setText(object.getName());
+        this.formDocument1.setText(object.getDocument1());
+        this.formDocument2.setText(object.getDocument2());
+    }
+
+    @Override
+    protected void mappingFormToObject() {
+        this.object.setLegalName(formLegalName.getText());
+        this.object.setName(formName.getText());
+        this.object.setDocument1(formDocument1.getText());
+        this.object.setDocument2(formDocument2.getText());
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
@@ -250,12 +310,12 @@ public class PeopleInternalFrame extends javax.swing.JInternalFrame {
     private javax.swing.JTextField formLegalName;
     private javax.swing.JTextField formName;
     private javax.swing.JButton formSubmit;
-    private javax.swing.JTextField formdocument1;
+    private javax.swing.JTextField formDocument1;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel labelDocument1;
     private javax.swing.JLabel labelDocument2;
     private javax.swing.JLabel labelLegalName;
-    private javax.swing.JLabel labelLegalName1;
+    private javax.swing.JLabel labelName;
     private javax.swing.JScrollPane scrollPane;
     private javax.swing.JPanel search;
     private javax.swing.JTextField searchName;

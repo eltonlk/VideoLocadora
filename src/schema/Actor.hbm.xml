@@ -10,12 +10,12 @@
 
         <property name="avatar" column="avatar" type="binary"/>
 
-        <property name="name" column="name" type="string" not-null="true"/>
-        
+        <property name="name" column="name" type="string" not-null="true" unique="true"/>
+
         <property name="gender" column="gender" type="string"/>
-        
+
         <many-to-one name="country" class="model.Country" column="country_id"/>
-        
+
         <set name="movies" table="movies_actors" inverse="false" lazy="true" fetch="select" cascade="all">
             <key>
                 <column name="actor_id" not-null="true"/>

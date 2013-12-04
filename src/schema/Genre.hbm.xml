@@ -8,6 +8,6 @@
             </generator>
         </id>
 
-        <property name="name" column="name" type="java.lang.String"/>
+        <property name="name" column="name" type="string" not-null="true" unique="true"/>
     </class>
 </hibernate-mapping>

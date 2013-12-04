@@ -1,28 +1,40 @@
 package view.movies;
 
+import comboBoxModel.GenderComboBoxModel;
+import comboBoxModel.GenreComboBoxModel;
+import comboBoxModel.MovieKindComboBoxModel;
+import controller.MovieController;
+import java.util.List;
+import java.util.Set;
+import javax.swing.JButton;
+import model.Movie;
+import tableModel.MovieTableModel;
+import util.GenericActionListener;
 
 import tableModel.ActorTableModel;
 import tableModel.MediaTableModel;
-import tableModel.MovieTableModel;
 
-public class MoviesInternalFrame extends javax.swing.JInternalFrame {
+public class MoviesInternalFrame extends util.GenericInternalFrame<MovieController, Movie, MovieTableModel> {
 
-    private MovieTableModel movieTableModel;
     private ActorTableModel actorTableModel;
     private MediaTableModel mediaTableModel;
-    
-    public MoviesInternalFrame() {
+
+    public MoviesInternalFrame(MovieController controller) {
         initComponents();
+
+        this.controller = controller;
+
+        this.listTableModel = new MovieTableModel();
+
+        this.tableMovies.setModel(listTableModel);
+
+        this.listener = new GenericActionListener(this, tableMovies, listTableModel, controller);
+
+        loadResources();
+
+        loadActorResources();
         
-        this.movieTableModel = new MovieTableModel();
-        this.actorTableModel = new ActorTableModel();
-        this.mediaTableModel = new MediaTableModel();
-        
-        this.tableMovies.setModel(movieTableModel);
-        this.tableActors.setModel(actorTableModel);
-        this.tableMedias.setModel(mediaTableModel);
-        
-        
+        loadSearchResources();
     }
 
     /** This method is called from within the constructor to
@@ -106,6 +118,7 @@ public class MoviesInternalFrame extends javax.swing.JInternalFrame {
         formSubmit.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
         formSubmit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/Save.png"))); // NOI18N
         formSubmit.setText("Gravar");
+        formSubmit.setActionCommand("save");
 
         formSynopsis.setColumns(20);
         formSynopsis.setRows(5);
@@ -268,14 +281,17 @@ public class MoviesInternalFrame extends javax.swing.JInternalFrame {
         addButton.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
         addButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/plus_16.png"))); // NOI18N
         addButton.setText("Adicionar");
+        addButton.setActionCommand("add");
 
         editButton.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
         editButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/edit_16.png"))); // NOI18N
         editButton.setText("Alterar");
+        editButton.setActionCommand("edit");
 
         destroyButton.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
         destroyButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/trash_16.png"))); // NOI18N
         destroyButton.setText("Excluír");
+        destroyButton.setActionCommand("destroy");
 
         search.setBorder(javax.swing.BorderFactory.createTitledBorder("Pesquisar"));
 
@@ -386,6 +402,89 @@ public class MoviesInternalFrame extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void loadSearchResources() {
+        this.searchGenre.setModel(new GenreComboBoxModel(true));
+        this.searchKind.setModel(new MovieKindComboBoxModel(true));
+    }
+    
+    private void loadActorResources() {
+        this.formKind.setModel(new MovieKindComboBoxModel());
+        this.formGenre.setModel(new GenreComboBoxModel());
+        
+        this.actorTableModel = new ActorTableModel();
+        this.mediaTableModel = new MediaTableModel();
+
+        this.tableActors.setModel(actorTableModel);
+        this.tableMedias.setModel(mediaTableModel);
+    }
+
+    @Override
+    public JButton getAddButton() {
+        return addButton;
+    }
+
+    @Override
+    public JButton getDestroyButton() {
+        return destroyButton;
+    }
+
+    @Override
+    public JButton getEditButton() {
+        return editButton;
+    }
+
+    @Override
+    public JButton getFormSubmit() {
+        return formSubmit;
+    }
+
+    @Override
+    protected void enableOrDisableFields(boolean enable) {
+        this.formTitle.setEnabled(enable);
+        this.formKind.setEnabled(enable);
+        this.formGenre.setEnabled(enable);
+        this.formDuration.setEnabled(enable);
+        this.formReleasedIn.setEnabled(enable);
+
+        this.formSynopsis.setEnabled(enable);
+
+        this.formSubmit.setEnabled(enable);
+
+        this.form.repaint();
+    }
+
+    @Override
+    protected void setNewObject() {
+        this.object = new Movie();
+    }
+
+    @Override
+    protected void mappingObjectToForm() {
+        this.formTitle.setText(object.getTitle());
+        this.formKind.setSelectedItem(object.getKind());
+        this.formGenre.setSelectedItem(object.getGenre());
+        this.formDuration.setValue(object.getDuration());
+//        this.formReleasedIn.setText(object.getReleasedIn().toLocaleString());
+
+        this.formSynopsis.setText(object.getSynopsis());
+        
+//        this.actorTableModel.addItems((List) object.getActors());
+//        this.mediaTableModel.addItems((List) object.getMedias());
+    }
+
+    @Override
+    protected void mappingFormToObject() {
+        this.object.setTitle(formTitle.getText());
+        this.object.setKind((String) formKind.getSelectedItem());
+        this.object.setGenre((model.Genre) formGenre.getSelectedItem());
+        this.object.setDuration((int) formDuration.getValue());
+        this.object.setReleasedIn( util.MyDate.delocalize(formReleasedIn.getText()).getDate() );
+
+        this.object.setSynopsis(formSynopsis.getText());
+
+        this.object.setActors((Set) actorTableModel.getItems());
+        this.object.setMedias((Set) mediaTableModel.getItems());
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;

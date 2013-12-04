@@ -1,17 +1,28 @@
 package view.states;
 
+import comboBoxModel.CountryComboBoxModel;
+import controller.StateController;
+import javax.swing.JButton;
+import model.State;
 import tableModel.StateTableModel;
+import util.GenericActionListener;
 
-public class StatesInternalFrame extends javax.swing.JInternalFrame {
+public class StatesInternalFrame extends util.GenericInternalFrame<StateController, State, StateTableModel> {
 
-    private StateTableModel tableModel;
-    
-    public StatesInternalFrame() {
+    public StatesInternalFrame(StateController controller) {
         initComponents();
-        
-        this.tableModel = new StateTableModel();
 
-        this.tableStates.setModel(tableModel);
+        this.controller = controller;
+
+        this.listTableModel = new StateTableModel();
+
+        this.tableStates.setModel(listTableModel);
+
+        this.listener = new GenericActionListener(this, tableStates, listTableModel, controller);
+
+        loadResources();
+        
+        loadStateResources();
     }
 
     /** This method is called from within the constructor to
@@ -51,6 +62,7 @@ public class StatesInternalFrame extends javax.swing.JInternalFrame {
         formSubmit.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
         formSubmit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/Save.png"))); // NOI18N
         formSubmit.setText("Gravar");
+        formSubmit.setActionCommand("save");
 
         javax.swing.GroupLayout formLayout = new javax.swing.GroupLayout(form);
         form.setLayout(formLayout);
@@ -100,14 +112,17 @@ public class StatesInternalFrame extends javax.swing.JInternalFrame {
         destroyButton.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
         destroyButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/trash_16.png"))); // NOI18N
         destroyButton.setText("Excluír");
+        destroyButton.setActionCommand("destroy");
 
         editButton.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
         editButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/edit_16.png"))); // NOI18N
         editButton.setText("Alterar");
+        editButton.setActionCommand("edit");
 
         addButton.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
         addButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/plus_16.png"))); // NOI18N
         addButton.setText("Adicionar");
+        addButton.setActionCommand("add");
 
         tableStates.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -158,7 +173,60 @@ public class StatesInternalFrame extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    
+    private void loadStateResources() {
+        this.formCountry.setModel(new CountryComboBoxModel());
+    }
 
+    @Override
+    public JButton getAddButton() {
+        return addButton;
+    }
+
+    @Override
+    public JButton getDestroyButton() {
+        return destroyButton;
+    }
+
+    @Override
+    public JButton getEditButton() {
+        return editButton;
+    }
+
+    @Override
+    public JButton getFormSubmit() {
+        return formSubmit;
+    }
+
+    @Override
+    protected void enableOrDisableFields(boolean enable) {
+        this.formName.setEnabled(enable);
+        this.formCountry.setEnabled(enable);
+        this.formAcronym.setEnabled(enable);
+
+        this.formSubmit.setEnabled(enable);
+
+        this.form.repaint();
+    }
+
+    @Override
+    protected void setNewObject() {
+        this.object = new State();
+    }
+
+    @Override
+    protected void mappingObjectToForm() {
+        this.formName.setText(object.getName());
+        this.formCountry.getModel().setSelectedItem(object.getCountry());
+        this.formAcronym.setText(object.getAcronym());
+    }
+
+    @Override
+    protected void mappingFormToObject() {
+        this.object.setName(formName.getText());
+        this.object.setCountry( (model.Country) formCountry.getModel().getSelectedItem() );
+        this.object.setAcronym(formAcronym.getText());
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;

@@ -11,7 +11,7 @@ public class Country extends util.GenericModel {
 
     public Country() {
     }
-   
+
     public Long getCountryId() {
         return countryId;
     }
@@ -45,6 +45,11 @@ public class Country extends util.GenericModel {
     }
 
     @Override
+    public String toString() {
+        return name;
+    }
+    
+    @Override
     protected void validateRules() {
         if (ValidationUtils.isEmpty(name)) {
             addError("name", "Nome do país não pode ficar em branco.");
@@ -52,7 +57,7 @@ public class Country extends util.GenericModel {
             CountryDao dao = new CountryDao();
 
             if (dao.exists(this)) {
-                addError("name", "Nome do país já existe.");
+                addError("name", "País já existe.");
             }
         }
     }

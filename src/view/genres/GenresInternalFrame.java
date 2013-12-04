@@ -1,17 +1,25 @@
 package view.genres;
 
+import controller.GenreController;
+import javax.swing.JButton;
+import model.Genre;
 import tableModel.GenreTableModel;
+import util.GenericActionListener;
 
-public class GenresInternalFrame extends javax.swing.JInternalFrame {
+public class GenresInternalFrame extends util.GenericInternalFrame<GenreController, Genre, GenreTableModel> {
 
-    private GenreTableModel tableModel;
-    
-    public GenresInternalFrame() {
+    public GenresInternalFrame(GenreController controller) {
         initComponents();
-        
-        this.tableModel = new GenreTableModel();
-        
-        this.tableGenres.setModel(tableModel);
+
+        this.controller = controller;
+
+        this.listTableModel = new GenreTableModel();
+
+        this.tableGenres.setModel(listTableModel);
+
+        this.listener = new GenericActionListener(this, tableGenres, listTableModel, controller);
+
+        loadResources();
     }
 
     /**
@@ -43,6 +51,7 @@ public class GenresInternalFrame extends javax.swing.JInternalFrame {
         formSubmit.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
         formSubmit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/Save.png"))); // NOI18N
         formSubmit.setText("Gravar");
+        formSubmit.setActionCommand("save");
 
         javax.swing.GroupLayout formLayout = new javax.swing.GroupLayout(form);
         form.setLayout(formLayout);
@@ -75,14 +84,17 @@ public class GenresInternalFrame extends javax.swing.JInternalFrame {
         addButton.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
         addButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/plus_16.png"))); // NOI18N
         addButton.setText("Adicionar");
+        addButton.setActionCommand("add");
 
         editButton.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
         editButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/edit_16.png"))); // NOI18N
         editButton.setText("Alterar");
+        editButton.setActionCommand("edit");
 
         destroyButton.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
         destroyButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/trash_16.png"))); // NOI18N
         destroyButton.setText("Excluír");
+        destroyButton.setActionCommand("destroy");
 
         tableGenres.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -135,6 +147,49 @@ public class GenresInternalFrame extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    @Override
+    public JButton getAddButton() {
+        return addButton;
+    }
+
+    @Override
+    public JButton getDestroyButton() {
+        return destroyButton;
+    }
+
+    @Override
+    public JButton getEditButton() {
+        return editButton;
+    }
+
+    @Override
+    public JButton getFormSubmit() {
+        return formSubmit;
+    }
+
+    @Override
+    protected void enableOrDisableFields(boolean enable) {
+        this.formName.setEnabled(enable);
+
+        this.formSubmit.setEnabled(enable);
+
+        this.form.repaint();
+    }
+
+    @Override
+    protected void setNewObject() {
+        this.object = new Genre();
+    }
+
+    @Override
+    protected void mappingObjectToForm() {
+        this.formName.setText(object.getName());
+    }
+
+    @Override
+    protected void mappingFormToObject() {
+        this.object.setName(formName.getText());
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;

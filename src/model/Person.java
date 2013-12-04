@@ -1,8 +1,8 @@
 package model;
 
-import java.io.Serializable;
+import dao.PersonDao;
 
-public class Person implements Serializable {
+public class Person extends util.GenericModel {
 
     private Long personId;
     private byte[] avatar;
@@ -13,7 +13,7 @@ public class Person implements Serializable {
     private String phone;
     private String cell;
     private String email;
-    
+
     public Person() {
     }
 
@@ -40,7 +40,7 @@ public class Person implements Serializable {
     public void setLegalName(String legalName) {
         this.legalName = legalName;
     }
-    
+
     public String getName() {
         return name;
     }
@@ -88,5 +88,22 @@ public class Person implements Serializable {
     public void setEmail(String email) {
         this.email = email;
     }
-    
+
+    @Override
+    protected void validateRules() {
+        if (ValidationUtils.isEmpty(legalName)) {
+            addError("legal_name", "Razão social não pode ficar em branco.");
+        } else {
+            PersonDao dao = new PersonDao();
+
+            if (dao.exists(this)) {
+                addError("legal_name", "Cliente já existe.");
+            }
+        }
+
+        if (ValidationUtils.isEmpty(name)) {
+            addError("name", "Nome fantasia não pode ficar em branco.");
+        }
+    }
+
 }

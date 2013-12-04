@@ -1,11 +1,16 @@
 package tableModel;
 
+import dao.GenreDao;
 import model.Genre;
 
 public class GenreTableModel extends util.GenericTableModel<Genre> {
 
+    private GenreDao dao = new GenreDao();
+
     public GenreTableModel() {
         this.columns = new String[] { "Nome" };
+
+        reload();
     }
 
     @Override
@@ -23,7 +28,7 @@ public class GenreTableModel extends util.GenericTableModel<Genre> {
         Genre genre = rows.get(rowIndex);
 
         switch (columnIndex) {
-        case 0: 
+        case 0:
             return genre.getName();
         default:
             throw new IndexOutOfBoundsException("columnIndex out of bounds");
@@ -40,7 +45,7 @@ public class GenreTableModel extends util.GenericTableModel<Genre> {
 
     @Override
     public void reload() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        addItems(dao.list());
     }
-    
+
 }

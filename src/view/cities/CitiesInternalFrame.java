@@ -1,17 +1,28 @@
 package view.cities;
 
+import comboBoxModel.StateComboBoxModel;
+import controller.CityController;
+import javax.swing.JButton;
+import model.City;
 import tableModel.CityTableModel;
+import util.GenericActionListener;
 
-public class CitiesInternalFrame extends javax.swing.JInternalFrame {
+public class CitiesInternalFrame extends util.GenericInternalFrame<CityController, City, CityTableModel> {
 
-    private CityTableModel tableModel;
-    
-    public CitiesInternalFrame() {
+    public CitiesInternalFrame(CityController controller) {
         initComponents();
-        
-        this.tableModel = new CityTableModel();
 
-        this.tableCities.setModel(tableModel);        
+        this.controller = controller;
+
+        this.listTableModel = new CityTableModel();
+
+        this.tableCities.setModel(listTableModel);
+
+        this.listener = new GenericActionListener(this, tableCities, listTableModel, controller);
+
+        loadResources();
+        
+        loadCityResources();
     }
 
     /** This method is called from within the constructor to
@@ -51,6 +62,7 @@ public class CitiesInternalFrame extends javax.swing.JInternalFrame {
         formSubmit.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
         formSubmit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/Save.png"))); // NOI18N
         formSubmit.setText("Gravar");
+        formSubmit.setActionCommand("save");
 
         javax.swing.GroupLayout formLayout = new javax.swing.GroupLayout(form);
         form.setLayout(formLayout);
@@ -97,14 +109,17 @@ public class CitiesInternalFrame extends javax.swing.JInternalFrame {
         destroyButton.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
         destroyButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/trash_16.png"))); // NOI18N
         destroyButton.setText("Excluír");
+        destroyButton.setActionCommand("destroy");
 
         editButton.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
         editButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/edit_16.png"))); // NOI18N
         editButton.setText("Alterar");
+        editButton.setActionCommand("edit");
 
         addButton.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
         addButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/plus_16.png"))); // NOI18N
         addButton.setText("Adicionar");
+        addButton.setActionCommand("add");
 
         tableCities.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -156,6 +171,59 @@ public class CitiesInternalFrame extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void loadCityResources() {
+        this.formState.setModel(new StateComboBoxModel());
+    }
+    
+    @Override
+    public JButton getAddButton() {
+        return addButton;
+    }
+
+    @Override
+    public JButton getDestroyButton() {
+        return destroyButton;
+    }
+
+    @Override
+    public JButton getEditButton() {
+        return editButton;
+    }
+
+    @Override
+    public JButton getFormSubmit() {
+        return formSubmit;
+    }
+
+    @Override
+    protected void enableOrDisableFields(boolean enable) {
+        this.formName.setEnabled(enable);
+        this.formState.setEnabled(enable);
+        this.formZip.setEnabled(enable);
+
+        this.formSubmit.setEnabled(enable);
+
+        this.form.repaint();
+    }
+
+    @Override
+    protected void setNewObject() {
+        this.object = new City();
+    }
+
+    @Override
+    protected void mappingObjectToForm() {
+        this.formName.setText(object.getName());
+        this.formState.getModel().setSelectedItem(object.getState());
+        this.formZip.setText(object.getZip());
+    }
+
+    @Override
+    protected void mappingFormToObject() {
+        this.object.setName(formName.getText());
+        this.object.setState((model.State) formState.getModel().getSelectedItem());
+        this.object.setZip(formZip.getText());
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;

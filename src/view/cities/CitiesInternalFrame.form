@@ -160,6 +160,7 @@
               <Image iconType="3" name="/assets/images/Save.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Gravar"/>
+            <Property name="actionCommand" type="java.lang.String" value="save"/>
           </Properties>
         </Component>
       </SubComponents>
@@ -173,6 +174,7 @@
           <Image iconType="3" name="/assets/images/trash_16.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Exclu&#xed;r"/>
+        <Property name="actionCommand" type="java.lang.String" value="destroy"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="editButton">
@@ -184,6 +186,7 @@
           <Image iconType="3" name="/assets/images/edit_16.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Alterar"/>
+        <Property name="actionCommand" type="java.lang.String" value="edit"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="addButton">
@@ -195,6 +198,7 @@
           <Image iconType="3" name="/assets/images/plus_16.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Adicionar"/>
+        <Property name="actionCommand" type="java.lang.String" value="add"/>
       </Properties>
     </Component>
     <Container class="javax.swing.JScrollPane" name="scrollPane">

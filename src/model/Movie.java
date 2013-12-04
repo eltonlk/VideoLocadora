@@ -1,10 +1,10 @@
 package model;
 
-import java.io.Serializable;
+import dao.MovieDao;
 import java.util.Date;
 import java.util.Set;
 
-public class Movie implements Serializable {
+public class Movie extends util.GenericModel {
 
     private Long movieId;
     private byte[] avatar;
@@ -35,7 +35,7 @@ public class Movie implements Serializable {
     public void setAvatar(byte[] avatar) {
         this.avatar = avatar;
     }
-    
+
     public String getTitle() {
         return title;
     }
@@ -99,7 +99,7 @@ public class Movie implements Serializable {
     public void setMedias(Set<Media> medias) {
         this.medias = medias;
     }
-    
+
     public void addActor(Actor actor) {
         this.actors.add(actor);
     }
@@ -107,5 +107,18 @@ public class Movie implements Serializable {
     public void addMedia(Media media) {
         this.medias.add(media);
     }
-    
+
+    @Override
+    protected void validateRules() {
+        if (ValidationUtils.isEmpty(title)) {
+            addError("title", "Título do filme não pode ficar em branco.");
+        } else {
+            MovieDao dao = new MovieDao();
+
+            if (dao.exists(this)) {
+                addError("title", "Filme já existe.");
+            }
+        }
+    }
+
 }

@@ -1,28 +1,29 @@
 package view.actors;
 
+import comboBoxModel.CountryComboBoxModel;
+import comboBoxModel.GenderComboBoxModel;
 import controller.ActorController;
 import javax.swing.JButton;
 import model.Actor;
-import model.Country;
 import tableModel.ActorTableModel;
 import util.GenericActionListener;
 
 public class ActorsInternalFrame extends util.GenericInternalFrame<ActorController, Actor, ActorTableModel> {
 
-    private ActorTableModel tableModel;
-    
     public ActorsInternalFrame(ActorController controller) {
         initComponents();
 
-        this.controller = controller;        
-        
+        this.controller = controller;
+
         this.listTableModel = new ActorTableModel();
-        
+
         this.tableActors.setModel(listTableModel);
-        
+
         this.listener = new GenericActionListener(this, tableActors, listTableModel, controller);
-        
+
         loadResources();
+        
+        loadActorResources();
     }
 
     /** This method is called from within the constructor to
@@ -38,10 +39,10 @@ public class ActorsInternalFrame extends util.GenericInternalFrame<ActorControll
         jLabel1 = new javax.swing.JLabel();
         formName = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        formSubmit = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         formGender = new javax.swing.JComboBox();
         formCountry = new javax.swing.JComboBox();
+        formSubmit = new javax.swing.JButton();
         addButton = new javax.swing.JButton();
         editButton = new javax.swing.JButton();
         destroyButton = new javax.swing.JButton();
@@ -61,12 +62,12 @@ public class ActorsInternalFrame extends util.GenericInternalFrame<ActorControll
 
         jLabel2.setText("Sexo");
 
+        jLabel3.setText("País");
+
         formSubmit.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
         formSubmit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/Save.png"))); // NOI18N
         formSubmit.setText("Gravar");
         formSubmit.setActionCommand("save");
-
-        jLabel3.setText("País");
 
         javax.swing.GroupLayout formLayout = new javax.swing.GroupLayout(form);
         form.setLayout(formLayout);
@@ -75,9 +76,6 @@ public class ActorsInternalFrame extends util.GenericInternalFrame<ActorControll
             .addGroup(formLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(formLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, formLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(formSubmit))
                     .addGroup(formLayout.createSequentialGroup()
                         .addGroup(formLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
@@ -91,7 +89,10 @@ public class ActorsInternalFrame extends util.GenericInternalFrame<ActorControll
                     .addGroup(formLayout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(formName))
+                    .addComponent(formName)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, formLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(formSubmit)))
                 .addContainerGap())
         );
         formLayout.setVerticalGroup(
@@ -215,6 +216,60 @@ public class ActorsInternalFrame extends util.GenericInternalFrame<ActorControll
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void loadActorResources() {
+        this.formCountry.setModel(new CountryComboBoxModel());
+        this.formGender.setModel(new GenderComboBoxModel());
+    }
+    
+    @Override
+    public JButton getAddButton() {
+        return addButton;
+    }
+
+    @Override
+    public JButton getDestroyButton() {
+        return destroyButton;
+    }
+
+    @Override
+    public JButton getEditButton() {
+        return editButton;
+    }
+
+    @Override
+    public JButton getFormSubmit() {
+        return formSubmit;
+    }
+
+    @Override
+    protected void enableOrDisableFields(boolean enable) {
+        this.formCountry.enable(enable);
+        this.formGender.enable(enable);
+        this.formName.enable(enable);
+
+        this.formSubmit.enable(enable);
+
+        this.form.repaint();
+    }
+
+    @Override
+    protected void setNewObject() {
+        this.object = new Actor();
+    }
+
+    @Override
+    protected void mappingObjectToForm() {
+        this.formName.setText(object.getName());
+        this.formGender.getModel().setSelectedItem(object.getGender());
+        this.formCountry.getModel().setSelectedItem(object.getCountry());
+    }
+
+    @Override
+    protected void mappingFormToObject() {
+        this.object.setName(formName.getText());
+        this.object.setGender((String) formGender.getModel().getSelectedItem());
+        this.object.setCountry((model.Country) formCountry.getModel().getSelectedItem());
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
@@ -236,53 +291,4 @@ public class ActorsInternalFrame extends util.GenericInternalFrame<ActorControll
     private javax.swing.JTable tableActors;
     // End of variables declaration//GEN-END:variables
 
-    @Override
-    protected void enableOrDisableFields(boolean enable) {
-        this.formCountry.enable(enable);
-        this.formGender.enable(enable);
-        this.formName.enable(enable);
-    
-        this.formSubmit.enable(enable);
-        
-        this.form.repaint();
-    }
-
-    @Override
-    protected void setNewObject() {
-        this.object = new Actor();
-    }
-
-    @Override
-    protected void mappingObjectToForm() {
-        this.formCountry.setSelectedItem(object.getCountry());
-        this.formGender.setSelectedItem(object.getGender());
-        this.formName.setText(object.getName());
-    }
-
-    @Override
-    protected void mappingFormToObject() {
-        this.object.setName(formName.getText());
-        this.object.setGender((String) formGender.getSelectedItem());
-        this.object.setCountry((Country) formCountry.getSelectedItem());
-    }
-
-    @Override
-    public JButton getAddButton() {
-        return addButton;
-    }
-
-    @Override
-    public JButton getDestroyButton() {
-        return destroyButton;
-    }
-
-    @Override
-    public JButton getEditButton() {
-        return editButton;
-    }
-
-    @Override
-    public JButton getFormSubmit() {
-        return formSubmit;
-    }
 }

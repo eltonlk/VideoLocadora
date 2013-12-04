@@ -1,12 +1,17 @@
 package tableModel;
 
+import dao.MovieDao;
 import java.util.Date;
 import model.Movie;
 
 public class MovieTableModel extends util.GenericTableModel<Movie> {
 
+    private MovieDao dao = new MovieDao();
+
     public MovieTableModel() {
         this.columns = new String[] { "Título", "Tipo", "Genero", "Data de Lançamento" };
+
+        reload();
     }
 
     @Override
@@ -30,13 +35,15 @@ public class MovieTableModel extends util.GenericTableModel<Movie> {
         Movie movie = rows.get(rowIndex);
 
         switch (columnIndex) {
-        case 0: 
+        case 0:
             return movie.getTitle();
-        case 1: 
+        case 1:
             return movie.getKind();
-        case 2: 
+        case 2:
+            if (movie.getGenre() == null) return null;
+
             return movie.getGenre().getName();
-        case 3: 
+        case 3:
             return movie.getReleasedIn();
         default:
             throw new IndexOutOfBoundsException("columnIndex out of bounds");
@@ -52,8 +59,8 @@ public class MovieTableModel extends util.GenericTableModel<Movie> {
     }
 
     @Override
-    public void reload() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public final void reload() {
+        addItems(dao.list());
     }
-    
+
 }

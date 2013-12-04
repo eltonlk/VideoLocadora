@@ -1,11 +1,16 @@
 package tableModel;
 
+import dao.CityDao;
 import model.City;
 
 public class CityTableModel extends util.GenericTableModel<City> {
 
+    private CityDao dao = new CityDao();
+
     public CityTableModel() {
         this.columns = new String[] { "Nome", "CEP", "Estado" };
+
+        reload();
     }
 
     @Override
@@ -16,7 +21,7 @@ public class CityTableModel extends util.GenericTableModel<City> {
         case 1:
             return String.class;
         case 2:
-            return String.class;            
+            return String.class;
         default:
             throw new IndexOutOfBoundsException("columnIndex out of bounds");
         }
@@ -27,11 +32,13 @@ public class CityTableModel extends util.GenericTableModel<City> {
         City city = rows.get(rowIndex);
 
         switch (columnIndex) {
-        case 0: 
+        case 0:
             return city.getName();
-        case 1: 
-            return city.getZip();            
+        case 1:
+            return city.getZip();
         case 2:
+            if (city.getState() == null) return null;
+
             return city.getState().getName();
         default:
             throw new IndexOutOfBoundsException("columnIndex out of bounds");
@@ -48,7 +55,7 @@ public class CityTableModel extends util.GenericTableModel<City> {
 
     @Override
     public void reload() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        addItems(dao.list());
     }
-    
+
 }

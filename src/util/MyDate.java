@@ -1,4 +1,4 @@
-package framework;
+package util;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -22,6 +22,10 @@ public class MyDate {
         date = new GregorianCalendar(year, month, day);
     }
     
+    public MyDate(Date date) {
+        this(date.getYear(), date.getMonth(), date.getDate());
+    }    
+
     public MyDate setTime(Date _date) {
         date.setTime(_date);
         
@@ -60,8 +64,18 @@ public class MyDate {
     public static MyDate today() {
         return new MyDate();
     }
+
+    public static String localize(Date date, String format) {
+        MyDate myDate = new MyDate(date);
+        
+        return myDate.toString(format);
+    }
+
+    public static String localize(Date date) {
+        return MyDate.localize(date, "dd/MM/yyyy");
+    }
     
-    public static MyDate strptime(String date, String format) {
+    public static MyDate delocalize(String date, String format) {
         MyDate myDate = new MyDate();
         
         try {
@@ -77,7 +91,8 @@ public class MyDate {
         return myDate;
     }
     
-    public static MyDate strptime(String date) {
-        return MyDate.strptime(date, "dd/MM/yyyy");
+    public static MyDate delocalize(String date) {
+        return MyDate.delocalize(date, "dd/MM/yyyy");
     }
+    
 }

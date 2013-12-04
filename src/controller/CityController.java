@@ -1,19 +1,24 @@
 package controller;
 
+import dao.CityDao;
 import javax.swing.JDesktopPane;
+import model.City;
 import view.cities.*;
 
-public class CityController extends util.GenericController<model.City> {
+public class CityController extends util.GenericController<City> {
+
+    private CitiesInternalFrame listFrame;
 
     public CityController(JDesktopPane pane) {
         this.pane = pane;
-    }    
+        this.dao = new CityDao();
+    }
 
     @Override
     public void list() {
-        CitiesInternalFrame frame = new CitiesInternalFrame();
-        
-        showFrame(frame);
+        this.listFrame = new CitiesInternalFrame(this);
+
+        showFrame(listFrame);
     }
-   
+
 }

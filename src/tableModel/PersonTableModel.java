@@ -1,11 +1,16 @@
 package tableModel;
 
+import dao.PersonDao;
 import model.Person;
 
 public class PersonTableModel extends util.GenericTableModel<Person> {
 
+    private PersonDao dao = new PersonDao();
+
     public PersonTableModel() {
         this.columns = new String[] { "Nome" };
+
+        reload();
     }
 
     @Override
@@ -23,7 +28,7 @@ public class PersonTableModel extends util.GenericTableModel<Person> {
         Person person = rows.get(rowIndex);
 
         switch (columnIndex) {
-        case 0: 
+        case 0:
             return person.getName();
         default:
             throw new IndexOutOfBoundsException("columnIndex out of bounds");
@@ -40,7 +45,7 @@ public class PersonTableModel extends util.GenericTableModel<Person> {
 
     @Override
     public void reload() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        addItems(dao.list());
     }
-    
+
 }
