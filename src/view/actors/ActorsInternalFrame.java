@@ -1,17 +1,28 @@
 package view.actors;
 
+import controller.ActorController;
+import javax.swing.JButton;
+import model.Actor;
+import model.Country;
 import tableModel.ActorTableModel;
+import util.GenericActionListener;
 
-public class ActorsInternalFrame extends javax.swing.JInternalFrame {
+public class ActorsInternalFrame extends util.GenericInternalFrame<ActorController, Actor, ActorTableModel> {
 
     private ActorTableModel tableModel;
     
-    public ActorsInternalFrame() {
+    public ActorsInternalFrame(ActorController controller) {
         initComponents();
 
-        this.tableModel = new ActorTableModel();
-
-        this.tableActors.setModel(tableModel);         
+        this.controller = controller;        
+        
+        this.listTableModel = new ActorTableModel();
+        
+        this.tableActors.setModel(listTableModel);
+        
+        this.listener = new GenericActionListener(this, tableActors, listTableModel, controller);
+        
+        loadResources();
     }
 
     /** This method is called from within the constructor to
@@ -53,6 +64,7 @@ public class ActorsInternalFrame extends javax.swing.JInternalFrame {
         formSubmit.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
         formSubmit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/Save.png"))); // NOI18N
         formSubmit.setText("Gravar");
+        formSubmit.setActionCommand("save");
 
         jLabel3.setText("País");
 
@@ -105,14 +117,17 @@ public class ActorsInternalFrame extends javax.swing.JInternalFrame {
         addButton.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
         addButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/plus_16.png"))); // NOI18N
         addButton.setText("Adicionar");
+        addButton.setActionCommand("add");
 
         editButton.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
         editButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/edit_16.png"))); // NOI18N
         editButton.setText("Alterar");
+        editButton.setActionCommand("edit");
 
         destroyButton.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
         destroyButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/trash_16.png"))); // NOI18N
         destroyButton.setText("Excluír");
+        destroyButton.setActionCommand("destroy");
 
         tableActors.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -134,6 +149,7 @@ public class ActorsInternalFrame extends javax.swing.JInternalFrame {
         searchSubmit.setFont(new java.awt.Font("Lucida Grande", 0, 10)); // NOI18N
         searchSubmit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/Find.png"))); // NOI18N
         searchSubmit.setText("Pesquisar");
+        searchSubmit.setActionCommand("search");
 
         javax.swing.GroupLayout searchLayout = new javax.swing.GroupLayout(search);
         search.setLayout(searchLayout);
@@ -219,4 +235,54 @@ public class ActorsInternalFrame extends javax.swing.JInternalFrame {
     private javax.swing.JButton searchSubmit;
     private javax.swing.JTable tableActors;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    protected void enableOrDisableFields(boolean enable) {
+        this.formCountry.enable(enable);
+        this.formGender.enable(enable);
+        this.formName.enable(enable);
+    
+        this.formSubmit.enable(enable);
+        
+        this.form.repaint();
+    }
+
+    @Override
+    protected void setNewObject() {
+        this.object = new Actor();
+    }
+
+    @Override
+    protected void mappingObjectToForm() {
+        this.formCountry.setSelectedItem(object.getCountry());
+        this.formGender.setSelectedItem(object.getGender());
+        this.formName.setText(object.getName());
+    }
+
+    @Override
+    protected void mappingFormToObject() {
+        this.object.setName(formName.getText());
+        this.object.setGender((String) formGender.getSelectedItem());
+        this.object.setCountry((Country) formCountry.getSelectedItem());
+    }
+
+    @Override
+    public JButton getAddButton() {
+        return addButton;
+    }
+
+    @Override
+    public JButton getDestroyButton() {
+        return destroyButton;
+    }
+
+    @Override
+    public JButton getEditButton() {
+        return editButton;
+    }
+
+    @Override
+    public JButton getFormSubmit() {
+        return formSubmit;
+    }
 }

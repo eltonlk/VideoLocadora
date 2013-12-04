@@ -6,17 +6,18 @@ import view.actors.*;
 
 public class ActorController extends util.GenericController<model.Actor> {
     
-    private ActorDao dao = new ActorDao();
+    private ActorsInternalFrame listFrame;
     
     public ActorController(JDesktopPane pane) {
         this.pane = pane;
+        this.dao = new ActorDao();
     }
 
     @Override
     public void list() {
-        ActorsInternalFrame frame = new ActorsInternalFrame();
+        this.listFrame = new ActorsInternalFrame(this);
         
-        showFrame(frame);
+        showFrame(listFrame);
     }
     
 }

@@ -3,10 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/elton/Projetos/java/sistemas/VideoLocadora/src/util/GenericModelValidation.java</file>
-            <file>file:/Users/elton/Projetos/java/sistemas/VideoLocadora/src/util/GenericDao.java</file>
-            <file>file:/Users/elton/Projetos/java/sistemas/VideoLocadora/src/dao/CountryDao.java</file>
-            <file>file:/Users/elton/Projetos/java/sistemas/VideoLocadora/src/model/Country.java</file>
+            <file>file:/C:/Users/EltonLuis/Projetos/java/sistemas/VideoLocadora/src/dao/ActorDao.java</file>
+            <file>file:/C:/Users/EltonLuis/Projetos/java/sistemas/VideoLocadora/src/dao/CityDao.java</file>
+            <file>file:/C:/Users/EltonLuis/Projetos/java/sistemas/VideoLocadora/src/model/Actor.java</file>
+            <file>file:/C:/Users/EltonLuis/Projetos/java/sistemas/VideoLocadora/src/model/City.java</file>
         </group>
     </open-files>
 </project-private>

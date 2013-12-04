@@ -51,7 +51,7 @@ public class Country extends util.GenericModel {
         } else {
             CountryDao dao = new CountryDao();
 
-            if (dao.findByName(name) == null) {
+            if (dao.exists(this)) {
                 addError("name", "Nome do país já existe.");
             }
         }

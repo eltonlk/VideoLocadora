@@ -1,13 +1,18 @@
 package tableModel;
 
+import dao.ActorDao;
 import java.util.ArrayList;
 import java.util.List;
 import model.Actor;
 
 public class ActorTableModel extends util.GenericTableModel<Actor> {
 
+    private ActorDao dao = new ActorDao();
+    
     public ActorTableModel() {
         this.columns = new String[] { "Nome", "Sexo", "País" };
+        
+        reload();
     }
 
     public ActorTableModel(List<Actor> rows) {
@@ -38,6 +43,8 @@ public class ActorTableModel extends util.GenericTableModel<Actor> {
         case 1: 
             return actor.getGender();
         case 2: 
+            if (actor.getCountry() == null) return null;
+            
             return actor.getCountry().getName();   
         default:
             throw new IndexOutOfBoundsException("columnIndex out of bounds");
@@ -53,8 +60,8 @@ public class ActorTableModel extends util.GenericTableModel<Actor> {
     }
 
     @Override
-    public void reload() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public final void reload() {
+        addItems(dao.list());
     }
     
 }

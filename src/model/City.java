@@ -1,8 +1,8 @@
 package model;
 
-import java.io.Serializable;
+import dao.CityDao;
 
-public class City implements Serializable {
+public class City extends util.GenericModel {
 
     private Long cityId;
     private String name;
@@ -42,6 +42,22 @@ public class City implements Serializable {
 
     public void setZip(String zip) {
         this.zip = zip;
+    }
+    
+    @Override
+    protected void validateRules() {
+        if (state == null) {
+            addError("state", "Estado não pode ficar em branco.");
+        }
+        if (ValidationUtils.isEmpty(name)) {
+            addError("name", "Nome da cidade não pode ficar em branco.");
+        } else {
+            CityDao dao = new CityDao();
+
+            if (dao.exists(this)) {
+                addError("name", "Nome da cidade já existe para este estado.");
+            }
+        }
     }
     
 }

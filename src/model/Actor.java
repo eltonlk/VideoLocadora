@@ -1,8 +1,9 @@
 package model;
 
+import dao.ActorDao;
 import java.util.Set;
 
-public class Actor implements java.io.Serializable {
+public class Actor extends util.GenericModel {
     
     private Long actorId;
     private byte[] avatar;
@@ -60,6 +61,19 @@ public class Actor implements java.io.Serializable {
 
     public void setMovies(Set<Movie> movies) {
         this.movies = movies;
+    }
+
+    @Override
+    protected void validateRules() {
+        if (ValidationUtils.isEmpty(name)) {
+            addError("name", "Nome do país não pode ficar em branco.");
+        } else {
+            ActorDao dao = new ActorDao();
+
+            if (dao.exists(this)) {
+                addError("name", "Nome do ator já existe.");
+            }
+        }
     }
     
 }

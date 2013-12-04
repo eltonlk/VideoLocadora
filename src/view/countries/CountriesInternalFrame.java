@@ -215,9 +215,6 @@ public class CountriesInternalFrame extends util.GenericInternalFrame<CountryCon
     
     @Override
     protected void mappingObjectToForm() {
-        
-        System.out.println(object.getName());
-        
         this.formName.setText(object.getName());
         this.formNationality.setText(object.getNationality());
         this.formAcronym.setText(object.getAcronym());
