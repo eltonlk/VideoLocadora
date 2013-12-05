@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="locations_by_period" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="697a193a-cde4-457d-baae-46d657db2f90">
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     locations."id" AS locations_id,
+     locations."customer_id" AS locations_customer_id,
+     locations."leased_in" AS locations_leased_in,
+     locations."amount" AS locations_amount,
+     locations."employee_id" AS locations_employee_id,
+     people."id" AS people_id,
+     people."avatar" AS people_avatar,
+     people."legal_name" AS people_legal_name,
+     people."name" AS people_name,
+     people."document1" AS people_document1,
+     people."document2" AS people_document2,
+     people."phone" AS people_phone,
+     people."cell_phone" AS people_cell_phone,
+     people."email" AS people_email,
+     people."district" AS people_district,
+     people."address" AS people_address,
+     people."city_id" AS people_city_id,
+     people."kind" AS people_kind,
+     people_A."id" AS people_A_id,
+     people_A."avatar" AS people_A_avatar,
+     people_A."legal_name" AS people_A_legal_name,
+     people_A."name" AS people_A_name,
+     people_A."document1" AS people_A_document1,
+     people_A."document2" AS people_A_document2,
+     people_A."phone" AS people_A_phone,
+     people_A."cell_phone" AS people_A_cell_phone,
+     people_A."email" AS people_A_email,
+     people_A."district" AS people_A_district,
+     people_A."address" AS people_A_address,
+     people_A."city_id" AS people_A_city_id,
+     people_A."kind" AS people_A_kind,
+     location_items."id" AS location_items_id,
+     location_items."location_id" AS location_items_location_id,
+     location_items."media_id" AS location_items_media_id,
+     medias."id" AS medias_id,
+     medias."kind" AS medias_kind,
+     medias."amount" AS medias_amount,
+     medias."movie_id" AS medias_movie_id,
+     movies."id" AS movies_id,
+     movies."title" AS movies_title,
+     movies."synopsis" AS movies_synopsis,
+     movies."kind" AS movies_kind,
+     movies."released_in" AS movies_released_in,
+     movies."duration" AS movies_duration,
+     movies."genre_id" AS movies_genre_id
+FROM
+     "public"."people" people INNER JOIN "public"."locations" locations ON people."id" = locations."customer_id"
+     INNER JOIN "public"."people" people_A ON locations."employee_id" = people_A."id"
+     INNER JOIN "public"."location_items" location_items ON locations."id" = location_items."location_id"
+     INNER JOIN "public"."medias" medias ON location_items."media_id" = medias."id"
+     INNER JOIN "public"."movies" movies ON medias."movie_id" = movies."id"]]>
+	</queryString>
+	<field name="locations_leased_in" class="java.sql.Date"/>
+	<field name="locations_amount" class="java.lang.String"/>
+	<field name="people_legal_name" class="java.lang.String"/>
+	<field name="people_a_legal_name" class="java.lang.String"/>
+	<field name="movies_title" class="java.lang.String"/>
+	<field name="movies_kind" class="java.lang.String"/>
+	<field name="medias_kind" class="java.lang.String"/>
+	<field name="movies_genre_id" class="java.lang.Long"/>
+	<field name="locations_id" class="java.lang.Long"/>
+	<field name="location_items_id" class="java.lang.Long"/>
+	<field name="medias_id" class="java.lang.Long"/>
+	<group name="locations_id">
+		<groupExpression><![CDATA[$F{locations_id}]]></groupExpression>
+	</group>
+	<group name="location_items_id">
+		<groupExpression><![CDATA[$F{location_items_id}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

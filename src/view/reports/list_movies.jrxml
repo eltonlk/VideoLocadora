@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="list_movies" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c4136ca2-1bf5-4495-a5bb-1d68f64d004c">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="genre_id" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="kind" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     movies."id" AS movies_id,
+     movies."title" AS movies_title,
+     movies."synopsis" AS movies_synopsis,
+     movies."kind" AS movies_kind,
+     movies."released_in" AS movies_released_in,
+     movies."duration" AS movies_duration,
+     movies."genre_id" AS movies_genre_id,
+     genres."id" AS genres_id,
+     genres."name" AS genres_name
+FROM
+     "public"."genres" genres INNER JOIN "public"."movies" movies ON genres."id" = movies."genre_id"
+WHERE genre_id = $P{genre_id} AND kind = $P{kind}]]>
+	</queryString>
+	<field name="movies_id" class="java.lang.Long"/>
+	<field name="movies_title" class="java.lang.String"/>
+	<field name="movies_synopsis" class="java.lang.String"/>
+	<field name="movies_kind" class="java.lang.String"/>
+	<field name="movies_released_in" class="java.sql.Date"/>
+	<field name="movies_duration" class="java.lang.Integer"/>
+	<field name="movies_genre_id" class="java.lang.Long"/>
+	<field name="genres_id" class="java.lang.Long"/>
+	<field name="genres_name" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="27" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="73" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="5011a9d1-0b02-4756-9d2e-0cd691093934" x="0" y="0" width="572" height="29"/>
+				<textElement textAlignment="Center">
+					<font size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Listagem de Filmes]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="3cdf4512-5fea-43fb-b5e5-ca5d6b2c4393" x="452" y="0" width="80" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}+" /"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="599262ac-1d67-44c3-922e-2fa985fd5767" x="532" y="0" width="40" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="22" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="e2230d25-40c8-4bee-b82a-35a911199e4a" x="0" y="0" width="100" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Título]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7fcfb832-e41f-42ec-8ca4-8cf9a23d825e" x="198" y="0" width="74" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="0a0b9867-c14c-4247-aa95-101a18506e4c" x="298" y="0" width="100" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Genero]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d8222d59-582e-4fab-bc86-1b8476040ec0" x="426" y="0" width="52" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Duração]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="dc9b2fd5-4148-4c2b-a995-cfa23f5294ca" x="495" y="0" width="77" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Lançado em]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="68752aa8-64a8-4c15-9352-c499a44f8a0a" x="0" y="19" width="572" height="1"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement uuid="d617ca82-2bb0-4893-9fee-946c227f717c" x="0" y="0" width="178" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{movies_title}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="fe5bb944-3d0b-4b18-ab40-ac7b84aa7fcd" x="198" y="0" width="74" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{movies_kind}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="714393cc-ace5-4ee0-9040-fa10cac4e9a1" x="298" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{genres_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="55fabc5b-86ef-47a9-99a8-23d14fb83c03" x="426" y="0" width="41" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{movies_duration}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="90ef9b48-96e4-4fce-818b-9a591ca82a76" x="495" y="0" width="77" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{movies_released_in}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
