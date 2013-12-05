@@ -22,7 +22,12 @@
      genres."name" AS genres_name
 FROM
      "public"."genres" genres INNER JOIN "public"."movies" movies ON genres."id" = movies."genre_id"
-WHERE genre_id = $P{genre_id} AND kind = $P{kind}]]>
+WHERE
+    CASE WHEN $P{kind} IS NULL THEN TRUE ELSE kind = $P{kind} END  
+    AND
+    CASE WHEN $P{genre_id} IS NULL THEN TRUE ELSE genre_id = $P{genre_id} END  
+]]>
+
 	</queryString>
 	<field name="movies_id" class="java.lang.Long"/>
 	<field name="movies_title" class="java.lang.String"/>

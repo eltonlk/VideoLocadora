@@ -112,12 +112,12 @@ public class ListMoviesInternalFrame extends javax.swing.JInternalFrame {
         if (reportGenre.getModel().getElementAt(0) != reportGenre.getModel().getSelectedItem()) {
             model.Genre genre = (model.Genre) reportGenre.getModel().getSelectedItem();
             
-            params.put("genre_id", genre.getGenreId());
-        }
+            params.put("genre_id", genre.getGenreId().intValue());
+        } 
 
         if (reportKind.getModel().getElementAt(0) != reportKind.getModel().getSelectedItem()) {
             params.put("kind", reportKind.getModel().getSelectedItem());
-        }
+        } 
         
         Report report = new Report("list_movies", params);
         report.show();

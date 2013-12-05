@@ -10,12 +10,11 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.view.JasperViewer;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.cfg.AnnotationConfiguration;
 
 public class Report {
     
-    private SessionFactory sessionFactory;
     private JasperReport report;
     private JasperPrint print;
     private HashMap params;
@@ -24,19 +23,23 @@ public class Report {
     public Report(String report_name, HashMap params) {
         this.report_name = report_name;
         this.params = params;
-        this.sessionFactory = new AnnotationConfiguration().configure().buildSessionFactory();
     }
     
     public void show() {
+        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+        Session session = sessionFactory.openSession();        
+        
         try {
             this.report = JasperCompileManager.compileReport(getClass().getResourceAsStream("../view/reports/" + report_name + ".jrxml"));
             
-            this.print = JasperFillManager.fillReport(report, params, sessionFactory.getCurrentSession().connection());
+            this.print = JasperFillManager.fillReport(report, params, session.connection());
             
             JasperViewer.viewReport(print, false);
         } catch (JRException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao gerar relatório: " + ex.getMessage());
             Logger.getLogger(Report.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            session.close();
         }
     }
 }
