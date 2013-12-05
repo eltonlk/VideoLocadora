@@ -1,4 +1,4 @@
-package framework;
+package util;
 
 import java.util.HashMap;
 import java.util.logging.Level;
@@ -13,7 +13,7 @@ import net.sf.jasperreports.view.JasperViewer;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
 
-public class ReportHelper {
+public class Report {
     
     private SessionFactory sessionFactory;
     private JasperReport report;
@@ -21,7 +21,7 @@ public class ReportHelper {
     private HashMap params;
     private String report_name;
 
-    public ReportHelper(String report_name, HashMap params) {
+    public Report(String report_name, HashMap params) {
         this.report_name = report_name;
         this.params = params;
         this.sessionFactory = new AnnotationConfiguration().configure().buildSessionFactory();
@@ -36,7 +36,7 @@ public class ReportHelper {
             JasperViewer.viewReport(print, false);
         } catch (JRException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao gerar relatório: " + ex.getMessage());
-            Logger.getLogger(ReportHelper.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Report.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

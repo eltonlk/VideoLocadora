@@ -44,6 +44,8 @@ public class GenreDao extends util.GenericDao<Genre, java.io.Serializable> {
             return !list.isEmpty();
         } catch (Exception e) {
             System.out.println(e.getMessage());
+        } finally {
+            session.close();
         }
 
         return false;

@@ -55,6 +55,7 @@ public class ActorsInternalFrame extends util.GenericInternalFrame<ActorControll
 
         setClosable(true);
         setTitle("Cadastro de Atores");
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/Employee.png"))); // NOI18N
 
         form.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 

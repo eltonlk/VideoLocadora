@@ -43,6 +43,7 @@ public class GenresInternalFrame extends util.GenericInternalFrame<GenreControll
 
         setClosable(true);
         setTitle("Cadastro de Generos");
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/category_16.png"))); // NOI18N
 
         form.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 

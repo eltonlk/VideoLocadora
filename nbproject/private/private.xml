@@ -3,8 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/elton/Projetos/java/sistemas/VideoLocadora/src/view/movies/MoviesInternalFrame.java</file>
-            <file>file:/Users/elton/Projetos/java/sistemas/VideoLocadora/src/util/MyDate.java</file>
+            <file>file:/C:/Users/EltonLuis/Projetos/java/sistemas/VideoLocadora/src/view/reports/ListMoviesInternalFrame.java</file>
+            <file>file:/C:/Users/EltonLuis/Projetos/java/sistemas/VideoLocadora/src/view/reports/LocationsByPeriodInternalFrame.java</file>
+            <file>file:/C:/Users/EltonLuis/Projetos/java/sistemas/VideoLocadora/src/controller/ReportController.java</file>
         </group>
     </open-files>
 </project-private>

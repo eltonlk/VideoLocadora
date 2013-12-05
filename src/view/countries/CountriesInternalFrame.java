@@ -47,6 +47,7 @@ public class CountriesInternalFrame extends util.GenericInternalFrame<CountryCon
 
         setClosable(true);
         setTitle("Cadastro de Países");
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/tag_3.png"))); // NOI18N
 
         form.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 

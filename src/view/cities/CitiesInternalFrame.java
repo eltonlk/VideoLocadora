@@ -50,6 +50,7 @@ public class CitiesInternalFrame extends util.GenericInternalFrame<CityControlle
 
         setClosable(true);
         setTitle("Cadastro de Cidades");
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/tag_1.png"))); // NOI18N
 
         form.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 

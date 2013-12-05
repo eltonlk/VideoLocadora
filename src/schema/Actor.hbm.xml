@@ -16,13 +16,18 @@
 
         <many-to-one name="country" class="model.Country" column="country_id"/>
 
-        <set name="movies" table="movies_actors" inverse="false" lazy="true" fetch="select" cascade="all">
+        <set name="movies" table="movies_actors" lazy="false">
+            <key column="actor_id"/>
+            <many-to-many column="movie_id" class="model.Movie"/>
+        </set>
+        
+<!--        <set name="movies" table="movies_actors" inverse="true" lazy="true" fetch="select" cascade="all">
             <key>
                 <column name="actor_id" not-null="true"/>
             </key>
             <many-to-many entity-name="model.Movie">
                 <column name="movie_id" not-null="true"/>
             </many-to-many>
-        </set>
+        </set>-->
     </class>
 </hibernate-mapping>

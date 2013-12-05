@@ -26,6 +26,23 @@ public class PersonDao extends util.GenericDao<Person, java.io.Serializable> {
         return null;
    }
 
+    public List<Person> list(String kind) {
+        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+        Session session = sessionFactory.openSession();
+
+        try {
+            Criteria c = session.createCriteria(Person.class);
+            c.add( Restrictions.eq("kind", kind) );
+            c.addOrder( Order.asc("name") );
+            List list = c.list();
+
+            return (List<Person>) list;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
+   }    
+    
    public boolean exists(Person person) {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session session = sessionFactory.openSession();
@@ -44,6 +61,8 @@ public class PersonDao extends util.GenericDao<Person, java.io.Serializable> {
             return !list.isEmpty();
         } catch (Exception e) {
             System.out.println(e.getMessage());
+        } finally {
+            session.close();
         }
 
         return false;

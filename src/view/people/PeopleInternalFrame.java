@@ -13,13 +13,15 @@ public class PeopleInternalFrame extends util.GenericInternalFrame<PersonControl
 
         this.controller = controller;
 
-        this.listTableModel = new PersonTableModel();
+        this.listTableModel = new PersonTableModel(controller.getKind());
 
         this.tablePeople.setModel(listTableModel);
 
         this.listener = new GenericActionListener(this, tablePeople, listTableModel, controller);
 
         loadResources();
+        
+        loadPersonResources();
     }
 
     /** This method is called from within the constructor to
@@ -80,6 +82,7 @@ public class PeopleInternalFrame extends util.GenericInternalFrame<PersonControl
         formSubmit.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
         formSubmit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/Save.png"))); // NOI18N
         formSubmit.setText("Gravar");
+        formSubmit.setActionCommand("save");
 
         labelName.setText("Nome Fantasia");
 
@@ -148,14 +151,17 @@ public class PeopleInternalFrame extends util.GenericInternalFrame<PersonControl
         addButton.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
         addButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/plus_16.png"))); // NOI18N
         addButton.setText("Adicionar");
+        addButton.setActionCommand("add");
 
         editButton.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
         editButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/edit_16.png"))); // NOI18N
         editButton.setText("Alterar");
+        editButton.setActionCommand("edit");
 
         destroyButton.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
         destroyButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/trash_16.png"))); // NOI18N
         destroyButton.setText("Excluír");
+        destroyButton.setActionCommand("destroy");
 
         search.setBorder(javax.swing.BorderFactory.createTitledBorder("Pesquisar"));
 
@@ -247,6 +253,39 @@ public class PeopleInternalFrame extends util.GenericInternalFrame<PersonControl
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void loadPersonResources() {
+        switch (controller.getKind()) {
+            case "employee":
+                this.labelLegalName.setText("Nome");
+                this.labelName.setText("Apelido");
+                this.labelDocument1.setText("CPF");
+                this.labelDocument2.setText("RG");
+                
+                this.setTitle("Cadastro de Colaboradores");
+                this.setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/employees_16.png")));
+
+                break;
+            case "supplier":
+                this.labelLegalName.setText("Razão Social");
+                this.labelName.setText("Nome Fantasia");
+                this.labelDocument1.setText("CNPJ");
+                this.labelDocument2.setText("IE");
+                
+                this.setTitle("Cadastro de Fornecedores");
+                this.setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/suppliers_16.png")));
+                
+                break;
+            default:
+                this.labelLegalName.setText("Razão Social");
+                this.labelName.setText("Nome Fantasia");
+                this.labelDocument1.setText("CNPJ");
+                this.labelDocument2.setText("IE");
+
+                this.setTitle("Cadastro de Clientes");
+                this.setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/customers_16.png")));
+        }
+    }
+    
     @Override
     public JButton getAddButton() {
         return addButton;
@@ -282,6 +321,7 @@ public class PeopleInternalFrame extends util.GenericInternalFrame<PersonControl
     @Override
     protected void setNewObject() {
         this.object = new Person();
+        this.object.setKind(controller.getKind());
     }
 
     @Override
@@ -306,11 +346,11 @@ public class PeopleInternalFrame extends util.GenericInternalFrame<PersonControl
     private javax.swing.JButton editButton;
     private javax.swing.JPanel form;
     private javax.swing.JPanel formAvatar;
+    private javax.swing.JTextField formDocument1;
     private javax.swing.JTextField formDocument2;
     private javax.swing.JTextField formLegalName;
     private javax.swing.JTextField formName;
     private javax.swing.JButton formSubmit;
-    private javax.swing.JTextField formDocument1;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel labelDocument1;
     private javax.swing.JLabel labelDocument2;

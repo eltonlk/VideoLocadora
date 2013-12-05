@@ -45,6 +45,8 @@ public class StateDao extends util.GenericDao<State, java.io.Serializable> {
             return !list.isEmpty();
         } catch (Exception e) {
             System.out.println(e.getMessage());
+        } finally {
+            session.close();
         }
 
         return false;

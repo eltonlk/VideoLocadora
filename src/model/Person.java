@@ -13,6 +13,7 @@ public class Person extends util.GenericModel {
     private String phone;
     private String cell;
     private String email;
+    private String kind;
 
     public Person() {
     }
@@ -87,6 +88,14 @@ public class Person extends util.GenericModel {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getKind() {
+        return kind;
+    }
+
+    public void setKind(String kind) {
+        this.kind = kind;
     }
 
     @Override

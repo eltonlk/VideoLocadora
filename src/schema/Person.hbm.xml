@@ -23,5 +23,7 @@
         <property name="cell" column="cell" type="string"/>
 
         <property name="email" column="email" type="string"/>
+        
+        <property name="kind" column="kind" type="string"/>
     </class>
 </hibernate-mapping>

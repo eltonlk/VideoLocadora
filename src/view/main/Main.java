@@ -12,7 +12,10 @@ public class Main extends javax.swing.JFrame {
     private GenreController genreController;
     private LocationController locationController;
     private MovieController movieController;
-    private PersonController personController;
+    private PersonController customerController;
+    private PersonController supplierController;
+    private PersonController employeeController;
+    private ReportController reportController;
     private ReservationController reservationController;
     private StateController stateController;
     
@@ -42,9 +45,6 @@ public class Main extends javax.swing.JFrame {
         statesMenuItem = new javax.swing.JMenuItem();
         countriesMenuItem = new javax.swing.JMenuItem();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
-        usersMenuItem = new javax.swing.JMenuItem();
-        optionsMenuItem = new javax.swing.JMenuItem();
-        jSeparator3 = new javax.swing.JPopupMenu.Separator();
         exitMenuItem = new javax.swing.JMenuItem();
         movieMenu = new javax.swing.JMenu();
         reservationMenuItem = new javax.swing.JMenuItem();
@@ -63,8 +63,6 @@ public class Main extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema de Gestão de Video Locadoras");
         setPreferredSize(getMaximumSize());
-
-        desktopPane.setLayout(null);
 
         entriesMenu.setMnemonic('f');
         entriesMenu.setText("Cadastros");
@@ -100,6 +98,7 @@ public class Main extends javax.swing.JFrame {
         entriesMenu.add(employeesMenuItem);
         entriesMenu.add(jSeparator1);
 
+        citiesMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/tag_1.png"))); // NOI18N
         citiesMenuItem.setText("Cidades");
         citiesMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -108,6 +107,7 @@ public class Main extends javax.swing.JFrame {
         });
         entriesMenu.add(citiesMenuItem);
 
+        statesMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/tag_2.png"))); // NOI18N
         statesMenuItem.setText("Estados");
         statesMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -116,6 +116,7 @@ public class Main extends javax.swing.JFrame {
         });
         entriesMenu.add(statesMenuItem);
 
+        countriesMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/tag_3.png"))); // NOI18N
         countriesMenuItem.setText("Países");
         countriesMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -124,20 +125,6 @@ public class Main extends javax.swing.JFrame {
         });
         entriesMenu.add(countriesMenuItem);
         entriesMenu.add(jSeparator2);
-
-        usersMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/user_16.png"))); // NOI18N
-        usersMenuItem.setText("Usuários");
-        usersMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                usersMenuItemActionPerformed(evt);
-            }
-        });
-        entriesMenu.add(usersMenuItem);
-
-        optionsMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/config_16.png"))); // NOI18N
-        optionsMenuItem.setText("Opções do Sistema");
-        entriesMenu.add(optionsMenuItem);
-        entriesMenu.add(jSeparator3);
 
         exitMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/sign_out_16.png"))); // NOI18N
         exitMenuItem.setMnemonic('x');
@@ -154,6 +141,7 @@ public class Main extends javax.swing.JFrame {
         movieMenu.setMnemonic('e');
         movieMenu.setText("Filmes");
 
+        reservationMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/Schedule.png"))); // NOI18N
         reservationMenuItem.setText("Reserva");
         reservationMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -162,6 +150,7 @@ public class Main extends javax.swing.JFrame {
         });
         movieMenu.add(reservationMenuItem);
 
+        locationMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/Up.png"))); // NOI18N
         locationMenuItem.setText("Locação");
         locationMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -170,6 +159,7 @@ public class Main extends javax.swing.JFrame {
         });
         movieMenu.add(locationMenuItem);
 
+        devolutionMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/Down.png"))); // NOI18N
         devolutionMenuItem.setText("Devolução");
         devolutionMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -179,6 +169,7 @@ public class Main extends javax.swing.JFrame {
         movieMenu.add(devolutionMenuItem);
         movieMenu.add(jSeparator4);
 
+        moviesMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/Movie.png"))); // NOI18N
         moviesMenuItem.setText("Filmes");
         moviesMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -197,6 +188,7 @@ public class Main extends javax.swing.JFrame {
         });
         movieMenu.add(genresMenuItem);
 
+        actorsMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/Employee.png"))); // NOI18N
         actorsMenuItem.setText("Atores");
         actorsMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -209,6 +201,7 @@ public class Main extends javax.swing.JFrame {
 
         reportMenu.setText("Relatórios");
 
+        locationsByPeriodMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/Report.png"))); // NOI18N
         locationsByPeriodMenuItem.setText("Locações Por Período");
         locationsByPeriodMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -217,6 +210,7 @@ public class Main extends javax.swing.JFrame {
         });
         reportMenu.add(locationsByPeriodMenuItem);
 
+        listMoviesMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/Report.png"))); // NOI18N
         listMoviesMenuItem.setText("Listagem de Filmes");
         listMoviesMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -252,27 +246,7 @@ public class Main extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
-        System.exit(0);
-    }//GEN-LAST:event_exitMenuItemActionPerformed
-
-    private void customersMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customersMenuItemActionPerformed
-        personController.list();
-    }//GEN-LAST:event_customersMenuItemActionPerformed
-
-    private void suppliersMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_suppliersMenuItemActionPerformed
-        personController.list();
-    }//GEN-LAST:event_suppliersMenuItemActionPerformed
     
-    private void employeesMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_employeesMenuItemActionPerformed
-        personController.list();
-    }//GEN-LAST:event_employeesMenuItemActionPerformed
-
-    private void usersMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usersMenuItemActionPerformed
-// TODO
-    }//GEN-LAST:event_usersMenuItemActionPerformed
-
     private void genresMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genresMenuItemActionPerformed
         genreController.list();
     }//GEN-LAST:event_genresMenuItemActionPerformed
@@ -282,27 +256,19 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_actorsMenuItemActionPerformed
 
     private void locationsByPeriodMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_locationsByPeriodMenuItemActionPerformed
-// TODO
+        reportController.locationsByPeriod();
     }//GEN-LAST:event_locationsByPeriodMenuItemActionPerformed
 
     private void listMoviesMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listMoviesMenuItemActionPerformed
-// TODO
+        reportController.listMovies();
     }//GEN-LAST:event_listMoviesMenuItemActionPerformed
 
-    private void citiesMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_citiesMenuItemActionPerformed
-        cityController.list();
-    }//GEN-LAST:event_citiesMenuItemActionPerformed
-
-    private void statesMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statesMenuItemActionPerformed
-        stateController.list();
-    }//GEN-LAST:event_statesMenuItemActionPerformed
-
     private void reservationMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reservationMenuItemActionPerformed
-        reservationController.list();
+        reservationController.newReservation();
     }//GEN-LAST:event_reservationMenuItemActionPerformed
 
     private void locationMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_locationMenuItemActionPerformed
-        locationController.list();
+        locationController.newLocation();
     }//GEN-LAST:event_locationMenuItemActionPerformed
 
     private void devolutionMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_devolutionMenuItemActionPerformed
@@ -313,9 +279,33 @@ public class Main extends javax.swing.JFrame {
         movieController.list();
     }//GEN-LAST:event_moviesMenuItemActionPerformed
 
+    private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_exitMenuItemActionPerformed
+
     private void countriesMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_countriesMenuItemActionPerformed
         countryController.list();
     }//GEN-LAST:event_countriesMenuItemActionPerformed
+
+    private void statesMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statesMenuItemActionPerformed
+        stateController.list();
+    }//GEN-LAST:event_statesMenuItemActionPerformed
+
+    private void citiesMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_citiesMenuItemActionPerformed
+        cityController.list();
+    }//GEN-LAST:event_citiesMenuItemActionPerformed
+
+    private void employeesMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_employeesMenuItemActionPerformed
+        employeeController.list();
+    }//GEN-LAST:event_employeesMenuItemActionPerformed
+
+    private void suppliersMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_suppliersMenuItemActionPerformed
+        supplierController.list();
+    }//GEN-LAST:event_suppliersMenuItemActionPerformed
+
+    private void customersMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customersMenuItemActionPerformed
+        customerController.list();
+    }//GEN-LAST:event_customersMenuItemActionPerformed
 
    private void loadControllers() {
         actorController = new ActorController(desktopPane);
@@ -324,7 +314,10 @@ public class Main extends javax.swing.JFrame {
         genreController = new GenreController(desktopPane);
         locationController = new LocationController(desktopPane);
         movieController = new MovieController(desktopPane);
-        personController = new PersonController(desktopPane);
+        customerController = new PersonController(desktopPane, "customer");
+        supplierController = new PersonController(desktopPane, "supplier");
+        employeeController = new PersonController(desktopPane, "employee");
+        reportController = new ReportController(desktopPane);
         reservationController = new ReservationController(desktopPane);
         stateController = new StateController(desktopPane);        
     }
@@ -368,7 +361,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenu helpMenu;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
-    private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JPopupMenu.Separator jSeparator4;
     private javax.swing.JMenuItem listMoviesMenuItem;
     private javax.swing.JMenuItem locationMenuItem;
@@ -376,12 +368,10 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenu movieMenu;
     private javax.swing.JMenuItem moviesMenuItem;
-    private javax.swing.JMenuItem optionsMenuItem;
     private javax.swing.JMenu reportMenu;
     private javax.swing.JMenuItem reservationMenuItem;
     private javax.swing.JMenuItem statesMenuItem;
     private javax.swing.JMenuItem suppliersMenuItem;
-    private javax.swing.JMenuItem usersMenuItem;
     // End of variables declaration//GEN-END:variables
     
 }

@@ -92,7 +92,7 @@
                               <Component id="formLegalName" max="32767" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="formdocument1" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
+                                      <Component id="formDocument1" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
                                       <Component id="labelDocument1" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
@@ -111,7 +111,7 @@
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="labelLegalName" min="-2" max="-2" attributes="0"/>
-                                      <Component id="labelLegalName1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="labelName" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
@@ -136,7 +136,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="formLegalName" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="labelLegalName1" min="-2" max="-2" attributes="0"/>
+                          <Component id="labelName" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="formName" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
@@ -146,7 +146,7 @@
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="formdocument1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="formDocument1" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="formDocument2" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -199,7 +199,7 @@
             <Property name="text" type="java.lang.String" value="IE"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="formdocument1">
+        <Component class="javax.swing.JTextField" name="formDocument1">
         </Component>
         <Component class="javax.swing.JButton" name="formSubmit">
           <Properties>
@@ -210,13 +210,14 @@
               <Image iconType="3" name="/assets/images/Save.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Gravar"/>
+            <Property name="actionCommand" type="java.lang.String" value="save"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="formDocument2">
         </Component>
         <Component class="javax.swing.JTextField" name="formName">
         </Component>
-        <Component class="javax.swing.JLabel" name="labelLegalName1">
+        <Component class="javax.swing.JLabel" name="labelName">
           <Properties>
             <Property name="text" type="java.lang.String" value="Nome Fantasia"/>
           </Properties>
@@ -232,6 +233,7 @@
           <Image iconType="3" name="/assets/images/plus_16.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Adicionar"/>
+        <Property name="actionCommand" type="java.lang.String" value="add"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="editButton">
@@ -243,6 +245,7 @@
           <Image iconType="3" name="/assets/images/edit_16.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Alterar"/>
+        <Property name="actionCommand" type="java.lang.String" value="edit"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="destroyButton">
@@ -254,6 +257,7 @@
           <Image iconType="3" name="/assets/images/trash_16.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Exclu&#xed;r"/>
+        <Property name="actionCommand" type="java.lang.String" value="destroy"/>
       </Properties>
     </Component>
     <Container class="javax.swing.JPanel" name="search">

@@ -35,6 +35,8 @@ public class GenericDao<T, ID extends Serializable> {
         Transaction transaction = session.beginTransaction();
         
         try {
+            session.flush();
+            session.clear();
             session.saveOrUpdate(object);
             
             transaction.commit();
@@ -43,7 +45,9 @@ public class GenericDao<T, ID extends Serializable> {
         } catch (Exception e) {
             System.out.println(e.getMessage());
             transaction.rollback();
-        }         
+        } finally {
+            session.close();
+        } 
         return false;
     }
     
@@ -61,7 +65,9 @@ public class GenericDao<T, ID extends Serializable> {
         } catch (Exception e) {
             System.out.println(e.getMessage());
             transaction.rollback();
-        }         
+        } finally {
+            session.close();
+        }
         return false;
     }    
     
@@ -71,12 +77,19 @@ public class GenericDao<T, ID extends Serializable> {
         Transaction transaction = session.beginTransaction();
         
         try {
+            session.flush();
+            session.clear();
             session.delete(object);
+            System.out.println("1");
             transaction.commit();
+            
+            return true;
         } catch (Exception e) {
             System.out.println(e.getMessage());
             transaction.rollback();
-        } 
+        } finally {
+            session.close();
+        }
         return false;
     }
     

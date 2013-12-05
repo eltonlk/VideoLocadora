@@ -6,9 +6,18 @@ import model.Person;
 public class PersonTableModel extends util.GenericTableModel<Person> {
 
     private PersonDao dao = new PersonDao();
+    private String kind;
 
-    public PersonTableModel() {
-        this.columns = new String[] { "Nome" };
+    public PersonTableModel(String kind) {
+        this.kind = kind;
+        
+        switch (kind) {
+            case "employee":
+                this.columns = new String[] { "Nome", "Apelido", "CPF", "RG" };
+                break;
+            default:
+                this.columns = new String[] { "Razão Social", "Nome Fantasia", "CNPJ", "IE" };
+        }
 
         reload();
     }
@@ -17,6 +26,12 @@ public class PersonTableModel extends util.GenericTableModel<Person> {
     public Class<?> getColumnClass(int columnIndex) {
         switch (columnIndex) {
         case 0:
+            return String.class;
+        case 1:
+            return String.class;
+        case 2:
+            return String.class;
+        case 3:
             return String.class;
         default:
             throw new IndexOutOfBoundsException("columnIndex out of bounds");
@@ -29,7 +44,13 @@ public class PersonTableModel extends util.GenericTableModel<Person> {
 
         switch (columnIndex) {
         case 0:
+            return person.getLegalName();
+        case 1:
             return person.getName();
+        case 2:
+            return person.getDocument1();
+        case 3:
+            return person.getDocument2();
         default:
             throw new IndexOutOfBoundsException("columnIndex out of bounds");
         }
@@ -44,8 +65,8 @@ public class PersonTableModel extends util.GenericTableModel<Person> {
     }
 
     @Override
-    public void reload() {
-        addItems(dao.list());
+    public final void reload() {
+        addItems(dao.list(kind));
     }
 
 }

@@ -44,6 +44,8 @@ public class MovieDao extends util.GenericDao<Movie, java.io.Serializable> {
             return !list.isEmpty();
         } catch (Exception e) {
             System.out.println(e.getMessage());
+        } finally {
+            session.close();
         }
 
         return false;

@@ -50,6 +50,7 @@ public class StatesInternalFrame extends util.GenericInternalFrame<StateControll
 
         setClosable(true);
         setTitle("Cadastro de Estados");
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/tag_2.png"))); // NOI18N
 
         form.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 

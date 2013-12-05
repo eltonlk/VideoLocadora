@@ -20,13 +20,18 @@
 
         <many-to-one name="genre" class="model.Genre" column="genre_id"/>
 
-        <set name="actors" table="movies_actors" inverse="false" lazy="true" fetch="select" cascade="all">
+<!--        <set name="actors" table="movies_actors" inverse="true" lazy="true" fetch="select" cascade="all">
             <key>
                 <column name="movie_id" not-null="true"/>
             </key>
             <many-to-many entity-name="model.Actor">
                 <column name="actor_id" not-null="true"/>
             </many-to-many>
+        </set>-->
+        
+        <set name="actors" table="movies_actors" cascade="all" inverse="true" lazy="false">
+            <key column="movie_id"/>
+            <many-to-many column="actor_id" class="model.Actor"/>
         </set>
 
         <set name="medias" table="medias" inverse="true" lazy="true" fetch="select" cascade="all">
