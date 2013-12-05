@@ -3,7 +3,6 @@ package view.movies;
 import comboBoxModel.GenreComboBoxModel;
 import comboBoxModel.MovieKindComboBoxModel;
 import controller.MovieController;
-import java.util.Set;
 import javax.swing.JButton;
 import model.Movie;
 import tableModel.MovieTableModel;
@@ -461,8 +460,8 @@ public class MoviesInternalFrame extends util.GenericInternalFrame<MovieControll
     }// </editor-fold>//GEN-END:initComponents
 
     private void addMediaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addMediaActionPerformed
-        MediaDialog dialog = new MediaDialog(null, true);
-        dialog.setVisible(true);
+//
+//
     }//GEN-LAST:event_addMediaActionPerformed
 
     private void loadSearchResources() {

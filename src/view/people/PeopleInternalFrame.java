@@ -2,9 +2,18 @@ package view.people;
 
 import comboBoxModel.CityComboBoxModel;
 import controller.PersonController;
-import java.text.ParseException;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.RenderingHints;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import model.Person;
 import tableModel.PersonTableModel;
@@ -39,6 +48,7 @@ public class PeopleInternalFrame extends util.GenericInternalFrame<PersonControl
 
         form = new javax.swing.JPanel();
         formAvatar = new javax.swing.JPanel();
+        labelAvatar = new javax.swing.JLabel();
         labelLegalName = new javax.swing.JLabel();
         formLegalName = new javax.swing.JTextField();
         labelDocument1 = new javax.swing.JLabel();
@@ -62,6 +72,7 @@ public class PeopleInternalFrame extends util.GenericInternalFrame<PersonControl
         formCellPhone = new javax.swing.JFormattedTextField();
         formDocument1 = new javax.swing.JFormattedTextField();
         formDocument2 = new javax.swing.JFormattedTextField();
+        avatarFileChooser = new javax.swing.JFileChooser();
         addButton = new javax.swing.JButton();
         editButton = new javax.swing.JButton();
         destroyButton = new javax.swing.JButton();
@@ -78,17 +89,11 @@ public class PeopleInternalFrame extends util.GenericInternalFrame<PersonControl
         form.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         formAvatar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        formAvatar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout formAvatarLayout = new javax.swing.GroupLayout(formAvatar);
-        formAvatar.setLayout(formAvatarLayout);
-        formAvatarLayout.setHorizontalGroup(
-            formAvatarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 150, Short.MAX_VALUE)
-        );
-        formAvatarLayout.setVerticalGroup(
-            formAvatarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
+        labelAvatar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelAvatar.setPreferredSize(new java.awt.Dimension(150, 180));
+        formAvatar.add(labelAvatar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 150, 180));
 
         labelLegalName.setText("Razão Social");
 
@@ -114,8 +119,18 @@ public class PeopleInternalFrame extends util.GenericInternalFrame<PersonControl
         labelAddress.setText("Endereço");
 
         addAvatar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/plus_16.png"))); // NOI18N
+        addAvatar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addAvatarActionPerformed(evt);
+            }
+        });
 
         removeAvatar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/Delete.png"))); // NOI18N
+        removeAvatar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeAvatarActionPerformed(evt);
+            }
+        });
 
         labelDistrict.setText("Bairro");
 
@@ -143,15 +158,17 @@ public class PeopleInternalFrame extends util.GenericInternalFrame<PersonControl
                         .addComponent(formSubmit))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, formLayout.createSequentialGroup()
                         .addGroup(formLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(formAvatar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(labelCity)
-                            .addComponent(formCity, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(formCity, 0, 154, Short.MAX_VALUE)
                             .addGroup(formLayout.createSequentialGroup()
                                 .addComponent(addAvatar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(removeAvatar))
+                                .addComponent(removeAvatar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(avatarFileChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(labelDistrict)
-                            .addComponent(formDistrict))
+                            .addComponent(formDistrict)
+                            .addComponent(formAvatar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(formLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(formAddress, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -213,7 +230,8 @@ public class PeopleInternalFrame extends util.GenericInternalFrame<PersonControl
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(formLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(formPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(formCellPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(formCellPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(avatarFileChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(addAvatar)
                     .addComponent(removeAvatar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -342,6 +360,53 @@ public class PeopleInternalFrame extends util.GenericInternalFrame<PersonControl
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    private Image getScaledImage(Image srcImg, int w, int h){
+        BufferedImage resizedImg = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
+        Graphics2D g2 = resizedImg.createGraphics();
+        g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+        g2.drawImage(srcImg, 0, 0, w, h, null);
+        g2.dispose();
+        return resizedImg;
+    }
+    
+    private void addAvatarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addAvatarActionPerformed
+        int popFile = avatarFileChooser.showOpenDialog(this);
+        
+        if (popFile == avatarFileChooser.APPROVE_OPTION) {
+            File arq = avatarFileChooser.getSelectedFile();
+            
+            ImageIcon image = new ImageIcon(arq.getPath());
+            
+            image.setImage( getScaledImage(image.getImage(), labelAvatar.getWidth(), labelAvatar.getHeight()) );
+            
+            this.object.setAvatar(getImgBytes(image.getImage()));
+            
+            labelAvatar.setIcon( image );
+        }
+    }//GEN-LAST:event_addAvatarActionPerformed
+
+    private BufferedImage getBufferedImage(Image image) {
+        int width = image.getWidth(null);
+        int height = image.getHeight(null);
+        BufferedImage bi = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+        return bi;
+    }    
+    
+    private byte [] getImgBytes(Image image) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        try {
+            ImageIO.write(getBufferedImage(image), "JPEG", baos);
+        } catch (IOException ex) {
+        }
+        return baos.toByteArray();
+    }    
+    
+    private void removeAvatarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeAvatarActionPerformed
+        labelAvatar.setIcon(null);
+        this.object.setAvatar(null);
+    }//GEN-LAST:event_removeAvatarActionPerformed
+
     private void loadPersonResources() {
         if ("supplier".equals(controller.getKind())) {
             try {
@@ -442,6 +507,19 @@ public class PeopleInternalFrame extends util.GenericInternalFrame<PersonControl
         this.formCity.getModel().setSelectedItem(object.getCity());
         this.formDistrict.setText(object.getDistrict());
         this.formAddress.setText(object.getAddress());
+        
+        if (object.getAvatar() != null) {
+            try {
+                BufferedImage img = ImageIO.read(new ByteArrayInputStream(object.getAvatar()));
+                
+                this.labelAvatar.setIcon(new ImageIcon(img));
+            } catch (IOException ex) {
+                Logger.getLogger(PeopleInternalFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            this.labelAvatar.setIcon(null);
+        }
+        
     }
 
     @Override
@@ -461,6 +539,7 @@ public class PeopleInternalFrame extends util.GenericInternalFrame<PersonControl
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addAvatar;
     private javax.swing.JButton addButton;
+    private javax.swing.JFileChooser avatarFileChooser;
     private javax.swing.JButton destroyButton;
     private javax.swing.JButton editButton;
     private javax.swing.JPanel form;
@@ -478,6 +557,7 @@ public class PeopleInternalFrame extends util.GenericInternalFrame<PersonControl
     private javax.swing.JButton formSubmit;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel labelAddress;
+    private javax.swing.JLabel labelAvatar;
     private javax.swing.JLabel labelCellPhone;
     private javax.swing.JLabel labelCity;
     private javax.swing.JLabel labelDistrict;
