@@ -64,9 +64,13 @@ public class MoviesInternalFrame extends util.GenericInternalFrame<MovieControll
         jPanel4 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tableMedias = new javax.swing.JTable();
+        removeMedia = new javax.swing.JButton();
+        addMedia = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tableActors = new javax.swing.JTable();
+        addActor = new javax.swing.JButton();
+        removeActor = new javax.swing.JButton();
         addAvatar = new javax.swing.JButton();
         removeAvatar = new javax.swing.JButton();
         formReleasedIn = new javax.swing.JFormattedTextField();
@@ -158,20 +162,39 @@ public class MoviesInternalFrame extends util.GenericInternalFrame<MovieControll
         ));
         jScrollPane2.setViewportView(tableMedias);
 
+        removeMedia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/Delete.png"))); // NOI18N
+
+        addMedia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/plus_16.png"))); // NOI18N
+        addMedia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addMediaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 433, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 433, Short.MAX_VALUE)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(addMedia)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(removeMedia)))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(removeMedia)
+                    .addComponent(addMedia))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -190,20 +213,34 @@ public class MoviesInternalFrame extends util.GenericInternalFrame<MovieControll
         ));
         jScrollPane3.setViewportView(tableActors);
 
+        addActor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/plus_16.png"))); // NOI18N
+
+        removeActor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/Delete.png"))); // NOI18N
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 433, Short.MAX_VALUE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 433, Short.MAX_VALUE)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(addActor)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(removeActor)))
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(removeActor)
+                    .addComponent(addActor))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -423,6 +460,11 @@ public class MoviesInternalFrame extends util.GenericInternalFrame<MovieControll
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void addMediaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addMediaActionPerformed
+        MediaDialog dialog = new MediaDialog(null, true);
+        dialog.setVisible(true);
+    }//GEN-LAST:event_addMediaActionPerformed
+
     private void loadSearchResources() {
         this.searchGenre.setModel(new GenreComboBoxModel(true));
         this.searchKind.setModel(new MovieKindComboBoxModel(true));
@@ -507,8 +549,10 @@ public class MoviesInternalFrame extends util.GenericInternalFrame<MovieControll
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addActor;
     private javax.swing.JButton addAvatar;
     private javax.swing.JButton addButton;
+    private javax.swing.JButton addMedia;
     private javax.swing.JButton destroyButton;
     private javax.swing.JButton editButton;
     private javax.swing.JPanel form;
@@ -535,7 +579,9 @@ public class MoviesInternalFrame extends util.GenericInternalFrame<MovieControll
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JButton removeActor;
     private javax.swing.JButton removeAvatar;
+    private javax.swing.JButton removeMedia;
     private javax.swing.JScrollPane scrollPane;
     private javax.swing.JPanel search;
     private javax.swing.JComboBox searchGenre;

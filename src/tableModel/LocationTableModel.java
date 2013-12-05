@@ -28,7 +28,7 @@ public class LocationTableModel extends util.GenericTableModel<Location> {
         case 0: 
             return location.getLocationId();
         case 1: 
-            return location.getPerson().getName();
+            return location.getCustomer().getName();
         default:
             throw new IndexOutOfBoundsException("columnIndex out of bounds");
         }

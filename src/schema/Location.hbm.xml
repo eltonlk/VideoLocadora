@@ -7,12 +7,20 @@
                 <param name="sequence">locations_id_seq</param>
             </generator>
         </id>
+        
+        <many-to-one name="customer" class="model.Person" column="customer_id"/>
+        
+        <property name="leasedIn" column="leased_in" type="date"/>
+        
+        <property name="amount" column="amount" type="currency"/>
+        
+        <many-to-one name="employee" class="model.Person" column="employee_id"/>
 
-        <set name="items" cascade="all">
+<!--        <set name="items" cascade="all">
             <key column="location_id"/>
             <one-to-many class="model.LocationItem"/>
-        </set>
+        </set>-->
 
-        <many-to-one name="person" class="model.Person" column="person_id"/>
+        
     </class>
 </hibernate-mapping>
