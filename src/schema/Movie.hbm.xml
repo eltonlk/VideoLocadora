@@ -19,7 +19,9 @@
         <property name="duration" column="duration" type="int"/>
 
         <many-to-one name="genre" class="model.Genre" column="genre_id"/>
-
+        
+        <!--TODO: Acertar os relacionamentos-->
+        
 <!--        <set name="actors" table="movies_actors" inverse="true" lazy="true" fetch="select" cascade="all">
             <key>
                 <column name="movie_id" not-null="true"/>
@@ -29,7 +31,7 @@
             </many-to-many>
         </set>-->
         
-        <set name="actors" table="movies_actors" cascade="all" inverse="true" lazy="false">
+<!--        <set name="actors" table="movies_actors" cascade="all" inverse="true" lazy="false">
             <key column="movie_id"/>
             <many-to-many column="actor_id" class="model.Actor"/>
         </set>
@@ -39,6 +41,6 @@
                 <column name="movie_id" not-null="true"/>
             </key>
             <one-to-many class="model.Media"/>
-        </set>
+        </set>-->
     </class>
 </hibernate-mapping>

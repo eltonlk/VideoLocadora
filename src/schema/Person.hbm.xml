@@ -20,9 +20,15 @@
 
         <property name="phone" column="phone" type="string"/>
 
-        <property name="cell" column="cell" type="string"/>
+        <property name="cellPhone" column="cell_phone" type="string"/>
 
         <property name="email" column="email" type="string"/>
+        
+        <property name="district" column="district" type="string"/>
+        
+        <property name="address" column="address" type="string"/>
+        
+        <many-to-one name="city" class="model.City" column="city_id"/>
         
         <property name="kind" column="kind" type="string"/>
     </class>

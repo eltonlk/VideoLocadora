@@ -1,22 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package view.reports;
 
-/**
- *
- * @author EltonLuis
- */
+import comboBoxModel.GenreComboBoxModel;
+import comboBoxModel.MovieKindComboBoxModel;
+import java.util.HashMap;
+import util.Report;
+
 public class ListMoviesInternalFrame extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form ListMoviesInternalFrame
-     */
     public ListMoviesInternalFrame() {
         initComponents();
+
+        this.reportGenre.setModel(new GenreComboBoxModel(true));
+        this.reportKind.setModel(new MovieKindComboBoxModel(true));
     }
 
     /**
@@ -48,6 +43,11 @@ public class ListMoviesInternalFrame extends javax.swing.JInternalFrame {
         generateButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         generateButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/Print.png"))); // NOI18N
         generateButton.setText("Gerar");
+        generateButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                generateButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -105,6 +105,23 @@ public class ListMoviesInternalFrame extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void generateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateButtonActionPerformed
+        HashMap params = new HashMap();
+        
+        if (reportGenre.getModel().getElementAt(0) != reportGenre.getModel().getSelectedItem()) {
+            model.Genre genre = (model.Genre) reportGenre.getModel().getSelectedItem();
+            
+            params.put("genre_id", genre.getGenreId());
+        }
+
+        if (reportKind.getModel().getElementAt(0) != reportKind.getModel().getSelectedItem()) {
+            params.put("kind", reportKind.getModel().getSelectedItem());
+        }
+        
+        Report report = new Report("list_movies", params);
+        report.show();
+    }//GEN-LAST:event_generateButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

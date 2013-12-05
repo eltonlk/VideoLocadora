@@ -43,6 +43,11 @@ public class City extends util.GenericModel {
     public void setZip(String zip) {
         this.zip = zip;
     }
+    
+    @Override
+    public String toString() {
+        return name;
+    }
 
     @Override
     protected void validateRules() {

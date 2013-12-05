@@ -11,8 +11,11 @@ public class Person extends util.GenericModel {
     private String document1;
     private String document2;
     private String phone;
-    private String cell;
+    private String cellPhone;
     private String email;
+    private String address;
+    private City city;
+    private String district;
     private String kind;
 
     public Person() {
@@ -74,12 +77,12 @@ public class Person extends util.GenericModel {
         this.phone = phone;
     }
 
-    public String getCell() {
-        return cell;
+    public String getCellPhone() {
+        return cellPhone;
     }
 
-    public void setCell(String cell) {
-        this.cell = cell;
+    public void setCellPhone(String cellPhone) {
+        this.cellPhone = cellPhone;
     }
 
     public String getEmail() {
@@ -90,6 +93,30 @@ public class Person extends util.GenericModel {
         this.email = email;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
+    }
+
+    public String getDistrict() {
+        return district;
+    }
+
+    public void setDistrict(String district) {
+        this.district = district;
+    }
+    
     public String getKind() {
         return kind;
     }
@@ -98,6 +125,11 @@ public class Person extends util.GenericModel {
         this.kind = kind;
     }
 
+    @Override
+    public String toString() {
+        return name;
+    }
+    
     @Override
     protected void validateRules() {
         if (ValidationUtils.isEmpty(legalName)) {
@@ -112,6 +144,10 @@ public class Person extends util.GenericModel {
 
         if (ValidationUtils.isEmpty(name)) {
             addError("name", "Nome fantasia não pode ficar em branco.");
+        }
+        
+        if (ValidationUtils.emailInvalid(email)) {
+            addError("email", "Email inválido.");
         }
     }
 

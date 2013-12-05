@@ -11,6 +11,8 @@ import java.util.logging.Logger;
 
 public class MyDate {
     
+    private static String defaultFormat = "dd/MM/yyyy";
+    
     private SimpleDateFormat strToDate;
     private final Calendar date;
     
@@ -49,7 +51,7 @@ public class MyDate {
     public String toString(String format) {
         strToDate = new SimpleDateFormat(format);
         
-        return strToDate.format(date.getTime());        
+        return strToDate.format(getDate());        
     }
     
     public Date getDate() {
@@ -58,7 +60,7 @@ public class MyDate {
 
     @Override
     public String toString() {
-        return toString("dd/MM/yyyy");
+        return toString(defaultFormat);
     }
     
     public static MyDate today() {
@@ -72,7 +74,7 @@ public class MyDate {
     }
 
     public static String localize(Date date) {
-        return MyDate.localize(date, "dd/MM/yyyy");
+        return MyDate.localize(date, defaultFormat);
     }
     
     public static MyDate delocalize(String date, String format) {
@@ -92,7 +94,7 @@ public class MyDate {
     }
     
     public static MyDate delocalize(String date) {
-        return MyDate.delocalize(date, "dd/MM/yyyy");
+        return MyDate.delocalize(date, defaultFormat);
     }
     
 }

@@ -1,10 +1,8 @@
 package view.movies;
 
-import comboBoxModel.GenderComboBoxModel;
 import comboBoxModel.GenreComboBoxModel;
 import comboBoxModel.MovieKindComboBoxModel;
 import controller.MovieController;
-import java.util.List;
 import java.util.Set;
 import javax.swing.JButton;
 import model.Movie;
@@ -55,7 +53,6 @@ public class MoviesInternalFrame extends util.GenericInternalFrame<MovieControll
         formGenre = new javax.swing.JComboBox();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        formReleasedIn = new javax.swing.JTextField();
         formDuration = new javax.swing.JSpinner();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -70,6 +67,9 @@ public class MoviesInternalFrame extends util.GenericInternalFrame<MovieControll
         jPanel5 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tableActors = new javax.swing.JTable();
+        addAvatar = new javax.swing.JButton();
+        removeAvatar = new javax.swing.JButton();
+        formReleasedIn = new javax.swing.JFormattedTextField();
         addButton = new javax.swing.JButton();
         editButton = new javax.swing.JButton();
         destroyButton = new javax.swing.JButton();
@@ -110,6 +110,8 @@ public class MoviesInternalFrame extends util.GenericInternalFrame<MovieControll
         jLabel3.setText("Genero");
 
         jLabel4.setText("Lançamento");
+
+        formDuration.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
 
         jLabel5.setText("minutos");
 
@@ -207,6 +209,16 @@ public class MoviesInternalFrame extends util.GenericInternalFrame<MovieControll
 
         tabbedPane.addTab("Atores", jPanel5);
 
+        addAvatar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/plus_16.png"))); // NOI18N
+
+        removeAvatar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/Delete.png"))); // NOI18N
+
+        try {
+            formReleasedIn.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
         javax.swing.GroupLayout formLayout = new javax.swing.GroupLayout(form);
         form.setLayout(formLayout);
         formLayout.setHorizontalGroup(
@@ -215,8 +227,16 @@ public class MoviesInternalFrame extends util.GenericInternalFrame<MovieControll
                 .addContainerGap()
                 .addGroup(formLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(tabbedPane)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, formLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(formSubmit))
                     .addGroup(formLayout.createSequentialGroup()
-                        .addComponent(formAvatar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(formLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(formAvatar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(formLayout.createSequentialGroup()
+                                .addComponent(addAvatar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(removeAvatar)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(formLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(formTitle)
@@ -238,10 +258,7 @@ public class MoviesInternalFrame extends util.GenericInternalFrame<MovieControll
                                                 .addComponent(formDuration, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(jLabel5)))))
-                                .addGap(0, 0, Short.MAX_VALUE))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, formLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(formSubmit)))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         formLayout.setVerticalGroup(
@@ -267,11 +284,15 @@ public class MoviesInternalFrame extends util.GenericInternalFrame<MovieControll
                             .addComponent(jLabel6))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(formLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(formReleasedIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(formDuration, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5)))
+                            .addComponent(jLabel5)
+                            .addComponent(formReleasedIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(formAvatar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(64, 64, 64)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(formLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(addAvatar)
+                    .addComponent(removeAvatar))
+                .addGap(30, 30, 30)
                 .addComponent(tabbedPane)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(formSubmit)
@@ -445,7 +466,6 @@ public class MoviesInternalFrame extends util.GenericInternalFrame<MovieControll
         this.formGenre.setEnabled(enable);
         this.formDuration.setEnabled(enable);
         this.formReleasedIn.setEnabled(enable);
-
         this.formSynopsis.setEnabled(enable);
 
         this.formSubmit.setEnabled(enable);
@@ -456,16 +476,16 @@ public class MoviesInternalFrame extends util.GenericInternalFrame<MovieControll
     @Override
     protected void setNewObject() {
         this.object = new Movie();
+        this.object.setReleasedIn(util.MyDate.today().getDate());
     }
 
     @Override
     protected void mappingObjectToForm() {
         this.formTitle.setText(object.getTitle());
-        this.formKind.setSelectedItem(object.getKind());
-        this.formGenre.setSelectedItem(object.getGenre());
+        this.formKind.getModel().setSelectedItem(object.getKind());
+        this.formGenre.getModel().setSelectedItem(object.getGenre());
         this.formDuration.setValue(object.getDuration());
-//        this.formReleasedIn.setText(object.getReleasedIn().toLocaleString());
-
+        this.formReleasedIn.setText( util.MyDate.localize(object.getReleasedIn()) );
         this.formSynopsis.setText(object.getSynopsis());
         
 //        this.actorTableModel.addItems((List) object.getActors());
@@ -475,18 +495,19 @@ public class MoviesInternalFrame extends util.GenericInternalFrame<MovieControll
     @Override
     protected void mappingFormToObject() {
         this.object.setTitle(formTitle.getText());
-        this.object.setKind((String) formKind.getSelectedItem());
-        this.object.setGenre((model.Genre) formGenre.getSelectedItem());
+        this.object.setKind((String) formKind.getModel().getSelectedItem());
+        this.object.setGenre((model.Genre) formGenre.getModel().getSelectedItem());
         this.object.setDuration((int) formDuration.getValue());
         this.object.setReleasedIn( util.MyDate.delocalize(formReleasedIn.getText()).getDate() );
 
         this.object.setSynopsis(formSynopsis.getText());
 
-        this.object.setActors((Set) actorTableModel.getItems());
-        this.object.setMedias((Set) mediaTableModel.getItems());
+//        this.object.setActors((Set) actorTableModel.getItems());
+//        this.object.setMedias((Set) mediaTableModel.getItems());
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addAvatar;
     private javax.swing.JButton addButton;
     private javax.swing.JButton destroyButton;
     private javax.swing.JButton editButton;
@@ -495,7 +516,7 @@ public class MoviesInternalFrame extends util.GenericInternalFrame<MovieControll
     private javax.swing.JSpinner formDuration;
     private javax.swing.JComboBox formGenre;
     private javax.swing.JComboBox formKind;
-    private javax.swing.JTextField formReleasedIn;
+    private javax.swing.JFormattedTextField formReleasedIn;
     private javax.swing.JButton formSubmit;
     private javax.swing.JTextArea formSynopsis;
     private javax.swing.JTextField formTitle;
@@ -514,6 +535,7 @@ public class MoviesInternalFrame extends util.GenericInternalFrame<MovieControll
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JButton removeAvatar;
     private javax.swing.JScrollPane scrollPane;
     private javax.swing.JPanel search;
     private javax.swing.JComboBox searchGenre;

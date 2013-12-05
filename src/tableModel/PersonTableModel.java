@@ -12,11 +12,11 @@ public class PersonTableModel extends util.GenericTableModel<Person> {
         this.kind = kind;
         
         switch (kind) {
-            case "employee":
-                this.columns = new String[] { "Nome", "Apelido", "CPF", "RG" };
+            case "supplier":
+                this.columns = new String[] { "Razão Social", "Nome Fantasia", "CNPJ", "IE" };
                 break;
             default:
-                this.columns = new String[] { "Razão Social", "Nome Fantasia", "CNPJ", "IE" };
+                this.columns = new String[] { "Nome", "Apelido", "CPF", "RG" };
         }
 
         reload();

@@ -15,11 +15,13 @@
         <property name="gender" column="gender" type="string"/>
 
         <many-to-one name="country" class="model.Country" column="country_id"/>
-
-        <set name="movies" table="movies_actors" lazy="false">
+        
+        <!--TODO: Acertar o relacionamento com os filmes-->
+        
+<!--        <set name="movies" table="movies_actors" lazy="false">
             <key column="actor_id"/>
             <many-to-many column="movie_id" class="model.Movie"/>
-        </set>
+        </set>-->
         
 <!--        <set name="movies" table="movies_actors" inverse="true" lazy="true" fetch="select" cascade="all">
             <key>

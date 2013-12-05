@@ -1,6 +1,10 @@
 package view.people;
 
+import comboBoxModel.CityComboBoxModel;
 import controller.PersonController;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import model.Person;
 import tableModel.PersonTableModel;
@@ -39,11 +43,25 @@ public class PeopleInternalFrame extends util.GenericInternalFrame<PersonControl
         formLegalName = new javax.swing.JTextField();
         labelDocument1 = new javax.swing.JLabel();
         labelDocument2 = new javax.swing.JLabel();
-        formDocument1 = new javax.swing.JTextField();
         formSubmit = new javax.swing.JButton();
-        formDocument2 = new javax.swing.JTextField();
         formName = new javax.swing.JTextField();
         labelName = new javax.swing.JLabel();
+        labelPhone = new javax.swing.JLabel();
+        labelCellPhone = new javax.swing.JLabel();
+        labelEmail = new javax.swing.JLabel();
+        formEmail = new javax.swing.JTextField();
+        labelCity = new javax.swing.JLabel();
+        formCity = new javax.swing.JComboBox();
+        formAddress = new javax.swing.JTextField();
+        labelAddress = new javax.swing.JLabel();
+        addAvatar = new javax.swing.JButton();
+        removeAvatar = new javax.swing.JButton();
+        labelDistrict = new javax.swing.JLabel();
+        formDistrict = new javax.swing.JTextField();
+        formPhone = new javax.swing.JFormattedTextField();
+        formCellPhone = new javax.swing.JFormattedTextField();
+        formDocument1 = new javax.swing.JFormattedTextField();
+        formDocument2 = new javax.swing.JFormattedTextField();
         addButton = new javax.swing.JButton();
         editButton = new javax.swing.JButton();
         destroyButton = new javax.swing.JButton();
@@ -56,7 +74,6 @@ public class PeopleInternalFrame extends util.GenericInternalFrame<PersonControl
 
         setClosable(true);
         setTitle("Cadastro de Pessoas");
-        setFrameIcon(null);
 
         form.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -70,7 +87,7 @@ public class PeopleInternalFrame extends util.GenericInternalFrame<PersonControl
         );
         formAvatarLayout.setVerticalGroup(
             formAvatarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 170, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         labelLegalName.setText("Razão Social");
@@ -86,63 +103,135 @@ public class PeopleInternalFrame extends util.GenericInternalFrame<PersonControl
 
         labelName.setText("Nome Fantasia");
 
+        labelPhone.setText("Telefone");
+
+        labelCellPhone.setText("Celular");
+
+        labelEmail.setText("Email");
+
+        labelCity.setText("Cidade");
+
+        labelAddress.setText("Endereço");
+
+        addAvatar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/plus_16.png"))); // NOI18N
+
+        removeAvatar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/Delete.png"))); // NOI18N
+
+        labelDistrict.setText("Bairro");
+
+        try {
+            formPhone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) ####-####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            formCellPhone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) ####-####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
         javax.swing.GroupLayout formLayout = new javax.swing.GroupLayout(form);
         form.setLayout(formLayout);
         formLayout.setHorizontalGroup(
             formLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(formLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, formLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(formLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(formLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(formLayout.createSequentialGroup()
-                        .addComponent(formAvatar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(formSubmit))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, formLayout.createSequentialGroup()
+                        .addGroup(formLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(formAvatar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(labelCity)
+                            .addComponent(formCity, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(formLayout.createSequentialGroup()
+                                .addComponent(addAvatar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(removeAvatar))
+                            .addComponent(labelDistrict)
+                            .addComponent(formDistrict))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(formLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(formAddress, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(formLegalName)
                             .addGroup(formLayout.createSequentialGroup()
-                                .addGroup(formLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(formDocument1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(labelDocument1))
+                                .addGroup(formLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(labelDocument1)
+                                    .addComponent(labelPhone)
+                                    .addComponent(formPhone, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                                    .addComponent(formDocument1, javax.swing.GroupLayout.Alignment.TRAILING))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(formLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(formCellPhone, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
                                     .addGroup(formLayout.createSequentialGroup()
-                                        .addComponent(labelDocument2)
+                                        .addGroup(formLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(labelDocument2)
+                                            .addComponent(labelCellPhone))
                                         .addGap(0, 0, Short.MAX_VALUE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, formLayout.createSequentialGroup()
-                                        .addGap(0, 0, Short.MAX_VALUE)
-                                        .addComponent(formDocument2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(formDocument2)))
                             .addComponent(formName)
+                            .addComponent(formEmail)
                             .addGroup(formLayout.createSequentialGroup()
                                 .addGroup(formLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(labelAddress)
                                     .addComponent(labelLegalName)
-                                    .addComponent(labelName))
-                                .addGap(0, 0, Short.MAX_VALUE))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, formLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(formSubmit)))
+                                    .addComponent(labelName)
+                                    .addComponent(labelEmail))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         formLayout.setVerticalGroup(
             formLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(formLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(formLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(formLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(formLayout.createSequentialGroup()
-                        .addComponent(labelLegalName)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(formLegalName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(labelName)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(formName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(formLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(formLayout.createSequentialGroup()
+                                .addComponent(labelLegalName)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(formLegalName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(labelName)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(formName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(formLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(labelDocument1)
+                                    .addComponent(labelDocument2))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(formLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(formDocument1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(formDocument2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(formLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(labelPhone)
+                                    .addComponent(labelCellPhone)))
+                            .addComponent(formAvatar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(formLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(labelDocument1)
-                            .addComponent(labelDocument2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(formLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(formDocument1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(formDocument2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(formAvatar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(formPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(formCellPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(addAvatar)
+                    .addComponent(removeAvatar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(formLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelEmail)
+                    .addComponent(labelCity))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(formLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(formEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(formCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(formLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelAddress)
+                    .addComponent(labelDistrict))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(formLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(formAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(formDistrict, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(formSubmit)
                 .addContainerGap())
@@ -183,7 +272,7 @@ public class PeopleInternalFrame extends util.GenericInternalFrame<PersonControl
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(searchName))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, searchLayout.createSequentialGroup()
-                        .addContainerGap(360, Short.MAX_VALUE)
+                        .addContainerGap(378, Short.MAX_VALUE)
                         .addComponent(searchSubmit)))
                 .addContainerGap())
         );
@@ -254,36 +343,47 @@ public class PeopleInternalFrame extends util.GenericInternalFrame<PersonControl
     }// </editor-fold>//GEN-END:initComponents
 
     private void loadPersonResources() {
+        if ("supplier".equals(controller.getKind())) {
+            try {
+                this.formDocument1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.###.###/####-##")));
+                this.formDocument2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###-#######")));
+            } catch (java.text.ParseException ex) { 
+            }       
+            
+            this.labelLegalName.setText("Razão Social");
+            this.labelName.setText("Nome Fantasia");
+            this.labelDocument1.setText("CNPJ");
+            this.labelDocument2.setText("IE");            
+        } else {
+            try {
+                this.formDocument1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+                this.formDocument2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-#")));
+            } catch (java.text.ParseException ex) { 
+            }            
+
+            this.labelLegalName.setText("Nome");
+            this.labelName.setText("Apelido");
+            this.labelDocument1.setText("CPF");
+            this.labelDocument2.setText("RG");        
+        }
+        
         switch (controller.getKind()) {
             case "employee":
-                this.labelLegalName.setText("Nome");
-                this.labelName.setText("Apelido");
-                this.labelDocument1.setText("CPF");
-                this.labelDocument2.setText("RG");
-                
                 this.setTitle("Cadastro de Colaboradores");
                 this.setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/employees_16.png")));
 
                 break;
             case "supplier":
-                this.labelLegalName.setText("Razão Social");
-                this.labelName.setText("Nome Fantasia");
-                this.labelDocument1.setText("CNPJ");
-                this.labelDocument2.setText("IE");
-                
                 this.setTitle("Cadastro de Fornecedores");
                 this.setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/suppliers_16.png")));
                 
                 break;
             default:
-                this.labelLegalName.setText("Razão Social");
-                this.labelName.setText("Nome Fantasia");
-                this.labelDocument1.setText("CNPJ");
-                this.labelDocument2.setText("IE");
-
                 this.setTitle("Cadastro de Clientes");
                 this.setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/customers_16.png")));
         }
+        
+        formCity.setModel(new CityComboBoxModel());
     }
     
     @Override
@@ -312,7 +412,13 @@ public class PeopleInternalFrame extends util.GenericInternalFrame<PersonControl
         this.formName.setEnabled(enable);
         this.formDocument1.setEnabled(enable);
         this.formDocument2.setEnabled(enable);
-
+        this.formPhone.setEnabled(enable);
+        this.formCellPhone.setEnabled(enable);
+        this.formEmail.setEnabled(enable);
+        this.formCity.setEnabled(enable);
+        this.formDistrict.setEnabled(enable);
+        this.formAddress.setEnabled(enable);
+        
         this.formSubmit.setEnabled(enable);
 
         this.form.repaint();
@@ -330,6 +436,12 @@ public class PeopleInternalFrame extends util.GenericInternalFrame<PersonControl
         this.formName.setText(object.getName());
         this.formDocument1.setText(object.getDocument1());
         this.formDocument2.setText(object.getDocument2());
+        this.formPhone.setText(object.getPhone());
+        this.formCellPhone.setText(object.getCellPhone());
+        this.formEmail.setText(object.getEmail());
+        this.formCity.getModel().setSelectedItem(object.getCity());
+        this.formDistrict.setText(object.getDistrict());
+        this.formAddress.setText(object.getAddress());
     }
 
     @Override
@@ -338,24 +450,44 @@ public class PeopleInternalFrame extends util.GenericInternalFrame<PersonControl
         this.object.setName(formName.getText());
         this.object.setDocument1(formDocument1.getText());
         this.object.setDocument2(formDocument2.getText());
+        this.object.setPhone(formPhone.getText());
+        this.object.setCellPhone(formCellPhone.getText());
+        this.object.setEmail(formEmail.getText());
+        this.object.setCity((model.City) formCity.getModel().getSelectedItem());
+        this.object.setDistrict(formDistrict.getText());
+        this.object.setAddress(formAddress.getText());
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addAvatar;
     private javax.swing.JButton addButton;
     private javax.swing.JButton destroyButton;
     private javax.swing.JButton editButton;
     private javax.swing.JPanel form;
+    private javax.swing.JTextField formAddress;
     private javax.swing.JPanel formAvatar;
-    private javax.swing.JTextField formDocument1;
-    private javax.swing.JTextField formDocument2;
+    private javax.swing.JFormattedTextField formCellPhone;
+    private javax.swing.JComboBox formCity;
+    private javax.swing.JTextField formDistrict;
+    private javax.swing.JFormattedTextField formDocument1;
+    private javax.swing.JFormattedTextField formDocument2;
+    private javax.swing.JTextField formEmail;
     private javax.swing.JTextField formLegalName;
     private javax.swing.JTextField formName;
+    private javax.swing.JFormattedTextField formPhone;
     private javax.swing.JButton formSubmit;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel labelAddress;
+    private javax.swing.JLabel labelCellPhone;
+    private javax.swing.JLabel labelCity;
+    private javax.swing.JLabel labelDistrict;
     private javax.swing.JLabel labelDocument1;
     private javax.swing.JLabel labelDocument2;
+    private javax.swing.JLabel labelEmail;
     private javax.swing.JLabel labelLegalName;
     private javax.swing.JLabel labelName;
+    private javax.swing.JLabel labelPhone;
+    private javax.swing.JButton removeAvatar;
     private javax.swing.JScrollPane scrollPane;
     private javax.swing.JPanel search;
     private javax.swing.JTextField searchName;
