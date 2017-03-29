@@ -32,7 +32,7 @@ public class Report {
         try {
             this.report = JasperCompileManager.compileReport(getClass().getResourceAsStream("../view/reports/" + report_name + ".jrxml"));
             
-            this.print = JasperFillManager.fillReport(report, params, session.connection());
+//            this.print = JasperFillManager.fillReport(report, params, session.connection());
             
             JasperViewer.viewReport(print, false);
         } catch (JRException ex) {

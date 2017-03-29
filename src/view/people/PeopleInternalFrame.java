@@ -32,9 +32,9 @@ public class PeopleInternalFrame extends util.GenericInternalFrame<PersonControl
 
         this.listener = new GenericActionListener(this, tablePeople, listTableModel, controller);
 
-        loadResources();
+//        loadResources();
         
-        loadPersonResources();
+//        loadPersonResources();
     }
 
     /** This method is called from within the constructor to
